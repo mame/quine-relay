@@ -91,7 +91,7 @@ For other languages, I used the following deb packages:
 
 ### License
 
-Copyright (c) 2013 Yusuke Endoh, @hirekoke
+Copyright (c) 2013 Yusuke Endoh (@mametter), @hirekoke
 
 MIT License
 
