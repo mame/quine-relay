@@ -158,7 +158,7 @@ REXX         |regina-rexx    |3.6-2
 
 ### License
 
-Copyright (c) 2013 Yusuke Endoh, @hirekoke
+Copyright (c) 2013 Yusuke Endoh (@mametter), @hirekoke
 
 MIT License
 
