@@ -105,20 +105,14 @@ class Perl < CodeGen
     <<-'END'.lines.map {|l| l.strip }.join
       [
         *%(
-          sub f{
-            $s="";
-            foreach(split//,$_[0]){
-              $n=ord($_);
-              $s.=substr(unpack("B8",chr($n-($n<58?46:$n<91?53:59))),2);
-            }
-            $s=~s/.{7}/0$&/g;
-            print pack("B".length($s),$s);
-          }
-          f"#{
+          $_="#{
             s=PREV;
             (s+N*(-s.size%6)).bytes.map{|n|"%07b"%n}.join.
-              scan(/.{6}/).map{|n|n=n.to_i(2);(n<12?n+46:n<38?n+53:n+59).chr}*""
-          }"
+              scan(/.{6}/).map{|n|n=n.to_i(2);((n/26*6+n+19)%83+46).chr}*""
+          }";
+          s|.|$n=ord$&;substr unpack(B8,chr$n-($n<58?-6:$n<91?65:71)),2|eg;
+          s/.{7}/0$&/g;
+          print pack B.length,$_
         ).scan(%r(([ .0-9A-Za-z]+)|(.))).reverse.
           map{|a,b|(b)?"s//chr #{b.ord}/e":"s//#{a}/"},
         "eval"
@@ -146,14 +140,14 @@ class Octave < CodeGen
   Ext = ".octave"
   Cmd = "octave -qf QR.octave > OUTFILE"
   Apt = "octave"
-  Code = %q("printf#{E[PREV]}")
+  Code = %q("printf"+E[PREV])
 end
 
 class OCaml < CodeGen
   Ext = ".ml"
   Cmd = "ocaml QR.ml > OUTFILE"
   Apt = "ocaml"
-  Code = %q("print_string#{E[PREV]}")
+  Code = %q("print_string"+E[PREV])
 end
 
 class NodeJS_ObjC < CodeGen
@@ -206,7 +200,7 @@ class Lua < CodeGen
   Ext = ".lua"
   Cmd = "lua QR.lua > OUTFILE"
   Apt = "lua5.2"
-  Code = %q("print#{E[PREV]}")
+  Code = %q("print"+E[PREV])
 end
 
 class Logo < CodeGen
@@ -348,18 +342,18 @@ class CoffeeScript_CommonLisp_Forth_FORTRAN77_Fortran90 < CodeGen
   Apt = ["coffeescript", "clisp", "gforth", "gfortran", "gfortran"]
   def code
     # assuming that PREV has no '
-    <<-'END'.lines.map {|l| l.strip }.join.gsub("_", " ")
+    <<-'END'.lines.map {|l| l.strip }.join
       %(
         s=#{E[PREV]};u="        ";
-        g=(l)->l.replace(/[\\\\"]/g,(x)->"\\\\"+x)\n
-        f=(l)->console.log("(write-line \\""+g(l)+"\\")")\n
-        e=(l)->f(".\\\\\\""+u+g(l)+"\\" cr")\n
-        d=(l)->e("WRITE(*,*)'"+u+l+"'");d\n
-        d("program QR")("print \\"(&");i=0\n
-        d("&A,&")while i++<s.length\n
-        d("&A)\\",&");i=0\n
-        d("&char("+s.charCodeAt(i++)+"),&")while i<s.length\n
-        d("&\\"\\"")("end program QR");e("STOP");e("END");f("bye")
+        g=(l)->l.replace /[\\\\"]/g,(x)->"\\\\"+x\n
+        f=(l)->console.log "(write-line \\""+g(l)+"\\")"\n
+        e=(l)->f ".\\\\\\""+u+g(l)+"\\" cr"\n
+        d=(l)->e "WRITE(*,*)'"+u+l+"'"\n
+        d "program QR";d "print \\"(&";i=0\n
+        d "&A,&"while i++<s.length\n
+        d "&A)\\",&";i=0\n
+        d "&char("+s.charCodeAt(i++)+"),&"while i<s.length\n
+        d "&\\"\\"";d "end program QR";e "STOP";e "END";f "bye"
       )
     END
   end
@@ -401,10 +395,9 @@ class CSharp < CodeGen
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
-        using System;
         class Program{
           public static void Main(){
-            Console.Write(#{E[D[PREV,?~]]}.Replace("~","\\\\"));
+            System.Console.Write(#{E[D[PREV,?~]]}.Replace("~","\\\\"));
           }
         }
       )
@@ -506,10 +499,10 @@ class Vala_Verilog_Whitespace < CodeGen
           string s=#{E[PREV]};
           int i,j;
           print("module QR;initial begin ");
-          for(i=1;i<=s.length;i++){
+          for(i=0;i<s.length;i++){
             print("$write(\\"   ");
             for(j=6;j>=0;j--)
-              print((s[i-1]>>j)%2>0?"\\\\t":" ");
+              print((s[i]>>j)%2>0?"\\\\t":" ");
             print("\\\\n\\\\t\\\\n  \\\");");
           }
           print("$display(\\"\\\\n\\\\n\\");end endmodule");
