@@ -32,4 +32,4 @@ cmds.size.times do |i|
   cmd.split("&&").each {|c| OUT << "\t" + c.strip }
 end
 
-File.write("../Makefile", OUT.join("\n"))
+File.write("../Makefile", OUT.join("\n") + "\n")
