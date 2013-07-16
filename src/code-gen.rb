@@ -125,7 +125,7 @@ class Pascal < CodeGen
   Ext = ".pas"
   Cmd = "fpc QR.pas && ./QR > OUTFILE"
   Apt = "fp-compiler"
-  Code = %q("program QR(output);begin write('#{PREV}');end.")
+  Code = %q("program QR(output);begin #{(PREV).scan(/.{1,255}/).map{|s|"write('#{s}');"}*""}end.")
 end
 
 class ParrotAsm < CodeGen
