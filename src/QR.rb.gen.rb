@@ -21,12 +21,15 @@ code = <<-END.split.join
   )*""))
 END
 
-code[-6, 0] = " ##  Quine Relay -- Copyriht (c) 2013 Yusuke Endoh, @hirekoke  ##"
-
 $stderr.puts "size: #{ code.size }"
 
 Tmpl = File.read("uroboros.txt")
+width = Tmpl[/.*/].size
 
-code[-6, 0] = "#" * (Tmpl.count("#") - code.size)
+code[-1, 0] =
+  "  Quine Relay -- Copyriht (c) 2013 Yusuke Endoh (@mametter), @hirekoke  ".
+  center(width, "#")[0..-2]
+
+code[-1, 0] = "#" * (Tmpl.count("#") - code.size)
 code = Tmpl.gsub(/#+/) { code.slice!(0, $&.size) }
 File.write("../QR.rb", code)

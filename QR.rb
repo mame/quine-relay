@@ -50,5 +50,5 @@ AY"(f"#{e[$&]}""")))}}["STOPXRU        N."])))),?~]]}.Replace("~","             
 ")END)]}");endXQR;)]};intXi,j;H("modu                                       leXQR;initialXbeginX");for(i=0;i<s.
 length;i++){H("$write(^"XXX");for(j=6;j>=                              0;j--)H((s[i]>>j)%2>0?"^^t":"X");H("^^n^
 ^t^^nXX^`");");}H("$display(^"^^n^^n^");endXendm                odule");returnX0;}].reverse],/[`[`]$]/]}"X^x60.
-&];putsX"k"),?']}';cr"]]}")]}"))]}}").gsub(/[HJK^`X]/){[:print,0,:tring,:main,B*2,0,B,32.chr][$&.ord%9]})) ##  
-Quine Relay -- Copyriht (c) 2013 Yusuke Endoh, @hirekoke  ###############################################)*""))
+&];putsX"k"),?']}';cr"]]}")]}"))]}}").gsub(/[HJK^`X]/){[:print,0,:tring,:main,B*2,0,B,32.chr][$&.ord%9]})))*"")
+###################  Quine Relay -- Copyriht (c) 2013 Yusuke Endoh (@mametter), @hirekoke  ###################)
