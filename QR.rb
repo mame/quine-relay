@@ -51,4 +51,4 @@ char("+s.charCodeAt(i++)+"),       &")whileXi<s.length`nd("&^"^"")("end         
 H("moduleXQR;initialXbeginX");for(i=1;i<=                              s.length;i++){H("$write(^"XXX");for(j=6;
 j>=0;j--)H((s[i-1]>>j)%2>0?"^^t":"X");H("^^n^^t^                ^nXX^`");");}H("$display(^"^^n^^n^");endXendmod
 ule");returnX0;}].reverse],/[`[`]$]/]}"X^x60.&];putsX"k"),?']}';cr"]]}")]}"))]}}").gsub(/[HJK^`X]/){[:print,0,:
-tring,:main,B*2,0,B,32.chr][$&.ord%9]})) ##  Quine Relay -- Copyriht (c) 2013 Yusuke Endoh, @hirekoke  ##)*""))
+tring,:main,B*2,0,B,32.chr][$&.ord%9]})) ##  Quine Relay -- Copyright (c) 2013 Yusuke Endoh, @hirekoke ##)*""))
