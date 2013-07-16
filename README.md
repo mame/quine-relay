@@ -94,7 +94,7 @@ Alternatively, just type `make`.
 Note: It may require huge memory to compile some files.
 According to some reports, 2 GB memory is not enough.
 I believe that it will work on 4 GB memory, though it depends on a platform.
-Please enable swap if you have no enough memory.
+Please enable swap if you have not enough memory.
 
 ### Tested interpreter/compiler versions
 
