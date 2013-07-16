@@ -51,7 +51,7 @@ end
 
 surface.write_to_png("../langs.png")
 
-# convert svn to template
+# convert svg to template
 #
 #H = 55.0
 #W = H * 2
