@@ -41,7 +41,7 @@ This is a <%= langs[0] %> program that generates
 <%= langs[2] %> program that generates
 ...(through <%= langs.size %> languages)...
 <%= langs[-1] %> program that generates
-the original Ruby code again.
+the original <%= langs[0] %> code again.
 
 ![Language Uroboros][langs]
 
