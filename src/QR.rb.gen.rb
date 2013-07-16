@@ -27,7 +27,7 @@ Tmpl = File.read("uroboros.txt")
 width = Tmpl[/.*/].size
 
 code[-1, 0] =
-  "  Quine Relay -- Copyriht (c) 2013 Yusuke Endoh (@mametter), @hirekoke  ".
+  "  Quine Relay -- Copyright (c) 2013 Yusuke Endoh (@mametter), @hirekoke  ".
   center(width, "#")[0..-2]
 
 code[-1, 0] = "#" * (Tmpl.count("#") - code.size)
