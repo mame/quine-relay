@@ -24,7 +24,7 @@ apts = "apt-get install #{ apts.uniq.sort * " " }".gsub(/.{,70}( |\z)/) do
 end
 
 cmds = cmds.zip(exts.drop(1) + [".rb"]).map do |cmd, ext|
-  cmd.gsub("OUTFILE", "QR" + ext).gsub(/mv QR\.c(\.bak)? QR\.c(\.bak)? &&/, "")
+  cmd.gsub("OUTFILE", "QR" + ext).gsub(/mv QR\.c(\.bak)? QR\.c(\.bak)? && /, "")
 end
 cmds[-1].gsub!("QR.rb", "QR2.rb")
 
