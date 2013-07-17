@@ -206,7 +206,10 @@ QR.f90: QR.f
 	@echo "##  FORTRAN77 -> Fortran90  ##"
 	@echo "##############################"
 	@echo
-	gfortran -o QR QR.f
+	mv QR.c QR.c.bak
+	f2c QR.f
+	tcc -o QR QR.c -L/usr/lib -lf2c
+	mv QR.c.bak QR.c
 	./QR > QR.f90
 
 QR.go: QR.f90
@@ -258,7 +261,7 @@ QR.j: QR.i
 	@echo "##########################"
 	@echo
 	mv QR.c QR.c.bak
-	ick -b QR.i
+	CC=tcc ick -b QR.i
 	mv QR.c.bak QR.c
 	./QR > QR.j
 

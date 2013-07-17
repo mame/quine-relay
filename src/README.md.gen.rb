@@ -5,21 +5,21 @@ require "cairo"
 langs = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.name } }
 cmds = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.cmd } }
 exts = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.ext } }
-apts = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.apt } }.compact
+apts = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.apt } }
 
-rows = [["language", "ubuntu package", "version"]] + CodeGen::List.reverse.flat_map do |c|
-  c.steps.map do |step|
-    version = step.apt ? `dpkg -p #{ step.apt }`.b[/^Version: (.*)/, 1] : "-"
-    [step.name, step.apt || "(none)", version]
+rows = [["language", "ubuntu package", "version"]]
+rows += (langs.zip(apts) + [["(extra)", "tcc"]]).map do |lang, apt|
+    version = apt ? `dpkg -p #{ apt }`.b[/^Version: (.*)/, 1] : "-"
+    [lang, apt || "(none)", version]
   end
-end
 ws = rows.transpose.map {|row| row.map {|s| s.size }.max + 1 }
 rows[1, 0] = [ws.map {|w| "-" * w }]
 rows = rows.map do |col|
   (col.zip(ws).map {|s, w| s.ljust(w) } * "|").rstrip
 end
 
-apts = "apt-get install #{ apts.uniq.sort * " " }".gsub(/.{,70}( |\z)/) do
+apts = "sudo apt-get install #{ (apts + ["tcc"]).compact.uniq.sort * " " }"
+apts.gsub!(/.{,70}( |\z)/) do
   $&[-1] == " " ? $& + "\\\n      " : $&
 end
 
@@ -74,9 +74,6 @@ Alternatively, just type `make`.
     $ make
 
 Note: It may require huge memory to compile some files.
-According to some reports, 2 GB memory is not enough.
-I believe that it will work on 4 GB memory, though it depends on a platform.
-Please enable swap if you have no enough memory.
 
 ### Tested interpreter/compiler versions
 
@@ -88,6 +85,9 @@ For other languages, I used the following deb packages:
 % rows.each do |row|
 <%= row %>
 % end
+
+Note: `tcc` is used to compile FORTRAN77 and INTERCAL sources
+with less memory.
 
 ### How to re-generate the source
 

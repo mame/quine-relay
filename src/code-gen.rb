@@ -295,7 +295,11 @@ end
 
 class Haskell_Icon_INTERCAL < CodeGen
   Ext = [".hs", ".icn", ".i"]
-  Cmd = ["runghc QR.hs > OUTFILE", "icont -s QR.icn && ./QR > OUTFILE", "mv QR.c QR.c.bak && ick -b QR.i && mv QR.c.bak QR.c && ./QR > OUTFILE"]
+  Cmd = [
+    "runghc QR.hs > OUTFILE",
+    "icont -s QR.icn && ./QR > OUTFILE",
+    "mv QR.c QR.c.bak && CC=tcc ick -b QR.i && mv QR.c.bak QR.c && ./QR > OUTFILE"
+  ]
   Apt = ["ghc", "icont", "intercal"]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
@@ -338,8 +342,14 @@ end
 
 class CoffeeScript_CommonLisp_Forth_FORTRAN77_Fortran90 < CodeGen
   Ext = [".coffee", ".lisp", ".fs", ".f", ".f90"]
-  Cmd = ["coffee QR.coffee > OUTFILE", "clisp QR.lisp > OUTFILE", "gforth QR.fs > OUTFILE", "gfortran -o QR QR.f && ./QR > OUTFILE", "gfortran -o QR QR.f90 && ./QR > OUTFILE"]
-  Apt = ["coffeescript", "clisp", "gforth", "gfortran", "gfortran"]
+  Cmd = [
+    "coffee QR.coffee > OUTFILE",
+    "clisp QR.lisp > OUTFILE",
+    "gforth QR.fs > OUTFILE",
+    "mv QR.c QR.c.bak && f2c QR.f && tcc -o QR QR.c -L/usr/lib -lf2c && mv QR.c.bak QR.c && ./QR > OUTFILE",
+    "gfortran -o QR QR.f90 && ./QR > OUTFILE"
+  ]
+  Apt = ["coffeescript", "clisp", "gforth", "f2c", "gfortran"]
   def code
     # assuming that PREV has no '
     <<-'END'.lines.map {|l| l.strip }.join
