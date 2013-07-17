@@ -1,7 +1,7 @@
 eval$s=%q(eval(%w(B=92.chr;N=10.chr;n=0;e=->(s){s.gsub(/[#{B+B+N}"]/){B+(N==$&??n:$&)}};E=->(s){'("'+e[s]+'")'}
 ;d=->(s,t=?"){s.gsub(t){t+t}};D=->(s,t=?@){s.gsub(B){t}};Q=->(s,t=?$){s.gsub(t){B+$&}};puts(eval(%q("objectXQRX
 extendsXApp{Hln#{E[%((displayX"#{e[%(HfX% sX"#{Q[  e["Trans  criptXshow:X'#{d[%(putsX[regsubX-allX{.}X"#{Q[e[%[
-intXK(){sJXs=#{E[%(withXAda.Text _Io;p   roce     dure      XQRXisXbeginXAda.Text_Io.Put_Line("#{d[%(BEGINXH("#
+intXK(){sJXs=#{E[%(withXAda.Text _Io;p   roce     dure      XqrXisXbeginXAda.Text_Io.Put_Line("#{d[%(BEGINXH("#
 {d[%(BEGIN{s=#{E[D[%(forXbXinX  Sys     t                            em.Text.ASCIIEncoding().GetBytes(#{Q[E["#i
 nclude<stdio.h>`nintXK (){pu    t                                   s#{E["#include<iostream>`nintXK(){std::cout
 <<#{E[%(classXProgram  {pu                                                    blicXstaticXvoidXMain(){System.Co
@@ -47,7 +47,7 @@ l.replaceX/[^^"]/g,(x)-    >"^^"+x`nf=(l)->console.logX"(write-lineX^""+g(l)+"^ 
 s.length`ndX"&^"^"";dX"endXp       rogramXQR";eX"STOP";eX"END";fX"bye")             .gsub(/.+/){%((cons"DI  SPL
 AY"(f"#{e[$&]}""")))}}["STOPXRU        N."])))),?~]]}.Replace("~","               ^^"));}})]};}"]};returnX  0;}
 "]]}):HXjoin(['+'forXiXinXrange(0             ,b)],"")+".>"                    ),?!]]};gsub(/!/,"^^",s);HXs})]}
-")END)]}");endXQR;)]};intXi,j;H("modu                                       leXQR;initialXbeginX");for(i=0;i<s.
+")END)]}");endXqr;)]};intXi,j;H("modu                                       leXQR;initialXbeginX");for(i=0;i<s.
 length;i++){H("$write(^"XXX");for(j=6;j>=                              0;j--)H((s[i]>>j)%2>0?"^^t":"X");H("^^n^
 ^t^^nXX^`");");}H("$display(^"^^n^^n^");endXendm                odule");returnX0;}].reverse],/[`[`]$]/]}"X^x60.
 &];putsX"k"),?']}';cr"]]}")]}"))]}}").gsub(/[HJK^`X]/){[:print,0,:tring,:main,B*2,0,B,32.chr][$&.ord%9]})))*"")

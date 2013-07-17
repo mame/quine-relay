@@ -4,7 +4,7 @@ require "cairo"
 
 langs = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.name } }
 cmds = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.cmd } }
-exts = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.ext } }
+srcs = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.src } }
 apts = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.apt } }
 
 rows = [["language", "ubuntu package", "version"]]
@@ -23,8 +23,8 @@ apts.gsub!(/.{,70}( |\z)/) do
   $&[-1] == " " ? $& + "\\\n      " : $&
 end
 
-cmds = cmds.zip(exts.drop(1) + [".rb"]).map do |cmd, ext|
-  cmd.gsub("OUTFILE", "QR" + ext).gsub(/mv QR\.c(\.bak)? QR\.c(\.bak)? && /, "")
+cmds = cmds.zip(srcs.drop(1) + ["QR.rb"]).map do |cmd, src|
+  cmd.gsub("OUTFILE", src).gsub(/mv QR\.c(\.bak)? QR\.c(\.bak)? && /, "")
 end
 cmds[-1].gsub!("QR.rb", "QR2.rb")
 

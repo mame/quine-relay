@@ -2,7 +2,7 @@
 
 # A class that generates Ruby code that generates a code (in a language X) that prints PREV.
 class CodeGen
-  # Ext = file extention of X
+  # File = source file name of X
   # Cmd = command for execution/compilation
   # Apt = ubuntu package name of the interpreter/compiler of X
 
@@ -19,16 +19,16 @@ class CodeGen
     self.class::Code
   end
 
-  Step = Struct.new(:name, :ext, :cmd, :apt)
+  Step = Struct.new(:name, :src, :cmd, :apt)
 
   def self.steps
     a = []
     a << (defined?(self::Name) ? [*self::Name] : self.to_s.split("_"))
-    a << [*self::Ext]
+    a << [*self::File]
     a << [*self::Cmd]
     a << [*self::Apt]
-    a.transpose.map do |name, ext, cmd, apt|
-      Step[name, ext, cmd, apt]
+    a.transpose.map do |name, src, cmd, apt|
+      Step[name, src, cmd, apt]
     end
   end
 
@@ -56,49 +56,49 @@ end
 
 
 class REXX < CodeGen
-  Ext = ".rexx"
+  File = "QR.rexx"
   Cmd = "rexx ./QR.rexx > OUTFILE"
   Apt = "regina-rexx"
   Code = %q(PREV.gsub(/.+/){"say \"#{d[$&]}\""})
 end
 
 class R < CodeGen
-  Ext = ".R"
+  File = "QR.R"
   Cmd = "R --slave < QR.R > OUTFILE"
   Apt = "r-base"
   Code = %q("cat"+E[PREV])
 end
 
 class Python < CodeGen
-  Ext = ".py"
+  File = "QR.py"
   Cmd = "python QR.py > OUTFILE"
   Apt = "python"
   Code = %q("print"+E[PREV])
 end
 
 class Prolog < CodeGen
-  Ext = ".prolog"
+  File = "QR.prolog"
   Cmd = "swipl -q -t qr -f QR.prolog > OUTFILE"
   Apt = "swi-prolog"
   Code = %q("qr:-write('#{Q[e[PREV],?']}'),nl,halt.")
 end
 
 class Pike < CodeGen
-  Ext = ".pike"
+  File = "QR.pike"
   Cmd = "pike QR.pike > OUTFILE"
   Apt = "pike7.8"
   Code = %q("int main(){write#{E[PREV]};return 0;}")
 end
 
 class PHP < CodeGen
-  Ext = ".php"
+  File = "QR.php"
   Cmd = "php QR.php > OUTFILE"
   Apt = "php5-cli"
   Code = %q(%(<?php echo"#{Q[e[PREV]]}"?>))
 end
 
 class Perl < CodeGen
-  Ext = ".pl"
+  File = "QR.pl"
   Cmd = "perl QR.pl > OUTFILE"
   Apt = "perl"
   def code
@@ -122,7 +122,7 @@ class Perl < CodeGen
 end
 
 class Pascal < CodeGen
-  Ext = ".pas"
+  File = "QR.pas"
   Cmd = "fpc QR.pas && ./QR > OUTFILE"
   Apt = "fp-compiler"
   Code = %q("program QR(output);begin #{(PREV).scan(/.{1,255}/).map{|s|"write('#{s}');"}*""}end.")
@@ -130,21 +130,21 @@ end
 
 class ParrotAsm < CodeGen
   Name = "Parrot asm"
-  Ext = ".pasm"
+  File = "QR.pasm"
   Cmd = "parrot QR.pasm > OUTFILE"
   Apt = "parrot"
   Code = %q(%(say"#{e[PREV]}"\nend\n))
 end
 
 class Octave < CodeGen
-  Ext = ".octave"
+  File = "QR.octave"
   Cmd = "octave -qf QR.octave > OUTFILE"
   Apt = "octave"
   Code = %q("printf"+E[PREV])
 end
 
 class OCaml < CodeGen
-  Ext = ".ml"
+  File = "QR.ml"
   Cmd = "ocaml QR.ml > OUTFILE"
   Apt = "ocaml"
   Code = %q("print_string"+E[PREV])
@@ -152,7 +152,7 @@ end
 
 class NodeJS_ObjC < CodeGen
   Name = %w(NodeJS Objective-C)
-  Ext = [".js", ".m"]
+  File = ["QR.js", "QR.m"]
   Cmd = ["nodejs QR.js > OUTFILE", "gcc -o QR QR.m && ./QR > OUTFILE"]
   Apt = ["nodejs", "gobjc"]
   def code
@@ -171,7 +171,7 @@ class NodeJS_ObjC < CodeGen
 end
 
 class MSIL < CodeGen
-  Ext = ".il"
+  File = "QR.il"
   Cmd = "ilasm QR.il && mono QR.exe > OUTFILE"
   Apt = "mono-devel"
   def code
@@ -190,21 +190,21 @@ class MSIL < CodeGen
 end
 
 class Makefile < CodeGen
-  Ext = ".makefile"
+  File = "QR.makefile"
   Cmd = "make -f QR.makefile > OUTFILE"
   Apt = "make"
   Code = %q(%(all:\n\t@printf %s "#{e[PREV]}"))
 end
 
 class Lua < CodeGen
-  Ext = ".lua"
+  File = "QR.lua"
   Cmd = "lua QR.lua > OUTFILE"
   Apt = "lua5.2"
   Code = %q("print"+E[PREV])
 end
 
 class Logo < CodeGen
-  Ext = ".logo"
+  File = "QR.logo"
   Cmd = "ucblogo QR.logo > OUTFILE"
   Apt = "ucblogo"
   Code = %q(%(PRINT "#{Q[PREV,/[ \\\\\t;"(){}\[\]]/]}\nBYE))
@@ -212,7 +212,7 @@ end
 
 class LLVMAsm < CodeGen
   Name = "LLVM asm"
-  Ext = ".ll"
+  File = "QR.ll"
   Cmd = "llvm-as QR.ll && lli QR.bc > OUTFILE"
   Apt = "llvm"
   def code
@@ -232,7 +232,7 @@ class LLVMAsm < CodeGen
 end
 
 class Java < CodeGen
-  Ext = ".java"
+  File = "QR.java"
   Cmd = "javac QR.java && java QR > OUTFILE"
   Apt = "openjdk-6-jdk"
   def code
@@ -273,7 +273,7 @@ class Java < CodeGen
 end
 
 class Jasmin < CodeGen
-  Ext = ".j"
+  File = "QR.j"
   Cmd = "jasmin QR.j && java QR > OUTFILE"
   Apt = "jasmin-sable"
   def code
@@ -294,7 +294,7 @@ class Jasmin < CodeGen
 end
 
 class Haskell_Icon_INTERCAL < CodeGen
-  Ext = [".hs", ".icn", ".i"]
+  File = ["QR.hs", "QR.icn", "QR.i"]
   Cmd = [
     "runghc QR.hs > OUTFILE",
     "icont -s QR.icn && ./QR > OUTFILE",
@@ -321,7 +321,7 @@ class Haskell_Icon_INTERCAL < CodeGen
 end
 
 class Go_Groovy < CodeGen
-  Ext = [".go", ".groovy"]
+  File = ["QR.go", "QR.groovy"]
   Cmd = ["go run QR.go > OUTFILE", "groovy QR.groovy > OUTFILE"]
   Apt = ["golang", "groovy"]
   def code
@@ -341,7 +341,7 @@ class Go_Groovy < CodeGen
 end
 
 class CoffeeScript_CommonLisp_Forth_FORTRAN77_Fortran90 < CodeGen
-  Ext = [".coffee", ".lisp", ".fs", ".f", ".f90"]
+  File = ["QR.coffee", "QR.lisp", "QR.fs", "QR.f", "QR.f90"]
   Cmd = [
     "coffee QR.coffee > OUTFILE",
     "clisp QR.lisp > OUTFILE",
@@ -370,7 +370,7 @@ class CoffeeScript_CommonLisp_Forth_FORTRAN77_Fortran90 < CodeGen
 end
 
 class Clojure_Cobol < CodeGen
-  Ext = [".clj", ".cob"]
+  File = ["QR.clj", "QR.cob"]
   Cmd = ["clojure QR.clj > OUTFILE", "cobc -x QR.cob && ./QR > OUTFILE"]
   Apt = ["clojure1.4", "open-cobol"]
   def code
@@ -399,7 +399,7 @@ end
 
 class CSharp < CodeGen
   Name = "C#"
-  Ext = ".cs"
+  File = "QR.cs"
   Cmd = "mcs QR.cs && mono QR.exe > OUTFILE"
   Apt = "mono-mcs"
   def code
@@ -417,7 +417,7 @@ end
 
 class Cplusplus < CodeGen
   Name = "C++"
-  Ext = ".cpp"
+  File = "QR.cpp"
   Cmd = "g++ -o QR QR.cpp && ./QR > OUTFILE"
   Apt = "g++"
   def code
@@ -433,7 +433,7 @@ class Cplusplus < CodeGen
 end
 
 class C < CodeGen
-  Ext = ".c"
+  File = "QR.c"
   Cmd = "gcc -o QR QR.c && ./QR > OUTFILE"
   Apt = "gcc"
   def code
@@ -450,7 +450,7 @@ class C < CodeGen
 end
 
 class Boo_Brainfuck < CodeGen
-  Ext = [".boo", ".bf"]
+  File = ["QR.boo", "QR.bf"]
   Cmd = ["booi QR.boo > OUTFILE", "beef QR.bf > OUTFILE"]
   Apt = ["boo", "beef"]
   def code
@@ -464,38 +464,38 @@ class Boo_Brainfuck < CodeGen
 end
 
 class Awk < CodeGen
-  Ext = ".awk"
+  File = "QR.awk"
   Cmd = "awk -f QR.awk > OUTFILE"
   Apt = "gawk"
   Code = %q(%(BEGIN{s=#{E[D[PREV,?!]]};gsub(/!/,"\\\\\\\\",s);print s}))
 end
 
 class ALGOL68 < CodeGen
-  Ext = ".a68"
+  File = "QR.a68"
   Cmd = "a68g QR.a68 > OUTFILE"
   Apt = "algol68g"
   Code = %q(%(BEGIN print("#{d[PREV]}")END))
 end
 
 class Ada < CodeGen
-  Ext = ".adb"
-  Cmd = "gnatmake QR.adb && ./QR > OUTFILE"
+  File = "qr.adb"
+  Cmd = "gnatmake qr.adb && ./qr > OUTFILE"
   Apt = "gnat"
   def code
     <<-'END'.lines.map {|l| l.strip }.join.gsub("|", " ")
       %(
         with Ada.Text_Io;
-        procedure QR is|
+        procedure qr is|
         begin|
           Ada.Text_Io.Put_Line("#{d[PREV]}");
-        end QR;
+        end qr;
       )
     END
   end
 end
 
 class Vala_Verilog_Whitespace < CodeGen
-  Ext = [".vala", ".v", ".ws"]
+  File = ["QR.vala", "QR.v", "QR.ws"]
   Cmd = [
     "valac QR.vala && ./QR > OUTFILE",
     "iverilog -o QR QR.v && ./QR -vcd-none > OUTFILE",
@@ -524,42 +524,42 @@ class Vala_Verilog_Whitespace < CodeGen
 end
 
 class Tcl_Unlambda < CodeGen
-  Ext = [".tcl", ".unl"]
+  File = ["QR.tcl", "QR.unl"]
   Cmd = ["tclsh QR.tcl > OUTFILE", "ruby unlambda.rb QR.unl > OUTFILE"]
   Apt = ["tcl8.5", nil]
   Code = %q(%(puts [regsub -all {.} "#{Q[e[PREV.reverse],/[\[\]$]/]}" \\\\x60.&];puts "k"))
 end
 
 class Smalltalk < CodeGen
-  Ext = ".st"
+  File = "QR.st"
   Cmd = "gst QR.st > OUTFILE"
   Apt = "gnu-smalltalk"
   Code = %q("Transcript show: '#{d[PREV,?']}';cr")
 end
 
 class Shell < CodeGen
-  Ext = ".bash"
+  File = "QR.bash"
   Cmd = "bash QR.bash > OUTFILE"
   Apt = "bash"
   Code = %q(%(printf %s "#{Q[e[PREV]]}"))
 end
 
 class Scheme < CodeGen
-  Ext = ".scm"
+  File = "QR.scm"
   Cmd = "gosh QR.scm > OUTFILE"
   Apt = "gauche"
   Code = %q(%((display "#{e[PREV]}")))
 end
 
 class Scala < CodeGen
-  Ext = ".scala"
+  File = "QR.scala"
   Cmd = "scalac QR.scala && scala QR > OUTFILE"
   Apt = "scala"
   Code = %q("object QR extends App{println#{E[PREV]}}")
 end
 
 class Ruby < CodeGen
-  Ext = ".rb"
+  File = "QR.rb"
   Cmd = "ruby QR.rb > OUTFILE"
   Apt = "ruby1.9.3"
 end

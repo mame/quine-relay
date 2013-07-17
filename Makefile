@@ -83,22 +83,22 @@ QR.ws: QR.v
 	iverilog -o QR QR.v
 	./QR -vcd-none > QR.ws
 
-QR.adb: QR.ws
+qr.adb: QR.ws
 	@echo
 	@echo "#########################"
 	@echo "##  Whitespace -> Ada  ##"
 	@echo "#########################"
 	@echo
-	ruby whitespace.rb QR.ws > QR.adb
+	ruby whitespace.rb QR.ws > qr.adb
 
-QR.a68: QR.adb
+QR.a68: qr.adb
 	@echo
 	@echo "######################"
 	@echo "##  Ada -> ALGOL68  ##"
 	@echo "######################"
 	@echo
-	gnatmake QR.adb
-	./QR > QR.a68
+	gnatmake qr.adb
+	./qr > QR.a68
 
 QR.awk: QR.a68
 	@echo

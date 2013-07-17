@@ -41,8 +41,8 @@ If you could do it, please let me know.  Good luck.
     $ ruby unlambda.rb QR.unl > QR.vala
     $ valac QR.vala && ./QR > QR.v
     $ iverilog -o QR QR.v && ./QR -vcd-none > QR.ws
-    $ ruby whitespace.rb QR.ws > QR.adb
-    $ gnatmake QR.adb && ./QR > QR.a68
+    $ ruby whitespace.rb QR.ws > qr.adb
+    $ gnatmake qr.adb && ./qr > QR.a68
     $ a68g QR.a68 > QR.awk
     $ awk -f QR.awk > QR.boo
     $ booi QR.boo > QR.bf
