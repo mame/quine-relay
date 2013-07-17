@@ -29,14 +29,13 @@ langs.size.times do |i|
   end
 
   ctx.save do
-    a = langs.size / 2.0
-    b = (a - 1) / 2
-    ctx.rotate(-Math::PI * ((i + b) % a - b) / a)
+    angle = i / (langs.size / 4.0)
+    dir = 1 <= angle && angle < 3 ? 1 : -1
+    ctx.rotate(Math::PI / 2 * (dir + 1 - angle))
 
     name = langs[i]
     e = ctx.text_extents(name)
-    x = (i / a).round == 1 ? Radius : -Radius
-    ctx.move_to(x - e.width / 2, e.height / 2)
+    ctx.move_to(dir * Radius - e.width / 2, e.height / 2)
     ctx.show_text(name)
   end
 end
