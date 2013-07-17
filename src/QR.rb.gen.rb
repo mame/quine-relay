@@ -23,13 +23,17 @@ END
 
 $stderr.puts "size: #{ code.size }"
 
-Tmpl = File.read("uroboros.txt")
-width = Tmpl[/.*/].size
-
-code[-1, 0] =
+TEMPLATE = File.read("uroboros.txt")
+width = TEMPLATE[/.*/].size
+PADDING = "".ljust(width, "#_buffer_for_future_bug_fixes_")
+COPYRIGHT =
   "  Quine Relay -- Copyright (c) 2013 Yusuke Endoh (@mametter), @hirekoke  ".
   center(width, "#")[0..-2]
 
-code[-1, 0] = "#" * (Tmpl.count("#") - code.size)
-code = Tmpl.gsub(/#+/) { code.slice!(0, $&.size) }
-File.write("../QR.rb", code)
+code.chop!
+code = TEMPLATE.gsub(/#+/) { w = $&.size; code.slice!(0, w).ljust(w, PADDING) }.chomp
+code[-1] = ")"
+
+code[-1 - COPYRIGHT.size, COPYRIGHT.size] = COPYRIGHT
+
+File.write("../QR.rb", code + "\n")

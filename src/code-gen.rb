@@ -340,33 +340,51 @@ class Go_Groovy < CodeGen
   end
 end
 
-class CoffeeScript_CommonLisp_Forth_FORTRAN77_Fortran90 < CodeGen
-  File = ["QR.coffee", "QR.lisp", "QR.fs", "QR.f", "QR.f90"]
+class Forth_FORTRAN77_Fortran90 < CodeGen
+  File = ["QR.fs", "QR.f", "QR.f90"]
   Cmd = [
-    "coffee QR.coffee > OUTFILE",
-    "clisp QR.lisp > OUTFILE",
     "gforth QR.fs > OUTFILE",
     "mv QR.c QR.c.bak && f2c QR.f && tcc -o QR QR.c -L/usr/lib -lf2c && mv QR.c.bak QR.c && ./QR > OUTFILE",
     "gfortran -o QR QR.f90 && ./QR > OUTFILE"
   ]
-  Apt = ["coffeescript", "clisp", "gforth", "f2c", "gfortran"]
+  Apt = ["gforth", "f2c", "gfortran"]
   def code
     # assuming that PREV has no '
-    <<-'END'.lines.map {|l| l.strip }.join
+    <<-'END'.lines.map {|l| l.strip }.join(" ")
       %(
-        s=#{E[PREV]};u="        ";
-        g=(l)->l.replace /[\\\\"]/g,(x)->"\\\\"+x\n
-        f=(l)->console.log "(write-line \\""+g(l)+"\\")"\n
-        e=(l)->f ".\\\\\\""+u+g(l)+"\\" cr"\n
-        d=(l)->e "WRITE(*,*)'"+u+l+"'"\n
-        d "program QR";d "print \\"(&";i=0\n
-        d "&A,&"while i++<s.length\n
-        d "&A)\\",&";i=0\n
-        d "&char("+s.charCodeAt(i++)+"),&"while i<s.length\n
-        d "&\\"\\"";d "end program QR";e "STOP";e "END";f "bye"
+        : A ."         " ;
+        : B A ." WRITE(*,*)'" A ;
+        : C B TYPE ." '" CR ;
+        : D
+          S" program QR" C
+          S\\" print \\"(&" C
+          S\\" #{e[PREV]}" DUP FOR S" &A,&" C NE\x58T
+          S\\" &A)\\",&" C
+          0 DO B ." &char(" COUNT . ." ),&'" CR LOOP
+          S\\" &\\"\\"" C
+          S" end program QR" C
+          A ." STOP" CR
+          A ." END" CR
+          BYE ;
+        D
       )
     END
   end
+end
+
+class CommonLisp < CodeGen
+  File = "QR.lisp"
+  Cmd = "clisp QR.lisp > OUTFILE"
+  Apt = "clisp"
+  # assuming that PREV is just one line
+  Code = %q(%((write-line"#{Q[PREV,/([\\\\"])/]}")))
+end
+
+class CoffeeScript < CodeGen
+  File = "QR.coffee"
+  Cmd = "coffee QR.coffee > OUTFILE"
+  Apt = "coffeescript"
+  Code = %q("console.log"+E[PREV])
 end
 
 class Clojure_Cobol < CodeGen
@@ -391,7 +409,7 @@ class Clojure_Cobol < CodeGen
               ["IDENTIFICATION DIVISION."
                "PROGRAM-ID. QR."
                "PROCEDURE DIVISION."]#{
-                PREV.gsub(/.+/){%((cons"DISPLAY"(f"#{e[$&]}""")))}
+                (PREV).gsub(/.+/){%((cons"DISPLAY"(f"#{e[$&]}""")))}
               }["STOP RUN."]))))
     END
   end
