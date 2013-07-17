@@ -9,19 +9,48 @@ apts = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.apt } }
 
 rows = [["language", "ubuntu package", "version"]]
 rows += (langs.zip(apts) + [["(extra)", "tcc"]]).map do |lang, apt|
-    version = apt ? `dpkg -p #{ apt }`.b[/^Version: (.*)/, 1] : "-"
-    [lang, apt || "(none)", version]
+    if apt
+      pkg = `dpkg -p #{ apt }`
+      version = $?.exitstatus > 0 && pkg.b[/^Version: (.*)/, 1]
+    end
+    [lang, apt || "(none)", version || '-']
   end
+
 ws = rows.transpose.map {|row| row.map {|s| s.size }.max + 1 }
 rows[1, 0] = [ws.map {|w| "-" * w }]
 rows = rows.map do |col|
   (col.zip(ws).map {|s, w| s.ljust(w) } * "|").rstrip
 end
 
-apts = "sudo apt-get install #{ (apts + ["tcc"]).compact.uniq.sort * " " }"
-apts.gsub!(/.{,70}( |\z)/) do
+apt_get = "sudo apt-get install #{ (apts + ["tcc"]).compact.uniq.sort * " " }"
+apt_get.gsub!(/.{,70}( |\z)/) do
   $&[-1] == " " ? $& + "\\\n      " : $&
 end
+
+pacman_apts = %w(bash boo clisp clojure fpc gawk gcc gcc-fortran ghc go gprolog
+  groovy llvm make mono nodejs ocaml octave parrot perl php python r ruby scala
+  tcl).compact.uniq.sort
+
+pacman = "pacman -S --needed #{ pacman_apts * " " }"
+pacman.gsub!(/.{,70}( |\z)/) do
+  $&[-1] == " " ? $& + "\\\n      " : $&
+end
+
+yaourt_apts = %w(algol68genie coffee-script c-intercal f2c gauche gforth icon
+  iverilog open-cobol rpl pike regina-rexx-das swi-prolog ucblogo vala
+).compact.uniq.sort
+
+yaourt = "yaourt -S #{ yaourt_apts * " " }"
+yaourt.gsub!(/.{,70}( |\z)/) do
+  $&[-1] == " " ? $& + "\\\n      " : $&
+end
+
+missing = {
+  jasmin: 'http://sourceforge.net/projects/jasmin/files/jasmin/',
+  pike: 'http://packages.ubuntu.com/en/raring/ucblogo',
+  ucblogo: 'http://packages.ubuntu.com/raring/pike7.8-core',
+}.map {|k, v| "[`#{ k }`](#{ v })" }
+missing[-1] = missing[-2] + " and " + missing.pop if missing.size > 1
 
 cmds = cmds.zip(srcs.drop(1) + ["QR.rb"]).map do |cmd, src|
   cmd.gsub("OUTFILE", src).gsub(/mv QR\.c(\.bak)? QR\.c(\.bak)? && /, "")
@@ -54,9 +83,16 @@ the original <%= langs[0] %> code again.
 You are fortunate if you are using Ubuntu 13.04 (Raring Ringtail).
 You just have to type the following apt-get command to install all of them.
 
-    $ <%= apts %>
+    $ <%= apt_get %>
 
-If you are not using Ubuntu, please find your way yourself.
+You can also install languages from Arch Linux's repositories and AUR,
+except <%= missing * ', ' %>, which may not work properly.
+Note: `yaourt` has `--noconfirm` option.
+
+    # <%= pacman %>
+    # <%= yaourt %>
+
+If you are not using these Linux distributions, please find your way yourself.
 If you could do it, please let me know.  Good luck.
 
 #### 2. Run each program on each interpreter/compiler.

@@ -1,5 +1,17 @@
 MAKEFLAGS += --no-print-directory
 
+BRAINFUCK=beef
+CLOJURE=clojure
+NODEJS=nodejs
+JASMIN=jasmin
+
+ifeq ($(shell [ -f /etc/arch-release ] && echo arch),arch)
+	BRAINFUCK=brainfuck
+	CLOJURE=clj
+	NODEJS=node
+	JASMIN=java -jar jasmin.jar
+endif
+
 all: QR2.rb
 	@echo
 	@echo "#############"
@@ -130,7 +142,7 @@ QR.c: QR.bf
 	@echo "##  Brainfuck -> C  ##"
 	@echo "######################"
 	@echo
-	beef QR.bf > QR.c
+	$(BRAINFUCK) QR.bf > QR.c
 
 QR.cpp: QR.c
 	@echo
@@ -165,7 +177,7 @@ QR.cob: QR.clj
 	@echo "##  Clojure -> Cobol  ##"
 	@echo "########################"
 	@echo
-	clojure QR.clj > QR.cob
+	$(CLOJURE) QR.clj > QR.cob
 
 QR.coffee: QR.cob
 	@echo
@@ -271,7 +283,7 @@ QR.java: QR.j
 	@echo "##  Jasmin -> Java  ##"
 	@echo "######################"
 	@echo
-	jasmin QR.j
+	$(JASMIN) QR.j
 	java QR > QR.java
 
 QR.ll: QR.java
@@ -331,7 +343,7 @@ QR.m: QR.js
 	@echo "##  NodeJS -> Objective-C  ##"
 	@echo "#############################"
 	@echo
-	nodejs QR.js > QR.m
+	$(NODEJS) QR.js > QR.m
 
 QR.ml: QR.m
 	@echo
