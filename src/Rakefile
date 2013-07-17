@@ -1,8 +1,10 @@
 require "rake/clean"
 
 CLEAN.include("../QR.*")
+CLEAN.include("../qr.*")
 CLEAN.include("../QR$*")
 CLEAN.include("../QR")
+CLEAN.include("../qr")
 CLEAN.include("../QR2.rb")
 CLEAN.include("../README.md")
 CLEAN.include("../langs.png")
