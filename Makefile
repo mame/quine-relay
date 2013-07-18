@@ -6,10 +6,10 @@ NODEJS=nodejs
 JASMIN=jasmin
 
 ifeq ($(shell [ -f /etc/arch-release ] && echo arch),arch)
-	BRAINFUCK=brainfuck
-	CLOJURE=clj
-	NODEJS=node
-	JASMIN=java -jar jasmin.jar
+  BRAINFUCK=brainfuck
+  CLOJURE=clj
+  NODEJS=node
+  JASMIN=java -jar jasmin.jar
 endif
 
 all: QR2.rb

@@ -11,7 +11,7 @@ rows = [["language", "ubuntu package", "version"]]
 rows += (langs.zip(apts) + [["(extra)", "tcc"]]).map do |lang, apt|
     if apt
       pkg = `dpkg -p #{ apt }`
-      version = $?.exitstatus > 0 && pkg.b[/^Version: (.*)/, 1]
+      version = $?.success? && pkg.b[/^Version: (.*)/, 1]
     end
     [lang, apt || "(none)", version || '-']
   end
@@ -26,31 +26,6 @@ apt_get = "sudo apt-get install #{ (apts + ["tcc"]).compact.uniq.sort * " " }"
 apt_get.gsub!(/.{,70}( |\z)/) do
   $&[-1] == " " ? $& + "\\\n      " : $&
 end
-
-pacman_apts = %w(bash boo clisp clojure fpc gawk gcc gcc-fortran ghc go gprolog
-  groovy llvm make mono nodejs ocaml octave parrot perl php python r ruby scala
-  tcl).compact.uniq.sort
-
-pacman = "pacman -S --needed #{ pacman_apts * " " }"
-pacman.gsub!(/.{,70}( |\z)/) do
-  $&[-1] == " " ? $& + "\\\n      " : $&
-end
-
-yaourt_apts = %w(algol68genie coffee-script c-intercal f2c gauche gforth icon
-  iverilog open-cobol rpl pike regina-rexx-das swi-prolog ucblogo vala
-).compact.uniq.sort
-
-yaourt = "yaourt -S #{ yaourt_apts * " " }"
-yaourt.gsub!(/.{,70}( |\z)/) do
-  $&[-1] == " " ? $& + "\\\n      " : $&
-end
-
-missing = {
-  jasmin: 'http://sourceforge.net/projects/jasmin/files/jasmin/',
-  pike: 'http://packages.ubuntu.com/en/raring/ucblogo',
-  ucblogo: 'http://packages.ubuntu.com/raring/pike7.8-core',
-}.map {|k, v| "[`#{ k }`](#{ v })" }
-missing[-1] = missing[-2] + " and " + missing.pop if missing.size > 1
 
 cmds = cmds.zip(srcs.drop(1) + ["QR.rb"]).map do |cmd, src|
   cmd.gsub("OUTFILE", src).gsub(/mv QR\.c(\.bak)? QR\.c(\.bak)? && /, "")
@@ -85,12 +60,7 @@ You just have to type the following apt-get command to install all of them.
 
     $ <%= apt_get %>
 
-You can also install languages from Arch Linux's repositories and AUR,
-except <%= missing * ', ' %>, which may not work properly.
-Note: `yaourt` has `--noconfirm` option.
-
-    # <%= pacman %>
-    # <%= yaourt %>
+You may find [instructions for Arch Linux and other platforms in the wiki](https://github.com/mame/quine-relay/wiki/Installation).
 
 If you are not using these Linux distributions, please find your way yourself.
 If you could do it, please let me know.  Good luck.
