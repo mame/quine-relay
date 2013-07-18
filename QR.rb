@@ -1,5 +1,5 @@
-eval$s=%q(eval(%w(B=?\\;N=?\n;n=0;e=->(s){s.gsub(/[#{B+B+N}"]/){B+(N==$&??n:$&)}};E=->(s){'("'+e[s]+'")'};d=->(
-s,t=?"){s.gsub(t){t+t}};D=->(s,t=?@){s.gsub(B){t}};Q=->(s,t=?$){s.gsub(t){B+$&}};puts(eval(%q("objectXQRXextend
+eval$s=%q(eval(%w(B=92.chr;N=?\n;n=0;e=->(s){s.gsub(/[#{B+B+N}"]/){B+(N==$&??n:$&)}};E=->(s){'("'+e[s]+'")'};d=
+->(s,t=?"){s.gsub(t){t+t}};D=->(s,t=?@){s.tr(B,t)};Q=->(s,t=?$){s.gsub(t){B+$&}};puts(eval(%q("objectXQRXextend
 sXApp{Hln#{E[%((displayX"#{e[%(HfX%sX"#{Q [e["Tra  nscriptX  show:X'#{d[%(putsX[regsubX-allX{.}X"#{Q[e[%[intXK(
 ){sJXs=#{E[%(withXAda.Text_Io;pr ocedu   reXq     rXis      XbeginXAda.Text_Io.Put_Line("#{d[%(BEGINXH("#{d[%(B
 EGIN{s=#{E[D[%(forXbXinXSystem  .Te     x                            t.ASCIIEncoding().GetBytes(#{Q[E["#include
