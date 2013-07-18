@@ -15,7 +15,7 @@ code = <<-END.split.join
     # '^' % 9 => 4
     # '`' % 9 => 6
     # 'X' % 9 => 7
-  }).gsub(/[HJK^`X]/){[:print,0,:tring,:main,B*2,0,B,32.chr][$&.ord%9]}))
+  }).gsub(/[HJK^`X]/){[:print,0,:tring,:main,B*2,0,B,?\\s][$&.ord%9]}))
 
   
   )*""))
