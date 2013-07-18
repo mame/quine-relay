@@ -35,7 +35,7 @@ class CodeGen
   # Common part
   PROLOGUE = <<-END.split.join
   B=92.chr;
-  N=10.chr;
+  N=?\\n;
   n=0;
   e=->(s){s.gsub(/[\#{B+B+N}"]/){B+(N==$&??n:$&)}};
   E=->(s){'("'+e[s]+'")'};
