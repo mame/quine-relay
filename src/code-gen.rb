@@ -40,7 +40,7 @@ class CodeGen
   e=->(s){s.gsub(/[\#{B+B+N}"]/){B+(N==$&??n:$&)}};
   E=->(s){'("'+e[s]+'")'};
   d=->(s,t=?"){s.gsub(t){t+t}};
-  D=->(s,t=?@){s.gsub(B){t}};
+  D=->(s,t=?@){s.tr(B,t)};
   Q=->(s,t=?$){s.gsub(t){B+$&}};
   END
 
