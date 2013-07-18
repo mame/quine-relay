@@ -1,7 +1,9 @@
 require_relative "code-gen"
 
-s = '%(eval$s=%q(#$s))'
-CodeGen::List[0..-2].each {|c| s = c.gen_code(s).tr(" \\","X`") }
+s =
+CodeGen::List[0..-2].inject('%(eval$s=%q(#$s))') {|c, lang|
+  lang.gen_code(c).tr(" \\","X`")
+}
 
 code = <<-END.split.join
   eval$s=%q(eval(%w(
