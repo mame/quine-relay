@@ -9,17 +9,21 @@ apts = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.apt } }
 
 rows = [["language", "ubuntu package", "version"]]
 rows += (langs.zip(apts) + [["(extra)", "tcc"]]).map do |lang, apt|
-    version = apt ? `dpkg -p #{ apt }`.b[/^Version: (.*)/, 1] : "-"
-    [lang, apt || "(none)", version]
+    if apt
+      pkg = `dpkg -p #{ apt }`
+      version = $?.success? && pkg.b[/^Version: (.*)/, 1]
+    end
+    [lang, apt || "(none)", version || '-']
   end
+
 ws = rows.transpose.map {|row| row.map {|s| s.size }.max + 1 }
 rows[1, 0] = [ws.map {|w| "-" * w }]
 rows = rows.map do |col|
   (col.zip(ws).map {|s, w| s.ljust(w) } * "|").rstrip
 end
 
-apts = "sudo apt-get install #{ (apts + ["tcc"]).compact.uniq.sort * " " }"
-apts.gsub!(/.{,70}( |\z)/) do
+apt_get = "sudo apt-get install #{ (apts + ["tcc"]).compact.uniq.sort * " " }"
+apt_get.gsub!(/.{,70}( |\z)/) do
   $&[-1] == " " ? $& + "\\\n      " : $&
 end
 
@@ -54,9 +58,11 @@ the original <%= langs[0] %> code again.
 You are fortunate if you are using Ubuntu 13.04 (Raring Ringtail).
 You just have to type the following apt-get command to install all of them.
 
-    $ <%= apts %>
+    $ <%= apt_get %>
 
-If you are not using Ubuntu, please find your way yourself.
+You may find [instructions for Arch Linux and other platforms in the wiki](https://github.com/mame/quine-relay/wiki/Installation).
+
+If you are not using these Linux distributions, please find your way yourself.
 If you could do it, please let me know.  Good luck.
 
 #### 2. Run each program on each interpreter/compiler.
