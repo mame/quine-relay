@@ -20,7 +20,7 @@ file "../README.md" => ["README.md.gen.rb", "code-gen.rb"] do |t|
   ruby "README.md.gen.rb"
 end
 
-file "../langs.png" => ["langs.png.gen.rb", "code-gen.rb"] do |t|
+file "../langs.png" => ["langs.png.gen.rb", "uroboros.svg", "code-gen.rb"] do |t|
   ruby "langs.png.gen.rb"
 end
 
