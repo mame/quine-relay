@@ -545,7 +545,7 @@ class Tcl_Unlambda < CodeGen
   File = ["QR.tcl", "QR.unl"]
   Cmd = ["tclsh QR.tcl > OUTFILE", "ruby unlambda.rb QR.unl > OUTFILE"]
   Apt = ["tcl8.5", nil]
-  Code = %q(%(puts [regsub -all {.} "#{Q[e[PREV.reverse],/[\[\]$]/]}" \\\\x60.&];puts "k"))
+  Code = %q(%(puts [regsub -all {.} "#{Q[e[PREV.reverse],/[\[\]$]/]}" \\\\x60.&]k))
 end
 
 class Smalltalk < CodeGen

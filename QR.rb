@@ -49,6 +49,6 @@ EX;XDX),/([^"])/]}"))]).gsub       (/.+/){%((cons"DISPLAY"(f"#{e[$&]}""         
 +".>"),?!]]};gsub(/!/,"^^",s);HXs             })]}")END)]}"                    );endXqr;)]};intXi,j;H("moduleXQ
 R;initialXbeginX");for(i=0;i<s.length                                       ;i++){H("$write(^"XXX");for(j=6;j>=
 0;j--)H((s[i]>>j)%2>0?"^^t":"X");H("^^n^^                              t^^nXX^`");");}H("$display(^"^^n^^n^");e
-ndXendmodule");returnX0;}].reverse],/[`[`]$]/]}"                X^x60.&];putsX"k"),?']}';cr"]]}")]}"))]}}").gsu
-b(/[HJK^`X]/){[:print,0,:tring,:main,B*2,0,B,?\s][$&.ord%9]})))*"")#_buffer_for_future_bug_fixes_#_buffer_for_f
+ndXendmodule");returnX0;}].reverse],/[`[`]$]/]}"                X^x60.&]k),?']}';cr"]]}")]}"))]}}").gsub(/[HJK^
+`X]/){[:print,0,:tring,:main,B*2,0,B,?\s][$&.ord%9]})))*"")#_buffer_for_future_bug_fixes_#_buffer_for_future_bu
 ###################  Quine Relay -- Copyright (c) 2013 Yusuke Endoh (@mametter), @hirekoke  ##################)
