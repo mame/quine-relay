@@ -35,7 +35,7 @@ class CodeGen
   # Common part
   PROLOGUE = <<-END.split.join
   B=92.chr;
-  N=?\\n;
+  N=10.chr;
   n=0;
   e=->(s){s.gsub(/[\#{B+B+N}"]/){B+(N==$&??n:$&)}};
   E=->(s){'("'+e[s]+'")'};
@@ -55,25 +55,18 @@ class CodeGen
 end
 
 
-class REXX < CodeGen
-  File = "QR.rexx"
-  Cmd = "rexx ./QR.rexx > OUTFILE"
-  Apt = "regina-rexx"
-  Code = %q(PREV.gsub(/.+/){"say \"#{d[$&]}\""})
-end
-
-class R < CodeGen
-  File = "QR.R"
-  Cmd = "R --slave < QR.R > OUTFILE"
-  Apt = "r-base"
-  Code = %q("cat"+E[PREV])
-end
-
-class Python < CodeGen
-  File = "QR.py"
-  Cmd = "python QR.py > OUTFILE"
-  Apt = "python"
-  Code = %q("print"+E[PREV])
+class Python_R_REXX < CodeGen
+  File = ["QR.py", "QR.R", "QR.rexx"]
+  Cmd = ["python QR.py > OUTFILE", "R --slave < QR.R > OUTFILE", "rexx ./QR.rexx > OUTFILE"]
+  Apt = ["python", "r-base", "regina-rexx"]
+  def code
+    <<-'END'.lines.map {|l| l.strip }.join
+      %(
+        for l in#{E[e[d[PREV]]]}.split("\\\\n"):
+          print('cat("say \\\\"'+l+'\\\\"\\\\n")')
+      )
+    END
+  end
 end
 
 class Prolog < CodeGen
