@@ -7,14 +7,17 @@ cmds = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.cmd } }
 srcs = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.src } }
 apts = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.apt } }
 
+pkg_versions = {}
+`dpkg -p #{ (apts + ["tcc"]).join(" ") }`.b.split("\n\n").each do |s|
+  name = s[/^Package: (.*)$/, 1]
+  version = s[/^Version: (.*)$/, 1]
+  pkg_versions[name] = version if name && version
+end
+
 rows = [["language", "ubuntu package", "version"]]
 rows += (langs.zip(apts) + [["(extra)", "tcc"]]).map do |lang, apt|
-    if apt
-      pkg = `dpkg -p #{ apt }`
-      version = $?.success? && pkg.b[/^Version: (.*)/, 1]
-    end
-    [lang, apt || "(none)", version || '-']
-  end
+  [lang, apt || "(none)", pkg_versions[apt] || '-']
+end
 
 ws = rows.transpose.map {|row| row.map {|s| s.size }.max + 1 }
 rows[1, 0] = [ws.map {|w| "-" * w }]
