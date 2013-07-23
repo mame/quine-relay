@@ -248,10 +248,10 @@ class Java < CodeGen
             }";
             int i,n,q=0,t;
             for(n=0;++n<126;)c[n]=""+(char)n;
-            for(i=0;++i<s.length();){
+            for(i=0;i<s.length();){
               t=s.charAt(i);
               q=q*75+t-t/64-t/92*5-43;
-              if(i%2>0){
+              if(i++%2>0){
                 y=q<n?c[q]:y;
                 c[n++]=z+=y.charAt(0);
                 System.out.print(z=c[q]);
