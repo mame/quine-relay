@@ -40,7 +40,6 @@ class CodeGen
   e=->(s){s.gsub(/[\#{B+B+N}"]/){B+(N==$&??n:$&)}};
   E=->(s){'("'+e[s]+'")'};
   d=->(s,t=?"){s.gsub(t){t+t}};
-  D=->(s,t=?@){s.tr(B,t)};
   Q=->(s,t=?$){s.gsub(t){B+$&}};
   END
 
@@ -154,9 +153,9 @@ class NodeJS_ObjC < CodeGen
         var u=require('util');
         u.print('#import<stdio.h>\\n');
         u.print(#{
-          E[D[%(
+          E[%(
             int main(){puts#{E[PREV]};return 0;}
-          )]]
+          ).tr B,?@]
         }.replace(/@/g,String.fromCharCode(92)))
       "
     END
@@ -325,7 +324,7 @@ class Go_Groovy < CodeGen
         func main(){
           fmt.Print(
             "print\\x27"+
-            strings.Replace("#{e[D[e[PREV]]]}\\x27\\n","@","\\\\",-1)
+            strings.Replace("#{e[e[PREV].tr B,?@]}\\x27\\n","@","\\\\",-1)
           )
         }
       )
@@ -418,7 +417,7 @@ class CSharp < CodeGen
       %(
         class Program{
           public static void Main(){
-            System.Console.Write(#{E[D[PREV,?~]]}.Replace("~","\\\\"));
+            System.Console.Write(#{E[PREV.tr B,?~]}.Replace("~","\\\\"));
           }
         }
       )
@@ -478,7 +477,7 @@ class Awk < CodeGen
   File = "QR.awk"
   Cmd = "awk -f QR.awk > OUTFILE"
   Apt = "gawk"
-  Code = %q(%(BEGIN{s=#{E[D[PREV,?!]]};gsub(/!/,"\\\\\\\\",s);print s}))
+  Code = %q(%(BEGIN{s=#{E[PREV.tr B,?!]};gsub(/!/,"\\\\\\\\",s);print s}))
 end
 
 class ALGOL68 < CodeGen
