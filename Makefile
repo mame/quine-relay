@@ -1,16 +1,15 @@
 MAKEFLAGS += --no-print-directory
 
-BRAINFUCK=beef
-CLOJURE=clojure
-NODEJS=nodejs
-JASMIN=jasmin
-
-ifeq ($(shell [ -f /etc/arch-release ] && echo arch),arch)
-  BRAINFUCK=brainfuck
-  CLOJURE=clj
-  NODEJS=node
-  JASMIN=java -jar jasmin.jar
+NODE := $(shell which nodejs)
+ifeq ($(NODE),)
+  NODE := $(shell which node)
+  ifeq ($(NODE),)
+    $(warning No node found!)
+  endif
 endif
+  
+.DELETE_ON_ERROR:
+
 
 all: QR2.rb
 	@echo
@@ -142,7 +141,7 @@ QR.c: QR.bf
 	@echo "##  Brainfuck -> C  ##"
 	@echo "######################"
 	@echo
-	$(BRAINFUCK) QR.bf > QR.c
+	beef QR.bf > QR.c
 
 QR.cpp: QR.c
 	@echo
@@ -177,7 +176,7 @@ QR.cob: QR.clj
 	@echo "##  Clojure -> Cobol  ##"
 	@echo "########################"
 	@echo
-	$(CLOJURE) QR.clj > QR.cob
+	clojure QR.clj > QR.cob
 
 QR.coffee: QR.cob
 	@echo
@@ -283,7 +282,7 @@ QR.java: QR.j
 	@echo "##  Jasmin -> Java  ##"
 	@echo "######################"
 	@echo
-	$(JASMIN) QR.j
+	jasmin QR.j
 	java QR > QR.java
 
 QR.ll: QR.java
@@ -310,7 +309,7 @@ QR.lua: QR.logo
 	@echo "##  Logo -> Lua  ##"
 	@echo "###################"
 	@echo
-	ucblogo QR.logo > QR.lua
+	logo QR.logo > QR.lua
 
 QR.makefile: QR.lua
 	@echo
@@ -343,7 +342,7 @@ QR.m: QR.js
 	@echo "##  NodeJS -> Objective-C  ##"
 	@echo "#############################"
 	@echo
-	$(NODEJS) QR.js > QR.m
+	$(NODE) QR.js > QR.m
 
 QR.ml: QR.m
 	@echo

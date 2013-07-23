@@ -146,7 +146,7 @@ end
 class NodeJS_ObjC < CodeGen
   Name = %w(NodeJS Objective-C)
   File = ["QR.js", "QR.m"]
-  Cmd = ["nodejs QR.js > OUTFILE", "gcc -o QR QR.m && ./QR > OUTFILE"]
+  Cmd = ["$(NODE) QR.js > OUTFILE", "gcc -o QR QR.m && ./QR > OUTFILE"]
   Apt = ["nodejs", "gobjc"]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
@@ -198,7 +198,7 @@ end
 
 class Logo < CodeGen
   File = "QR.logo"
-  Cmd = "ucblogo QR.logo > OUTFILE"
+  Cmd = "logo QR.logo > OUTFILE"
   Apt = "ucblogo"
   Code = %q(%(PRINT "#{Q[PREV,/[ \\\\\t;"(){}\[\]]/]}\nBYE))
 end

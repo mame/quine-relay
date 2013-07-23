@@ -67,11 +67,11 @@ If you could do it, please let me know.  Good luck.
     $ jasmin QR.j && java QR > QR.java
     $ javac QR.java && java QR > QR.ll
     $ llvm-as QR.ll && lli QR.bc > QR.logo
-    $ ucblogo QR.logo > QR.lua
+    $ logo QR.logo > QR.lua
     $ lua QR.lua > QR.makefile
     $ make -f QR.makefile > QR.il
     $ ilasm QR.il && mono QR.exe > QR.js
-    $ nodejs QR.js > QR.m
+    $ $(NODE) QR.js > QR.m
     $ gcc -o QR QR.m && ./QR > QR.ml
     $ ocaml QR.ml > QR.octave
     $ octave -qf QR.octave > QR.pasm
