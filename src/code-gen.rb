@@ -37,7 +37,7 @@ class CodeGen
   B=92.chr;
   N=10.chr;
   n=0;
-  e=->(s){s.gsub(/[\#{B+B+N}"]/){B+(N==$&??n:$&)}};
+  e=->(s){Q[Q[s,B],?"].gsub(N,B+?n)};
   E=->(s){'("'+e[s]+'")'};
   d=->(s,t=?"){s.gsub(t){t+t}};
   Q=->(s,t=?$){s.gsub(t){B+$&}};
