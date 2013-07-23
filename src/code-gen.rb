@@ -565,7 +565,15 @@ class Scala < CodeGen
   File = "QR.scala"
   Cmd = "scalac QR.scala && scala QR > OUTFILE"
   Apt = "scala"
-  Code = %q("object QR extends App{println#{E[PREV]}}")
+  def code
+    <<-'END'.lines.map {|l| l.strip }.join
+      %(
+        object QR extends App{
+          print("#{e[PREV.gsub B*8,?|]}".replaceAll("\\\\|","#{B*32}"))
+        }
+      )
+    END
+  end
 end
 
 class Ruby < CodeGen
