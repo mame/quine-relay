@@ -22,33 +22,33 @@ i+1)                     v;f[]_X_="PLEASEREAD OUT,1^^nPLEASEGIVEUP^");end";s=#{E
 R`n.                    superXjava/lang/Obje   ct`n.methodXpublicXstaticXK([Ljava/lang            /SJ;)V`n.limi
 tXs                    tackX2`ngetstaticXja  v  a/lang/System/outXLjava/io/PrintStream;            `nldcX"#{e[%
 (cl                   assXQR{publicXstatic  Xvo  idXK(SJ[]v){SJXc[]=newXSJ[8000],y="",z            =y,s="#{z=t=
-(0.       .r         =q=126).map{|n|[n,[]  ]};a=  [];%(@s=internalXconstant[#{i=(s=%(PRI            NTX"#{Q["H"
-+E[                 %(all:`n`t@HfX%sX"#{  e[%(.as  semblyXt{}.methodXstaticXvoidXMain(){.           entrypointX
-ldst               r"#{e["v                                     arXu=require('util');u.H(           '#import<st
-dio.h        >^n  ');u.H(#{E  [%(intX  K(){puts#{E["  H_sJ"+E  ["Hf"+E[%(say"#{e["programX          QR(output);
-beginX       #{([*%($_="#{s=%  (<?ph  pXecho"#{Q[e["i  ntXK(  ){write#{E["qr:-write('#{Q[e          [%(forXlXin
-#{E[e[d[%   (eval$s=%q(#$s))]]  ]}.  split("^^n"):H('c  at(  "sayX^^"'+l+'^^"^^n")'))],?']          }'),nl,halt
-."]};returnX0;} "]]}"?>);(s+N*(  -  s.size%6)).bytes.ma  p  {|n|"%07b"%n}.join.scan(/.{6}/          ).map{|n|n=
-n.to_i(2);((n/2 6*6+n+19)%83+46)   .chr}*""}";s|.|$n=ord   $&;substrXunpack(B8,chr$n-($n<5          8?-6:$n<91?
-65:71)),2|eg;s/ .{7}/0$&/g;HXpa  c  kXB.length,$_).scan  (  %r(([X.0-9A-Za-z]+)|(.))     )          .reverse.ma
-p{|a,b|(b)?"s//  chrX#{b.ord}/  e":  "s//#{a}/"},"eval  "]*  "XxX").scan(               /          .  {1,255}/)
-.map{|s|"write(' #{s}');"}*""  }end.  "]}"`nend`n)]]]  };ret  urnX0;})                  .          t   rXB,?@]}
-.replace(/@/g,SJ  .fromCharC  ode(92)  ))"]}"callXvo  idX[msc  orlib]System.C          o          n     sole::W
-rite(sJ)ret})]}") ],/[X^`t;                                     "(){}`[`]]/]           }          `      nBYE))
-.size+1}XxXi8]c"#  {s.gsub(/[^`n"]/){B+"  %02`x58  "%$&.ord}}^00"declareXi32 @puts(i8 *          )       define
-Xi32@K(){start:%0=  callXi32@puts(i8*Xget  eleme  ntptrXinbounds([#{i}XxXi8]*@s,i32X 0          ,         i32X0
-))retXi32X0}).bytes  {|n|r,z=z[n]||(a<<r;q  <56  24&&z[n]=[q+=1,[]];t[n])};a<<r;t=[*4          3          ..123
-]-[64,*92..96];a.map  {|n|t[n/75].chr+t[n%7  5  ].chr}*""}";intXi,n,q=0,t;for(n=0;++          n           <126;
-)c[n]=""+(char)n;for(   i=0;i<s.length();){t   =s.charAt(i);q=q*75+t-t/64-t/92*5-4           3             ;if(
-i++%2>0){y=q<n?c[q]:y;   c[n++]=z+=y.charAt(0 );System.out.H(z=c[q]);q=0;}}}})]}"           `              ninv
-okevirtualXjava/io/Prin    tStream/Hln(Ljava/lang/SJ;)V`nreturn`n.endXmethod)+N           ]})].tr          XB,?
-@]}^x27^n","@","^^",-1))}    )]}"XDUPXFORXS"X&A,&"XCXNE`x58TXS^"X&A)^",&"XCX0           XDOXBX."X          &cha
-r("XCOUNTX.X."X),&'"XCRXLO      OPXS^"X&^"^""XCXS"XendXprogramXQR"XCXAX."X            STOP"XCRXAX."XEND"X  CRXB
-YEX;XDX),/([^"])/]}"))]).gsu       b(/.+/){%((cons"DISPLAY"(f"#{e[$&]}"             "")))}}["STOPXRUN."]))  )).
-trXB,?~]}.Replace("~","^^"));}}        )]};}"]};returnX0;}"]]}):HXj               oin(['+'forXiXinXrange(0  ,b)
-],"")+".>").trXB,?!]};gsub(/!/,"^             ^",s);HXs})]}                    ")END)]}");endXqr;)]};intXi,j;H(
-"moduleXQR;initialXbeginX");for(i=0;i                                       <s.length;i++){H("$write(^"XXX");fo
-r(j=6;j>=0;j--)H((s[i]>>j)%2>0?"^^t":"X")                              ;H("^^n^^t^^nXX^`");");}H("$display(^"^^
-n^^n^");endXendmodule");returnX0;}].reverse],/[`                [`]$]/]}"X^x60.&]k),?']}';cr"]]}")]}"))]}}").gs
-ub(/[HJK^`X]/){[:print,0,:tring,:main,B*2,0,B,?\s][$&.ord%9]})))*"")#_buffer_for_future_bug_fixes_#_buffer_for_
+(0.       .r         =q=126).map{|n|[n,[]  ]};a=  [];%(@s=internalXconstant[#{i=(s=%(PRX            "#{Q["H"+E[
+%(a                 ll:`n`t@HfX%sX"#{e[%  (.assem  blyXt{}.methodXstaticXvoidXMain(){.ent           rypointXlds
+tr"#               {e["varX                                     u=require('util');u.H('#i           mport<stdio
+.h>^n        ');  u.H(#{E[%(  intXK()  {puts#{E["H_s  J"+E["H  f"+E[%(say"#{e["programXQR(          output);beg
+inX#{(       [*%($_="#{s=%(<?  phpXe  cho"#{Q[e["intX  K(){w  rite#{E["qr:-write('#{Q[e[%(          forXlXin#{E
+[e[d[%(ev   al$s=%q(#$s))]]]}.  spl  it("^^n"):H('cat(  "sa  yX^^"'+l+'^^"^^n")'))],?']}')          ,nl,halt."]
+};returnX0;}"]] }"?>);(s+N*(-s.  s  ize%6)).bytes.map{|  n  |"%07b"%n}.join.scan(/.{6}/).m          ap{|n|n=n.t
+o_i(2);((n/26*6 +n+19)%83+46).ch   r}*""}";s|.|$n=ord$&;   substrXunpack(B8,chr$n-($n<58?-          6:$n<91?65:
+71)),2|eg;s/.{7 }/0$&/g;HXpackX  B  .length,$_).scan(%r  (  ([X.0-9A-Za-z]+)|(.))).r     e          verse.map{|
+a,b|(b)?"s//chr  X#{b.ord}/e":  "s/  /#{a}/"},"eval"]*  "Xx  X").scan(/.{               1          ,  255}/).ma
+p{|s|"write('#{s }');"}*""}en  d."]}  "`nend`n)]]]};r  eturn  X0;}).tr                  X          B   ,?@]}.re
+place(/@/g,SJ.fr  omCharCode  (92)))"  ]}"callXvoidX  [mscorl  ib]System.Cons          o          l     e::Writ
+e(sJ)ret})]}")],/ [X^`t;"()                                     {}`[`]]/]}`n           B          Y      E)).si
+ze+1}XxXi8]c"#{s.  gsub(/[^`n"]/){B+"%02  `x58"%$  &.ord}}^00"declareXi32@pu ts(i8*)d e          f       ineXi3
+2@K(){start:%0=cal  lXi32@puts(i8*Xgetele  mentp  trXinbounds([#{i}XxXi8]*@s,i32X0,i 3          2         X0))r
+etXi32X0}).bytes{|n  |r,z=z[n]||(a<<r;q<56  24&  &z[n]=[q+=1,[]];t[n])};a<<r;t=[*43..          1          23]-[
+64,*92..96];a.map{|n  |t[n/75].chr+t[n%75].  c  hr}*""}";intXi,n,q=0,t;for(n=0;++n<1          2           6;)c[
+n]=""+(char)n;for(i=0   ;i<s.length();){t=s.   charAt(i);q=q*75+t-t/64-t/92*5-43;i           f             (i++
+%2>0){y=q<n?c[q]:y;c[n   ++]=z+=y.charAt(0);S ystem.out.H(z=c[q]);q=0;}}}})]}"`ni           n              voke
+virtualXjava/io/PrintSt    ream/Hln(Ljava/lang/SJ;)V`nreturn`n.endXmethod)+N]})           ].trXB,          ?@]}
+^x27^n","@","^^",-1))})]}    "XDUPXFORXS"X&A,&"XCXNE`x58TXS^"X&A)^",&"XCX0XDO           XBX."X&ch          ar("
+XCOUNTX.X."X),&'"XCRXLOOPX      S^"X&^"^""XCXS"XendXprogramXQR"XCXAX."XSTO            P"XCRXAX."XEND"XCRX  BYEX
+;XDX),/([^"])/]}"))]).gsub(/       .+/){%((cons"DISPLAY"(f"#{e[$&]}""")             ))}}["STOPXRUN."])))).  trX
+B,?~]}.Replace("~","^^"));}})]}        ;}"]};returnX0;}"]]}):HXjoin               (['+'forXiXinXrange(0,b)  ],"
+")+".>").trXB,?!]};gsub(/!/,"^^",             s);HXs})]}")E                    ND)]}");endXqr;)]};intXi,j;H("mo
+duleXQR;initialXbeginX");for(i=0;i<s.                                       length;i++){H("$write(^"XXX");for(j
+=6;j>=0;j--)H((s[i]>>j)%2>0?"^^t":"X");H(                              "^^n^^t^^nXX^`");");}H("$display(^"^^n^^
+n^");endXendmodule");returnX0;}].reverse],/[`[`]                $]/]}"X^x60.&]k),?']}';cr"]]}")]}"))]}}").gsub(
+/[HJK^`X]/){[:print,0,:tring,:main,B*2,0,B,?\s][$&.ord%9]})))*"")#_buffer_for_future_bug_fixes_#_buffer_for_fut
 ###################  Quine Relay -- Copyright (c) 2013 Yusuke Endoh (@mametter), @hirekoke  ##################)

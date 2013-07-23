@@ -199,7 +199,7 @@ class Logo < CodeGen
   File = "QR.logo"
   Cmd = "logo QR.logo > OUTFILE"
   Apt = "ucblogo"
-  Code = %q(%(PRINT "#{Q[PREV,/[ \\\\\t;"(){}\[\]]/]}\nBYE))
+  Code = %q(%(PR "#{Q[PREV,/[ \\\\\t;"(){}\[\]]/]}\nBYE))
 end
 
 class LLVMAsm < CodeGen
