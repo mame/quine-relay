@@ -174,7 +174,7 @@ class MSIL < CodeGen
         .method static void Main()
         {
           .entrypoint ldstr"#{e[PREV]}"
-          call void [mscorlib]System.Console::WriteLine(string)
+          call void [mscorlib]System.Console::Write(string)
           ret
         }
       )
