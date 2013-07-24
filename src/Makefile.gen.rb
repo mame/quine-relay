@@ -14,14 +14,11 @@ end
 OUT << <<-END
 MAKEFLAGS += --no-print-directory
 
-NODE := $(shell which nodejs)
+NODE := $(shell which nodejs 2>/dev/null || which node)
 ifeq ($(NODE),)
-  NODE := $(shell which node)
-  ifeq ($(NODE),)
-    $(warning No node found!)
-  endif
+  $(warning Node.js not found!)
 endif
-  
+
 .DELETE_ON_ERROR:
 
 END
