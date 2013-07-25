@@ -556,7 +556,7 @@ end
 
 class Scheme < CodeGen
   File = "QR.scm"
-  Cmd = "gosh QR.scm > OUTFILE"
+  Cmd = "$(SCHEME) QR.scm > OUTFILE"
   Apt = "gauche"
   Code = %q(%((display "#{e[PREV]}")))
 end

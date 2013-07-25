@@ -36,7 +36,7 @@ If you could do it, please let me know.  Good luck.
 
     $ ruby QR.rb > QR.scala
     $ scalac QR.scala && scala QR > QR.scm
-    $ gosh QR.scm > QR.bash
+    $ $(SCHEME) QR.scm > QR.bash
     $ bash QR.bash > QR.st
     $ gst QR.st > QR.tcl
     $ tclsh QR.tcl > QR.unl
@@ -135,7 +135,7 @@ Haskell      |ghc            |7.6.2-1ubuntu1
 Icon         |icont          |9.4.3-4
 INTERCAL     |intercal       |29:0.29-2
 Jasmin       |jasmin-sable   |2.4.0-1ubuntu1
-Java         |openjdk-6-jdk  |6b27-1.12.5-1ubuntu1
+Java         |openjdk-6-jdk  |6b27-1.12.6-1ubuntu0.13.04.2
 LLVM asm     |llvm           |1:3.2-16~exp1
 Logo         |ucblogo        |5.5-2.1
 Lua          |lua5.2         |5.2.1-3

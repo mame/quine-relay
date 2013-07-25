@@ -18,6 +18,10 @@ NODE := $(shell which nodejs 2>/dev/null || which node)
 ifeq ($(NODE),)
   $(warning Node.js not found!)
 endif
+SCHEME := $(shell which guile 2>/dev/null || which gosh)
+ifeq ($(SCHEME),)
+  $(warning Scheme interpreter not found!)
+endif
 
 .DELETE_ON_ERROR:
 
