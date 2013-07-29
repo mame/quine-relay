@@ -23,6 +23,8 @@ gens.each do |gen|
   steps.each_cons(2) do |src, dst|
     cmd = src.cmd.gsub("OUTFILE", dst.src)
     cmd = cmd.gsub(/mv QR\.c(\.bak)? QR\.c(\.bak)? &&/, "")
+    cmd = cmd.gsub("$(NODE)", "nodejs")
+    cmd = cmd.gsub("$(SCHEME)", "gosh")
     puts "cmd: " + cmd
     system(cmd) || raise("failed")
   end
