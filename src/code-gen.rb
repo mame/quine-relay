@@ -245,9 +245,9 @@ class Java < CodeGen
               t=[*43..123]-[64,*92..96];
               a.map{|n|t[n/75].chr+t[n%75].chr}*""
             }";
-            int i,n,q=0,t;
-            for(n=0;++n<126;)c[n]=""+(char)n;
-            for(i=0;i<s.length();){
+            int i=0,n=0,q=0,t;
+            for(;++n<126;)c[n]=""+(char)n;
+            for(;i<s.length();){
               t=s.charAt(i);
               q=q*75+t-t/64-t/92*5-43;
               if(i++%2>0){
