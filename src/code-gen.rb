@@ -100,7 +100,7 @@ class Perl < CodeGen
           $_="#{
             s=PREV;
             (s+N*(-s.size%6)).bytes.map{|n|"%07b"%n}.join.
-              scan(/.{6}/).map{|n|n=n.to_i(2);((n/26*6+n+19)%83+46).chr}*""
+              gsub(/.{6}/){|n|n=n.to_i(2);((n/26*6+n+19)%83+46).chr}
           }";
           s|.|$n=ord$&;substr unpack(B8,chr$n-($n<58?-6:$n<91?65:71)),2|eg;
           s/.{7}/0$&/g;
@@ -117,7 +117,7 @@ class Pascal < CodeGen
   File = "QR.pas"
   Cmd = "fpc QR.pas && ./QR > OUTFILE"
   Apt = "fp-compiler"
-  Code = %q("program QR(output);begin #{(PREV).scan(/.{1,255}/).map{|s|"write('#{s}');"}*""}end.")
+  Code = %q("program QR(output);begin #{(PREV).gsub(/.{1,255}/){|s|"write('#{s}');"}}end.")
 end
 
 class ParrotAsm < CodeGen
