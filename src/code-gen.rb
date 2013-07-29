@@ -252,7 +252,7 @@ class Java < CodeGen
               q=q*75+t-t/64-t/92*5-43;
               if(i++%2>0){
                 y=q<n?c[q]:y;
-                c[n++]=z+=y.charAt(0);
+                c[n++]=z+y.charAt(0);
                 System.out.print(z=c[q]);
                 q=0;
               }
