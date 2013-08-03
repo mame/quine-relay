@@ -8,7 +8,8 @@ srcs = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.src } }
 apts = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.apt } }
 
 pkg_versions = {}
-`dpkg -p #{ (apts + ["tcc"]).join(" ") }`.b.split("\n\n").each do |s|
+`which apt-get >/dev/null \
+  && dpkg -p #{ (apts + ["tcc"]).join(" ") }`.b.split("\n\n").each do |s|
   name = s[/^Package: (.*)$/, 1]
   version = s[/^Version: (.*)$/, 1]
   pkg_versions[name] = version if name && version
