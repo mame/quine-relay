@@ -4,7 +4,7 @@ NODE := $(shell which nodejs 2>/dev/null || which node)
 ifeq ($(NODE),)
   $(warning Node.js not found!)
 endif
-SCHEME := $(shell which guile 2>/dev/null || which gosh >/dev/null || which csi >/dev/null && echo "csi -s" )
+SCHEME := $(shell which guile 2>/dev/null || which gosh 2>/dev/null || which csi >/dev/null && echo "csi -s" )
 ifeq ($(SCHEME),)
   $(warning Scheme interpreter not found!)
 endif
