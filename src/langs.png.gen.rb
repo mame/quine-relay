@@ -9,7 +9,7 @@ ctx = Cairo::Context.new(surface)
 langs = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.name } }
 
 ctx.line_width = 1
-ctx.set_source_rgb(255, 255, 255)
+ctx.set_source_rgb(1, 1, 1)
 ctx.rectangle(0, 0, W, H)
 ctx.fill
 ctx.set_source_rgb(0, 0, 0)
