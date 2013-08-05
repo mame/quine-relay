@@ -4,9 +4,12 @@ NODE := $(shell which nodejs 2>/dev/null || which node)
 ifeq ($(NODE),)
   $(warning Node.js not found!)
 endif
-SCHEME := $(shell which guile 2>/dev/null || which gosh 2>/dev/null || which csi >/dev/null && echo "csi -s" )
+SCHEME := $(shell which guile csi gosh 2>/dev/null | head -1)
 ifeq ($(SCHEME),)
   $(warning Scheme interpreter not found!)
+endif
+ifeq ($(SCHEME),$(shell which csi 2>/dev/null | head -1))
+  SCHEME := csi -s
 endif
 
 .DELETE_ON_ERROR:
