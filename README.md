@@ -27,7 +27,9 @@ You just have to type the following apt-get command to install all of them.
       open-cobol openjdk-6-jdk parrot perl php5-cli pike7.8 python r-base \
       regina-rexx ruby1.9.3 scala swi-prolog tcc tcl8.5 ucblogo valac
 
-You may find [instructions for Arch Linux and other platforms in the wiki](https://github.com/mame/quine-relay/wiki/Installation).
+You are even more fortunate if you are using Arch Linux, as you can just install the [quine-relay-git](https://aur.archlinux.org/packages/quine-relay-git/) package from AUR, either manually or by using your favorite AUR helper.
+
+You may find [instructions for other platforms in the wiki](https://github.com/mame/quine-relay/wiki/Installation).
 
 If you are not using these Linux distributions, please find your way yourself.
 If you could do it, please let me know.  Good luck.
