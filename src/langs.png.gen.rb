@@ -49,6 +49,9 @@ ctx.save do
 end
 
 surface.write_to_png("../langs.png")
+system 'optipng -fix -i0 -o7 ../langs.png'
+system 'advdef -z4 ../langs.png'
+system 'advpng -z4 ../langs.png'
 
 # convert svg to template
 #
