@@ -145,7 +145,7 @@ end
 class NodeJS_ObjC < CodeGen
   Name = %w(NodeJS Objective-C)
   File = ["QR.js", "QR.m"]
-  Cmd = ["$(NODE) QR.js > OUTFILE", "gcc -o QR QR.m && ./QR > OUTFILE"]
+  Cmd = ["$(NODE) QR.js > OUTFILE", '${CC} -o QR QR.m && ./QR > OUTFILE']
   Apt = ["nodejs", "gobjc"]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
@@ -290,7 +290,7 @@ class Haskell_Icon_INTERCAL < CodeGen
   Cmd = [
     "runghc QR.hs > OUTFILE",
     "icont -s QR.icn && ./QR > OUTFILE",
-    "mv QR.c QR.c.bak && CC=tcc ick -bfO QR.i && mv QR.c.bak QR.c && ./QR > OUTFILE"
+    "mv QR.c QR.c.bak && ick -bfO QR.i && mv QR.c.bak QR.c && ./QR > OUTFILE"
   ]
   Apt = ["ghc", "icont", "intercal"]
   def code
@@ -336,7 +336,7 @@ class Forth_FORTRAN77_Fortran90 < CodeGen
   File = ["QR.fs", "QR.f", "QR.f90"]
   Cmd = [
     "gforth QR.fs > OUTFILE",
-    "mv QR.c QR.c.bak && f2c QR.f && tcc -o QR QR.c -L/usr/lib -lf2c && mv QR.c.bak QR.c && ./QR > OUTFILE",
+    'mv QR.c QR.c.bak && f2c QR.f && ${CC} -o QR QR.c -L/usr/lib -lf2c && mv QR.c.bak QR.c && ./QR > OUTFILE',
     "gfortran -o QR QR.f90 && ./QR > OUTFILE"
   ]
   Apt = ["gforth", "f2c", "gfortran"]
@@ -428,7 +428,7 @@ end
 class Cplusplus < CodeGen
   Name = "C++"
   File = "QR.cpp"
-  Cmd = "g++ -o QR QR.cpp && ./QR > OUTFILE"
+  Cmd = '${CXX} -o QR QR.cpp && ./QR > OUTFILE'
   Apt = "g++"
   def code
     <<-'END'.lines.map {|l| l.strip }.join
@@ -444,7 +444,7 @@ end
 
 class C < CodeGen
   File = "QR.c"
-  Cmd = "gcc -o QR QR.c && ./QR > OUTFILE"
+  Cmd = '${CC} -o QR QR.c && ./QR > OUTFILE'
   Apt = "gcc"
   def code
     <<-'END'.lines.map {|l| l.strip }.join

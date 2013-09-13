@@ -153,7 +153,7 @@ QR.cpp: QR.c
 	@echo "##  C -> C++  ##"
 	@echo "################"
 	@echo
-	gcc -o QR QR.c
+	${CC} -o QR QR.c
 	./QR > QR.cpp
 
 QR.cs: QR.cpp
@@ -162,7 +162,7 @@ QR.cs: QR.cpp
 	@echo "##  C++ -> C#  ##"
 	@echo "#################"
 	@echo
-	g++ -o QR QR.cpp
+	${CXX} -o QR QR.cpp
 	./QR > QR.cs
 
 QR.clj: QR.cs
@@ -223,7 +223,7 @@ QR.f90: QR.f
 	@echo
 	mv QR.c QR.c.bak
 	f2c QR.f
-	tcc -o QR QR.c -L/usr/lib -lf2c
+	${CC} -o QR QR.c -L/usr/lib -lf2c
 	mv QR.c.bak QR.c
 	./QR > QR.f90
 
@@ -276,7 +276,7 @@ QR.j: QR.i
 	@echo "##########################"
 	@echo
 	mv QR.c QR.c.bak
-	CC=tcc ick -bfO QR.i
+	ick -bfO QR.i
 	mv QR.c.bak QR.c
 	./QR > QR.j
 
@@ -354,7 +354,7 @@ QR.ml: QR.m
 	@echo "##  Objective-C -> OCaml  ##"
 	@echo "############################"
 	@echo
-	gcc -o QR QR.m
+	${CC} -o QR QR.m
 	./QR > QR.ml
 
 QR.octave: QR.ml

@@ -158,7 +158,7 @@ R            |r-base         |2.15.2-1ubuntu1
 REXX         |regina-rexx    |3.6-2
 (extra)      |tcc            |0.9.26~git20120612.ad5f375-6
 
-Note: `tcc` is used to compile FORTRAN77 and INTERCAL sources
+Note: `CC=tcc ick -bfO` may be used to compile INTERCAL sources
 with less memory.
 
 ### How to re-generate the source
