@@ -276,7 +276,7 @@ QR.j: QR.i
 	@echo "##########################"
 	@echo
 	mv QR.c QR.c.bak
-	CC=tcc ick -b QR.i
+	CC=tcc ick -bfO QR.i
 	mv QR.c.bak QR.c
 	./QR > QR.j
 

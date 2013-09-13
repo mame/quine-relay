@@ -65,7 +65,7 @@ If you could do it, please let me know.  Good luck.
     $ groovy QR.groovy > QR.hs
     $ runghc QR.hs > QR.icn
     $ icont -s QR.icn && ./QR > QR.i
-    $ CC=tcc ick -b QR.i && ./QR > QR.j
+    $ CC=tcc ick -bfO QR.i && ./QR > QR.j
     $ jasmin QR.j && java QR > QR.java
     $ javac QR.java && java QR > QR.ll
     $ llvm-as QR.ll && lli QR.bc > QR.logo

@@ -290,7 +290,7 @@ class Haskell_Icon_INTERCAL < CodeGen
   Cmd = [
     "runghc QR.hs > OUTFILE",
     "icont -s QR.icn && ./QR > OUTFILE",
-    "mv QR.c QR.c.bak && CC=tcc ick -b QR.i && mv QR.c.bak QR.c && ./QR > OUTFILE"
+    "mv QR.c QR.c.bak && CC=tcc ick -bfO QR.i && mv QR.c.bak QR.c && ./QR > OUTFILE"
   ]
   Apt = ["ghc", "icont", "intercal"]
   def code
