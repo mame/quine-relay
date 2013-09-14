@@ -51,21 +51,21 @@ If you could do it, please let me know.  Good luck.
     $ awk -f QR.awk > QR.boo
     $ booi QR.boo > QR.bf
     $ beef QR.bf > QR.c
-    $ gcc -o QR QR.c && ./QR > QR.cpp
-    $ g++ -o QR QR.cpp && ./QR > QR.cs
+    $ ${CC} -o QR QR.c && ./QR > QR.cpp
+    $ ${CXX} -o QR QR.cpp && ./QR > QR.cs
     $ mcs QR.cs && mono QR.exe > QR.clj
     $ clojure QR.clj > QR.cob
     $ cobc -x QR.cob && ./QR > QR.coffee
     $ coffee QR.coffee > QR.lisp
     $ clisp QR.lisp > QR.fs
     $ gforth QR.fs > QR.f
-    $ f2c QR.f && tcc -o QR QR.c -L/usr/lib -lf2c && ./QR > QR.f90
+    $ f2c QR.f && ${CC} -o QR QR.c -L/usr/lib -lf2c && ./QR > QR.f90
     $ gfortran -o QR QR.f90 && ./QR > QR.go
     $ go run QR.go > QR.groovy
     $ groovy QR.groovy > QR.hs
     $ runghc QR.hs > QR.icn
     $ icont -s QR.icn && ./QR > QR.i
-    $ CC=tcc ick -b QR.i && ./QR > QR.j
+    $ ick -bfO QR.i && ./QR > QR.j
     $ jasmin QR.j && java QR > QR.java
     $ javac QR.java && java QR > QR.ll
     $ llvm-as QR.ll && lli QR.bc > QR.logo
@@ -158,7 +158,7 @@ R            |r-base         |2.15.2-1ubuntu1
 REXX         |regina-rexx    |3.6-2
 (extra)      |tcc            |0.9.26~git20120612.ad5f375-6
 
-Note: `tcc` is used to compile FORTRAN77 and INTERCAL sources
+Note: `CC=tcc ick -bfO` may be used to compile INTERCAL sources
 with less memory.
 
 ### How to re-generate the source
