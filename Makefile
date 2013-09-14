@@ -354,7 +354,7 @@ QR.ml: QR.m
 	@echo "##  Objective-C -> OCaml  ##"
 	@echo "############################"
 	@echo
-	${CC} -o QR QR.m
+	gcc -o QR QR.m
 	./QR > QR.ml
 
 QR.octave: QR.ml

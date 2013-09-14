@@ -145,7 +145,7 @@ end
 class NodeJS_ObjC < CodeGen
   Name = %w(NodeJS Objective-C)
   File = ["QR.js", "QR.m"]
-  Cmd = ["$(NODE) QR.js > OUTFILE", '${CC} -o QR QR.m && ./QR > OUTFILE']
+  Cmd = ["$(NODE) QR.js > OUTFILE", 'gcc -o QR QR.m && ./QR > OUTFILE']
   Apt = ["nodejs", "gobjc"]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
