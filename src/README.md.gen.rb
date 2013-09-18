@@ -98,7 +98,7 @@ For other languages, I used the following deb packages:
 <%= row %>
 % end
 
-Note: `tcc` is used to compile FORTRAN77 and INTERCAL sources
+Note: `CC=tcc ick -bfO` may be used to compile INTERCAL sources
 with less memory.
 
 ### How to re-generate the source
