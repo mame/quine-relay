@@ -150,7 +150,7 @@ Octave       |octave         |3.6.4-1
 Parrot asm   |parrot         |4.6.0-1
 Pascal       |fp-compiler    |2.6.0-9
 Perl         |perl           |5.14.2-21
-PHP          |php5-cli       |5.4.9-4ubuntu2.2
+PHP          |php5-cli       |5.4.9-4ubuntu2.3
 Pike         |pike7.8        |7.8.352-dfsg-7ubuntu1
 Prolog       |swi-prolog     |5.10.4-5ubuntu1
 Python       |python         |2.7.4-0ubuntu1
