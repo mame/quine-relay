@@ -55,7 +55,7 @@ If you could do it, please let me know.  Good luck.
     $ ${CXX} -o QR QR.cpp && ./QR > QR.cs
     $ mcs QR.cs && mono QR.exe > QR.clj
     $ clojure QR.clj > QR.cob
-    $ cobc -x QR.cob && ./QR > QR.coffee
+    $ cobc -O2 -x QR.cob && ./QR > QR.coffee
     $ coffee QR.coffee > QR.lisp
     $ clisp QR.lisp > QR.fs
     $ gforth QR.fs > QR.f

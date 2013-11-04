@@ -46,4 +46,12 @@ cmds.size.times do |i|
   cmd.split("&&").each {|c| OUT << "\t" + c.strip }
 end
 
-File.write("../Makefile", OUT.join("\n") + "\n")
+OUT << <<-END
+
+clean:
+\t@mv QR.rb quine-relay.rb
+\trm -f qr QR qr.* QR.* QR2.rb *.class
+\t@mv quine-relay.rb QR.rb
+END
+
+File.write("../Makefile", OUT.join("\n"))

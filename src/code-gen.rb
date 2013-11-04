@@ -381,7 +381,7 @@ end
 
 class Clojure_Cobol < CodeGen
   File = ["QR.clj", "QR.cob"]
-  Cmd = ["clojure QR.clj > OUTFILE", "cobc -x QR.cob && ./QR > OUTFILE"]
+  Cmd = ["clojure QR.clj > OUTFILE", "cobc -O2 -x QR.cob && ./QR > OUTFILE"]
   Apt = ["clojure1.4", "open-cobol"]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
