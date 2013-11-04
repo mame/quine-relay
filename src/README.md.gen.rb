@@ -59,7 +59,7 @@ the original <%= langs[0] %> code again.
 
 #### 1. Install all interpreters/compilers.
 
-You are fortunate if you are using Ubuntu 13.04 (Raring Ringtail).
+You are fortunate if you are using Ubuntu 13.10 (Saucy Salamander).
 You just have to type the following apt-get command to install all of them.
 
     $ <%= apt_get %>
