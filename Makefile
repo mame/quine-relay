@@ -188,7 +188,7 @@ QR.coffee: QR.cob
 	@echo "##  Cobol -> CoffeeScript  ##"
 	@echo "#############################"
 	@echo
-	cobc -x QR.cob
+	cobc -O2 -x QR.cob
 	./QR > QR.coffee
 
 QR.lisp: QR.coffee
