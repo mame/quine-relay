@@ -445,3 +445,8 @@ QR2.rb: QR.rexx
 	@echo "####################"
 	@echo
 	rexx ./QR.rexx > QR2.rb
+
+clean:
+	@mv QR.rb quine-relay.rb
+	rm -f qr QR qr.* QR.* QR2.rb *.class
+	@mv quine-relay.rb QR.rb
