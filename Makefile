@@ -38,7 +38,7 @@ QR.scm: QR.scala
 	@echo "#######################"
 	@echo
 	scalac QR.scala
-	scala QR > QR.scm
+	CLASSPATH=. scala QR > QR.scm
 
 QR.bash: QR.scm
 	@echo
