@@ -38,7 +38,7 @@ QR.scm: QR.scala
 	@echo "#######################"
 	@echo
 	scalac QR.scala
-	scala QR > QR.scm
+	CLASSPATH=. scala QR > QR.scm
 
 QR.bash: QR.scm
 	@echo
@@ -287,7 +287,7 @@ QR.java: QR.j
 	@echo "######################"
 	@echo
 	jasmin QR.j
-	java QR > QR.java
+	CLASSPATH=. java QR > QR.java
 
 QR.ll: QR.java
 	@echo
@@ -296,7 +296,7 @@ QR.ll: QR.java
 	@echo "########################"
 	@echo
 	javac QR.java
-	java QR > QR.ll
+	CLASSPATH=. java QR > QR.ll
 
 QR.logo: QR.ll
 	@echo
