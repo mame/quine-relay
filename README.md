@@ -37,7 +37,7 @@ If you could do it, please let me know.  Good luck.
 #### 2. Run each program on each interpreter/compiler.
 
     $ ruby QR.rb > QR.scala
-    $ scalac QR.scala && scala QR > QR.scm
+    $ scalac QR.scala && CLASSPATH=. scala QR > QR.scm
     $ $(SCHEME) QR.scm > QR.bash
     $ bash QR.bash > QR.st
     $ gst QR.st > QR.tcl
@@ -66,8 +66,8 @@ If you could do it, please let me know.  Good luck.
     $ runghc QR.hs > QR.icn
     $ icont -s QR.icn && ./QR > QR.i
     $ ick -bfO QR.i && ./QR > QR.j
-    $ jasmin QR.j && java QR > QR.java
-    $ javac QR.java && java QR > QR.ll
+    $ jasmin QR.j && CLASSPATH=. java QR > QR.java
+    $ javac QR.java && CLASSPATH=. java QR > QR.ll
     $ llvm-as QR.ll && lli QR.bc > QR.logo
     $ logo QR.logo > QR.lua
     $ lua QR.lua > QR.makefile
@@ -106,7 +106,7 @@ For other languages, I used the following deb packages:
 
 language     |ubuntu package |version
 -------------|---------------|-----------------------------------
-Ruby         |ruby1.9.3      |1.9.3.194-8.1ubuntu2
+Ruby         |ruby1.9.3      |1.9.3.194-8.1ubuntu2.1
 Scala        |scala          |2.9.2+dfsg-1
 Scheme       |gauche         |0.9.3.3-8
 Shell        |bash           |4.2-5ubuntu3
@@ -137,7 +137,7 @@ Haskell      |ghc            |7.6.3-4
 Icon         |icont          |9.4.3-4.2ubuntu1
 INTERCAL     |intercal       |29:0.29-3
 Jasmin       |jasmin-sable   |2.4.0-3
-Java         |openjdk-6-jdk  |6b27-1.12.6-1ubuntu2
+Java         |openjdk-6-jdk  |6b27-1.12.6-1ubuntu2.1
 LLVM asm     |llvm           |1:3.2-20
 Logo         |ucblogo        |5.5-2.1
 Lua          |lua5.2         |5.2.2-1
@@ -150,7 +150,7 @@ Octave       |octave         |3.6.4-3
 Parrot asm   |parrot         |5.0.0-1
 Pascal       |fp-compiler    |2.6.2-5
 Perl         |perl           |5.14.2-21build1
-PHP          |php5-cli       |5.5.3+dfsg-1ubuntu2
+PHP          |php5-cli       |5.5.3+dfsg-1ubuntu2.1
 Pike         |pike7.8        |7.8.700-7
 Prolog       |swi-prolog     |6.2.6-7
 Python       |python         |2.7.5-5ubuntu1
