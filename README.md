@@ -17,7 +17,7 @@ the original Ruby code again.
 
 #### 1. Install all interpreters/compilers.
 
-You are fortunate if you are using Ubuntu 13.10 (Saucy Salamander).
+You are fortunate if you are using Ubuntu 14.04 (Trusty Tahr).
 You just have to type the following apt-get command to install all of them.
 
     $ sudo apt-get install algol68g bash beef boo clisp clojure1.4 \
@@ -106,55 +106,55 @@ For other languages, I used the following deb packages:
 
 language     |ubuntu package |version
 -------------|---------------|-----------------------------------
-Ruby         |ruby1.9.3      |1.9.3.194-8.1ubuntu2.1
-Scala        |scala          |2.9.2+dfsg-1
-Scheme       |gauche         |0.9.3.3-8
-Shell        |bash           |4.2-5ubuntu3
+Ruby         |ruby1.9.3      |1.9.3.484-2ubuntu1
+Scala        |scala          |2.9.2+dfsg-2
+Scheme       |gauche         |0.9.3.3-8ubuntu1
+Shell        |bash           |4.3-7ubuntu1
 Smalltalk    |gnu-smalltalk  |3.2.4-2
-Tcl          |tcl8.5         |8.5.13-1ubuntu4
+Tcl          |tcl8.5         |8.5.15-2ubuntu1
 Unlambda     |(none)         |-
-Vala         |valac          |0.20.1-2ubuntu3
+Vala         |valac          |0.22.1-0ubuntu1
 Verilog      |iverilog       |0.9.7-1
 Whitespace   |(none)         |-
-Ada          |gnat           |4.6ubuntu1
+Ada          |gnat           |4.6ubuntu4
 ALGOL68      |algol68g       |2.4.1-1
 Awk          |gawk           |1:4.0.1+dfsg-2.1ubuntu2
 Boo          |boo            |0.9.5~git20110729.r1.202a430-2
 Brainfuck    |beef           |1.0.0-1
-C            |gcc            |4:4.8.1-2ubuntu3
-C++          |g++            |4:4.8.1-2ubuntu3
-C#           |mono-mcs       |2.10.8.1-5ubuntu2
-Clojure      |clojure1.4     |1.4.0+dfsg-2ubuntu2
-Cobol        |open-cobol     |1.1-1
+C            |gcc            |4:4.8.2-1ubuntu6
+C++          |g++            |4:4.8.2-1ubuntu6
+C#           |mono-mcs       |3.2.8+dfsg-4ubuntu1
+Clojure      |clojure1.4     |1.4.0+dfsg-3
+Cobol        |open-cobol     |1.1-1build1
 CoffeeScript |coffeescript   |1.4.0-1
-CommonLisp   |clisp          |1:2.49-8.2
+CommonLisp   |clisp          |1:2.49-9ubuntu1
 Forth        |gforth         |0.7.0+ds2-0.1
 FORTRAN77    |f2c            |20100827-1
-Fortran90    |gfortran       |4:4.8.1-2ubuntu3
-Go           |golang         |2:1.1.2-2ubuntu1
+Fortran90    |gfortran       |4:4.8.2-1ubuntu6
+Go           |golang         |2:1.2.1-2ubuntu1
 Groovy       |groovy         |2.0.0~beta2+isreally1.8.6-0ubuntu1
-Haskell      |ghc            |7.6.3-4
+Haskell      |ghc            |7.6.3-10
 Icon         |icont          |9.4.3-4.2ubuntu1
 INTERCAL     |intercal       |29:0.29-3
 Jasmin       |jasmin-sable   |2.4.0-3
-Java         |openjdk-6-jdk  |6b27-1.12.6-1ubuntu2.1
-LLVM asm     |llvm           |1:3.2-20
+Java         |openjdk-6-jdk  |6b31-1.13.3-1ubuntu1
+LLVM asm     |llvm           |1:3.4-0ubuntu1
 Logo         |ucblogo        |5.5-2.1
-Lua          |lua5.2         |5.2.2-1
+Lua          |lua5.2         |5.2.3-1
 Makefile     |make           |3.81-8.2ubuntu3
-MSIL         |mono-devel     |2.10.8.1-5ubuntu2
-NodeJS       |nodejs         |0.10.15~dfsg1-4
-Objective-C  |gobjc          |4:4.8.1-2ubuntu3
-OCaml        |ocaml          |3.12.1-4ubuntu1
-Octave       |octave         |3.6.4-3
-Parrot asm   |parrot         |5.0.0-1
-Pascal       |fp-compiler    |2.6.2-5
-Perl         |perl           |5.14.2-21build1
-PHP          |php5-cli       |5.5.3+dfsg-1ubuntu2.1
+MSIL         |mono-devel     |3.2.8+dfsg-4ubuntu1
+NodeJS       |nodejs         |0.10.25~dfsg2-2ubuntu1
+Objective-C  |gobjc          |4:4.8.2-1ubuntu6
+OCaml        |ocaml          |4.01.0-3ubuntu3
+Octave       |octave         |3.8.1-1ubuntu1
+Parrot asm   |parrot         |5.9.0-1build1
+Pascal       |fp-compiler    |2.6.2-8
+Perl         |perl           |5.18.2-2ubuntu1
+PHP          |php5-cli       |5.5.9+dfsg-1ubuntu4
 Pike         |pike7.8        |7.8.700-7
-Prolog       |swi-prolog     |6.2.6-7
-Python       |python         |2.7.5-5ubuntu1
-R            |r-base         |3.0.1-3ubuntu1
+Prolog       |swi-prolog     |6.6.4-2ubuntu1
+Python       |python         |2.7.5-5ubuntu3
+R            |r-base         |3.0.2-1ubuntu1
 REXX         |regina-rexx    |3.6-2
 (extra)      |tcc            |0.9.26~git20120612.ad5f375-6
 
