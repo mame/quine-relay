@@ -137,7 +137,7 @@ Haskell      |ghc            |7.6.3-10
 Icon         |icont          |9.4.3-4.2ubuntu1
 INTERCAL     |intercal       |29:0.29-3
 Jasmin       |jasmin-sable   |2.4.0-3
-Java         |openjdk-6-jdk  |6b31-1.13.3-1ubuntu1
+Java         |openjdk-6-jdk  |6b32-1.13.4-4ubuntu0.14.04.1
 LLVM asm     |llvm           |1:3.4-0ubuntu1
 Logo         |ucblogo        |5.5-2.1
 Lua          |lua5.2         |5.2.3-1
@@ -150,7 +150,7 @@ Octave       |octave         |3.8.1-1ubuntu1
 Parrot asm   |parrot         |5.9.0-1build1
 Pascal       |fp-compiler    |2.6.2-8
 Perl         |perl           |5.18.2-2ubuntu1
-PHP          |php5-cli       |5.5.9+dfsg-1ubuntu4
+PHP          |php5-cli       |5.5.9+dfsg-1ubuntu4.3
 Pike         |pike7.8        |7.8.700-7
 Prolog       |swi-prolog     |6.6.4-2ubuntu1
 Python       |python         |2.7.5-5ubuntu3

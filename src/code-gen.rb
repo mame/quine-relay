@@ -386,23 +386,22 @@ class Clojure_Cobol < CodeGen
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
-        (defn f[l r]
-          (if
-            (>(count r)45)
-            (lazy-seq
-              (cons(str"    \\""r"\\"&")(f l"")))
-            (let[c(first l)]
-              (if c
-                (f(next l)(if(= c \\")(str r c c)(str r c)))
-                [(str"    \\""r"\\".")]))))
-        (doall
-          (map #(println(str"        "%1))
-            (lazy-cat
-              ["IDENTIFICATION DIVISION."
-               "PROGRAM-ID. QR."
-               "PROCEDURE DIVISION."]#{
-                (PREV).gsub(/.+/){%((cons"DISPLAY"(f"#{e[$&]}""")))}
-              }["STOP RUN."]))))
+        (doseq[s
+          (lazy-cat
+            ["IDENTIFICATION DIVISION."
+             "PROGRAM-ID. QR."
+             "PROCEDURE DIVISION."
+             'DISPLAY]
+             (map #(str
+                  "    \\""
+                  (.replace%1"\\"""\\"\\"")
+                  "\\"&")
+               (re-seq #".{1,45}"
+                  "#{e[PREV]}"))
+             ["    \\" \\"."
+              "STOP RUN."])]
+          (println(str"        "s)))
+        )
     END
   end
 end
