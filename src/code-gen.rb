@@ -124,14 +124,14 @@ class ParrotAsm < CodeGen
   File = "QR.pasm"
   Cmd = "parrot QR.pasm > OUTFILE"
   Apt = "parrot"
-  Code = %q(%(say"#{e[PREV]}"\nend\n))
+  Code = %q(%(say"#{e[PREV]}"\nend))
 end
 
 class Octave < CodeGen
   File = "QR.octave"
   Cmd = "octave -qf QR.octave > OUTFILE"
   Apt = "octave"
-  Code = %q("printf"+E[PREV])
+  Code = %q("printf"+E[PREV+N])
 end
 
 class OCaml < CodeGen

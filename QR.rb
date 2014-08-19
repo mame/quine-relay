@@ -26,7 +26,7 @@ ayX       ^^         "'+l+'^^"^^n")'))],?  ']}')  ,nl,halt."]};returnX0;}"]]}"?>
 .un                 pack("B*")[0].gsub(/  .{6}/){  n=$&.to_iX2;((n+14)/26*6+n+47).chr}}";           s|.|$n=ord$
 &;su               bstrXunp                                     ack(B8,chr$n-int($n/32)*6           -41),2|eg;H
 Xpack        "B*  ",$_).scan  (/[X,-:  A-z]+|(.)/){p  ="s++#{  $1?"chrX#{$1.ord}+e":$&+?+}          ;"+p};p)).g
-sub(/.       {1,255}/){|s|"wr  ite('  #{s}');"}}end."  ]}"`n  end`n)]]]};returnX0;}).trXB,          ?@]}.replac
+sub(/.       {1,255}/){|s|"wr  ite('  #{s}');"}}end."  ]}"`n  end)+N]]]};returnX0;}).trXB,          ?@]}.replac
 e(/@/g,SJ   .fromCharCode(92))  )"]  }"callXvoidX[msco  rli  b]System.Console::Write(sJ)re          t})]}")],/[
 X^`t;"(){}`[`]] /]}`nBYE)).size  +  1}XxXi8]c"#{s.gsub(  /  [^`n"]/){B+"%02`x58"%$&.ord}}^          00"declareX
 i32@puts(i8*)de fineXi32@K(){sta   rt:%0=callXi32@puts(i   8*XgetelementptrXinbounds([#{i}          XxXi8]*@s,i
