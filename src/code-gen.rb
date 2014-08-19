@@ -279,12 +279,12 @@ class Jasmin < CodeGen
     <<-'END'.lines.map {|l| l.strip }.join
       %(
         .class public QR\n
-        .super java/lang/Object\n
-        .method public static main([Ljava/lang/String;)V\n
+        .super #{$T="java/io/PrintStream"}\n
+        .method public static main([L#{S="java/lang/"}String;)V ;]\n
         .limit stack 2\n
-        getstatic java/lang/System/out Ljava/io/PrintStream;\n
+        getstatic #{S}System/out L#$T;\n
         ldc "#{e[PREV]}"\n
-        invokevirtual java/io/PrintStream/println(Ljava/lang/String;)V\n
+        invokevirtual #$T/println(L#{S}String;)V\n
         return\n
         .end method
       )
