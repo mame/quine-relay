@@ -73,7 +73,7 @@ class Prolog < CodeGen
   File = "QR.prolog"
   Cmd = "swipl -q -t qr -f QR.prolog > OUTFILE"
   Apt = "swi-prolog"
-  Code = %q("qr:-write('#{Q[e[PREV],?']}'),nl,halt.")
+  Code = %q("qr:-write('#{Q[e[PREV],?']}').")
 end
 
 class Pike < CodeGen
@@ -214,7 +214,7 @@ class Logo < CodeGen
   File = "QR.logo"
   Cmd = "logo QR.logo > OUTFILE"
   Apt = "ucblogo"
-  Code = %q(%(PR "#{Q[PREV,/[ \\\\\t;"(){}\[\]]/]}\nBYE))
+  Code = %q(%(PR "#{Q[PREV,/[ \\\\\t;"(){}\[\]]/]} BYE))
 end
 
 class LLVMAsm < CodeGen
