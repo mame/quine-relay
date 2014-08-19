@@ -321,20 +321,30 @@ class Haskell < CodeGen
   Code = %q(("main=putStr"+E[PREV]))
 end
 
-class Go_Groovy < CodeGen
-  File = ["QR.go", "QR.groovy"]
-  Cmd = ["go run QR.go > OUTFILE", "groovy QR.groovy > OUTFILE"]
-  Apt = ["golang", "groovy"]
+class Groovy < CodeGen
+  File = "QR.groovy"
+  Cmd = "groovy QR.groovy > OUTFILE"
+  Apt = "groovy"
+  def code
+    <<-'END'.lines.map {|l| l.strip }.join
+      %(
+        print'#{e[PREV.tr(B,?&)]}'.tr('&','\\\\\\\\');
+      )
+    END
+  end
+end
+
+class Go < CodeGen
+  File = "QR.go"
+  Cmd = "go run QR.go > OUTFILE"
+  Apt = "golang"
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
         package main;
-        import("fmt";"strings");
+        import"fmt";
         func main(){
-          fmt.Print(
-            "print\\x27"+
-            strings.Replace("#{e[e[PREV].tr B,?@]}\\x27\\n","@","\\\\",-1)
-          )
+          fmt.Print#{E[PREV]};
         }
       )
     END
