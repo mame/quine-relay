@@ -561,7 +561,7 @@ end
 class Tcl_Unlambda < CodeGen
   File = ["QR.tcl", "QR.unl"]
   Cmd = ["tclsh QR.tcl > OUTFILE", "ruby unlambda.rb QR.unl > OUTFILE"]
-  Apt = ["tcl8.5", nil]
+  Apt = ["tcl", nil]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
@@ -611,5 +611,5 @@ end
 class Ruby < CodeGen
   File = "QR.rb"
   Cmd = "ruby QR.rb > OUTFILE"
-  Apt = "ruby1.9.3"
+  Apt = "ruby2.0"
 end

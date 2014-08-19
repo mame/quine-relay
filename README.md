@@ -25,7 +25,7 @@ You just have to type the following apt-get command to install all of them.
       gnat gnu-smalltalk gobjc golang groovy icont intercal iverilog \
       jasmin-sable llvm lua5.2 make mono-devel mono-mcs nodejs ocaml octave \
       open-cobol openjdk-6-jdk parrot perl php5-cli pike7.8 python r-base \
-      regina-rexx ruby1.9.3 scala swi-prolog tcc tcl8.5 ucblogo valac
+      regina-rexx ruby2.0 scala swi-prolog tcc tcl ucblogo valac
 
 You are even more fortunate if you are using Arch Linux,
 as you can just install the [quine-relay-git](https://aur.archlinux.org/packages/quine-relay-git/) package from AUR,
@@ -108,12 +108,12 @@ For other languages, I used the following deb packages:
 
 \# |language     |ubuntu package |version
 ---|-------------|---------------|-----------------------------------
-1  |Ruby         |ruby1.9.3      |1.9.3.484-2ubuntu1
+1  |Ruby         |ruby2.0        |2.0.0.484-1ubuntu2
 2  |Scala        |scala          |2.9.2+dfsg-2
 3  |Scheme       |gauche         |0.9.3.3-8ubuntu1
 4  |Shell        |bash           |4.3-7ubuntu1
 5  |Smalltalk    |gnu-smalltalk  |3.2.4-2
-6  |Tcl          |tcl8.5         |8.5.15-2ubuntu1
+6  |Tcl          |tcl            |8.6.0+6ubuntu3
 7  |Unlambda     |(none)         |-
 8  |Vala         |valac          |0.22.1-0ubuntu1
 9  |Verilog      |iverilog       |0.9.7-1
