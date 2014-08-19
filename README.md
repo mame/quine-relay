@@ -165,8 +165,11 @@ with less memory.
 
 ### How to re-generate the source
 
+    $ sudo apt-get install rake ruby-cairo ruby-rsvg2 ruby-gdk-pixbuf2 \
+      optipng advancecomp
     $ cd src
-    $ rake
+    $ rake2.0 clobber
+    $ rake2.0
 
 ### License
 
