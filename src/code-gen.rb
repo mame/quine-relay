@@ -35,6 +35,7 @@ class CodeGen
   # Common part
   PROLOGUE = <<-'END'.lines.map {|l| l.strip }.join
   B=92.chr;
+  g=32.chr;
   N=10.chr;
   n=0;
   e=->s{Q[Q[s,B],?"].gsub(N,B+?n)};
@@ -368,13 +369,13 @@ class Forth_FORTRAN77_Fortran90 < CodeGen
     # assuming that PREV has no '
     <<-'END'.lines.map {|l| l.strip }.join(" ")
       %(
-        : A ."         " ;
+        : A ."#{g*9}" ;
         : B A ." WRITE(*,*)'" A ;
         : C B TYPE ." '" CR ;
         : D
           S" program QR" C
           S\\" print \\"(&" C
-          S\\" #{e[PREV]}" DUP FOR S" &A,&" C NE\x58T
+          S\\" #{e[PREV]}" DUP FOR S" &A,&" C NEXT
           S\\" &A)\\",&" C
           0 DO B ." &char(" COUNT . ." ),&'" CR LOOP
           S\\" &\\"\\"" C
@@ -431,7 +432,7 @@ class Clojure_Cobol < CodeGen
                   "#{e[PREV]}"))
              ["    \\" \\"."
               "STOP RUN."])]
-          (println(str"        "s)))
+          (println(str"#{g*8}"s)))
         )
     END
   end

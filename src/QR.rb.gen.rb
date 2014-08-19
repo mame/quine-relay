@@ -1,7 +1,7 @@
 require_relative "code-gen"
 
 s =
-  CodeGen::PROLOGUE.split(?;).drop(1).join(?;) + ?; +
+  CodeGen::PROLOGUE.split(?;).drop(2).join(?;) + ?; +
   CodeGen::List[0..-2].inject('%(eval$s=%q(#$s))') {|c, lang| lang.gen_code(c) }
 
 if false
@@ -67,7 +67,7 @@ ABBREV.each do |k, v|
       when "\\" then "B"
       when "``" then "B*2"
       when "^^" then "B*4"
-      when " " then "32.chr"
+      when " " then "g"
       when "ain()" then %("ain()")
       else ":#{ v }"
       end
@@ -78,7 +78,7 @@ a = a.join(",")
 code = <<-END.split.join
   eval$s=%q(eval(%w(
 
-    #{CodeGen::PROLOGUE.split(?;)[0,1].join(?;)};
+    #{CodeGen::PROLOGUE.split(?;)[0,2].join(?;)};
     puts(eval(
       %q(#{ s }).gsub(/[#{ ABBREV.keys.sort.join }]/){[#{ a }][$&.ord%#{ $N }%#{ $M }]}
     ))
