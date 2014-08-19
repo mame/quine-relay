@@ -241,22 +241,20 @@ class Java < CodeGen
           public static void main(String[]v){
             String c[]=new String[8000],y="",z=y,s="#{
               z=t=(0..r=q=126).map{|n|[n,[]]};
-              a=[];
-              PREV.bytes{|n|
+              a="";
+              b=->n{a<<(n%78+55)%84+42};
+              (PREV).bytes{|n|
                 r,z=z[n]||(
-                  a<<r;
-                  q<5624&&z[n]=[q+=1,[]];
+                  b[r/78];b[r];
+                  q<6083&&z[n]=[q+=1,[]];
                   t[n])
               };
-              a<<r;
-              t=[*43..123]-[64,*92..96];
-              a.map{|n|t[n/75].chr+t[n%75].chr}*""
+              b[r/78];b[r]
             }";
-            int i=0,n=0,q=0,t;
+            int i=0,n=0,q=0;
             for(;++n<126;)c[n]=""+(char)n;
             for(;i<s.length();){
-              t=s.charAt(i);
-              q=q*75+t-t/64-t/92*5-43;
+              q=q*78+(s.charAt(i)-13)%84;
               if(i++%2>0){
                 y=q<n?c[q]:y;
                 c[n++]=z+y.charAt(0);
