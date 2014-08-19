@@ -4,12 +4,18 @@ NODE := $(shell which nodejs 2>/dev/null || which node)
 ifeq ($(NODE),)
   $(warning Node.js not found!)
 endif
+
 SCHEME := $(shell which guile csi gosh 2>/dev/null | head -1)
 ifeq ($(SCHEME),)
   $(warning Scheme interpreter not found!)
 endif
 ifeq ($(SCHEME),$(shell which csi 2>/dev/null | head -1))
   SCHEME := csi -s
+endif
+
+BF := $(shell which bf beef 2>/dev/null | head -1)
+ifeq ($(BF),)
+  $(warning Brainfuck interpreter not found!)
 endif
 
 .DELETE_ON_ERROR:
@@ -145,7 +151,7 @@ QR.c: QR.bf
 	@echo "##  Brainfuck -> C  ##"
 	@echo "######################"
 	@echo
-	bf QR.bf > QR.c
+	$(BF) QR.bf > QR.c
 
 QR.cpp: QR.c
 	@echo

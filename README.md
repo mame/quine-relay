@@ -40,7 +40,7 @@ If you could do it, please let me know.  Good luck.
 
     $ ruby QR.rb > QR.scala
     $ scalac QR.scala && CLASSPATH=. scala QR > QR.scm
-    $ $(SCHEME) QR.scm > QR.bash
+    $ gosh QR.scm > QR.bash
     $ bash QR.bash > QR.st
     $ gst QR.st > QR.tcl
     $ tclsh QR.tcl > QR.unl
@@ -53,15 +53,15 @@ If you could do it, please let me know.  Good luck.
     $ awk -f QR.awk > QR.boo
     $ booi QR.boo > QR.bf
     $ bf QR.bf > QR.c
-    $ ${CC} -o QR QR.c && ./QR > QR.cpp
-    $ ${CXX} -o QR QR.cpp && ./QR > QR.cs
+    $ gcc -o QR QR.c && ./QR > QR.cpp
+    $ g++ -o QR QR.cpp && ./QR > QR.cs
     $ mcs QR.cs && mono QR.exe > QR.clj
     $ clojure QR.clj > QR.cob
     $ cobc -O2 -x QR.cob && ./QR > QR.coffee
     $ coffee QR.coffee > QR.lisp
     $ clisp QR.lisp > QR.fs
     $ gforth QR.fs > QR.f
-    $ f2c QR.f && ${CC} -o QR QR.c -L/usr/lib -lf2c && ./QR > QR.f90
+    $ f2c QR.f && gcc -o QR QR.c -L/usr/lib -lf2c && ./QR > QR.f90
     $ gfortran -o QR QR.f90 && ./QR > QR.go
     $ go run QR.go > QR.groovy
     $ groovy QR.groovy > QR.hs
@@ -75,7 +75,7 @@ If you could do it, please let me know.  Good luck.
     $ lua QR.lua > QR.makefile
     $ make -f QR.makefile > QR.il
     $ ilasm QR.il && mono QR.exe > QR.js
-    $ $(NODE) QR.js > QR.m
+    $ nodejs QR.js > QR.m
     $ gcc -o QR QR.m && ./QR > QR.ml
     $ ocaml QR.ml > QR.octave
     $ octave -qf QR.octave > QR.pasm

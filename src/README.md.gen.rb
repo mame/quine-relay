@@ -34,7 +34,15 @@ apt_get.gsub!(/.{,70}( |\z)/) do
 end
 
 cmds = cmds.zip(srcs.drop(1) + ["QR.rb"]).map do |cmd, src|
-  cmd.gsub("OUTFILE", src).gsub(/mv QR\.c(\.bak)? QR\.c(\.bak)? && /, "")
+  cmd = cmd.gsub("OUTFILE", src).gsub(/mv QR\.c(\.bak)? QR\.c(\.bak)? && /, "")
+
+  cmd = cmd.gsub("$(SCHEME)", "gosh")
+  cmd = cmd.gsub("$(NODE)", "nodejs")
+  cmd = cmd.gsub("$(BF)", "bf")
+  cmd = cmd.gsub("${CC}", "gcc")
+  cmd = cmd.gsub("${CXX}", "g++")
+
+  cmd
 end
 cmds[-1].gsub!("QR.rb", "QR2.rb")
 

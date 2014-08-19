@@ -18,12 +18,18 @@ NODE := $(shell which nodejs 2>/dev/null || which node)
 ifeq ($(NODE),)
   $(warning Node.js not found!)
 endif
+
 SCHEME := $(shell which guile csi gosh 2>/dev/null | head -1)
 ifeq ($(SCHEME),)
   $(warning Scheme interpreter not found!)
 endif
 ifeq ($(SCHEME),$(shell which csi 2>/dev/null | head -1))
   SCHEME := csi -s
+endif
+
+BF := $(shell which bf beef 2>/dev/null | head -1)
+ifeq ($(BF),)
+  $(warning Brainfuck interpreter not found!)
 endif
 
 .DELETE_ON_ERROR:
@@ -39,6 +45,7 @@ srcs = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.src } } + ["
 
 cmds.size.times do |i|
   cmd = cmds[i].gsub("OUTFILE", srcs[i + 1])
+  cmd = cmd.gsub("gosh", "$(SCHEME)")
 
   OUT << ""
   OUT << "#{ srcs[i + 1] }: #{ srcs[i] }"
