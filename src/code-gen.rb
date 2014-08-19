@@ -44,6 +44,7 @@ class CodeGen
   Q=->s,t=?${s.gsub(t){B+$&}};
   M=->s{"<stdio.h>#{N}int main(){puts#{E[s]};return 0;}"};
   V=->s,a,z{s.gsub(/(#{B*4})+/){a+"#{$&.size/2}"+z}};
+  $D="program QR";
   END
 
   def self.setup_dir(name)
@@ -128,7 +129,7 @@ class Pascal < CodeGen
   File = "QR.pas"
   Cmd = "fpc QR.pas && ./QR > OUTFILE"
   Apt = "fp-compiler"
-  Code = %q("program QR(output);begin #{(PREV).gsub(/.{1,255}/){|s|"write('#{s}');"}}end.")
+  Code = %q("#$D(output);begin #{(PREV).gsub(/.{1,255}/){|s|"write('#{s}');"}}end.")
 end
 
 class ParrotAsm < CodeGen
@@ -373,13 +374,13 @@ class Forth_FORTRAN77_Fortran90 < CodeGen
         : B A ." WRITE(*,*)'" A ;
         : C B TYPE ." '" CR ;
         : D
-          S" program QR" C
+          S" #$D" C
           S\\" print \\"(&" C
           S\\" #{e[PREV]}" DUP FOR S" &A,&" C NEXT
           S\\" &A)\\",&" C
           0 DO B ." &char(" COUNT . ." ),&'" CR LOOP
           S\\" &\\"\\"" C
-          S" end program QR" C
+          S" end #$D" C
           A ." STOP" CR
           A ." END" CR
           BYE ;
