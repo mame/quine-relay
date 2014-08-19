@@ -530,7 +530,7 @@ class ALGOL68 < CodeGen
   File = "QR.a68"
   Cmd = "a68g QR.a68 > OUTFILE"
   Apt = "algol68g"
-  Code = %q(%(BEGIN print("#{d[PREV]}")END))
+  Code = %q(%(print("#{d[PREV]}")))
 end
 
 class Ada < CodeGen
