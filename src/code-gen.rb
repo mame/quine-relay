@@ -216,12 +216,11 @@ class LLVMAsm < CodeGen
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
-        @s=internal constant[#{i=(s=PREV).size+1} x i8]
-          c"#{s.gsub(/[\\\n"]/){B+"%02\x58"%$&.ord}}\\00"
+        @s=global[#{i=(s=PREV).size+1}x i8]
+          c"#{s.gsub(/[\\"]/){"\\%X"%$&.ord}}\\00"
         declare i32@puts(i8*)
         define i32@main(){
-          start:
-          %0=call i32@puts(i8* getelementptr inbounds([#{i} x i8]*@s,i32 0,i32 0))
+          %1=call i32@puts(i8*getelementptr([#{i}x i8]*@s,i32 0,i32 0))
           ret i32 0
         }
       )
