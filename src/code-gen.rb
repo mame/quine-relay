@@ -285,31 +285,40 @@ class Jasmin < CodeGen
   end
 end
 
-class Haskell_Icon_INTERCAL < CodeGen
-  File = ["QR.hs", "QR.icn", "QR.i"]
+class Icon_INTERCAL < CodeGen
+  File = ["QR.icn", "QR.i"]
   Cmd = [
-    "runghc QR.hs > OUTFILE",
     "icont -s QR.icn && ./QR > OUTFILE",
     "mv QR.c QR.c.bak && ick -bfO QR.i && mv QR.c.bak QR.c && ./QR > OUTFILE"
   ]
-  Apt = ["ghc", "icont", "intercal"]
+  Apt = ["icont", "intercal"]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
-        import Data.Char\n
-        main=
-          putStrLn$"procedure main();write(\\"DO,1<-#"++show(length s)++f s 1 0;
-        f(x:t)i c=
-          let v=foldl(\\a x->a*2+(mod x 2))0$take 8$iterate(flip div 2)$Data.Char.ord x in
-          (if mod i 4<1then"PLEASE"else"")++
-          "DO,1SUB#"++show i++"<-#"++show(mod(c-v)256)++"\\\\n"++
-          f t(i+1)v;
-        f[]_ _=
-          "PLEASEREADOUT,1\\\\nPLEASEGIVEUP\\");end";
-        s=#{E[PREV+N]}
+        procedure main();
+          i:=c:=0;
+          s:=#{E[PREV+N]};
+          write("DO,1<-#"||*s);
+          s?while t:=ord(move(1))do{
+            i+:=1;
+            u:=-i;
+            every 0to 7do{u:=u*2+t%2;t/:=2};
+            write("PLEASE")\\(i%4/3);
+            write("DO,1SUB#"||i||"<-#"||((c-u)%256));
+            c:=u;
+          };
+          write("PLEASEREADOUT,1\\nPLEASEGIVEUP");
+        end
       )
     END
   end
+end
+
+class Haskell < CodeGen
+  File = "QR.hs"
+  Cmd = "runghc QR.hs > OUTFILE"
+  Apt = "ghc"
+  Code = %q(("main=putStr"+E[PREV]))
 end
 
 class Go_Groovy < CodeGen
@@ -491,11 +500,11 @@ class Ada < CodeGen
   Cmd = "gnatmake qr.adb && ./qr > OUTFILE"
   Apt = "gnat"
   def code
-    <<-'END'.lines.map {|l| l.strip }.join.gsub("|", " ")
+    <<-'END'.lines.map {|l| l.strip }.join.gsub("$$$", " ")
       %(
         with Ada.Text_Io;
-        procedure qr is|
-        begin|
+        procedure qr is$$$
+        begin$$$
           Ada.Text_Io.Put_Line("#{d[PREV]}");
         end qr;
       )
@@ -568,7 +577,7 @@ class Scala < CodeGen
     <<-'END'.lines.map {|l| l.strip }.join
       %(
         object QR extends App{
-          print("#{e[PREV.gsub B*8,?|]}".replaceAll("\\\\|","#{B*32}"))
+          print#{E[PREV]};
         }
       )
     END
