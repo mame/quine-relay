@@ -145,7 +145,7 @@ QR.c: QR.bf
 	@echo "##  Brainfuck -> C  ##"
 	@echo "######################"
 	@echo
-	beef QR.bf > QR.c
+	bf QR.bf > QR.c
 
 QR.cpp: QR.c
 	@echo

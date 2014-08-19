@@ -20,7 +20,7 @@ the original Ruby code again.
 You are fortunate if you are using Ubuntu 14.04 (Trusty Tahr).
 You just have to type the following apt-get command to install all of them.
 
-    $ sudo apt-get install algol68g bash beef boo clisp clojure1.4 \
+    $ sudo apt-get install algol68g bash bf boo clisp clojure1.4 \
       coffeescript f2c fp-compiler g++ gauche gawk gcc gforth gfortran ghc \
       gnat gnu-smalltalk gobjc golang groovy icont intercal iverilog \
       jasmin-sable llvm lua5.2 make mono-devel mono-mcs nodejs ocaml octave \
@@ -50,7 +50,7 @@ If you could do it, please let me know.  Good luck.
     $ a68g QR.a68 > QR.awk
     $ awk -f QR.awk > QR.boo
     $ booi QR.boo > QR.bf
-    $ beef QR.bf > QR.c
+    $ bf QR.bf > QR.c
     $ ${CC} -o QR QR.c && ./QR > QR.cpp
     $ ${CXX} -o QR QR.cpp && ./QR > QR.cs
     $ mcs QR.cs && mono QR.exe > QR.clj
@@ -120,7 +120,7 @@ Ada          |gnat           |4.6ubuntu4
 ALGOL68      |algol68g       |2.4.1-1
 Awk          |gawk           |1:4.0.1+dfsg-2.1ubuntu2
 Boo          |boo            |0.9.5~git20110729.r1.202a430-2
-Brainfuck    |beef           |1.0.0-1
+Brainfuck    |bf             |20041219ubuntu5
 C            |gcc            |4:4.8.2-1ubuntu6
 C++          |g++            |4:4.8.2-1ubuntu6
 C#           |mono-mcs       |3.2.8+dfsg-4ubuntu1

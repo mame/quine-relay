@@ -501,8 +501,8 @@ end
 
 class Boo_Brainfuck < CodeGen
   File = ["QR.boo", "QR.bf"]
-  Cmd = ["booi QR.boo > OUTFILE", "beef QR.bf > OUTFILE"]
-  Apt = ["boo", "beef"]
+  Cmd = ["booi QR.boo > OUTFILE", "bf QR.bf > OUTFILE"]
+  Apt = ["boo", "bf"]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
