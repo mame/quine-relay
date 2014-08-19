@@ -41,6 +41,7 @@ class CodeGen
   E=->s{'("'+e[s]+'")'};
   d=->s,t=?"{s.gsub(t){t+t}};
   Q=->s,t=?${s.gsub(t){B+$&}};
+  M=->s{"<stdio.h>#{N}int main(){puts#{E[s]};return 0;}"};
   V=->s,a,z{s.gsub(/(#{B*4})+/){a+"#{$&.size/2}"+z}};
   END
 
@@ -156,17 +157,7 @@ class ObjC < CodeGen
   File = "QR.m"
   Cmd = "gcc -o QR QR.m && ./QR > OUTFILE"
   Apt = "gobjc"
-  def code
-    <<-'END'.lines.map {|l| l.strip }.join
-      "
-        #import<stdio.h>\n
-        int main(){
-          puts#{E[PREV]};
-          return 0;
-        }
-      "
-    END
-  end
+  Code = %q("#import"+M[PREV])
 end
 
 class NodeJS < CodeGen
@@ -486,17 +477,7 @@ class C < CodeGen
   File = "QR.c"
   Cmd = '${CC} -o QR QR.c && ./QR > OUTFILE'
   Apt = "gcc"
-  def code
-    <<-'END'.lines.map {|l| l.strip }.join
-      "
-        #include<stdio.h>\n
-        int main(){
-          puts#{E[PREV]};
-          return 0;
-        }
-      "
-    END
-  end
+  Code = %q("#include"+M[PREV])
 end
 
 class Boo_Brainfuck < CodeGen
