@@ -363,7 +363,7 @@ class Forth_FORTRAN77_Fortran90 < CodeGen
     'mv QR.c QR.c.bak && f2c QR.f && ${CC} -o QR QR.c -L/usr/lib -lf2c && mv QR.c.bak QR.c && ./QR > OUTFILE',
     "gfortran -o QR QR.f90 && ./QR > OUTFILE"
   ]
-  Apt = ["gforth", "f2c", "gfortran"]
+  Apt = ["gforth", ["f2c", "tcc"], "gfortran"]
   def code
     # assuming that PREV has no '
     <<-'END'.lines.map {|l| l.strip }.join(" ")

@@ -5,7 +5,7 @@
 This is a Ruby program that generates
 Scala program that generates
 Scheme program that generates
-...(through 50 languages)...
+...(through 50 languages in total)...
 REXX program that generates
 the original Ruby code again.
 
@@ -27,7 +27,9 @@ You just have to type the following apt-get command to install all of them.
       open-cobol openjdk-6-jdk parrot perl php5-cli pike7.8 python r-base \
       regina-rexx ruby1.9.3 scala swi-prolog tcc tcl8.5 ucblogo valac
 
-You are even more fortunate if you are using Arch Linux, as you can just install the [quine-relay-git](https://aur.archlinux.org/packages/quine-relay-git/) package from AUR, either manually or by using your favorite AUR helper.
+You are even more fortunate if you are using Arch Linux,
+as you can just install the [quine-relay-git](https://aur.archlinux.org/packages/quine-relay-git/) package from AUR,
+either manually or by using your favorite AUR helper.
 
 You may find [instructions for other platforms in the wiki](https://github.com/mame/quine-relay/wiki/Installation).
 
@@ -104,59 +106,59 @@ It does not provide Unlambda and Whitespace interpreters,
 so this repository includes my own implementations.
 For other languages, I used the following deb packages:
 
-language     |ubuntu package |version
--------------|---------------|-----------------------------------
-Ruby         |ruby1.9.3      |1.9.3.484-2ubuntu1
-Scala        |scala          |2.9.2+dfsg-2
-Scheme       |gauche         |0.9.3.3-8ubuntu1
-Shell        |bash           |4.3-7ubuntu1
-Smalltalk    |gnu-smalltalk  |3.2.4-2
-Tcl          |tcl8.5         |8.5.15-2ubuntu1
-Unlambda     |(none)         |-
-Vala         |valac          |0.22.1-0ubuntu1
-Verilog      |iverilog       |0.9.7-1
-Whitespace   |(none)         |-
-Ada          |gnat           |4.6ubuntu4
-ALGOL68      |algol68g       |2.4.1-1
-Awk          |gawk           |1:4.0.1+dfsg-2.1ubuntu2
-Boo          |boo            |0.9.5~git20110729.r1.202a430-2
-Brainfuck    |bf             |20041219ubuntu5
-C            |gcc            |4:4.8.2-1ubuntu6
-C++          |g++            |4:4.8.2-1ubuntu6
-C#           |mono-mcs       |3.2.8+dfsg-4ubuntu1
-Clojure      |clojure1.4     |1.4.0+dfsg-3
-Cobol        |open-cobol     |1.1-1build1
-CoffeeScript |coffeescript   |1.4.0-1
-CommonLisp   |clisp          |1:2.49-9ubuntu1
-Forth        |gforth         |0.7.0+ds2-0.1
-FORTRAN77    |f2c            |20100827-1
-Fortran90    |gfortran       |4:4.8.2-1ubuntu6
-Go           |golang         |2:1.2.1-2ubuntu1
-Groovy       |groovy         |2.0.0~beta2+isreally1.8.6-0ubuntu1
-Haskell      |ghc            |7.6.3-10
-Icon         |icont          |9.4.3-4.2ubuntu1
-INTERCAL     |intercal       |29:0.29-3
-Jasmin       |jasmin-sable   |2.4.0-3
-Java         |openjdk-6-jdk  |6b32-1.13.4-4ubuntu0.14.04.1
-LLVM asm     |llvm           |1:3.4-0ubuntu1
-Logo         |ucblogo        |5.5-2.1
-Lua          |lua5.2         |5.2.3-1
-Makefile     |make           |3.81-8.2ubuntu3
-MSIL         |mono-devel     |3.2.8+dfsg-4ubuntu1
-NodeJS       |nodejs         |0.10.25~dfsg2-2ubuntu1
-Objective-C  |gobjc          |4:4.8.2-1ubuntu6
-OCaml        |ocaml          |4.01.0-3ubuntu3
-Octave       |octave         |3.8.1-1ubuntu1
-Parrot asm   |parrot         |5.9.0-1build1
-Pascal       |fp-compiler    |2.6.2-8
-Perl         |perl           |5.18.2-2ubuntu1
-PHP          |php5-cli       |5.5.9+dfsg-1ubuntu4.3
-Pike         |pike7.8        |7.8.700-7
-Prolog       |swi-prolog     |6.6.4-2ubuntu1
-Python       |python         |2.7.5-5ubuntu3
-R            |r-base         |3.0.2-1ubuntu1
-REXX         |regina-rexx    |3.6-2
-(extra)      |tcc            |0.9.26~git20120612.ad5f375-6
+\# |language     |ubuntu package |version
+---|-------------|---------------|-----------------------------------
+1  |Ruby         |ruby1.9.3      |1.9.3.484-2ubuntu1
+2  |Scala        |scala          |2.9.2+dfsg-2
+3  |Scheme       |gauche         |0.9.3.3-8ubuntu1
+4  |Shell        |bash           |4.3-7ubuntu1
+5  |Smalltalk    |gnu-smalltalk  |3.2.4-2
+6  |Tcl          |tcl8.5         |8.5.15-2ubuntu1
+7  |Unlambda     |(none)         |-
+8  |Vala         |valac          |0.22.1-0ubuntu1
+9  |Verilog      |iverilog       |0.9.7-1
+10 |Whitespace   |(none)         |-
+11 |Ada          |gnat           |4.6ubuntu4
+12 |ALGOL68      |algol68g       |2.4.1-1
+13 |Awk          |gawk           |1:4.0.1+dfsg-2.1ubuntu2
+14 |Boo          |boo            |0.9.5~git20110729.r1.202a430-2
+15 |Brainfuck    |bf             |20041219ubuntu5
+16 |C            |gcc            |4:4.8.2-1ubuntu6
+17 |C++          |g++            |4:4.8.2-1ubuntu6
+18 |C#           |mono-mcs       |3.2.8+dfsg-4ubuntu1
+19 |Clojure      |clojure1.4     |1.4.0+dfsg-3
+20 |Cobol        |open-cobol     |1.1-1build1
+21 |CoffeeScript |coffeescript   |1.4.0-1
+22 |CommonLisp   |clisp          |1:2.49-9ubuntu1
+23 |Forth        |gforth         |0.7.0+ds2-0.1
+24 |FORTRAN77    |f2c            |20100827-1
+   |             |tcc            |0.9.26~git20120612.ad5f375-6
+25 |Fortran90    |gfortran       |4:4.8.2-1ubuntu6
+26 |Go           |golang         |2:1.2.1-2ubuntu1
+27 |Groovy       |groovy         |2.0.0~beta2+isreally1.8.6-0ubuntu1
+28 |Haskell      |ghc            |7.6.3-10
+29 |Icon         |icont          |9.4.3-4.2ubuntu1
+30 |INTERCAL     |intercal       |29:0.29-3
+31 |Jasmin       |jasmin-sable   |2.4.0-3
+32 |Java         |openjdk-6-jdk  |6b32-1.13.4-4ubuntu0.14.04.1
+33 |LLVM asm     |llvm           |1:3.4-0ubuntu1
+34 |Logo         |ucblogo        |5.5-2.1
+35 |Lua          |lua5.2         |5.2.3-1
+36 |Makefile     |make           |3.81-8.2ubuntu3
+37 |MSIL         |mono-devel     |3.2.8+dfsg-4ubuntu1
+38 |NodeJS       |nodejs         |0.10.25~dfsg2-2ubuntu1
+39 |Objective-C  |gobjc          |4:4.8.2-1ubuntu6
+40 |OCaml        |ocaml          |4.01.0-3ubuntu3
+41 |Octave       |octave         |3.8.1-1ubuntu1
+42 |Parrot asm   |parrot         |5.9.0-1build1
+43 |Pascal       |fp-compiler    |2.6.2-8
+44 |Perl         |perl           |5.18.2-2ubuntu1
+45 |PHP          |php5-cli       |5.5.9+dfsg-1ubuntu4.3
+46 |Pike         |pike7.8        |7.8.700-7
+47 |Prolog       |swi-prolog     |6.6.4-2ubuntu1
+48 |Python       |python         |2.7.5-5ubuntu3
+49 |R            |r-base         |3.0.2-1ubuntu1
+50 |REXX         |regina-rexx    |3.6-2
 
 Note: `CC=tcc ick -bfO` may be used to compile INTERCAL sources
 with less memory.
@@ -168,7 +170,7 @@ with less memory.
 
 ### License
 
-Copyright (c) 2013 Yusuke Endoh (@mametter), @hirekoke
+Copyright (c) 2013, 2014 Yusuke Endoh (@mametter), @hirekoke
 
 MIT License
 

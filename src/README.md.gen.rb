@@ -8,16 +8,18 @@ srcs = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.src } }
 apts = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.apt } }
 
 pkg_versions = {}
-`which apt-get >/dev/null \
-  && dpkg -p #{ (apts + ["tcc"]).join(" ") }`.b.split("\n\n").each do |s|
+`which apt-get >/dev/null && dpkg -p #{ apts.join(" ") }`.b.split("\n\n").each do |s|
   name = s[/^Package: (.*)$/, 1]
   version = s[/^Version: (.*)$/, 1]
   pkg_versions[name] = version if name && version
 end
 
-rows = [["language", "ubuntu package", "version"]]
-rows += (langs.zip(apts) + [["(extra)", "tcc"]]).map do |lang, apt|
-  [lang, apt || "(none)", pkg_versions[apt] || '-']
+rows = [["\\#", "language", "ubuntu package", "version"]]
+rows += langs.zip(apts).flat_map.with_index do |(lang, apt), idx|
+  apt = [apt] unless apt.is_a?(Array)
+  apt.map.with_index do |apt, i|
+    [i == 0 ? (idx + 1).to_s : "", i == 0 ? lang : "", apt || "(none)", pkg_versions[apt] || '-']
+  end
 end
 
 ws = rows.transpose.map {|row| row.map {|s| s.size }.max + 1 }
@@ -26,7 +28,7 @@ rows = rows.map do |col|
   (col.zip(ws).map {|s, w| s.ljust(w) } * "|").rstrip
 end
 
-apt_get = "sudo apt-get install #{ (apts + ["tcc"]).compact.uniq.sort * " " }"
+apt_get = "sudo apt-get install #{ apts.flatten.compact.uniq.sort * " " }"
 apt_get.gsub!(/.{,70}( |\z)/) do
   $&[-1] == " " ? $& + "\\\n      " : $&
 end
@@ -47,7 +49,7 @@ __END__
 This is a <%= langs[0] %> program that generates
 <%= langs[1] %> program that generates
 <%= langs[2] %> program that generates
-...(through <%= langs.size %> languages)...
+...(through <%= langs.size %> languages in total)...
 <%= langs[-1] %> program that generates
 the original <%= langs[0] %> code again.
 
@@ -64,7 +66,9 @@ You just have to type the following apt-get command to install all of them.
 
     $ <%= apt_get %>
 
-You are even more fortunate if you are using Arch Linux, as you can just install the [quine-relay-git](https://aur.archlinux.org/packages/quine-relay-git/) package from AUR, either manually or by using your favorite AUR helper.
+You are even more fortunate if you are using Arch Linux,
+as you can just install the [quine-relay-git](https://aur.archlinux.org/packages/quine-relay-git/) package from AUR,
+either manually or by using your favorite AUR helper.
 
 You may find [instructions for other platforms in the wiki](https://github.com/mame/quine-relay/wiki/Installation).
 
@@ -108,7 +112,7 @@ with less memory.
 
 ### License
 
-Copyright (c) 2013 Yusuke Endoh (@mametter), @hirekoke
+Copyright (c) 2013, 2014 Yusuke Endoh (@mametter), @hirekoke
 
 MIT License
 
