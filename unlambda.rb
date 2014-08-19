@@ -1,4 +1,16 @@
-tokens = File.read($*[0])
+tokens = [] 
+File.read($*[0]).scan(/\.(?<out>.)|(?<insn>[r`ikscd])|#.*/) do
+  if $~[:out]
+    tokens << [:o, $~[:out]]
+  elsif $~[:insn]
+    case $~[:insn]
+    when ?r then tokens << [:o, ?\n]
+    when ?` then tokens << :a
+    else tokens << $~[:insn].to_sym
+    end
+  end
+end
+tokens.reverse!
 
 stack = [nil, :S]
 acc = nil
@@ -6,18 +18,12 @@ while stack
   stack, cmd = stack
   acc = if cmd == :S
     stack = [stack, acc] if acc
-    case tokens.slice!(0, 1)
-    when ?. then [:o, tokens.slice!(0, 1)]
-    when ?r then [:o, "\n"]
-    when ?` then stack = [[stack, :S], :S]; nil
-    when ?i then [:i]
-    when ?k then [:k]
-    when ?s then [:s]
-    when ?c then [:c]
-    when ?d then [:d]
-    when ?# then tokens.slice!(/.*/); stack = [stack, :S]; nil
+    insn, arg = tokens.pop
+    case insn
+    when :o then [:o, arg]
+    when :a then stack = [[stack, :S], :S]; nil
     when nil then raise "EOF"
-    else stack = [stack, :S]; nil
+    else [insn]
     end
   else
     [:a, cmd, acc]
