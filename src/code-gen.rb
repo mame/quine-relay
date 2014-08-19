@@ -95,20 +95,19 @@ class Perl < CodeGen
   Apt = "perl"
   def code
     <<-'END'.lines.map {|l| l.strip }.join
-      [
-        *%(
+      (
+        p="eval";
+        %(
           $_="#{
             s=PREV;
-            (s+N*(-s.size%6)).bytes.map{|n|"%07b"%n}.join.
-              gsub(/.{6}/){|n|n=n.to_i(2);((n/26*6+n+19)%83+46).chr}
+            (s+N*(-s.size%6)).unpack("B*")[0].
+              gsub(/.{6}/){n=$&.to_i 2;((n+14)/26*6+n+47).chr}
           }";
-          s|.|$n=ord$&;substr unpack(B8,chr$n-($n<58?-6:$n<91?65:71)),2|eg;
-          s/.{7}/0$&/g;
-          print pack B.length,$_
-        ).scan(%r(([ .0-9A-Za-z]+)|(.))).reverse.
-          map{|a,b|(b)?"s//chr #{b.ord}/e":"s//#{a}/"},
-        "eval"
-      ]*" x "
+          s|.|$n=ord$&;substr unpack(B8,chr$n-int($n/32)*6-41),2|eg;
+          print pack"B*",$_
+        ).scan(/[ ,-:A-z]+|(.)/){p="s++#{$1?"chr #{$1.ord}+e":$&+?+};"+p};
+        p
+      )
     END
   end
 end
