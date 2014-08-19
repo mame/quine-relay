@@ -33,7 +33,7 @@ class CodeGen
   end
 
   # Common part
-  PROLOGUE = <<-END.split.join
+  PROLOGUE = <<-'END'.lines.map {|l| l.strip }.join
   B=92.chr;
   N=10.chr;
   n=0;
@@ -41,6 +41,7 @@ class CodeGen
   E=->(s){'("'+e[s]+'")'};
   d=->(s,t=?"){s.gsub(t){t+t}};
   Q=->(s,t=?$){s.gsub(t){B+$&}};
+  V=->s,a,z{s.gsub(/(#{B*4})+/){a+"#{$&.size/2}"+z}};
   END
 
   def self.setup_dir(name)
@@ -86,7 +87,16 @@ class PHP < CodeGen
   File = "QR.php"
   Cmd = "php QR.php > OUTFILE"
   Apt = "php5-cli"
-  Code = %q(%(<?php echo"#{Q[e[PREV]]}"?>))
+  def code
+    <<-'END'.lines.map {|l| l.strip }.join
+      %(
+        <?php function f($n){return str_repeat("\\\\",$n);};
+          $f="f";
+          echo#{V[Q[E[PREV]],"{$f(",")}"]}
+        ?>
+      )
+    END
+  end
 end
 
 class Perl < CodeGen
@@ -400,7 +410,14 @@ class CoffeeScript < CodeGen
   File = "QR.coffee"
   Cmd = "coffee QR.coffee > OUTFILE"
   Apt = "coffeescript"
-  Code = %q("console.log"+E[PREV])
+  def code
+    <<-'END'.lines.map {|l| l.strip }.join
+      %(
+        (f=(n)->Array(n+1).join "\\\\");
+        console.log#{V[E[d[PREV,?%]],'#{f(',')}']}
+      )
+    END
+  end
 end
 
 class Clojure_Cobol < CodeGen
@@ -489,7 +506,8 @@ class Boo_Brainfuck < CodeGen
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
-        for b in System.Text.ASCIIEncoding().GetBytes(#{Q[E[PREV]]}):
+        f={n as int|'\\\\'*n};
+        for b in System.Text.ASCIIEncoding().GetBytes(#{V[Q[E[PREV]],"$(f(","))"]}):
           print join(['+'for i in range(0,b)],"")+".>"
       )
     END
@@ -560,7 +578,14 @@ class Tcl_Unlambda < CodeGen
   File = ["QR.tcl", "QR.unl"]
   Cmd = ["tclsh QR.tcl > OUTFILE", "ruby unlambda.rb QR.unl > OUTFILE"]
   Apt = ["tcl8.5", nil]
-  Code = %q(%(puts [regsub -all {.} "#{Q[e[PREV.reverse],/[\[\]$]/]}" \\\\x60.&]k))
+  def code
+    <<-'END'.lines.map {|l| l.strip }.join
+      %(
+        proc f {n} {string repeat "\\\\" $n} ;
+        puts [regsub -all {.} "#{V[Q[e[PREV.reverse],/[\[\]$]/],"[f ",?]]}" \\x60.&]k
+      )
+    END
+  end
 end
 
 class Smalltalk < CodeGen
