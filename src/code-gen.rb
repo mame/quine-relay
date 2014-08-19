@@ -394,8 +394,7 @@ class CommonLisp < CodeGen
   File = "QR.lisp"
   Cmd = "clisp QR.lisp > OUTFILE"
   Apt = "clisp"
-  # assuming that PREV is just one line
-  Code = %q(%((write-line"#{Q[PREV,/([\\\\"])/]}")))
+  Code = %q(%((write-line"#{e[PREV]}")))
 end
 
 class CoffeeScript < CodeGen
