@@ -141,24 +141,30 @@ class OCaml < CodeGen
   Code = %q("print_string"+E[PREV])
 end
 
-class NodeJS_ObjC < CodeGen
-  Name = %w(NodeJS Objective-C)
-  File = ["QR.js", "QR.m"]
-  Cmd = ["$(NODE) QR.js > OUTFILE", 'gcc -o QR QR.m && ./QR > OUTFILE']
-  Apt = ["nodejs", "gobjc"]
+class ObjC < CodeGen
+  Name = "Objective-C"
+  File = "QR.m"
+  Cmd = "gcc -o QR QR.m && ./QR > OUTFILE"
+  Apt = "gobjc"
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       "
-        var u=require('util');
-        u.print('#import<stdio.h>\\n');
-        u.print(#{
-          E[%(
-            int main(){puts#{E[PREV]};return 0;}
-          ).tr B,?@]
-        }.replace(/@/g,String.fromCharCode(92)))
+        #import<stdio.h>\n
+        int main(){
+          puts#{E[PREV]};
+          return 0;
+        }
       "
     END
   end
+end
+
+class NodeJS < CodeGen
+  Name = "NodeJS"
+  File = "QR.js"
+  Cmd = "$(NODE) QR.js > OUTFILE"
+  Apt = "nodejs"
+  Code = %q("require('util').print#{E[PREV]}")
 end
 
 class MSIL < CodeGen

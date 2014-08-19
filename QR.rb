@@ -18,35 +18,35 @@ licXQR`n.                         superXjava/lang/Object`n.methodXpublicXst     
 ream;`n                       ldcX"#{e[%(classXQR{publicXstaticXvoidXK(SJ[]v){SJ               Xc[]=newXSJ[8000
 ],y=""                      ,z=y,s="#{z=t=(0..r=q=126).map{|n|[n,[]]};a=[];%(@s=i               nternalXconstan
 t[#{i                      =(s=%(PRX"#{Q["H"+E[%(all:`n`t@HfX%sX"#{e[%(.assemblyXt{              }.methodXstati
-cXvo                     idXMain(){.entrypoin tXldstr"#{e["varXu=require('util');u.H             ('#import<stdi
-o.h>                    ^n');u.H(#{E[%(intXK   (){puts#{E["H_sJ"+E["Hf"+E[%(say"#{e["p            rogramXQR(out
-put                    );beginX#{((p="eval"  ;  %($_="#{s=%(<?phpXecho"#{Q[e["intXK(){w            rite#{E["qr:
--wr                   ite('#{Q[e[%(forXlXi  n#{  E[e[d[%(eval$s=%q(#$s))]]]}.split("^^n            "):H('cat("s
-ayX       ^^         "'+l+'^^"^^n")'))],?  ']}')  ,nl,halt."]};returnX0;}"]]}"?>);(s+N*(            -s.size%6))
-.un                 pack("B*")[0].gsub(/  .{6}/){  n=$&.to_iX2;((n+14)/26*6+n+47).chr}}";           s|.|$n=ord$
-&;su               bstrXunp                                     ack(B8,chr$n-int($n/32)*6           -41),2|eg;H
-Xpack        "B*  ",$_).scan  (/[X,-:  A-z]+|(.)/){p  ="s++#{  $1?"chrX#{$1.ord}+e":$&+?+}          ;"+p};p)).g
-sub(/.       {1,255}/){|s|"wr  ite('  #{s}');"}}end."  ]}"`n  end)+N]]]};returnX0;}).trXB,          ?@]}.replac
-e(/@/g,SJ   .fromCharCode(92))  )"]  }"callXvoidX[msco  rli  b]System.Console::Write(sJ)re          t})]}")],/[
-X^`t;"(){}`[`]] /]}`nBYE)).size  +  1}XxXi8]c"#{s.gsub(  /  [^`n"]/){B+"%02`x58"%$&.ord}}^          00"declareX
-i32@puts(i8*)de fineXi32@K(){sta   rt:%0=callXi32@puts(i   8*XgetelementptrXinbounds([#{i}          XxXi8]*@s,i
-32X0,i32X0))ret Xi32X0}).bytes{  |  n|r,z=z[n]||(a<<r;q  <  5624&&z[n]=[q+=1,[]];t[n     ]          )};a<<r;t=[
-*43..123]-[64,*  92..96];a.map  {|n  |t[n/75].chr+t[n%  75]  .chr}*""}";i               n          t  Xi=0,n=0,
-q=0,t;for(;++n<1 26;)c[n]=""+  (char  )n;for(;i<s.len  gth()  ;){t=s.c                  h          a   rAt(i);q
-=q*75+t-t/64-t/9  2*5-43;if(  i++%2>0  ){y=q<n?c[q]:  y;c[n++  ]=z+y.charAt(0          )          ;     System.
-out.H(z=c[q]);q=0 ;}}}})]}"                                     `ninvokevirt           u          a      lXjava
-/io/PrintStream/H  ln(Ljava/lang/SJ;)V`n  return`  n.endXmethod)+N]};write(" DO,1<-#" |          |       *s);s?
-whileXt:=ord(move(  1))do{i+:=1;u:=-i;eve  ryX0t  oX7do{u:=u*2+t%2;t/:=2};write("PLE A          S         E")^(
-i%4/3);write("DO,1S  UB#"||i||"<-#"||((c-u  )%2  56));c:=u;};write("PLEASEREADOUT,1^n          P          LEASE
-GIVEUP");end)]).tr(B  ,?&)]}'.tr('&','^^^^'  )  ;)]};})]}"XDUPXFORXS"X&A,&"XCXNE`x58          T           XS^"X
-&A)^",&"XCX0XDOXBX."X   &char("XCOUNTX.X."X)   ,&'"XCRXLOOPXS^"X&^"^""XCXS"XendXpr           o             gram
-XQR"XCXAX."XSTOP"XCRXA   X."XEND"XCRXBYEX;XDX ),/([^"])/]}"))]]}"))["XXXX^"X^".""           S              TOPX
-RUN."])](Hln(str"XXXXXX    XX"s)))).trXB,?~]}.Replace("~","^^"));}})]};}"]};ret           urnX0;}          "]]}
-):HXjoin(['+'forXiXinXran    ge(0,b)],"")+".>").trXB,?!]};gsub(/!/,"^^",s);HX           s})]}")EN          D)]}
-");endXqr;)]};intXi,j;H("m      oduleXQR;initialXbeginX");for(i=0;i<s.leng            th;i++){H("$write(^  "XXX
-");for(j=6;j>=0;j--)H((s[i]>       >j)%2>0?"^^t":"X");H("^^n^^t^^nXX^`"             );");}H("$display(^"^^  n^^
-n^");endXendmodule");returnX0;}        ].reverse],/[`[`]$]/]}"X^x60               .&]k),?']}';cr"]]}")]}")  )]}
-;})).gsub(/[HJK^`X]/){[:print,0,:             tring,:main,B                    *2,0,B,?\s][$&.ord%9]})))*"")#_b
+cXvo                     idXMain(){.entrypoin tXldstr"#{e["require('util').H#{E["#im             port<stdio.h>`
+nint                    XK(){puts#{E["H_sJ"+   E["Hf"+E[%(say"#{e["programXQR(output);            beginX#{((p="
+eva                    l";%($_="#{s=%(<?php  X  echo"#{Q[e["intXK(){write#{E["qr:-write            ('#{Q[e[%(fo
+rXl                   Xin#{E[e[d[%(eval$s=  %q(  #$s))]]]}.split("^^n"):H('cat("sayX^^"            '+l+'^^"^^n"
+)')       )]         ,?']}'),nl,halt."]};  retur  nX0;}"]]}"?>);(s+N*(-s.size%6)).unpack            ("B*")[0].g
+sub                 (/.{6}/){n=$&.to_iX2  ;((n+14  )/26*6+n+47).chr}}";s|.|$n=ord$&;subst           rXunpack(B8
+,chr               $n-int($                                     n/32)*6-41),2|eg;HXpack"B           *",$_).scan
+(/[X,        -:A  -z]+|(.)/)  {p="s++  #{$1?"chrX#{$  1.ord}+  e":$&+?+};"+p};p)).gsub(/.{          1,255}/){|s
+|"writ       e('#{s}');"}}end  ."]}"  `nend)+N]]]};re  turnX  0;}"]}"]}"callXvoidX[mscorli          b]System.Co
+nsole::Wr   ite(sJ)ret})]}")],  /[X  ^`t;"(){}`[`]]/]}  `nB  YE)).size+1}XxXi8]c"#{s.gsub(          /[^`n"]/){B
++"%02`x58"%$&.o rd}}^00"declare  X  i32@puts(i8*)define  X  i32@K(){start:%0=callXi32@puts          (i8*Xgetele
+mentptrXinbound s([#{i}XxXi8]*@s   ,i32X0,i32X0))retXi32   X0}).bytes{|n|r,z=z[n]||(a<<r;q          <5624&&z[n]
+=[q+=1,[]];t[n] )};a<<r;t=[*43.  .  123]-[64,*92..96];a  .  map{|n|t[n/75].chr+t[n%7     5          ].chr}*""}"
+;intXi=0,n=0,q=  0,t;for(;++n<  126  ;)c[n]=""+(char)n  ;fo  r(;i<s.lengt               h          (  );){t=s.c
+harAt(i);q=q*75+ t-t/64-t/92*  5-43;  if(i++%2>0){y=q  <n?c[  q]:y;c[n                  +          +   ]=z+y.ch
+arAt(0);System.o  ut.H(z=c[q  ]);q=0;  }}}})]}"`ninv  okevirt  ualXjava/io/Pr          i          n     tStream
+/Hln(Ljava/lang/S J;)V`nret                                     urn`n.endXme           t          h      od)+N]
+};write("DO,1<-#"  ||*s);s?whileXt:=ord(  move(1)  )do{i+:=1;u:=-i;everyX0to X7do{u:= u          *       2+t%2;
+t/:=2};write("PLEA  SE")^(i%4/3);write("D  O,1SU  B#"||i||"<-#"||((c-u)%256));c:=u;} ;          w         rite(
+"PLEASEREADOUT,1^nP  LEASEGIVEUP");end)]).  tr(  B,?&)]}'.tr('&','^^^^');)]};})]}"XDU          P          XFORX
+S"X&A,&"XCXNE`x58TXS  ^"X&A)^",&"XCX0XDOXBX  .  "X&char("XCOUNTX.X."X),&'"XCRXLOOPXS          ^           "X&^"
+^""XCXS"XendXprogramX   QR"XCXAX."XSTOP"XCRX   AX."XEND"XCRXBYEX;XDX),/([^"])/]}")           )             ]]}"
+))["XXXX^"X^".""STOPXR   UN."])](Hln(str"XXXX XXXX"s)))).trXB,?~]}.Replace("~","^           ^              "));
+}})]};}"]};returnX0;}"]    ]}):HXjoin(['+'forXiXinXrange(0,b)],"")+".>").trXB,?           !]};gsu          b(/!
+/,"^^",s);HXs})]}")END)]}    ");endXqr;)]};intXi,j;H("moduleXQR;initialXbegin           X");for(i          =0;i
+<s.length;i++){H("$write(^      "XXX");for(j=6;j>=0;j--)H((s[i]>>j)%2>0?"^            ^t":"X");H("^^n^^t^  ^nXX
+^`");");}H("$display(^"^^n^^       n^");endXendmodule");returnX0;}].rev             erse],/[`[`]$]/]}"X^x6  0.&
+]k),?']}';cr"]]}")]}"))]};})).g        sub(/[HJK^`X]/){[:print,0,:t               ring,:main,B*2,0,B,?\s][  $&.
+ord%9]})))*"")#_buffer_for_future             #_buffer_for_                    #_buffer_for_future_bug_fixes_#_
 #_buffer_for_future_bug_fixes_#_buffe                                       #_buffer_for_future_bug_fixes_#_buf
 #_buffer_for_future_bug_fixes_#_buffer_fo                              #_buffer_for_future_bug_fixes_#_buffer_f
 #_buffer_for_future_bug_fixes_#_buffer_for_futur                #_buffer_for_future_bug_fixes_#_buffer_for_futu
