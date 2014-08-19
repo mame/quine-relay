@@ -1,25 +1,86 @@
 require_relative "code-gen"
 
 s =
-CodeGen::List[0..-2].inject('%(eval$s=%q(#$s))') {|c, lang|
-  lang.gen_code(c).tr(" \\","X`")
+  CodeGen::PROLOGUE.split(?;).drop(1).join(?;) + ?; +
+  CodeGen::List[0..-2].inject('%(eval$s=%q(#$s))') {|c, lang| lang.gen_code(c) }
+
+if false
+  # search characters rarely used
+  h = {}
+  32.upto(126) {|c| h[c.chr] = 0 }
+  s.chars.group_by {|c| c }.map do |c, a|
+    h[c] = a.size
+  end
+  %w(( ) [ ] { } \  \\ \").each {|c| h.delete(c) }
+  p *h.sort_by {|k, v| v }
+  exit
+end
+
+if false
+  # search sequences that often appear
+  h = Hash.new(0)
+  2.upto(10) do |n|
+    s.chars.each_cons(n) do |a|
+      h[a.join] += n-1
+    end
+  end
+  p *h.sort_by {|k, v| v }.reverse
+  exit
+end
+
+# a table of short-hand character for sequences that often apper
+ABBREV = {
+  ?~ => " ",
+  ?` => "\\",
+  ?^ => "``",
+  ?Z => "print",
+  ?X => "ain()",
+  ?J => "tring",
+  ?H => "write",
+  ?K => "gsub",
+  ?! => "in",
+  ?Y => "^^",
 }
 
-s = s.gsub("print","H").gsub("tring","J").gsub("main","K").gsub("``","^")
+s = s.gsub(/[#{ ABBREV.keys.join }]/){"\\x%02x" % $&.ord}
 
-# lookup of escapes and common names
-# 'H' % 9 => 0 (print)
-# 'J' % 9 => 2 (tring)
-# 'K' % 9 => 3 (main)
-# '^' % 9 => 4 (2 * backslash)
-# '`' % 9 => 6 (backslash)
-# 'X' % 9 => 7 (space)
+# search perfect and simplest hash
+a = ABBREV.keys.join.bytes
+max = 1000
+a.size.upto(90) do |n|
+  a.size.upto(90) do |m|
+    b = a.map {|c| c%n%m }
+    if b.uniq.size >= a.size&&b.max<max
+      $N, $M, $B = n, m, b
+      max = b.max
+    end
+  end
+end
+
+ABBREV.each do |k, v|
+  s = s.gsub(v, k)
+end
+
+a = [0] * ($B.max + 1)
+ABBREV.each do |k, v|
+  v = case v
+      when "\\" then "B"
+      when "``" then "B*2"
+      when "^^" then "B*4"
+      when " " then "32.chr"
+      when "ain()" then %("ain()")
+      else ":#{ v }"
+      end
+  a[k.ord % $N % $M] = v
+end
+a = a.join(",")
+
 code = <<-END.split.join
   eval$s=%q(eval(%w(
 
-    #{CodeGen::PROLOGUE}
+    #{CodeGen::PROLOGUE.split(?;)[0,1].join(?;)};
     puts(eval(
-      %q(#{ s }).gsub(/[HJK^`X]/){[:print,0,:tring,:main,B*2,0,B,?\\s][$&.ord%9]}
+      %q(#{ s }).gsub(/[#{ ABBREV.keys.sort.join }]/){[#{ a }][$&.ord%#{ $N }%#{ $M }]}
     ))
 
   )*""))
