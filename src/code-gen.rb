@@ -507,8 +507,13 @@ class Boo_Brainfuck < CodeGen
     <<-'END'.lines.map {|l| l.strip }.join
       %(
         f={n as int|'\\\\'*n};
-        for b in System.Text.ASCIIEncoding().GetBytes(#{V[Q[E[PREV]],"$(f(","))"]}):
-          print join(['+'for i in range(0,b)],"")+".>"
+        a=0;
+        s=#{V[Q[E[PREV]],"$(f(","))"]};
+        for i in range(len(s)):
+          b as int=s[i];
+          a-=b;
+          print(('+'*-a if 0>a else'-'*a)+'.');
+          a=b;
       )
     END
   end
