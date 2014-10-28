@@ -17,7 +17,7 @@ the original Ruby code again.
 
 #### 1. Install all interpreters/compilers.
 
-You are fortunate if you are using Ubuntu 14.04 (Trusty Tahr).
+You are fortunate if you are using Ubuntu 14.10 (Utopic Unicorn).
 You just have to type the following apt-get command to install all of them.
 
     $ sudo apt-get install algol68g bash bf boo clisp clojure1.4 \
@@ -111,7 +111,7 @@ For other languages, I used the following deb packages:
 1  |Ruby         |ruby2.0        |2.0.0.484-1ubuntu2
 2  |Scala        |scala          |2.9.2+dfsg-2
 3  |Scheme       |gauche         |0.9.3.3-8ubuntu1
-4  |Shell        |bash           |4.3-7ubuntu1
+4  |Shell        |bash           |4.3-11ubuntu1
 5  |Smalltalk    |gnu-smalltalk  |3.2.4-2
 6  |Tcl          |tcl            |8.6.0+6ubuntu3
 7  |Unlambda     |(none)         |-
@@ -140,7 +140,7 @@ For other languages, I used the following deb packages:
 29 |Icon         |icont          |9.4.3-4.2ubuntu1
 30 |INTERCAL     |intercal       |29:0.29-3
 31 |Jasmin       |jasmin-sable   |2.4.0-3
-32 |Java         |openjdk-6-jdk  |6b32-1.13.4-4ubuntu0.14.04.1
+32 |Java         |openjdk-6-jdk  |6b33-1.13.5-1ubuntu0.14.04
 33 |LLVM asm     |llvm           |1:3.4-0ubuntu1
 34 |Logo         |ucblogo        |5.5-2.1
 35 |Lua          |lua5.2         |5.2.3-1
@@ -153,7 +153,7 @@ For other languages, I used the following deb packages:
 42 |Parrot asm   |parrot         |5.9.0-1build1
 43 |Pascal       |fp-compiler    |2.6.2-8
 44 |Perl         |perl           |5.18.2-2ubuntu1
-45 |PHP          |php5-cli       |5.5.9+dfsg-1ubuntu4.3
+45 |PHP          |php5-cli       |5.5.9+dfsg-1ubuntu4.4
 46 |Pike         |pike7.8        |7.8.700-7
 47 |Prolog       |swi-prolog     |6.6.4-2ubuntu1
 48 |Python       |python         |2.7.5-5ubuntu3

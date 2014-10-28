@@ -69,7 +69,7 @@ the original <%= langs[0] %> code again.
 
 #### 1. Install all interpreters/compilers.
 
-You are fortunate if you are using Ubuntu 14.04 (Trusty Tahr).
+You are fortunate if you are using Ubuntu 14.10 (Utopic Unicorn).
 You just have to type the following apt-get command to install all of them.
 
     $ <%= apt_get %>
