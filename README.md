@@ -22,7 +22,7 @@ You just have to type the following apt-get command to install all of them.
 
     $ sudo apt-get install algol68g bash bf boo clisp clojure1.4 \
       coffeescript f2c fp-compiler g++ gauche gawk gcc gforth gfortran ghc \
-      gnat gnu-smalltalk gobjc golang groovy icont intercal iverilog \
+      gnat gnu-smalltalk gobjc golang groovy icont iconx intercal iverilog \
       jasmin-sable llvm lua5.2 make mono-devel mono-mcs nodejs ocaml octave \
       open-cobol openjdk-6-jdk parrot perl php5-cli pike7.8 python r-base \
       regina-rexx ruby2.0 scala swi-prolog tcc tcl ucblogo valac
@@ -138,6 +138,7 @@ For other languages, I used the following deb packages:
 27 |Groovy       |groovy         |2.0.0~beta2+isreally1.8.6-0ubuntu1
 28 |Haskell      |ghc            |7.6.3-10
 29 |Icon         |icont          |9.4.3-4.2ubuntu1
+   |             |iconx          |9.4.3-4.2ubuntu1
 30 |INTERCAL     |intercal       |29:0.29-3
 31 |Jasmin       |jasmin-sable   |2.4.0-3
 32 |Java         |openjdk-6-jdk  |6b33-1.13.5-1ubuntu0.14.04

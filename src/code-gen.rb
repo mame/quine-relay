@@ -296,7 +296,7 @@ class Icon_INTERCAL < CodeGen
     "icont -s QR.icn && ./QR > OUTFILE",
     "mv QR.c QR.c.bak && ick -bfO QR.i && mv QR.c.bak QR.c && ./QR > OUTFILE"
   ]
-  Apt = ["icont", "intercal"]
+  Apt = [["icont", "iconx"], "intercal"]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
