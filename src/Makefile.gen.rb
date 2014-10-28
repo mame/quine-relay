@@ -2,8 +2,8 @@ require_relative "code-gen"
 
 OUT = []
 
-def banner(s1, s2=nil)
-  s = "##  #{ s1 }#{ ' -> ' + s2 if s2 }  ##"
+def banner(s1, s2=nil, i=nil)
+  s = "##  #{ "#{ i + 1 }: " if i }#{ s1 }#{ ' -> ' + s2 if s2 }  ##"
   OUT << "\t@echo"
   OUT << "\t@echo \"#{ "#" * s.size }\""
   OUT << "\t@echo \"#{ s }\""
@@ -49,7 +49,7 @@ cmds.size.times do |i|
 
   OUT << ""
   OUT << "#{ srcs[i + 1] }: #{ srcs[i] }"
-  banner(langs[i], langs[i + 1])
+  banner(langs[i], langs[i + 1], i)
   cmd.split("&&").each {|c| OUT << "\t" + c.strip }
 end
 
