@@ -403,7 +403,7 @@ class CoffeeScript < CodeGen
     <<-'END'.lines.map {|l| l.strip }.join
       %(
         (f=(n)->Array(n+1).join "\\\\");
-        console.log#{V[E[d[PREV,?%]],'#{f(',')}']}
+        console.log("%s",#{V[E[PREV],'#{f(',')}']})
       )
     END
   end
