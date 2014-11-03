@@ -321,7 +321,7 @@ end
 
 class Haskell < CodeGen
   File = "QR.hs"
-  Cmd = "runghc QR.hs > OUTFILE"
+  Cmd = "ghc QR.hs && ./QR > OUTFILE"
   Apt = "ghc"
   Code = %q(("main=putStr"+E[PREV]))
 end

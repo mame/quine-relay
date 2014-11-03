@@ -65,7 +65,7 @@ If you could do it, please let me know.  Good luck.
     $ gfortran -o QR QR.f90 && ./QR > QR.go
     $ go run QR.go > QR.groovy
     $ groovy QR.groovy > QR.hs
-    $ runghc QR.hs > QR.icn
+    $ ghc QR.hs && ./QR > QR.icn
     $ icont -s QR.icn && ./QR > QR.i
     $ ick -bfO QR.i && ./QR > QR.j
     $ jasmin QR.j && CLASSPATH=. java QR > QR.java

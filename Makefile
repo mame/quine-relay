@@ -264,7 +264,8 @@ QR.icn: QR.hs
 	@echo "##  28: Haskell -> Icon  ##"
 	@echo "###########################"
 	@echo
-	runghc QR.hs > QR.icn
+	ghc QR.hs
+	./QR > QR.icn
 
 QR.i: QR.icn
 	@echo
