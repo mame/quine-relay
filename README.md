@@ -129,7 +129,7 @@ For other languages, I used the following deb packages:
 19 |Clojure      |clojure1.4     |1.4.0+dfsg-3
 20 |Cobol        |open-cobol     |1.1-1build1
 21 |CoffeeScript |coffeescript   |1.4.0-1
-22 |CommonLisp   |clisp          |1:2.49-9ubuntu1
+22 |Common Lisp  |clisp          |1:2.49-9ubuntu1
 23 |Forth        |gforth         |0.7.0+ds2-0.1
 24 |FORTRAN77    |f2c            |20100827-1
    |             |tcc            |0.9.26~git20120612.ad5f375-6

@@ -389,6 +389,7 @@ class Forth_FORTRAN77_Fortran90 < CodeGen
 end
 
 class CommonLisp < CodeGen
+  Name = "Common Lisp"
   File = "QR.lisp"
   Cmd = "clisp QR.lisp > OUTFILE"
   Apt = "clisp"

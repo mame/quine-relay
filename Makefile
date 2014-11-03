@@ -199,17 +199,17 @@ QR.coffee: QR.cob
 
 QR.lisp: QR.coffee
 	@echo
-	@echo "######################################"
-	@echo "##  21: CoffeeScript -> CommonLisp  ##"
-	@echo "######################################"
+	@echo "#######################################"
+	@echo "##  21: CoffeeScript -> Common Lisp  ##"
+	@echo "#######################################"
 	@echo
 	coffee QR.coffee > QR.lisp
 
 QR.fs: QR.lisp
 	@echo
-	@echo "###############################"
-	@echo "##  22: CommonLisp -> Forth  ##"
-	@echo "###############################"
+	@echo "################################"
+	@echo "##  22: Common Lisp -> Forth  ##"
+	@echo "################################"
 	@echo
 	clisp QR.lisp > QR.fs
 
