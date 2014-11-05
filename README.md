@@ -5,7 +5,7 @@
 This is a Ruby program that generates
 Scala program that generates
 Scheme program that generates
-...(through 50 languages in total)...
+...(through 51 languages in total)...
 REXX program that generates
 the original Ruby code again.
 
@@ -13,23 +13,29 @@ the original Ruby code again.
 
 [langs]: https://raw.github.com/mame/quine-relay/master/langs.png
 
+(If you want to see the old 50-language version, see [50](https://github.com/mame/quine-relay/tree/50) branch.)
+
 ### Usage
 
 #### 1. Install all interpreters/compilers.
 
-You are fortunate if you are using Ubuntu 14.10 (Utopic Unicorn).
-You just have to type the following apt-get command to install all of them.
+You are (relatively) fortunate if you are using Ubuntu 14.10 "Utopic Unicorn".
+First, you have to type the following apt-get command to install all of them.
 
-    $ sudo apt-get install algol68g bash bf boo clisp clojure1.4 \
+    $ sudo apt-get install algol68g bash bf boo clisp clojure1.4 cmake \
       coffeescript f2c fp-compiler g++ gauche gawk gcc gforth gfortran ghc \
       gnat gnu-smalltalk gobjc golang groovy icont iconx intercal iverilog \
       jasmin-sable llvm lua5.2 make mono-devel mono-mcs nodejs ocaml octave \
       open-cobol openjdk-6-jdk parrot perl php5-cli pike7.8 python r-base \
       regina-rexx ruby2.0 scala swi-prolog tcl ucblogo valac
 
-You are even more fortunate if you are using Arch Linux,
-as you can just install the [quine-relay-git](https://aur.archlinux.org/packages/quine-relay-git/) package from AUR,
-either manually or by using your favorite AUR helper.
+Then, you have to build the bundled interpreters.
+
+    $ cd vendor
+    $ make
+
+If you are using Arch Linux, you might want to ask @xyproto to update
+the [quine-relay-git](https://aur.archlinux.org/packages/quine-relay-git/) package :-)
 
 You may find [instructions for other platforms in the wiki](https://github.com/mame/quine-relay/wiki/Installation).
 
@@ -71,7 +77,8 @@ If you could do it, please let me know.  Good luck.
     $ jasmin QR.j && CLASSPATH=. java QR > QR.java
     $ javac QR.java && CLASSPATH=. java QR > QR.ll
     $ llvm-as QR.ll && lli QR.bc > QR.logo
-    $ logo QR.logo > QR.lua
+    $ logo QR.logo > QR.lol
+    $ vendor/lci-*/lci QR.lol > QR.lua
     $ lua QR.lua > QR.makefile
     $ make -f QR.makefile > QR.il
     $ ilasm QR.il && mono QR.exe > QR.js
@@ -143,22 +150,23 @@ For other languages, I used the following deb packages:
 32 |Java         |openjdk-6-jdk  |6b33-1.13.5-1ubuntu0.14.04
 33 |LLVM asm     |llvm           |1:3.4-0ubuntu1
 34 |Logo         |ucblogo        |5.5-2.1
-35 |Lua          |lua5.2         |5.2.3-1
-36 |Makefile     |make           |3.81-8.2ubuntu3
-37 |MSIL         |mono-devel     |3.2.8+dfsg-4ubuntu1
-38 |NodeJS       |nodejs         |0.10.25~dfsg2-2ubuntu1
-39 |Objective-C  |gobjc          |4:4.8.2-1ubuntu6
-40 |OCaml        |ocaml          |4.01.0-3ubuntu3
-41 |Octave       |octave         |3.8.1-1ubuntu1
-42 |Parrot asm   |parrot         |5.9.0-1build1
-43 |Pascal       |fp-compiler    |2.6.2-8
-44 |Perl         |perl           |5.18.2-2ubuntu1
-45 |PHP          |php5-cli       |5.5.9+dfsg-1ubuntu4.4
-46 |Pike         |pike7.8        |7.8.700-7
-47 |Prolog       |swi-prolog     |6.6.4-2ubuntu1
-48 |Python       |python         |2.7.5-5ubuntu3
-49 |R            |r-base         |3.0.2-1ubuntu1
-50 |REXX         |regina-rexx    |3.6-2
+35 |LOLCODE      |(none)         |-
+36 |Lua          |lua5.2         |5.2.3-1
+37 |Makefile     |make           |3.81-8.2ubuntu3
+38 |MSIL         |mono-devel     |3.2.8+dfsg-4ubuntu1
+39 |NodeJS       |nodejs         |0.10.25~dfsg2-2ubuntu1
+40 |Objective-C  |gobjc          |4:4.8.2-1ubuntu6
+41 |OCaml        |ocaml          |4.01.0-3ubuntu3
+42 |Octave       |octave         |3.8.1-1ubuntu1
+43 |Parrot asm   |parrot         |5.9.0-1build1
+44 |Pascal       |fp-compiler    |2.6.2-8
+45 |Perl         |perl           |5.18.2-2ubuntu1
+46 |PHP          |php5-cli       |5.5.9+dfsg-1ubuntu4.4
+47 |Pike         |pike7.8        |7.8.700-7
+48 |Prolog       |swi-prolog     |6.6.4-2ubuntu1
+49 |Python       |python         |2.7.5-5ubuntu3
+50 |R            |r-base         |3.0.2-1ubuntu1
+51 |REXX         |regina-rexx    |3.6-2
 
 Note: `CC=tcc ick -bfO` may be used to compile INTERCAL sources
 with less memory.

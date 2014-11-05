@@ -200,11 +200,19 @@ class Lua < CodeGen
   Code = %q("print"+E[PREV])
 end
 
-class Logo < CodeGen
-  File = "QR.logo"
-  Cmd = "logo QR.logo > OUTFILE"
-  Apt = "ucblogo"
-  Code = %q(%(PR "#{Q[PREV,/[ \\\\\t;"(){}\[\]]/]} BYE))
+class Logo_LOLCODE < CodeGen
+  File = ["QR.logo", "QR.lol"]
+  Cmd = ["logo QR.logo > OUTFILE", "vendor/lci-*/lci QR.lol > OUTFILE"]
+  Apt = ["ucblogo", nil]
+  def code
+    <<-'END'.lines.map {|l| l.strip }.join
+      %(
+        PR "HAI\\ 1.2 PR "VISIBLE\\ "#{
+          Q[PREV.gsub(/[:"]/,":\\0"),/[ \\\\\t;"(){}\[\]]/]
+        }" PR "KTHXBYE BYE
+      )
+    END
+  end
 end
 
 class LLVMAsm < CodeGen

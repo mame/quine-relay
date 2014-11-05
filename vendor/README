@@ -5,3 +5,7 @@ Unlambda: unlambda.rb
 Whitespace: whitespace.rb
   * self-made
   * License: MIT
+
+LOLCODE: lci-0.10.5.zip
+  * http://lolcode.org/
+  * License: GPL3+

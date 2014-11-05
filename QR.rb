@@ -19,34 +19,35 @@ ocedu                      re~mX;i:=c:=0;s:=#{E[%(.class~public~QR`n.super~#{$T=
 trea                      m"}`n.method~public~static~ma!([L#{S="java/lang/"}SJ;)V~              ;]`n.limit~st
 ack                     ~2`ngetstatic~#{S}Sy stem/out~L#$T;`nldc~"#{e[%(class~QR{pu             blic~static~v
 oid                    ~ma!(SJ[]v){SJ~c[]=n   ew~SJ[8000],y="",z=y,s="#{z=t=(0..r=q=1            26).map{|n|[
-n,                    []]};a="";b=->n{a<<(  n  %78+55)%84+42};(%(@s=global[#{i=(s=%(PR            ~"#{Q["Z"+E
-[%                   (all:`n`t@Zf~%s~"#{e  [%(  .assembly~t{}.method~static~void~MX{.e            ntrypo!t~ld
-st       r"         #{e["require('util')  .Z#{E  ["#import"+M["Z_sJ"+E["Zf"+E[%(say"#{e            ["#$D(outp
-ut                 );beg!~H(#{((p="eval  ";%($_=  "#{s=%(<?php~function~f($n){return~str           _repeat("Y
-",$               n);};$f=                                     "f";echo#{V[Q[E["!t~mX{H#           {E["qr:-H(
-'#{Q        [e[  %(for~l~!#  {E[e[d[  %(eval$s=%q(#  $s))]]]  }.split("Yn"):Z('cat("say~Y          "'+l+'Y"Yn
-")'))       ],?']}')."]};ret  urn~0  ;}"]],"{$f(",")  }"]}?  >);(s+N*(-s.size%6)).unpack(          "B*")[0].K
-(/.{6}/)   {n=$&.to_i~2;((n+1  4)/  26*6+n+47).chr}}"  ;s|  .|$n=ord$&;substr~unpack(B8,c          hr$n-!t($n
-/32)*6-41),2|e g;Z~pack"B*",$_  )  .scan(/[~,-:A-z]+|(  .  )/){p="s++#{$1?"chr~#{$1.ord}+          e":$&+?+};
-"+p};p)).K(/.{ 1,255}/){|s|"'#{   s}',"}}'')end."]}"`ne   nd)+N]]]]}"]}"call~void~[mscorl          ib]System.
-Console::Write (sJ)ret})]}")],  /  [~^`t;"(){}`[`]]/]}  ~  B`x59E)).size+1}x~i8]c"#     {          s.K(/[^"]/
-){"^%`x58"%$&.  ord}}^00"decl  are  ~i32@puts(i8*)def  !e~  i32@mX{%1=ca               l          l  ~i32@put
-s(i8*getelement ptr([#{i}x~i  8]*@s  ,i32~0,i32~0))r  et~i3  2~0})).b                  y          t   es{|n|r
-,z=z[n]||(b[r/7  8];b[r];q<  6083&&z  [n]=[q+=1,[]]  ;t[n])}  ;b[r/78];b[r]}          "          ;     !t~i=0
-,n=0,q=0;for(;++ n<126;)c[                                     n]=""+(char)           n          ;      for(;
-i<s.length();){q  =q*78+(s.charAt(i)-13  )%84;if  (i++%2>0){y=q<n?c[q]:y;c[ n++]=z+y .          c       harAt
-(0);System.out.Z(  z=c[q]);q=0;}}}})]}"`  n!vok  evirtual~#$T/Zln(L#{S}SJ;)V`nretur n          `         n.en
-d~method)+N]};H("D  O,1<-#"||*s);s?while~  t:=  ord(move(1))do{i+:=1;u:=-i;every~0to          ~          7do{
-u:=u*2+t%2;t/:=2};H  ("PLEASE")^(i%4/3);H(  "  DO,1SUB#"||i||"<-#"||((c-u)%256));c:          =           u;};
-H("PLEASEREADOUT,1^n   PLEASEGIVEUP");end)]   ).tr(B,?&)]}'.tr('&','YY');)]};})]}           "             ~DU
-P~FOR~S"~&A,&"~C~NE`x   58T~S^"~&A)^",&"~C~0 ~DO~B~."~&char("~COUNT~.~."~),&'"~C           R              ~LO
-OP~S^"~&^"^""~C~S"~end    ~#$D"~C~A~."~STOP"~CR~A~."~END"~CR~B`x59E~;~D~)]}"))           ],'#{f(          ','
-)}']}))]}"))["~~~~^"~^".    ""STOP~RUN."])](Zln(str"#{g*8}"s)))).tr~B,?`x7e]           }.Replace          ("`
-x7e","Y"));}})]};}"]]],"$      (f(","))"]};for~i~!~range(len(s)):b~as~!t=            s[i];a-=b;Z(('+'*-a  ~if
-~0>a~else'-'*a)+'.');a=b;).       tr~B,?`x21]};K(/`x21/,"Y",s);Z~s})]}             "))]}");end~qr;)]};!t~  i,
-j;Z("module~QR;!itial~beg!~");        for(i=0;i<s.length;i++){Z("$               H(^"~~~");for(j=6;j>=0;j  --
-)Z((s[i]>>j)%2>0?"Yt":"~");Z("Yn             YtYn~~^`");")                    ;}Z("$display(^"YnYn^");end~end
-module");return~0;}].reverse],/[`[`]                                       $]/],"[f~",?]]}"~^x60.&]k),?']}';c
-r"]]}")]}"))]};})).gsub(/[!HJKXYZ^`~]/){                              [B*2,:write,B,:tring,:gsub,"ain()",B*4,
-:print,g,:in][$&.ord%47%12]})))*"")#_buffer_for                #_buffer_for_future_bug_fixes_#_buffer_for_fut
+n,                    []]};a="";b=->n{a<<(  n  %78+55)%84+42};(%(@s=global[#{i=(s=%(PR            ~"`x48AI^~1
+.2                   ~PR~"VISIBLE^~"#{Q["  Z"+  E[%(all:`n`t@Zf~%s~"#{e[%(.assembly~t{            }.method~st
+at       ic         ~void~MX{.entrypo!t~  ldstr  "#{e["require('util').Z#{E["#import"+M            ["Z_sJ"+E[
+"Z                 f"+E[%(say"#{e["#$D(  output)  ;beg!~H(#{((p="eval";%($_="#{s=%(<?php           ~function~
+f($               n){retur                                     n~str_repeat("Y",$n);};$f           ="f";echo#
+{V[Q        [E[  "!t~mX{H#{  E["qr:-  H('#{Q[e[%(fo  r~l~!#{  E[e[d[%(eval$s=%q(#$s))]]]}          .split("Yn
+"):Z(       'cat("say~Y"'+l+  'Y"Yn  ")'))],?']}')."  ]};re  turn~0;}"]],"{$f(",")}"]}?>)          ;(s+N*(-s.
+size%6))   .unpack("B*")[0].K  (/.  {6}/){n=$&.to_i~2  ;((  n+14)/26*6+n+47).chr}}";s|.|$          n=ord$&;su
+bstr~unpack(B8 ,chr$n-!t($n/32  )  *6-41),2|eg;Z~pack"  B  *",$_).scan(/[~,-:A-z]+|(.)/){          p="s++#{$1
+?"chr~#{$1.ord }+e":$&+?+};"+p}   ;p)).K(/.{1,255}/){|s   |"'#{s}',"}}'')end."]}"`nend)+N          ]]]]}"]}"c
+all~void~[msco rlib]System.Con  s  ole::Write(sJ)ret})  ]  }")].K(/[:"]/,":^0"),/[~     Y          `t;"(){}`[
+`]]/]}"~PR~"`x  4bT`x48`x58B`  x59  E~B`x59E)).size+1  }x~  i8]c"#{s.K(/               [          ^  "]/){"^%
+`x58"%$&.ord}}^ 00"declare~i  32@pu  ts(i8*)def!e~i3  2@mX{  %1=call~                  i          3   2@puts(
+i8*getelementpt  r([#{i}x~i  8]*@s,i  32~0,i32~0))r  et~i32~  0})).bytes{|n|          r          ,     z=z[n]
+||(b[r/78];b[r]; q<6083&&z                                     [n]=[q+=1,[]           ]          ;      t[n])
+};b[r/78];b[r]}"  ;!t~i=0,n=0,q=0;for(;  ++n<126  ;)c[n]=""+(char)n;for(;i< s.length (          )       ;){q=
+q*78+(s.charAt(i)  -13)%84;if(i++%2>0){y  =q<n?  c[q]:y;c[n++]=z+y.charAt(0);System .          o         ut.Z
+(z=c[q]);q=0;}}}})  ]}"`n!vokevirtual~#$T  /Zl  n(L#{S}SJ;)V`nreturn`n.end~method)+N          ]          };H(
+"DO,1<-#"||*s);s?wh  ile~t:=ord(move(1))do  {  i+:=1;u:=-i;every~0to~7do{u:=u*2+t%2          ;           t/:=
+2};H("PLEASE")^(i%4/   3);H("DO,1SUB#"||i||   "<-#"||((c-u)%256));c:=u;};H("PLEAS           E             REA
+DOUT,1^nPLEASEGIVEUP"   );end)]).tr(B,?&)]}' .tr('&','YY');)]};})]}"~DUP~FOR~S"~           &              A,&
+"~C~NE`x58T~S^"~&A)^",    &"~C~0~DO~B~."~&char("~COUNT~.~."~),&'"~CR~LOOP~S^"~           &^"^""~          C~S
+"~end~#$D"~C~A~."~STOP"~    CR~A~."~END"~CR~B`x59E~;~D~)]}"))],'#{f(',')}']}           ))]}"))["          ~~~
+~^"~^".""STOP~RUN."])](Zl      n(str"#{g*8}"s)))).tr~B,?`x7e]}.Replace("`            x7e","Y"));}})]};}"  ]]]
+,"$(f(","))"]};for~i~!~rang       e(len(s)):b~as~!t=s[i];a-=b;Z(('+'*-             a~if~0>a~else'-'*a)+'.  ')
+;a=b;).tr~B,?`x21]};K(/`x21/,"        Y",s);Z~s})]}"))]}");end~qr;               )]};!t~i,j;Z("module~QR;  !i
+tial~beg!~");for(i=0;i<s.length;             i++){Z("$H(^"                    ~~~");for(j=6;j>=0;j--)Z((s[i]>
+>j)%2>0?"Yt":"~");Z("YnYtYn~~^`");")                                       ;}Z("$display(^"YnYn^");end~endmod
+ule");return~0;}].reverse],/[`[`]$]/],"[                              f~",?]]}"~^x60.&]k),?']}';cr"]]}")]}"))
+]};})).gsub(/[!HJKXYZ^`~]/){[B*2,:write,B,:trin                g,:gsub,"ain()",B*4,:print,g,:in][$&.ord%47%12
+]})))*"")#_buffer_for_future_bug_fixes_#_buffer_for_future_bug_fixes_#_buffer_for_future_bug_fixes_#_buffer_f
 ##################  Quine Relay -- Copyright (c) 2013 Yusuke Endoh (@mametter), @hirekoke  #################)

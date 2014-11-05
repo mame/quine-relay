@@ -28,7 +28,7 @@ rows = rows.map do |col|
   (col.zip(ws).map {|s, w| s.ljust(w) } * "|").rstrip
 end
 
-apt_get = "sudo apt-get install #{ apts.flatten.compact.uniq.sort * " " }"
+apt_get = "sudo apt-get install #{ [*apts.flatten.compact.uniq, "cmake"].sort * " " }"
 apt_get.gsub!(/.{,70}( |\z)/) do
   $&[-1] == " " ? $& + "\\\n      " : $&
 end
@@ -65,18 +65,24 @@ the original <%= langs[0] %> code again.
 
 [langs]: https://raw.github.com/mame/quine-relay/master/langs.png
 
+(If you want to see the old 50-language version, see [50](https://github.com/mame/quine-relay/tree/50) branch.)
+
 ### Usage
 
 #### 1. Install all interpreters/compilers.
 
-You are fortunate if you are using Ubuntu 14.10 (Utopic Unicorn).
-You just have to type the following apt-get command to install all of them.
+You are (relatively) fortunate if you are using Ubuntu 14.10 "Utopic Unicorn".
+First, you have to type the following apt-get command to install all of them.
 
     $ <%= apt_get %>
 
-You are even more fortunate if you are using Arch Linux,
-as you can just install the [quine-relay-git](https://aur.archlinux.org/packages/quine-relay-git/) package from AUR,
-either manually or by using your favorite AUR helper.
+Then, you have to build the bundled interpreters.
+
+    $ cd vendor
+    $ make
+
+If you are using Arch Linux, you might want to ask @xyproto to update
+the [quine-relay-git](https://aur.archlinux.org/packages/quine-relay-git/) package :-)
 
 You may find [instructions for other platforms in the wiki](https://github.com/mame/quine-relay/wiki/Installation).
 
