@@ -84,7 +84,7 @@ QR.vala: QR.unl
 	@echo "##  7: Unlambda -> Vala  ##"
 	@echo "###########################"
 	@echo
-	ruby unlambda.rb QR.unl > QR.vala
+	ruby vendor/unlambda.rb QR.unl > QR.vala
 
 QR.v: QR.vala
 	@echo
@@ -110,7 +110,7 @@ qr.adb: QR.ws
 	@echo "##  10: Whitespace -> Ada  ##"
 	@echo "#############################"
 	@echo
-	ruby whitespace.rb QR.ws > qr.adb
+	ruby vendor/whitespace.rb QR.ws > qr.adb
 
 QR.a68: qr.adb
 	@echo

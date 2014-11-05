@@ -9,8 +9,6 @@ CLEAN.include("../QR2.rb")
 CLEAN.include("../README.md")
 CLEAN.include("../langs.png")
 CLEAN.include("../Makefile")
-CLEAN.include("../unlambda.rb")
-CLEAN.include("../whitespace.rb")
 
 file "../QR.rb" => ["QR.rb.gen.rb", "code-gen.rb", "uroboros.txt"] do |t|
   ruby "QR.rb.gen.rb"
@@ -28,14 +26,6 @@ file "../Makefile" => ["Makefile.gen.rb", "code-gen.rb"] do |t|
   ruby "Makefile.gen.rb"
 end
 
-file "../unlambda.rb" => ["unlambda.rb"] do |t|
-  cp "unlambda.rb", t.name
-end
-
-file "../whitespace.rb" => ["whitespace.rb"] do |t|
-  cp "whitespace.rb", t.name
-end
-
 task :test do
   ruby "test.rb"
 end
@@ -45,6 +35,4 @@ task :default => %w(
   ../README.md
   ../langs.png
   ../Makefile
-  ../unlambda.rb
-  ../whitespace.rb
 )

@@ -51,9 +51,6 @@ class CodeGen
     dir = File.join(File.dirname(__dir__), name)
     Dir.mkdir(dir) unless File.directory?(dir)
     Dir.chdir(dir)
-
-    system("cp", File.join(__dir__, "unlambda.rb"), dir)
-    system("cp", File.join(__dir__, "whitespace.rb"), dir)
   end
 end
 
@@ -535,7 +532,7 @@ class Vala_Verilog_Whitespace < CodeGen
   Cmd = [
     "valac QR.vala && ./QR > OUTFILE",
     "iverilog -o QR QR.v && ./QR -vcd-none > OUTFILE",
-    "ruby whitespace.rb QR.ws > OUTFILE"
+    "ruby vendor/whitespace.rb QR.ws > OUTFILE"
   ]
   Apt = ["valac", "iverilog", nil]
   def code
@@ -561,7 +558,7 @@ end
 
 class Tcl_Unlambda < CodeGen
   File = ["QR.tcl", "QR.unl"]
-  Cmd = ["tclsh QR.tcl > OUTFILE", "ruby unlambda.rb QR.unl > OUTFILE"]
+  Cmd = ["tclsh QR.tcl > OUTFILE", "ruby vendor/unlambda.rb QR.unl > OUTFILE"]
   Apt = ["tcl", nil]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
