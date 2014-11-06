@@ -338,18 +338,26 @@ QR.makefile: QR.lua
 	@echo
 	lua QR.lua > QR.makefile
 
-QR.il: QR.makefile
+QR.mac: QR.makefile
 	@echo
-	@echo "############################"
-	@echo "##  37: Makefile -> MSIL  ##"
-	@echo "############################"
+	@echo "##############################"
+	@echo "##  37: Makefile -> Maxima  ##"
+	@echo "##############################"
 	@echo
-	make -f QR.makefile > QR.il
+	make -f QR.makefile > QR.mac
+
+QR.il: QR.mac
+	@echo
+	@echo "##########################"
+	@echo "##  38: Maxima -> MSIL  ##"
+	@echo "##########################"
+	@echo
+	maxima -q --init-mac=QR.mac > QR.il
 
 QR.js: QR.il
 	@echo
 	@echo "##########################"
-	@echo "##  38: MSIL -> NodeJS  ##"
+	@echo "##  39: MSIL -> NodeJS  ##"
 	@echo "##########################"
 	@echo
 	ilasm QR.il
@@ -358,7 +366,7 @@ QR.js: QR.il
 QR.m: QR.js
 	@echo
 	@echo "#################################"
-	@echo "##  39: NodeJS -> Objective-C  ##"
+	@echo "##  40: NodeJS -> Objective-C  ##"
 	@echo "#################################"
 	@echo
 	$(NODE) QR.js > QR.m
@@ -366,7 +374,7 @@ QR.m: QR.js
 QR.ml: QR.m
 	@echo
 	@echo "################################"
-	@echo "##  40: Objective-C -> OCaml  ##"
+	@echo "##  41: Objective-C -> OCaml  ##"
 	@echo "################################"
 	@echo
 	gcc -o QR QR.m
@@ -375,7 +383,7 @@ QR.ml: QR.m
 QR.octave: QR.ml
 	@echo
 	@echo "###########################"
-	@echo "##  41: OCaml -> Octave  ##"
+	@echo "##  42: OCaml -> Octave  ##"
 	@echo "###########################"
 	@echo
 	ocaml QR.ml > QR.octave
@@ -383,7 +391,7 @@ QR.octave: QR.ml
 QR.pasm: QR.octave
 	@echo
 	@echo "################################"
-	@echo "##  42: Octave -> Parrot asm  ##"
+	@echo "##  43: Octave -> Parrot asm  ##"
 	@echo "################################"
 	@echo
 	octave -qf QR.octave > QR.pasm
@@ -391,7 +399,7 @@ QR.pasm: QR.octave
 QR.pas: QR.pasm
 	@echo
 	@echo "################################"
-	@echo "##  43: Parrot asm -> Pascal  ##"
+	@echo "##  44: Parrot asm -> Pascal  ##"
 	@echo "################################"
 	@echo
 	parrot QR.pasm > QR.pas
@@ -399,7 +407,7 @@ QR.pas: QR.pasm
 QR.pl: QR.pas
 	@echo
 	@echo "##########################"
-	@echo "##  44: Pascal -> Perl  ##"
+	@echo "##  45: Pascal -> Perl  ##"
 	@echo "##########################"
 	@echo
 	fpc QR.pas
@@ -408,7 +416,7 @@ QR.pl: QR.pas
 QR.php: QR.pl
 	@echo
 	@echo "#######################"
-	@echo "##  45: Perl -> PHP  ##"
+	@echo "##  46: Perl -> PHP  ##"
 	@echo "#######################"
 	@echo
 	perl QR.pl > QR.php
@@ -416,7 +424,7 @@ QR.php: QR.pl
 QR.pike: QR.php
 	@echo
 	@echo "#######################"
-	@echo "##  46: PHP -> Pike  ##"
+	@echo "##  47: PHP -> Pike  ##"
 	@echo "#######################"
 	@echo
 	php QR.php > QR.pike
@@ -424,7 +432,7 @@ QR.pike: QR.php
 QR.prolog: QR.pike
 	@echo
 	@echo "##########################"
-	@echo "##  47: Pike -> Prolog  ##"
+	@echo "##  48: Pike -> Prolog  ##"
 	@echo "##########################"
 	@echo
 	pike QR.pike > QR.prolog
@@ -432,7 +440,7 @@ QR.prolog: QR.pike
 QR.py: QR.prolog
 	@echo
 	@echo "############################"
-	@echo "##  48: Prolog -> Python  ##"
+	@echo "##  49: Prolog -> Python  ##"
 	@echo "############################"
 	@echo
 	swipl -q -t qr -f QR.prolog > QR.py
@@ -440,7 +448,7 @@ QR.py: QR.prolog
 QR.R: QR.py
 	@echo
 	@echo "#######################"
-	@echo "##  49: Python -> R  ##"
+	@echo "##  50: Python -> R  ##"
 	@echo "#######################"
 	@echo
 	python QR.py > QR.R
@@ -448,7 +456,7 @@ QR.R: QR.py
 QR.rexx: QR.R
 	@echo
 	@echo "#####################"
-	@echo "##  50: R -> REXX  ##"
+	@echo "##  51: R -> REXX  ##"
 	@echo "#####################"
 	@echo
 	R --slave < QR.R > QR.rexx
@@ -456,7 +464,7 @@ QR.rexx: QR.R
 QR2.rb: QR.rexx
 	@echo
 	@echo "########################"
-	@echo "##  51: REXX -> Ruby  ##"
+	@echo "##  52: REXX -> Ruby  ##"
 	@echo "########################"
 	@echo
 	rexx ./QR.rexx > QR2.rb

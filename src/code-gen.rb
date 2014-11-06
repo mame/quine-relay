@@ -186,6 +186,13 @@ class MSIL < CodeGen
   end
 end
 
+class Maxima < CodeGen
+  File = "QR.mac"
+  Cmd = "maxima -q --init-mac=QR.mac > OUTFILE"
+  Apt = "maxima"
+  Code = %q("linel:99999;print#{E[PREV]};quit();")
+end
+
 class Makefile < CodeGen
   File = "QR.makefile"
   Cmd = "make -f QR.makefile > OUTFILE"
