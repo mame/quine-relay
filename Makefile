@@ -463,5 +463,5 @@ QR2.rb: QR.rexx
 
 clean:
 	@mv QR.rb quine-relay.rb
-	rm -f qr QR qr.* QR.* QR2.rb *.class
+	rm -f qr QR qr.* QR.* QR2.rb *.class gst.im
 	@mv quine-relay.rb QR.rb

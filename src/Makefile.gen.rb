@@ -57,7 +57,7 @@ OUT << <<-END
 
 clean:
 \t@mv QR.rb quine-relay.rb
-\trm -f qr QR qr.* QR.* QR2.rb *.class
+\trm -f qr QR qr.* QR.* QR2.rb *.class gst.im
 \t@mv quine-relay.rb QR.rb
 END
 
