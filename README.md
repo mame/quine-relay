@@ -5,7 +5,7 @@
 This is a Ruby program that generates
 Scala program that generates
 Scheme program that generates
-...(through 52 languages in total)...
+...(through 53 languages in total)...
 REXX program that generates
 the original Ruby code again.
 
@@ -25,9 +25,9 @@ First, you have to type the following apt-get command to install all of them.
     $ sudo apt-get install algol68g bash bf boo clisp clojure1.4 cmake \
       coffeescript f2c fp-compiler g++ gauche gawk gcc gforth gfortran ghc \
       gnat gnu-smalltalk gobjc golang groovy icont iconx intercal iverilog \
-      jasmin-sable llvm lua5.2 make maxima mono-devel mono-mcs nodejs ocaml \
-      octave open-cobol openjdk-6-jdk parrot perl php5-cli pike7.8 python \
-      r-base regina-rexx ruby2.0 scala swi-prolog tcl ucblogo valac
+      jasmin-sable llvm lua5.2 make maxima mono-devel mono-mcs nasm nodejs \
+      ocaml octave open-cobol openjdk-6-jdk parrot perl php5-cli pike7.8 \
+      python r-base regina-rexx ruby2.0 scala swi-prolog tcl ucblogo valac
 
 Then, you have to build the bundled interpreters.
 
@@ -82,7 +82,8 @@ If you could do it, please let me know.  Good luck.
     $ lua QR.lua > QR.makefile
     $ make -f QR.makefile > QR.mac
     $ maxima -q --init-mac=QR.mac > QR.il
-    $ ilasm QR.il && mono QR.exe > QR.js
+    $ ilasm QR.il && mono QR.exe > QR.asm
+    $ nasm -felf QR.asm && ld -m elf_i386 -o QR QR.o && ./QR > QR.js
     $ nodejs QR.js > QR.m
     $ gcc -o QR QR.m && ./QR > QR.ml
     $ ocaml QR.ml > QR.octave
@@ -156,19 +157,20 @@ For other languages, I used the following deb packages:
 37 |Makefile     |make           |3.81-8.2ubuntu3
 38 |Maxima       |maxima         |5.32.1-1
 39 |MSIL         |mono-devel     |3.2.8+dfsg-4ubuntu1
-40 |NodeJS       |nodejs         |0.10.25~dfsg2-2ubuntu1
-41 |Objective-C  |gobjc          |4:4.8.2-1ubuntu6
-42 |OCaml        |ocaml          |4.01.0-3ubuntu3
-43 |Octave       |octave         |3.8.1-1ubuntu1
-44 |Parrot asm   |parrot         |5.9.0-1build1
-45 |Pascal       |fp-compiler    |2.6.2-8
-46 |Perl         |perl           |5.18.2-2ubuntu1
-47 |PHP          |php5-cli       |5.5.9+dfsg-1ubuntu4.4
-48 |Pike         |pike7.8        |7.8.700-7
-49 |Prolog       |swi-prolog     |6.6.4-2ubuntu1
-50 |Python       |python         |2.7.5-5ubuntu3
-51 |R            |r-base         |3.0.2-1ubuntu1
-52 |REXX         |regina-rexx    |3.6-2
+40 |NASM         |nasm           |2.10.09-1
+41 |NodeJS       |nodejs         |0.10.25~dfsg2-2ubuntu1
+42 |Objective-C  |gobjc          |4:4.8.2-1ubuntu6
+43 |OCaml        |ocaml          |4.01.0-3ubuntu3
+44 |Octave       |octave         |3.8.1-1ubuntu1
+45 |Parrot asm   |parrot         |5.9.0-1build1
+46 |Pascal       |fp-compiler    |2.6.2-8
+47 |Perl         |perl           |5.18.2-2ubuntu1
+48 |PHP          |php5-cli       |5.5.9+dfsg-1ubuntu4.4
+49 |Pike         |pike7.8        |7.8.700-7
+50 |Prolog       |swi-prolog     |6.6.4-2ubuntu1
+51 |Python       |python         |2.7.5-5ubuntu3
+52 |R            |r-base         |3.0.2-1ubuntu1
+53 |REXX         |regina-rexx    |3.6-2
 
 Note: `CC=tcc ick -bfO` may be used to compile INTERCAL sources
 with less memory.

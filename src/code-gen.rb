@@ -167,6 +167,26 @@ class NodeJS < CodeGen
   Code = %q("require('util').print#{E[PREV]}")
 end
 
+class NASM < CodeGen
+  File = "QR.asm"
+  Cmd = "nasm -felf QR.asm && ld -m elf_i386 -o QR QR.o && ./QR > OUTFILE"
+  Apt = "nasm"
+  def code
+    <<-'END'.lines.map {|l| l.strip }.join("\\n")
+      %(m:db\x60#{e[s=PREV+N]}\x60
+      global _start
+      _start:mov edx,#{s.size}
+      mov ecx,m
+      mov ebx,1
+      mov eax,4
+      int 128
+      mov ebx,0
+      mov eax,1
+      int 128)
+    END
+  end
+end
+
 class MSIL < CodeGen
   File = "QR.il"
   Cmd = "ilasm QR.il && mono QR.exe > OUTFILE"
@@ -197,7 +217,7 @@ class Makefile < CodeGen
   File = "QR.makefile"
   Cmd = "make -f QR.makefile > OUTFILE"
   Apt = "make"
-  Code = %q(%(all:\n\t@printf %s "#{e[PREV]}"))
+  Code = %q(%(all:\n\t@echo '#{d[Q[PREV,B],?$].gsub(?'){%('"'"')}}'))
 end
 
 class Lua < CodeGen
