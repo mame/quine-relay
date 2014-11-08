@@ -167,6 +167,13 @@ class NodeJS < CodeGen
   Code = %q("require('util').print#{E[PREV]}")
 end
 
+class Neko < CodeGen
+  File = "QR.neko"
+  Cmd = "nekoc QR.neko && neko QR.n > OUTFILE"
+  Apt = "neko"
+  Code = %q("$print#{E[PREV+N]};")
+end
+
 class NASM < CodeGen
   File = "QR.asm"
   Cmd = "nasm -felf QR.asm && ld -m elf_i386 -o QR QR.o && ./QR > OUTFILE"
