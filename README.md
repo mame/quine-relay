@@ -5,7 +5,7 @@
 This is a Ruby program that generates
 Scala program that generates
 Scheme program that generates
-...(through 54 languages in total)...
+...(through 55 languages in total)...
 REXX program that generates
 the original Ruby code again.
 
@@ -26,9 +26,9 @@ First, you have to type the following apt-get command to install all of them.
       coffeescript f2c fp-compiler g++ gauche gawk gcc gforth gfortran ghc \
       gnat gnu-smalltalk gobjc golang groovy icont iconx intercal iverilog \
       jasmin-sable llvm lua5.2 make maxima mono-devel mono-mcs nasm neko \
-      nodejs ocaml octave open-cobol openjdk-6-jdk parrot perl php5-cli \
-      pike7.8 python r-base regina-rexx ruby2.0 scala swi-prolog tcl ucblogo \
-      valac
+      nickle nodejs ocaml octave open-cobol openjdk-6-jdk parrot perl \
+      php5-cli pike7.8 python r-base regina-rexx ruby2.0 scala swi-prolog \
+      tcl ucblogo valac
 
 Then, you have to build the bundled interpreters.
 
@@ -85,7 +85,8 @@ If you could do it, please let me know.  Good luck.
     $ maxima -q --init-mac=QR.mac > QR.il
     $ ilasm QR.il && mono QR.exe > QR.asm
     $ nasm -felf QR.asm && ld -m elf_i386 -o QR QR.o && ./QR > QR.neko
-    $ nekoc QR.neko && neko QR.n > QR.js
+    $ nekoc QR.neko && neko QR.n > QR.5c
+    $ nickle QR.5c > QR.js
     $ nodejs QR.js > QR.m
     $ gcc -o QR QR.m && ./QR > QR.ml
     $ ocaml QR.ml > QR.octave
@@ -161,19 +162,20 @@ For other languages, I used the following deb packages:
 39 |MSIL         |mono-devel     |3.2.8+dfsg-4ubuntu1
 40 |NASM         |nasm           |2.10.09-1
 41 |Neko         |neko           |2.0.0-3
-42 |NodeJS       |nodejs         |0.10.25~dfsg2-2ubuntu1
-43 |Objective-C  |gobjc          |4:4.8.2-1ubuntu6
-44 |OCaml        |ocaml          |4.01.0-3ubuntu3
-45 |Octave       |octave         |3.8.1-1ubuntu1
-46 |Parrot asm   |parrot         |5.9.0-1build1
-47 |Pascal       |fp-compiler    |2.6.2-8
-48 |Perl         |perl           |5.18.2-2ubuntu1
-49 |PHP          |php5-cli       |5.5.9+dfsg-1ubuntu4.4
-50 |Pike         |pike7.8        |7.8.700-7
-51 |Prolog       |swi-prolog     |6.6.4-2ubuntu1
-52 |Python       |python         |2.7.5-5ubuntu3
-53 |R            |r-base         |3.0.2-1ubuntu1
-54 |REXX         |regina-rexx    |3.6-2
+42 |Nickle       |nickle         |2.77-1
+43 |NodeJS       |nodejs         |0.10.25~dfsg2-2ubuntu1
+44 |Objective-C  |gobjc          |4:4.8.2-1ubuntu6
+45 |OCaml        |ocaml          |4.01.0-3ubuntu3
+46 |Octave       |octave         |3.8.1-1ubuntu1
+47 |Parrot asm   |parrot         |5.9.0-1build1
+48 |Pascal       |fp-compiler    |2.6.2-8
+49 |Perl         |perl           |5.18.2-2ubuntu1
+50 |PHP          |php5-cli       |5.5.9+dfsg-1ubuntu4.4
+51 |Pike         |pike7.8        |7.8.700-7
+52 |Prolog       |swi-prolog     |6.6.4-2ubuntu1
+53 |Python       |python         |2.7.5-5ubuntu3
+54 |R            |r-base         |3.0.2-1ubuntu1
+55 |REXX         |regina-rexx    |3.6-2
 
 Note: `CC=tcc ick -bfO` may be used to compile INTERCAL sources
 with less memory.

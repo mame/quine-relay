@@ -167,6 +167,13 @@ class NodeJS < CodeGen
   Code = %q("require('util').print#{E[PREV]}")
 end
 
+class Nickle < CodeGen
+  File = "QR.5c"
+  Cmd = "nickle QR.5c > OUTFILE"
+  Apt = "nickle"
+  Code = %q(%(printf#{E[PREV]}))
+end
+
 class Neko < CodeGen
   File = "QR.neko"
   Cmd = "nekoc QR.neko && neko QR.n > OUTFILE"
