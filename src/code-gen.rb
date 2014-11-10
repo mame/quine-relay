@@ -137,6 +137,14 @@ class ParrotAsm < CodeGen
   Code = %q(%(say"#{e[PREV]}"\nend))
 end
 
+class PARIGP < CodeGen
+  Name = "PARI/GP"
+  File = "QR.gp"
+  Cmd = "gp -f -q QR.gp > OUTFILE"
+  Apt = "pari-gp"
+  Code = %q("print#{E[PREV]};quit")
+end
+
 class Octave < CodeGen
   File = "QR.octave"
   Cmd = "octave -qf QR.octave > OUTFILE"
