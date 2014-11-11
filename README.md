@@ -5,7 +5,7 @@
 This is a Ruby program that generates
 Scala program that generates
 Scheme program that generates
-...(through 56 languages in total)...
+...(through 57 languages in total)...
 REXX program that generates
 the original Ruby code again.
 
@@ -95,7 +95,8 @@ If you could do it, please let me know.  Good luck.
     $ parrot QR.pasm > QR.pas
     $ fpc QR.pas && ./QR > QR.pl
     $ perl QR.pl > QR.php
-    $ php QR.php > QR.pike
+    $ php QR.php > QR.png
+    $ vendor/npiet-*/npiet QR.png > QR.pike
     $ pike QR.pike > QR.prolog
     $ swipl -q -t qr -f QR.prolog > QR.py
     $ python QR.py > QR.R
@@ -173,11 +174,12 @@ For other languages, I used the following deb packages:
 49 |Pascal       |fp-compiler    |2.6.2-8
 50 |Perl         |perl           |5.18.2-2ubuntu1
 51 |PHP          |php5-cli       |5.5.9+dfsg-1ubuntu4.4
-52 |Pike         |pike7.8        |7.8.700-7
-53 |Prolog       |swi-prolog     |6.6.4-2ubuntu1
-54 |Python       |python         |2.7.5-5ubuntu3
-55 |R            |r-base         |3.0.2-1ubuntu1
-56 |REXX         |regina-rexx    |3.6-2
+52 |Piet         |(none)         |-
+53 |Pike         |pike7.8        |7.8.700-7
+54 |Prolog       |swi-prolog     |6.6.4-2ubuntu1
+55 |Python       |python         |2.7.5-5ubuntu3
+56 |R            |r-base         |3.0.2-1ubuntu1
+57 |REXX         |regina-rexx    |3.6-2
 
 Note: `CC=tcc ick -bfO` may be used to compile INTERCAL sources
 with less memory.

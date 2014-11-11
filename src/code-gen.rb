@@ -83,16 +83,31 @@ class Pike < CodeGen
   Code = %q("int main(){write#{E[PREV]};return 0;}")
 end
 
-class PHP < CodeGen
-  File = "QR.php"
-  Cmd = "php QR.php > OUTFILE"
-  Apt = "php5-cli"
+class PHP_Piet < CodeGen
+  File = ["QR.php", "QR.png"]
+  Cmd = ["php QR.php > OUTFILE", "vendor/npiet-*/npiet QR.png > OUTFILE"]
+  Apt = ["php5-cli", nil]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
         <?php function f($n){return str_repeat("\\\\",$n);};
           $f="f";
-          echo#{V[Q[E[PREV]],"{$f(",")}"]}
+          $z=3+$w=strlen($s=#{V[Q[E[PREV]],"{$f(",")}"]})*3;
+          echo"\\x89PNG\\r\\n\\x1a\\n";
+          $m="";
+          $t="\\xc0\\0\\xff";
+          for($i=-1;$i<128*$z;
+              $m.=$c--?
+                ($w-$c||$i>$z)&&$i/$z<($c<$w?ord($s[(int)($c/3)]):$c--%3+2)?
+                  $t[2].$t[$c%3%2].$t[$c%3]:"\\0\\0\\0":"\\0"
+          )
+            $c=++$i%$z;
+          foreach(array(
+            "IHDR".pack("NNCV",$w+2,128,8,2),
+            "IDAT".gzcompress($m),
+            "IEND"
+          )as$d)
+            echo pack("NA*N",strlen($d)-4,$d,crc32($d));
         ?>
       )
     END

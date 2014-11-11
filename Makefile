@@ -456,18 +456,26 @@ QR.php: QR.pl
 	@echo
 	perl QR.pl > QR.php
 
-QR.pike: QR.php
+QR.png: QR.php
 	@echo
 	@echo "#######################"
-	@echo "##  51: PHP -> Pike  ##"
+	@echo "##  51: PHP -> Piet  ##"
 	@echo "#######################"
 	@echo
-	php QR.php > QR.pike
+	php QR.php > QR.png
+
+QR.pike: QR.png
+	@echo
+	@echo "########################"
+	@echo "##  52: Piet -> Pike  ##"
+	@echo "########################"
+	@echo
+	vendor/npiet-*/npiet QR.png > QR.pike
 
 QR.prolog: QR.pike
 	@echo
 	@echo "##########################"
-	@echo "##  52: Pike -> Prolog  ##"
+	@echo "##  53: Pike -> Prolog  ##"
 	@echo "##########################"
 	@echo
 	pike QR.pike > QR.prolog
@@ -475,7 +483,7 @@ QR.prolog: QR.pike
 QR.py: QR.prolog
 	@echo
 	@echo "############################"
-	@echo "##  53: Prolog -> Python  ##"
+	@echo "##  54: Prolog -> Python  ##"
 	@echo "############################"
 	@echo
 	swipl -q -t qr -f QR.prolog > QR.py
@@ -483,7 +491,7 @@ QR.py: QR.prolog
 QR.R: QR.py
 	@echo
 	@echo "#######################"
-	@echo "##  54: Python -> R  ##"
+	@echo "##  55: Python -> R  ##"
 	@echo "#######################"
 	@echo
 	python QR.py > QR.R
@@ -491,7 +499,7 @@ QR.R: QR.py
 QR.rexx: QR.R
 	@echo
 	@echo "#####################"
-	@echo "##  55: R -> REXX  ##"
+	@echo "##  56: R -> REXX  ##"
 	@echo "#####################"
 	@echo
 	R --slave < QR.R > QR.rexx
@@ -499,7 +507,7 @@ QR.rexx: QR.R
 QR2.rb: QR.rexx
 	@echo
 	@echo "########################"
-	@echo "##  56: REXX -> Ruby  ##"
+	@echo "##  57: REXX -> Ruby  ##"
 	@echo "########################"
 	@echo
 	rexx ./QR.rexx > QR2.rb
