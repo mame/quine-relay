@@ -25,9 +25,9 @@ First, you have to type the following apt-get command to install all of them.
     $ sudo apt-get install algol68g bash bf boo clisp clojure1.4 cmake \
       coffeescript f2c fp-compiler g++ gauche gawk gcc gforth gfortran ghc \
       gnat gnu-smalltalk gobjc golang groovy icont iconx intercal iverilog \
-      jasmin-sable llvm lua5.2 make maxima mono-devel mono-mcs nasm neko \
-      nickle nodejs ocaml octave open-cobol openjdk-6-jdk pari-gp parrot \
-      perl php5-cli pike7.8 python r-base regina-rexx ruby2.0 scala \
+      jasmin-sable libpng12-dev llvm lua5.2 make maxima mono-devel mono-mcs \
+      nasm neko nickle nodejs ocaml octave open-cobol openjdk-6-jdk pari-gp \
+      parrot perl php5-cli pike7.8 python r-base regina-rexx ruby2.0 scala \
       swi-prolog tcl ucblogo valac
 
 Then, you have to build the bundled interpreters.

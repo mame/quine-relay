@@ -2,6 +2,11 @@ require_relative "code-gen"
 require "erb"
 require "cairo"
 
+other_packages = %w(cmake libpng12-dev) # libgd2-xpm-dev groff (to build npiet-foogol)
+other_packages.each do |package|
+  `dpkg -p #{ package }` # just check the packages
+end
+
 langs = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.name } }
 cmds = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.cmd } }
 srcs = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.src } }
@@ -28,7 +33,7 @@ rows = rows.map do |col|
   (col.zip(ws).map {|s, w| s.ljust(w) } * "|").rstrip
 end
 
-apt_get = "sudo apt-get install #{ [*apts.flatten.compact.uniq, "cmake"].sort * " " }"
+apt_get = "sudo apt-get install #{ [*apts.flatten.compact.uniq, *other_packages].sort * " " }"
 apt_get.gsub!(/.{,70}( |\z)/) do
   $&[-1] == " " ? $& + "\\\n      " : $&
 end
