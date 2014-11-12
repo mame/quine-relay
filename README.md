@@ -5,7 +5,7 @@
 This is a Ruby program that generates
 Scala program that generates
 Scheme program that generates
-...(through 57 languages in total)...
+...(through 58 languages in total)...
 REXX program that generates
 the original Ruby code again.
 
@@ -90,7 +90,8 @@ If you could do it, please let me know.  Good luck.
     $ nodejs QR.js > QR.m
     $ gcc -o QR QR.m && ./QR > QR.ml
     $ ocaml QR.ml > QR.octave
-    $ octave -qf QR.octave > QR.gp
+    $ octave -qf QR.octave > QR.ook
+    $ ruby vendor/ook.rb QR.ook > QR.gp
     $ gp -f -q QR.gp > QR.pasm
     $ parrot QR.pasm > QR.pas
     $ fpc QR.pas && ./QR > QR.pl
@@ -169,17 +170,18 @@ For other languages, I used the following deb packages:
 44 |Objective-C  |gobjc          |4:4.8.2-1ubuntu6
 45 |OCaml        |ocaml          |4.01.0-3ubuntu3
 46 |Octave       |octave         |3.8.1-1ubuntu1
-47 |PARI/GP      |pari-gp        |2.5.5-1
-48 |Parrot asm   |parrot         |5.9.0-1build1
-49 |Pascal       |fp-compiler    |2.6.2-8
-50 |Perl         |perl           |5.18.2-2ubuntu1
-51 |PHP          |php5-cli       |5.5.9+dfsg-1ubuntu4.4
-52 |Piet         |(none)         |-
-53 |Pike         |pike7.8        |7.8.700-7
-54 |Prolog       |swi-prolog     |6.6.4-2ubuntu1
-55 |Python       |python         |2.7.5-5ubuntu3
-56 |R            |r-base         |3.0.2-1ubuntu1
-57 |REXX         |regina-rexx    |3.6-2
+47 |Ook!         |(none)         |-
+48 |PARI/GP      |pari-gp        |2.5.5-1
+49 |Parrot asm   |parrot         |5.9.0-1build1
+50 |Pascal       |fp-compiler    |2.6.2-8
+51 |Perl         |perl           |5.18.2-2ubuntu1
+52 |PHP          |php5-cli       |5.5.9+dfsg-1ubuntu4.4
+53 |Piet         |(none)         |-
+54 |Pike         |pike7.8        |7.8.700-7
+55 |Prolog       |swi-prolog     |6.6.4-2ubuntu1
+56 |Python       |python         |2.7.5-5ubuntu3
+57 |R            |r-base         |3.0.2-1ubuntu1
+58 |REXX         |regina-rexx    |3.6-2
 
 Note: `CC=tcc ick -bfO` may be used to compile INTERCAL sources
 with less memory.

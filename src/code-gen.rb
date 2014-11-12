@@ -160,11 +160,28 @@ class PARIGP < CodeGen
   Code = %q("print#{E[PREV]};quit")
 end
 
-class Octave < CodeGen
-  File = "QR.octave"
-  Cmd = "octave -qf QR.octave > OUTFILE"
-  Apt = "octave"
-  Code = %q("printf"+E[PREV+N])
+class Octave_Ook < CodeGen
+  Name = ["Octave", "Ook!"]
+  File = ["QR.octave", "QR.ook"]
+  Cmd = ["octave -qf QR.octave > OUTFILE", "ruby vendor/ook.rb QR.ook > OUTFILE"]
+  Apt = ["octave", nil]
+  def code
+    <<-'END'.lines.map {|l| l.strip }.join
+      %(
+        s=toascii#{E[PREV]};
+        t=num2cell(b=11-ceil(s/13));
+        for n=1:9
+            m={};
+            for i=1:141
+              f=@(x,y,n)repmat(["Ook" x " Ook" y 32],[1 abs(n)]);
+              m(i)=[f(z=46,63,n) f(q=z-(i<13)*13,q,i-13) f(33,z,1) f(63,z,n)];
+            end;
+            t(x)=m(diff([0 s(x=b==n)])+13);
+        end;
+        printf(strjoin(t,""))
+      )
+    END
+  end
 end
 
 class OCaml < CodeGen

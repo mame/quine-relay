@@ -415,18 +415,26 @@ QR.octave: QR.ml
 	@echo
 	ocaml QR.ml > QR.octave
 
-QR.gp: QR.octave
+QR.ook: QR.octave
 	@echo
-	@echo "#############################"
-	@echo "##  46: Octave -> PARI/GP  ##"
-	@echo "#############################"
+	@echo "##########################"
+	@echo "##  46: Octave -> Ook!  ##"
+	@echo "##########################"
 	@echo
-	octave -qf QR.octave > QR.gp
+	octave -qf QR.octave > QR.ook
+
+QR.gp: QR.ook
+	@echo
+	@echo "###########################"
+	@echo "##  47: Ook! -> PARI/GP  ##"
+	@echo "###########################"
+	@echo
+	ruby vendor/ook.rb QR.ook > QR.gp
 
 QR.pasm: QR.gp
 	@echo
 	@echo "#################################"
-	@echo "##  47: PARI/GP -> Parrot asm  ##"
+	@echo "##  48: PARI/GP -> Parrot asm  ##"
 	@echo "#################################"
 	@echo
 	gp -f -q QR.gp > QR.pasm
@@ -434,7 +442,7 @@ QR.pasm: QR.gp
 QR.pas: QR.pasm
 	@echo
 	@echo "################################"
-	@echo "##  48: Parrot asm -> Pascal  ##"
+	@echo "##  49: Parrot asm -> Pascal  ##"
 	@echo "################################"
 	@echo
 	parrot QR.pasm > QR.pas
@@ -442,7 +450,7 @@ QR.pas: QR.pasm
 QR.pl: QR.pas
 	@echo
 	@echo "##########################"
-	@echo "##  49: Pascal -> Perl  ##"
+	@echo "##  50: Pascal -> Perl  ##"
 	@echo "##########################"
 	@echo
 	fpc QR.pas
@@ -451,7 +459,7 @@ QR.pl: QR.pas
 QR.php: QR.pl
 	@echo
 	@echo "#######################"
-	@echo "##  50: Perl -> PHP  ##"
+	@echo "##  51: Perl -> PHP  ##"
 	@echo "#######################"
 	@echo
 	perl QR.pl > QR.php
@@ -459,7 +467,7 @@ QR.php: QR.pl
 QR.png: QR.php
 	@echo
 	@echo "#######################"
-	@echo "##  51: PHP -> Piet  ##"
+	@echo "##  52: PHP -> Piet  ##"
 	@echo "#######################"
 	@echo
 	php QR.php > QR.png
@@ -467,7 +475,7 @@ QR.png: QR.php
 QR.pike: QR.png
 	@echo
 	@echo "########################"
-	@echo "##  52: Piet -> Pike  ##"
+	@echo "##  53: Piet -> Pike  ##"
 	@echo "########################"
 	@echo
 	vendor/npiet-*/npiet QR.png > QR.pike
@@ -475,7 +483,7 @@ QR.pike: QR.png
 QR.prolog: QR.pike
 	@echo
 	@echo "##########################"
-	@echo "##  53: Pike -> Prolog  ##"
+	@echo "##  54: Pike -> Prolog  ##"
 	@echo "##########################"
 	@echo
 	pike QR.pike > QR.prolog
@@ -483,7 +491,7 @@ QR.prolog: QR.pike
 QR.py: QR.prolog
 	@echo
 	@echo "############################"
-	@echo "##  54: Prolog -> Python  ##"
+	@echo "##  55: Prolog -> Python  ##"
 	@echo "############################"
 	@echo
 	swipl -q -t qr -f QR.prolog > QR.py
@@ -491,7 +499,7 @@ QR.py: QR.prolog
 QR.R: QR.py
 	@echo
 	@echo "#######################"
-	@echo "##  55: Python -> R  ##"
+	@echo "##  56: Python -> R  ##"
 	@echo "#######################"
 	@echo
 	python QR.py > QR.R
@@ -499,7 +507,7 @@ QR.R: QR.py
 QR.rexx: QR.R
 	@echo
 	@echo "#####################"
-	@echo "##  56: R -> REXX  ##"
+	@echo "##  57: R -> REXX  ##"
 	@echo "#####################"
 	@echo
 	R --slave < QR.R > QR.rexx
@@ -507,7 +515,7 @@ QR.rexx: QR.R
 QR2.rb: QR.rexx
 	@echo
 	@echo "########################"
-	@echo "##  57: REXX -> Ruby  ##"
+	@echo "##  58: REXX -> Ruby  ##"
 	@echo "########################"
 	@echo
 	rexx ./QR.rexx > QR2.rb
