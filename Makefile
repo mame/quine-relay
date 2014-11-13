@@ -480,18 +480,26 @@ QR.pike: QR.png
 	@echo
 	vendor/npiet-*/npiet QR.png > QR.pike
 
-QR.prolog: QR.pike
+QR.ps: QR.pike
 	@echo
-	@echo "##########################"
-	@echo "##  54: Pike -> Prolog  ##"
-	@echo "##########################"
+	@echo "##############################"
+	@echo "##  54: Pike -> PostScript  ##"
+	@echo "##############################"
 	@echo
-	pike QR.pike > QR.prolog
+	pike QR.pike > QR.ps
+
+QR.prolog: QR.ps
+	@echo
+	@echo "################################"
+	@echo "##  55: PostScript -> Prolog  ##"
+	@echo "################################"
+	@echo
+	gs -dNODISPLAY -q QR.ps > QR.prolog
 
 QR.py: QR.prolog
 	@echo
 	@echo "############################"
-	@echo "##  55: Prolog -> Python  ##"
+	@echo "##  56: Prolog -> Python  ##"
 	@echo "############################"
 	@echo
 	swipl -q -t qr -f QR.prolog > QR.py
@@ -499,7 +507,7 @@ QR.py: QR.prolog
 QR.R: QR.py
 	@echo
 	@echo "#######################"
-	@echo "##  56: Python -> R  ##"
+	@echo "##  57: Python -> R  ##"
 	@echo "#######################"
 	@echo
 	python QR.py > QR.R
@@ -507,7 +515,7 @@ QR.R: QR.py
 QR.rexx: QR.R
 	@echo
 	@echo "#####################"
-	@echo "##  57: R -> REXX  ##"
+	@echo "##  58: R -> REXX  ##"
 	@echo "#####################"
 	@echo
 	R --slave < QR.R > QR.rexx
@@ -515,7 +523,7 @@ QR.rexx: QR.R
 QR2.rb: QR.rexx
 	@echo
 	@echo "########################"
-	@echo "##  58: REXX -> Ruby  ##"
+	@echo "##  59: REXX -> Ruby  ##"
 	@echo "########################"
 	@echo
 	rexx ./QR.rexx > QR2.rb

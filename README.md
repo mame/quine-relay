@@ -5,7 +5,7 @@
 This is a Ruby program that generates
 Scala program that generates
 Scheme program that generates
-...(through 58 languages in total)...
+...(through 59 languages in total)...
 REXX program that generates
 the original Ruby code again.
 
@@ -24,11 +24,11 @@ First, you have to type the following apt-get command to install all of them.
 
     $ sudo apt-get install algol68g bash bf boo clisp clojure1.4 cmake \
       coffeescript f2c fp-compiler g++ gauche gawk gcc gforth gfortran ghc \
-      gnat gnu-smalltalk gobjc golang groovy icont iconx intercal iverilog \
-      jasmin-sable libpng12-dev llvm lua5.2 make maxima mono-devel mono-mcs \
-      nasm neko nickle nodejs ocaml octave open-cobol openjdk-6-jdk pari-gp \
-      parrot perl php5-cli pike7.8 python r-base regina-rexx ruby2.0 scala \
-      swi-prolog tcl ucblogo valac
+      ghostscript gnat gnu-smalltalk gobjc golang groovy icont iconx \
+      intercal iverilog jasmin-sable libpng12-dev llvm lua5.2 make maxima \
+      mono-devel mono-mcs nasm neko nickle nodejs ocaml octave open-cobol \
+      openjdk-6-jdk pari-gp parrot perl php5-cli pike7.8 python r-base \
+      regina-rexx ruby2.0 scala swi-prolog tcl ucblogo valac
 
 Then, you have to build the bundled interpreters.
 
@@ -98,7 +98,8 @@ If you could do it, please let me know.  Good luck.
     $ perl QR.pl > QR.php
     $ php QR.php > QR.png
     $ vendor/npiet-*/npiet QR.png > QR.pike
-    $ pike QR.pike > QR.prolog
+    $ pike QR.pike > QR.ps
+    $ gs -dNODISPLAY -q QR.ps > QR.prolog
     $ swipl -q -t qr -f QR.prolog > QR.py
     $ python QR.py > QR.R
     $ R --slave < QR.R > QR.rexx
@@ -178,10 +179,11 @@ For other languages, I used the following deb packages:
 52 |PHP          |php5-cli       |5.5.9+dfsg-1ubuntu4.4
 53 |Piet         |(none)         |-
 54 |Pike         |pike7.8        |7.8.700-7
-55 |Prolog       |swi-prolog     |6.6.4-2ubuntu1
-56 |Python       |python         |2.7.5-5ubuntu3
-57 |R            |r-base         |3.0.2-1ubuntu1
-58 |REXX         |regina-rexx    |3.6-2
+55 |PostScript   |ghostscript    |9.10~dfsg-0ubuntu10.2
+56 |Prolog       |swi-prolog     |6.6.4-2ubuntu1
+57 |Python       |python         |2.7.5-5ubuntu3
+58 |R            |r-base         |3.0.2-1ubuntu1
+59 |REXX         |regina-rexx    |3.6-2
 
 Note: `CC=tcc ick -bfO` may be used to compile INTERCAL sources
 with less memory.

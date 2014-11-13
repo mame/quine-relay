@@ -76,6 +76,13 @@ class Prolog < CodeGen
   Code = %q("qr:-write('#{Q[e[PREV],?']}').")
 end
 
+class PostScript < CodeGen
+  File = "QR.ps"
+  Cmd = "gs -dNODISPLAY -q QR.ps > OUTFILE"
+  Apt = "ghostscript"
+  Code = %q("(#{Q[PREV,?\\\\]})= quit")
+end
+
 class Pike < CodeGen
   File = "QR.pike"
   Cmd = "pike QR.pike > OUTFILE"
