@@ -51,4 +51,4 @@ EASEREADOUT,1^nPLEASEGIVEUP");    end)]).tr(B,?&)]}'.tr('&','YY');)]};})]}"~DUP~
 ~");for(j=6;j>=0;j--)Z((s[i]>>j)%2>0?"Yt":"~")                              ;Z("YnYtYn~~^`");");}Z("$display(^"YnYn^");en
 d~endmodule");return~0;}].reverse],/[`[`]$]/],"[f~",?                ]]}"~^x60.&]k),?']}';cr"]]}")]}"))]};})).gsub(/[!HJK
 XYZ^`~]/){[B*2,:write,B,:tring,:gsub,"ain()",B*4,:print,g,:in][$&.ord%47%12]})))*"")#_buffer_for_future_bug_fixes_#_buffe
-########################  Quine Relay -- Copyright (c) 2013 Yusuke Endoh (@mametter), @hirekoke  #######################)
+#####################  Quine Relay -- Copyright (c) 2013, 2014 Yusuke Endoh (@mametter), @hirekoke  ####################)

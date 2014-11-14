@@ -92,7 +92,7 @@ TEMPLATE = File.read("uroboros.txt")
 width = TEMPLATE[/.*/].size
 PADDING = "".ljust(width, "#_buffer_for_future_bug_fixes_")
 COPYRIGHT =
-  "  Quine Relay -- Copyright (c) 2013 Yusuke Endoh (@mametter), @hirekoke  ".
+  "  Quine Relay -- Copyright (c) 2013, 2014 Yusuke Endoh (@mametter), @hirekoke  ".
   center(width, "#")[0..-2]
 
 code.chop!
