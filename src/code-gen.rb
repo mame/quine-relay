@@ -76,11 +76,24 @@ class Prolog < CodeGen
   Code = %q("qr:-write('#{Q[e[PREV],?']}').")
 end
 
-class PostScript < CodeGen
-  File = "QR.ps"
-  Cmd = "gs -dNODISPLAY -q QR.ps > OUTFILE"
-  Apt = "ghostscript"
-  Code = %q("(#{Q[PREV,?\\\\]})= quit")
+class PostScript_PPT < CodeGen
+  Name = ["PostScript", "PPT (Punched tape)"]
+  File = ["QR.ps", "QR.ppt"]
+  Cmd = ["gs -dNODISPLAY -q QR.ps > OUTFILE", "ppt -d < QR.ppt > OUTFILE"]
+  Apt = ["ghostscript", "bsdgames"]
+  def code
+    <<-'END'.lines.map {|l| l.strip }.join
+      %(
+        (___________)dup =
+        /s(|     .   |)def
+        (#{Q[PREV,B]}){
+          9 7{
+            exch dup 1 and 79 mul 32 add exch 2 idiv 3 1 roll s exch 2 index exch put 1 sub dup 6 eq{1 sub}if
+          }repeat s = pop pop
+        }forall = quit
+      )
+    END
+  end
 end
 
 class Pike < CodeGen

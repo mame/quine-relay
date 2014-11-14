@@ -488,18 +488,26 @@ QR.ps: QR.pike
 	@echo
 	pike QR.pike > QR.ps
 
-QR.prolog: QR.ps
+QR.ppt: QR.ps
 	@echo
-	@echo "################################"
-	@echo "##  55: PostScript -> Prolog  ##"
-	@echo "################################"
+	@echo "############################################"
+	@echo "##  55: PostScript -> PPT (Punched tape)  ##"
+	@echo "############################################"
 	@echo
-	gs -dNODISPLAY -q QR.ps > QR.prolog
+	gs -dNODISPLAY -q QR.ps > QR.ppt
+
+QR.prolog: QR.ppt
+	@echo
+	@echo "########################################"
+	@echo "##  56: PPT (Punched tape) -> Prolog  ##"
+	@echo "########################################"
+	@echo
+	ppt -d < QR.ppt > QR.prolog
 
 QR.py: QR.prolog
 	@echo
 	@echo "############################"
-	@echo "##  56: Prolog -> Python  ##"
+	@echo "##  57: Prolog -> Python  ##"
 	@echo "############################"
 	@echo
 	swipl -q -t qr -f QR.prolog > QR.py
@@ -507,7 +515,7 @@ QR.py: QR.prolog
 QR.R: QR.py
 	@echo
 	@echo "#######################"
-	@echo "##  57: Python -> R  ##"
+	@echo "##  58: Python -> R  ##"
 	@echo "#######################"
 	@echo
 	python QR.py > QR.R
@@ -515,7 +523,7 @@ QR.R: QR.py
 QR.rexx: QR.R
 	@echo
 	@echo "#####################"
-	@echo "##  58: R -> REXX  ##"
+	@echo "##  59: R -> REXX  ##"
 	@echo "#####################"
 	@echo
 	R --slave < QR.R > QR.rexx
@@ -523,7 +531,7 @@ QR.rexx: QR.R
 QR2.rb: QR.rexx
 	@echo
 	@echo "########################"
-	@echo "##  59: REXX -> Ruby  ##"
+	@echo "##  60: REXX -> Ruby  ##"
 	@echo "########################"
 	@echo
 	rexx ./QR.rexx > QR2.rb
