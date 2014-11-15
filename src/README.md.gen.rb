@@ -63,7 +63,7 @@ the original <%= langs[0] %> code again.
 
 ![Language Uroboros][langs]
 
-[langs]: https://raw.github.com/mame/quine-relay/master/langs.png
+[langs]: https://raw.github.com/mame/quine-relay/50/langs.png
 
 ### Usage
 
