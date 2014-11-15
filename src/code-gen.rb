@@ -425,7 +425,7 @@ class Clojure_Cobol < CodeGen
              'DISPLAY]
              (map #(str
                   "    \\""
-                  (.replace%1"\\"""\\"\\"")
+                  (.replace %1"\\"""\\"\\"")
                   "\\"&")
                (re-seq #".{1,45}"
                   "#{e[PREV]}"))
