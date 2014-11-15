@@ -520,18 +520,28 @@ QR.R: QR.py
 	@echo
 	python QR.py > QR.R
 
-QR.rexx: QR.R
+QR.r: QR.R
 	@echo
-	@echo "#####################"
-	@echo "##  59: R -> REXX  ##"
-	@echo "#####################"
+	@echo "#######################"
+	@echo "##  59: R -> Ratfor  ##"
+	@echo "#######################"
 	@echo
-	R --slave < QR.R > QR.rexx
+	R --slave -f QR.R > QR.r
+
+QR.rexx: QR.r
+	@echo
+	@echo "##########################"
+	@echo "##  60: Ratfor -> REXX  ##"
+	@echo "##########################"
+	@echo
+	ratfor -o QR.r.f QR.r
+	gfortran -o QR QR.r.f
+	./QR > QR.rexx
 
 QR2.rb: QR.rexx
 	@echo
 	@echo "########################"
-	@echo "##  60: REXX -> Ruby  ##"
+	@echo "##  61: REXX -> Ruby  ##"
 	@echo "########################"
 	@echo
 	rexx ./QR.rexx > QR2.rb

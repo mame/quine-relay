@@ -55,15 +55,21 @@ class CodeGen
 end
 
 
-class Python_R_REXX < CodeGen
-  File = ["QR.py", "QR.R", "QR.rexx"]
-  Cmd = ["python QR.py > OUTFILE", "R --slave < QR.R > OUTFILE", "rexx ./QR.rexx > OUTFILE"]
-  Apt = ["python", "r-base", "regina-rexx"]
+class Python_R_Ratfor_REXX < CodeGen
+  File = ["QR.py", "QR.R", "QR.r", "QR.rexx"]
+  Cmd = [
+    "python QR.py > OUTFILE",
+    "R --slave -f QR.R > OUTFILE",
+    "ratfor -o QR.r.f QR.r && gfortran -o QR QR.r.f && ./QR > OUTFILE",
+    "rexx ./QR.rexx > OUTFILE"
+  ]
+  Apt = ["python", "r-base", "ratfor", "regina-rexx"]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
-        for l in#{E[e[d[PREV]]]}.split("\\\\n"):
-          print('cat("say \\\\"'+l+'\\\\"\\\\n")')
+        for c in"".join(["say '%s'\\n"%l for l in#{E[d[PREV,?']]}.split("\\n")]):
+          print('cat("r=fput(char(%d))\\n")'%ord(c))\n
+        print('cat("end\\n")')
       )
     END
   end

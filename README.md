@@ -5,7 +5,7 @@
 This is a Ruby program that generates
 Scala program that generates
 Scheme program that generates
-...(through 60 languages in total)...
+...(through 61 languages in total)...
 REXX program that generates
 the original Ruby code again.
 
@@ -28,7 +28,7 @@ First, you have to type the following apt-get command to install all of them.
       intercal iverilog jasmin-sable libpng12-dev llvm lua5.2 make maxima \
       mono-devel mono-mcs nasm neko nickle nodejs ocaml octave open-cobol \
       openjdk-6-jdk pari-gp parrot perl php5-cli pike7.8 python r-base \
-      regina-rexx ruby2.0 scala swi-prolog tcl ucblogo valac
+      ratfor regina-rexx ruby2.0 scala swi-prolog tcl ucblogo valac
 
 Then, you have to build the bundled interpreters.
 
@@ -103,7 +103,8 @@ If you could do it, please let me know.  Good luck.
     $ ppt -d < QR.ppt > QR.prolog
     $ swipl -q -t qr -f QR.prolog > QR.py
     $ python QR.py > QR.R
-    $ R --slave < QR.R > QR.rexx
+    $ R --slave -f QR.R > QR.r
+    $ ratfor -o QR.r.f QR.r && gfortran -o QR QR.r.f && ./QR > QR.rexx
     $ rexx ./QR.rexx > QR2.rb
 
 You will see that `QR.rb` is the same as `QR2.rb`.
@@ -185,7 +186,8 @@ For other languages, I used the following deb packages:
 57 |Prolog             |swi-prolog     |6.6.4-2ubuntu1
 58 |Python             |python         |2.7.5-5ubuntu3
 59 |R                  |r-base         |3.0.2-1ubuntu1
-60 |REXX               |regina-rexx    |3.6-2
+60 |Ratfor             |ratfor         |1.0-15
+61 |REXX               |regina-rexx    |3.6-2
 
 Note: `CC=tcc ick -bfO` may be used to compile INTERCAL sources
 with less memory.
