@@ -699,6 +699,13 @@ class Shell < CodeGen
   Code = %q(%(printf %s "#{Q[e[PREV]]}"))
 end
 
+class Scilab < CodeGen
+  File = "QR.sci"
+  Cmd = "scilab -nw -nb -f QR.sci > OUTFILE"
+  Apt = "scilab"
+  Code = %q(PREV.gsub(/.{1,3000}/){%(mfprintf(%io(2),"%s","#{d[d[$&],?']}")\n)}+"quit")
+end
+
 class Scheme < CodeGen
   File = "QR.scm"
   Cmd = "$(SCHEME) QR.scm > OUTFILE"
