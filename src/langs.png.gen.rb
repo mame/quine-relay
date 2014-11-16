@@ -15,16 +15,16 @@ ctx.fill
 ctx.set_source_rgb(0, 0, 0)
 
 ctx.translate(W / 2, H / 2)
-ctx.font_size = 15
+ctx.font_size = 14
 ctx.select_font_face("non-serif")
 
 Radius = 210.0
 langs.size.times do |i|
   ctx.save do
     ctx.rotate(Math::PI * (2 * i + 1) / langs.size)
-    ctx.move_to(-Radius    ,  4)
-    ctx.line_to(-Radius - 5, -2)
-    ctx.line_to(-Radius + 5, -2)
+    ctx.move_to(-Radius    ,  2)
+    ctx.line_to(-Radius - 4, -2)
+    ctx.line_to(-Radius + 4, -2)
     ctx.fill
   end
 
@@ -35,7 +35,7 @@ langs.size.times do |i|
 
     name = langs[i]
     e = ctx.text_extents(name)
-    ctx.move_to(dir * Radius - e.width / 2, e.height / 2)
+    ctx.move_to(dir * Radius - e.width / 2, e.height / 2 - 1)
     ctx.show_text(name)
   end
 end
