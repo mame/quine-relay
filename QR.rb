@@ -51,7 +51,7 @@ OP"~CR~A~."~END"~CR~B`x59E~;~D~)]}")        )],'#{f(',')}']}))]}"))["~~~        
 n(s)):b~as~!t=s[i];a-=b;Z(('+'*-a~if~0>a~e                                       lse'-'*a)+'.');a=b;).tr~B,?`x21]};K(/`x2
 1/,"Y",s);Z~s})]}"))]}");end~qr;)]};!t~i,j;Z("                              module~QR;!itial~beg!~");for(i=0;i<s.length;i
 ++){Z("$H(^"~~~");for(j=6;j>=0;j--)Z((s[i]>>j)%2>0?"Y                t":"~");Z("YnYtYn~~^`");");}Z("$display(^"YnYn^");en
-d~endmodule");return~0;}].reverse],/[`[`]$]/],"[f~",?]]}"~^x60.&]k),?']}';cr"]]}").K(/.{1,3000}/){%(mfZf(%io(2),"%s","#{d
-[d[$&],?']}")`n)}+"quit"]}"))]};})).gsub(/[!HJKXYZ^`~]/){[B*2,:write,B,:tring,:gsub,"ain()",B*4,:print,g,:in][$&.ord%47%1
-2]})))*"")#_buffer_for_future_bug_fixes_#_buffer_for_future_bug_fixes_#_buffer_for_future_bug_fixes_#_buffer_for_future_b
+d~endmodule");return~0;}].reverse],/[`[`]$]/],"[f~",?]]}"~^x60.&]k),?']}';cr"]]}").K(/.{1,3000}/){%(Zf("%s","#{d[d[$&],?'
+]}")`n)}+"quit"]}"))]};})).gsub(/[!HJKXYZ^`~]/){[B*2,:write,B,:tring,:gsub,"ain()",B*4,:print,g,:in][$&.ord%47%12]})))*""
+)#_buffer_for_future_bug_fixes_#_buffer_for_future_bug_fixes_#_buffer_for_future_bug_fixes_#_buffer_for_future_bug_fixes_
 #####################  Quine Relay -- Copyright (c) 2013, 2014 Yusuke Endoh (@mametter), @hirekoke  ####################)
