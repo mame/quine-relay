@@ -692,11 +692,16 @@ class Smalltalk < CodeGen
   Code = %q("Transcript show: '#{d[PREV,?']}';cr")
 end
 
-class Shell < CodeGen
-  File = "QR.bash"
-  Cmd = "bash QR.bash > OUTFILE"
-  Apt = "bash"
-  Code = %q(%(printf %s "#{Q[e[PREV]]}"))
+class Shell_SLang < CodeGen
+  Name = ["Shell (bash)", "S-Lang"]
+  File = ["QR.bash", "QR.sl"]
+  Cmd = ["bash QR.bash > OUTFILE", "slsh QR.sl > OUTFILE"]
+  Apt = ["bash", "slsh"]
+  def code
+    <<-'END'.lines.map {|l| l.strip }.join
+      %[echo -En "#{Q[e[e[PREV]]]}"|sed -E -e 's/([^\\\\]|\\\\.){1,120}/printf("%s","\\0");\\n/g']
+    END
+  end
 end
 
 class Scilab < CodeGen
