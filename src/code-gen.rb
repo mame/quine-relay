@@ -685,6 +685,13 @@ class Tcl_Unlambda < CodeGen
   end
 end
 
+class SPL < CodeGen
+  File = "QR.spl"
+  Cmd = "splrun QR.spl > OUTFILE"
+  Apt = "spl-core"
+  Code = %q(%(write#{Q[E[PREV]]};))
+end
+
 class Smalltalk < CodeGen
   File = "QR.st"
   Cmd = "gst QR.st > OUTFILE"

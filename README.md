@@ -5,7 +5,7 @@
 This is a Ruby program that generates
 Scala program that generates
 Scheme program that generates
-...(through 63 languages in total)...
+...(through 64 languages in total)...
 REXX program that generates
 the original Ruby code again.
 
@@ -28,8 +28,8 @@ First, you have to type the following apt-get command to install all of them.
       intercal iverilog jasmin-sable libpng12-dev llvm lua5.2 make maxima \
       mono-devel mono-mcs nasm neko nickle nodejs ocaml octave open-cobol \
       openjdk-6-jdk pari-gp parrot perl php5-cli pike7.8 python r-base \
-      ratfor regina-rexx ruby2.0 scala scilab slsh swi-prolog tcl ucblogo \
-      valac
+      ratfor regina-rexx ruby2.0 scala scilab slsh spl-core swi-prolog tcl \
+      ucblogo valac
 
 Then, you have to build the bundled interpreters.
 
@@ -52,7 +52,8 @@ If you could do it, please let me know.  Good luck.
     $ scilab -nw -nb -f QR.sci > QR.bash
     $ bash QR.bash > QR.sl
     $ slsh QR.sl > QR.st
-    $ gst QR.st > QR.tcl
+    $ gst QR.st > QR.spl
+    $ splrun QR.spl > QR.tcl
     $ tclsh QR.tcl > QR.unl
     $ ruby vendor/unlambda.rb QR.unl > QR.vala
     $ valac QR.vala && ./QR > QR.v
@@ -136,63 +137,64 @@ For other languages, I used the following deb packages:
 5  |Shell (bash)       |bash           |4.3-11ubuntu1
 6  |S-Lang             |slsh           |2.2.4-15ubuntu1
 7  |Smalltalk          |gnu-smalltalk  |3.2.4-2
-8  |Tcl                |tcl            |8.6.0+6ubuntu3
-9  |Unlambda           |(none)         |-
-10 |Vala               |valac          |0.22.1-0ubuntu1
-11 |Verilog            |iverilog       |0.9.7-1
-12 |Whitespace         |(none)         |-
-13 |Ada                |gnat           |4.6ubuntu4
-14 |ALGOL68            |algol68g       |2.4.1-1
-15 |Awk                |gawk           |1:4.0.1+dfsg-2.1ubuntu2
-16 |Boo                |boo            |0.9.5~git20110729.r1.202a430-2
-17 |Brainfuck          |bf             |20041219ubuntu5
-18 |C                  |gcc            |4:4.8.2-1ubuntu6
-19 |C++                |g++            |4:4.8.2-1ubuntu6
-20 |C#                 |mono-mcs       |3.2.8+dfsg-4ubuntu1
-21 |Clojure            |clojure1.4     |1.4.0+dfsg-3
-22 |Cobol              |open-cobol     |1.1-1build1
-23 |CoffeeScript       |coffeescript   |1.4.0-1
-24 |Common Lisp        |clisp          |1:2.49-9ubuntu1
-25 |Forth              |gforth         |0.7.0+ds2-0.1
-26 |FORTRAN77          |f2c            |20100827-1
-27 |Fortran90          |gfortran       |4:4.8.2-1ubuntu6
-28 |Go                 |golang         |2:1.2.1-2ubuntu1
-29 |Groovy             |groovy         |2.0.0~beta2+isreally1.8.6-0ubuntu1
-30 |Haskell            |ghc            |7.6.3-10
-31 |Icon               |icont          |9.4.3-4.2ubuntu1
+8  |SPL                |spl-core       |1.0~pre6-4ubuntu1
+9  |Tcl                |tcl            |8.6.0+6ubuntu3
+10 |Unlambda           |(none)         |-
+11 |Vala               |valac          |0.22.1-0ubuntu1
+12 |Verilog            |iverilog       |0.9.7-1
+13 |Whitespace         |(none)         |-
+14 |Ada                |gnat           |4.6ubuntu4
+15 |ALGOL68            |algol68g       |2.4.1-1
+16 |Awk                |gawk           |1:4.0.1+dfsg-2.1ubuntu2
+17 |Boo                |boo            |0.9.5~git20110729.r1.202a430-2
+18 |Brainfuck          |bf             |20041219ubuntu5
+19 |C                  |gcc            |4:4.8.2-1ubuntu6
+20 |C++                |g++            |4:4.8.2-1ubuntu6
+21 |C#                 |mono-mcs       |3.2.8+dfsg-4ubuntu1
+22 |Clojure            |clojure1.4     |1.4.0+dfsg-3
+23 |Cobol              |open-cobol     |1.1-1build1
+24 |CoffeeScript       |coffeescript   |1.4.0-1
+25 |Common Lisp        |clisp          |1:2.49-9ubuntu1
+26 |Forth              |gforth         |0.7.0+ds2-0.1
+27 |FORTRAN77          |f2c            |20100827-1
+28 |Fortran90          |gfortran       |4:4.8.2-1ubuntu6
+29 |Go                 |golang         |2:1.2.1-2ubuntu1
+30 |Groovy             |groovy         |2.0.0~beta2+isreally1.8.6-0ubuntu1
+31 |Haskell            |ghc            |7.6.3-10
+32 |Icon               |icont          |9.4.3-4.2ubuntu1
    |                   |iconx          |9.4.3-4.2ubuntu1
-32 |INTERCAL           |intercal       |29:0.29-3
-33 |Jasmin             |jasmin-sable   |2.4.0-3
-34 |Java               |openjdk-6-jdk  |6b33-1.13.5-1ubuntu0.14.04
-35 |LLVM asm           |llvm           |1:3.4-0ubuntu1
-36 |Logo               |ucblogo        |5.5-2.1
-37 |LOLCODE            |(none)         |-
-38 |Lua                |lua5.2         |5.2.3-1
-39 |Makefile           |make           |3.81-8.2ubuntu3
-40 |Maxima             |maxima         |5.32.1-1
-41 |MSIL               |mono-devel     |3.2.8+dfsg-4ubuntu1
-42 |NASM               |nasm           |2.10.09-1
-43 |Neko               |neko           |2.0.0-3
-44 |Nickle             |nickle         |2.77-1
-45 |NodeJS             |nodejs         |0.10.25~dfsg2-2ubuntu1
-46 |Objective-C        |gobjc          |4:4.8.2-1ubuntu6
-47 |OCaml              |ocaml          |4.01.0-3ubuntu3
-48 |Octave             |octave         |3.8.1-1ubuntu1
-49 |Ook!               |(none)         |-
-50 |PARI/GP            |pari-gp        |2.5.5-1
-51 |Parrot asm         |parrot         |5.9.0-1build1
-52 |Pascal             |fp-compiler    |2.6.2-8
-53 |Perl               |perl           |5.18.2-2ubuntu1
-54 |PHP                |php5-cli       |5.5.9+dfsg-1ubuntu4.4
-55 |Piet               |(none)         |-
-56 |Pike               |pike7.8        |7.8.700-7
-57 |PostScript         |ghostscript    |9.10~dfsg-0ubuntu10.2
-58 |PPT (Punched tape) |bsdgames       |2.17-21
-59 |Prolog             |swi-prolog     |6.6.4-2ubuntu1
-60 |Python             |python         |2.7.5-5ubuntu3
-61 |R                  |r-base         |3.0.2-1ubuntu1
-62 |Ratfor             |ratfor         |1.0-15
-63 |REXX               |regina-rexx    |3.6-2
+33 |INTERCAL           |intercal       |29:0.29-3
+34 |Jasmin             |jasmin-sable   |2.4.0-3
+35 |Java               |openjdk-6-jdk  |6b33-1.13.5-1ubuntu0.14.04
+36 |LLVM asm           |llvm           |1:3.4-0ubuntu1
+37 |Logo               |ucblogo        |5.5-2.1
+38 |LOLCODE            |(none)         |-
+39 |Lua                |lua5.2         |5.2.3-1
+40 |Makefile           |make           |3.81-8.2ubuntu3
+41 |Maxima             |maxima         |5.32.1-1
+42 |MSIL               |mono-devel     |3.2.8+dfsg-4ubuntu1
+43 |NASM               |nasm           |2.10.09-1
+44 |Neko               |neko           |2.0.0-3
+45 |Nickle             |nickle         |2.77-1
+46 |NodeJS             |nodejs         |0.10.25~dfsg2-2ubuntu1
+47 |Objective-C        |gobjc          |4:4.8.2-1ubuntu6
+48 |OCaml              |ocaml          |4.01.0-3ubuntu3
+49 |Octave             |octave         |3.8.1-1ubuntu1
+50 |Ook!               |(none)         |-
+51 |PARI/GP            |pari-gp        |2.5.5-1
+52 |Parrot asm         |parrot         |5.9.0-1build1
+53 |Pascal             |fp-compiler    |2.6.2-8
+54 |Perl               |perl           |5.18.2-2ubuntu1
+55 |PHP                |php5-cli       |5.5.9+dfsg-1ubuntu4.4
+56 |Piet               |(none)         |-
+57 |Pike               |pike7.8        |7.8.700-7
+58 |PostScript         |ghostscript    |9.10~dfsg-0ubuntu10.2
+59 |PPT (Punched tape) |bsdgames       |2.17-21
+60 |Prolog             |swi-prolog     |6.6.4-2ubuntu1
+61 |Python             |python         |2.7.5-5ubuntu3
+62 |R                  |r-base         |3.0.2-1ubuntu1
+63 |Ratfor             |ratfor         |1.0-15
+64 |REXX               |regina-rexx    |3.6-2
 
 Note: `CC=tcc ick -bfO` may be used to compile INTERCAL sources
 with less memory.
