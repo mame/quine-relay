@@ -297,7 +297,7 @@ class Makefile < CodeGen
   File = "QR.makefile"
   Cmd = "make -f QR.makefile > OUTFILE"
   Apt = "make"
-  Code = %q(%(all:\n\t@echo '#{d[Q[PREV,B],?$].gsub(?'){%('"'"')}}'))
+  Code = %q(%(all:\n\t@echo '#{d[PREV,?$].gsub(?'){"'\\\\''"}}'))
 end
 
 class Lua < CodeGen
