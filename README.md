@@ -72,7 +72,7 @@ If you could do it, please let me know.  Good luck.
     $ coffee QR.coffee > QR.lisp
     $ clisp QR.lisp > QR.fs
     $ gforth QR.fs > QR.f
-    $ f2c QR.f && gcc -o QR QR.c -L/usr/lib -lf2c && ./QR > QR.f90
+    $ f2c QR.f && gcc -o QR QR.c -L/usr/lib -lf2c -lm && ./QR > QR.f90
     $ gfortran -o QR QR.f90 && ./QR > QR.go
     $ go run QR.go > QR.groovy
     $ groovy QR.groovy > QR.hs
