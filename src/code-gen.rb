@@ -685,6 +685,14 @@ class Tcl_Unlambda < CodeGen
   end
 end
 
+class StandardML < CodeGen
+  Name = "Standard ML"
+  File = "QR.sml"
+  Cmd = "mlton QR.sml && ./QR > OUTFILE"
+  Apt = "mlton"
+  Code = %q(%(print#{E[PREV]};))
+end
+
 class SPL < CodeGen
   File = "QR.spl"
   Cmd = "splrun QR.spl > OUTFILE"
