@@ -253,7 +253,7 @@ QR.f90: QR.f
 	@echo
 	mv QR.c QR.c.bak
 	f2c QR.f
-	${CC} -o QR QR.c -L/usr/lib -lf2c
+	${CC} -o QR QR.c -L/usr/lib -lf2c -lm
 	mv QR.c.bak QR.c
 	./QR > QR.f90
 
