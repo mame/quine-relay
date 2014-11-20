@@ -685,12 +685,22 @@ class Tcl_Unlambda < CodeGen
   end
 end
 
-class StandardML < CodeGen
-  Name = "Standard ML"
-  File = "QR.sml"
-  Cmd = "mlton QR.sml && ./QR > OUTFILE"
-  Apt = "mlton"
-  Code = %q(%(print#{E[PREV]};))
+class StandardML_Subleq < CodeGen
+  Name = ["Standard ML", "Subleq"]
+  File = ["QR.sml", "QR.sq"]
+  Cmd = ["mlton QR.sml && ./QR > OUTFILE", "ruby vendor/subleq.rb QR.sq > OUTFILE"]
+  Apt = ["mlton", nil]
+  def code
+    <<-'END'.lines.map {|l| l.strip }.join
+      %(
+        fun p n=print(Int.toString n^" ");
+        p 0;p 0;p 130;
+        List.tabulate(127,p);
+        String.map(fn c=>(p(3+ord c);print"-1 0 ";c))#{E[PREV]};
+        print"0 0 -1";
+      )
+    END
+  end
 end
 
 class SPL < CodeGen
