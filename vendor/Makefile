@@ -1,5 +1,5 @@
 LCI=lci-0.10.5
-NPIET=npiet-1.3b
+NPIET=npiet-1.3c
 
 all: $(LCI)/lci $(NPIET)/npiet
 
