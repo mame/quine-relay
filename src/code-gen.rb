@@ -671,15 +671,15 @@ class Vala_Verilog_Whitespace < CodeGen
   end
 end
 
-class Tcl_Unlambda < CodeGen
-  File = ["QR.tcl", "QR.unl"]
-  Cmd = ["tclsh QR.tcl > OUTFILE", "ruby vendor/unlambda.rb QR.unl > OUTFILE"]
-  Apt = ["tcl", nil]
+class Tcl_Thue_Unlambda < CodeGen
+  File = ["QR.tcl", "QR.t", "QR.unl"]
+  Cmd = ["tclsh QR.tcl > OUTFILE", "ruby vendor/thue.rb QR.t > OUTFILE", "ruby vendor/unlambda.rb QR.unl > OUTFILE"]
+  Apt = ["tcl", nil, nil]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
-        proc f {n} {string repeat "\\\\" $n} ;
-        puts [regsub -all {.} "#{V[Q[e[PREV.reverse],/[\[\]$]/],"[f ",?]]}" \\x60.&]k
+        proc f {n} {string repeat "\\\\" $n};
+        puts a::=~[regsub -all {.} "#{V[Q[e[PREV.reverse],/[\[\]$]/],"[f ",?]]}" \\x60.&]k\\n::=\\na
       )
     END
   end
