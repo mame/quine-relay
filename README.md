@@ -126,11 +126,7 @@ Note: It may require huge memory to compile some files.
 
 ### Tested interpreter/compiler versions
 
-As I said above, I tested the program on Ubuntu.
-It does not provide Unlambda and Whitespace interpreters,
-so this repository includes my own implementations.
-
-For other languages, I used the following deb packages:
+I used the following Ubuntu deb packages to test this program.
 
 \# |language           |ubuntu package |version
 ---|-------------------|---------------|-----------------------------------
@@ -143,12 +139,12 @@ For other languages, I used the following deb packages:
 7  |Smalltalk          |gnu-smalltalk  |3.2.4-2
 8  |SPL                |spl-core       |1.0~pre6-4ubuntu1
 9  |Standard ML        |mlton          |20100608-5.1
-10 |Subleq             |(none)         |-
+10 |Subleq             |*N/A*          |-
 11 |Tcl                |tcl            |8.6.0+6ubuntu3
-12 |Unlambda           |(none)         |-
+12 |Unlambda           |*N/A*          |-
 13 |Vala               |valac          |0.22.1-0ubuntu1
 14 |Verilog            |iverilog       |0.9.7-1
-15 |Whitespace         |(none)         |-
+15 |Whitespace         |*N/A*          |-
 16 |Ada                |gnat           |4.6ubuntu4
 17 |ALGOL68            |algol68g       |2.4.1-1
 18 |Awk                |gawk           |1:4.0.1+dfsg-2.1ubuntu2
@@ -174,7 +170,7 @@ For other languages, I used the following deb packages:
 37 |Java               |openjdk-6-jdk  |6b33-1.13.5-1ubuntu0.14.04
 38 |LLVM asm           |llvm           |1:3.4-0ubuntu1
 39 |Logo               |ucblogo        |5.5-2.1
-40 |LOLCODE            |(none)         |-
+40 |LOLCODE            |*N/A*          |-
 41 |Lua                |lua5.2         |5.2.3-1
 42 |Makefile           |make           |3.81-8.2ubuntu3
 43 |Maxima             |maxima         |5.32.1-1
@@ -186,13 +182,13 @@ For other languages, I used the following deb packages:
 49 |Objective-C        |gobjc          |4:4.8.2-1ubuntu6
 50 |OCaml              |ocaml          |4.01.0-3ubuntu3
 51 |Octave             |octave         |3.8.1-1ubuntu1
-52 |Ook!               |(none)         |-
+52 |Ook!               |*N/A*          |-
 53 |PARI/GP            |pari-gp        |2.5.5-1
 54 |Parrot asm         |parrot         |5.9.0-1build1
 55 |Pascal             |fp-compiler    |2.6.2-8
 56 |Perl               |perl           |5.18.2-2ubuntu1
 57 |PHP                |php5-cli       |5.5.9+dfsg-1ubuntu4.4
-58 |Piet               |(none)         |-
+58 |Piet               |*N/A*          |-
 59 |Pike               |pike7.8        |7.8.700-7
 60 |PostScript         |ghostscript    |9.10~dfsg-0ubuntu10.2
 61 |PPT (Punched tape) |bsdgames       |2.17-21
@@ -202,8 +198,9 @@ For other languages, I used the following deb packages:
 65 |Ratfor             |ratfor         |1.0-15
 66 |REXX               |regina-rexx    |3.6-2
 
-Note: `CC=tcc ick -bfO` may be used to compile INTERCAL sources
-with less memory.
+Note that some languages are not available in Ubuntu (marked as *N/A*).
+This repository includes their implementations in `vendor/`.
+See also `vendor/README` in detail.
 
 ### How to re-generate the source
 

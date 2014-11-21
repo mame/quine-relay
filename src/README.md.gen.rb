@@ -23,7 +23,7 @@ rows = [["\\#", "language", "ubuntu package", "version"]]
 rows += langs.zip(apts).flat_map.with_index do |(lang, apt), idx|
   apt = [apt] unless apt.is_a?(Array)
   apt.map.with_index do |apt, i|
-    [i == 0 ? (idx + 1).to_s : "", i == 0 ? lang : "", apt || "(none)", pkg_versions[apt] || '-']
+    [i == 0 ? (idx + 1).to_s : "", i == 0 ? lang : "", apt || "*N/A*", pkg_versions[apt] || '-']
   end
 end
 
@@ -113,18 +113,15 @@ Note: It may require huge memory to compile some files.
 
 ### Tested interpreter/compiler versions
 
-As I said above, I tested the program on Ubuntu.
-It does not provide Unlambda and Whitespace interpreters,
-so this repository includes my own implementations.
-
-For other languages, I used the following deb packages:
+I used the following Ubuntu deb packages to test this program.
 
 % rows.each do |row|
 <%= row %>
 % end
 
-Note: `CC=tcc ick -bfO` may be used to compile INTERCAL sources
-with less memory.
+Note that some languages are not available in Ubuntu (marked as *N/A*).
+This repository includes their implementations in `vendor/`.
+See also `vendor/README` in detail.
 
 ### How to re-generate the source
 
