@@ -19,7 +19,8 @@ the original Ruby code again.
 
 #### 1. Install all interpreters/compilers.
 
-You are (relatively) fortunate if you are using Ubuntu 14.10 "Utopic Unicorn".
+If you are using Ubuntu 14.10 "Utopic Unicorn", you can perform the following steps:
+
 First, you have to type the following apt-get command to install all of them.
 
     $ sudo apt-get install algol68g bash bf boo bsdgames clisp clojure1.4 \
@@ -36,8 +37,8 @@ Then, you have to build the bundled interpreters.
     $ cd vendor
     $ make
 
-If you are using Arch Linux, you might want to ask @xyproto to update
-the [quine-relay-git](https://aur.archlinux.org/packages/quine-relay-git/) package :-)
+If you are using Arch Linux, just install [quine-relay-git](https://aur.archlinux.org/packages/quine-relay-git/) from AUR and run `quine-relay`.
+Report any problems as comments to the AUR package or to the respective packages, if one of the many compilers should have issues.
 
 You may find [instructions for other platforms in the wiki](https://github.com/mame/quine-relay/wiki/Installation).
 
@@ -128,6 +129,7 @@ Note: It may require huge memory to compile some files.
 As I said above, I tested the program on Ubuntu.
 It does not provide Unlambda and Whitespace interpreters,
 so this repository includes my own implementations.
+
 For other languages, I used the following deb packages:
 
 \# |language           |ubuntu package |version
