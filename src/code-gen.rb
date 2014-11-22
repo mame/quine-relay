@@ -636,39 +636,52 @@ class Ada < CodeGen
         procedure qr is$$$
         begin$$$
           Ada.Text_Io.Put_Line("#{d[PREV]}");
-        end qr;
+        end;
       )
     END
   end
 end
 
-class Vala_Verilog_Whitespace < CodeGen
-  File = ["QR.vala", "QR.v", "QR.ws"]
+class VisualBasic_Whitespace < CodeGen
+  Name = ["Visual Basic", "Whitespace"]
+  File = ["QR.vb", "QR.ws"]
   Cmd = [
-    "valac QR.vala && ./QR > OUTFILE",
-    "iverilog -o QR QR.v && ./QR -vcd-none > OUTFILE",
+    "vbnc QR.vb && mono ./QR.exe > OUTFILE",
     "ruby vendor/whitespace.rb QR.ws > OUTFILE"
   ]
-  Apt = ["valac", "iverilog", nil]
+  Apt = ["mono-vbnc", nil]
   def code
-    <<-'END'.lines.map {|l| l.strip }.join
-      %[
-        int main(){
-          string s=#{E[PREV]};
-          int i,j;
-          print("module QR;initial begin ");
-          for(i=0;i<s.length;i++){
-            print("$write(\\"   ");
-            for(j=6;j>=0;j--)
-              print((s[i]>>j)%2>0?"\\\\t":" ");
-            print("\\\\n\\\\t\\\\n  \\\");");
-          }
-          print("$display(\\"\\\\n\\\\n\\");end endmodule");
-          return 0;
-        }
-      ]
+    <<-'END'.lines.map {|l| l.strip }.join(?:)
+      %(Module QR
+        Sub Main()
+          Dim s,n,i,c As Object
+          n=Chr(10)
+          For Each c in"#{d[PREV]}"
+            s="   "
+            For i=0To 7
+                s &=Chr(32-(Asc(c)>>7-i And 1)*23)
+            Next
+            Console.Write(s &n &Chr(9)&n &"  ")
+          Next
+          Console.Write(n &n &n)
+        End Sub
+      End Module)
     END
   end
+end
+
+class Verilog < CodeGen
+  File = "QR.v"
+  Cmd = "iverilog -o QR QR.v && ./QR -vcd-none > OUTFILE"
+  Apt = "iverilog"
+  Code = %q(%(module QR;initial begin $write("#{o="";PREV.gsub(/.{,8000}/){o<<?,+E[$&]+N;"%s"}}"#{o});end endmodule))
+end
+
+class Vala < CodeGen
+  File = "QR.vala"
+  Cmd = "valac QR.vala && ./QR > OUTFILE"
+  Apt = "valac"
+  Code = %q(%(int main(){print#{d[E[PREV],?%]};return 0;}))
 end
 
 class Tcl_Thue_Unlambda < CodeGen
@@ -751,7 +764,7 @@ class Scala < CodeGen
     <<-'END'.lines.map {|l| l.strip }.join
       %(
         object QR extends App{
-          print#{E[PREV]};
+          #{PREV.gsub(/.{,50000}/){%(print("#{e[$&]}");)}}
         }
       )
     END
