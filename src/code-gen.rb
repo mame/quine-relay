@@ -643,6 +643,26 @@ class Ada < CodeGen
   end
 end
 
+class XSLT < CodeGen
+  File = "QR.xslt"
+  Cmd = "xsltproc QR.xslt > OUTFILE"
+  Apt = "xsltproc"
+  def code
+    <<-'END'.lines.map {|l| l.strip }.join.gsub("$$$", "\n")
+      "
+        <?xml#{O=" version='1.0'"}?>$$$
+        <?xml-#{I="stylesheet"} type='text/xsl'href='QR.xslt'?>$$$
+        <xsl:#{I+O} xmlns:xsl='http://www.w3.org/1999/XSL/Transform'>
+          <xsl:output method='text'/>
+          <#{U="xsl:template"} match='/'>
+            <![CDATA[#{PREV}]]>
+          </#{U}>
+        </xsl:#{I}>
+      "
+    END
+  end
+end
+
 class VisualBasic_Whitespace < CodeGen
   Name = ["Visual Basic", "Whitespace"]
   File = ["QR.vb", "QR.ws"]
@@ -657,7 +677,7 @@ class VisualBasic_Whitespace < CodeGen
         Sub Main()
           Dim s,n,i,c As Object
           n=Chr(10)
-          For Each c in"#{d[PREV]}"
+          For Each c in"#{d[PREV].gsub N,'"& VbLf &"'}"
             s="   "
             For i=0To 7
                 s &=Chr(32-(Asc(c)>>7-i And 1)*23)
