@@ -44,6 +44,7 @@ class CodeGen
   Q=->s,t=?${s.gsub(t){B+$&}};
   M=->s{"<stdio.h>#{N}int main(){puts#{E[s]};return 0;}"};
   V=->s,a,z{s.gsub(/(#{B*4})+/){a+"#{$&.size/2}"+z}};
+  C="Console.Write";
   $D="program QR";
   END
 
@@ -559,7 +560,7 @@ class CSharp < CodeGen
       %(
         class Program{
           public static void Main(){
-            System.Console.Write(#{E[PREV.tr B,?~]}.Replace("~","\\\\"));
+            System.#{C+E[(PREV)]};
           }
         }
       )
@@ -661,9 +662,9 @@ class VisualBasic_Whitespace < CodeGen
             For i=0To 7
                 s &=Chr(32-(Asc(c)>>7-i And 1)*23)
             Next
-            Console.Write(s &n &Chr(9)&n &"  ")
+            #{C}(s &n &Chr(9)&n &"  ")
           Next
-          Console.Write(n &n &n)
+          #{C}(n &n &n)
         End Sub
       End Module)
     END
