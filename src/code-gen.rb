@@ -643,6 +643,13 @@ class Ada < CodeGen
   end
 end
 
+class Yorick < CodeGen
+  File = "QR.yorick"
+  Cmd = "yorick -batch QR.yorick > OUTFILE"
+  Apt = "yorick"
+  Code = %q(%(write,format="#{y="";PREV.gsub(/.{,9000}/){y<<",\\n"+E[$&];"%s"}}")+y)
+end
+
 class XSLT < CodeGen
   File = "QR.xslt"
   Cmd = "xsltproc QR.xslt > OUTFILE"
