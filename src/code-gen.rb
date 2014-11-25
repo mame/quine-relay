@@ -643,6 +643,13 @@ class Ada < CodeGen
   end
 end
 
+class Zoem < CodeGen
+  File = "QR.azm"
+  Cmd = "zoem -i QR.azm > OUTFILE"
+  Apt = "zoem"
+  Code = %q("\\\\write{-}{txt}{#{Q[PREV,/[\\\\{}]/]}}")
+end
+
 class Yorick < CodeGen
   File = "QR.yorick"
   Cmd = "yorick -batch QR.yorick > OUTFILE"
