@@ -41,6 +41,7 @@ class CodeGen
   e=->s{Q[Q[s,B],?"].gsub(N,B+?n)};
   E=->s{'("'+e[s]+'")'};
   d=->s,t=?"{s.gsub(t){t+t}};
+  def f(s,n)s.gsub(/.{1,#{n*255}}/m){yield$S=$&}end;
   Q=->s,t=?${s.gsub(t){B+$&}};
   M=->s{"<stdio.h>#{N}int main(){puts#{E[s]};return 0;}"};
   V=->s,a,z{s.gsub(/(#{B*4})+/){a+"#{$&.size/2}"+z}};
@@ -168,7 +169,7 @@ class Pascal < CodeGen
   File = "QR.pas"
   Cmd = "fpc QR.pas && ./QR > OUTFILE"
   Apt = "fp-compiler"
-  Code = %q("#$D(output);begin write(#{(PREV).gsub(/.{1,255}/){|s|"'#{s}',"}}'')end.")
+  Code = %q("#$D(output);begin write(#{f(PREV,1){"'#$S',"}}'')end.")
 end
 
 class ParrotAsm < CodeGen
@@ -662,7 +663,7 @@ class Yorick < CodeGen
   File = "QR.yorick"
   Cmd = "yorick -batch QR.yorick > OUTFILE"
   Apt = "yorick"
-  Code = %q(%(write,format="#{y="";PREV.gsub(/.{,9000}/m){y<<",\\n"+E[$&];"%s"}}")+y)
+  Code = %q(%(write,format="#{y="";f(PREV,35){y<<",\\n"+E[$S];"%s"}}")+y)
 end
 
 class XSLT < CodeGen
@@ -717,7 +718,7 @@ class Verilog < CodeGen
   File = "QR.v"
   Cmd = "iverilog -o QR QR.v && ./QR -vcd-none > OUTFILE"
   Apt = "iverilog"
-  Code = %q(%(module QR;initial begin $write("#{o="";PREV.gsub(/.{,8000}/){o<<?,+E[$&]+N;"%s"}}"#{o});end endmodule))
+  Code = %q(%(module QR;initial begin $write("#{o="";f(PREV,7){o<<?,+E[$S]+N;"%s"}}"#{o});end endmodule))
 end
 
 class Vala < CodeGen
@@ -789,7 +790,7 @@ class Scilab < CodeGen
   File = "QR.sci"
   Cmd = "scilab -nw -nb -f QR.sci > OUTFILE"
   Apt = "scilab"
-  Code = %q(PREV.gsub(/.{1,3000}/){%(printf("%s","#{d[d[$&],?']}")\n)}+"quit")
+  Code = %q(%(#{f(PREV,7){%(printf("%s","#{d[d[$S],?']}")\n)}}quit))
 end
 
 class Scheme < CodeGen
@@ -807,7 +808,7 @@ class Scala < CodeGen
     <<-'END'.lines.map {|l| l.strip }.join
       %(
         object QR extends App{
-          #{PREV.gsub(/.{,50000}/){%(print("#{e[$&]}");)}}
+          #{f(PREV,196){%(print("#{e[$S]}");)}}
         }
       )
     END
