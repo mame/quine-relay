@@ -643,6 +643,14 @@ class Ada < CodeGen
   end
 end
 
+class Aplus < CodeGen
+  Name = "A+"
+  File = "QR.+"
+  Cmd = "a+ -q < QR.+ > OUTFILE"
+  Apt = "aplus-fsf"
+  Code = %q(E[PREV]+"\nsys.exit 0")
+end
+
 class Zoem < CodeGen
   File = "QR.azm"
   Cmd = "zoem -i QR.azm > OUTFILE"
@@ -654,7 +662,7 @@ class Yorick < CodeGen
   File = "QR.yorick"
   Cmd = "yorick -batch QR.yorick > OUTFILE"
   Apt = "yorick"
-  Code = %q(%(write,format="#{y="";PREV.gsub(/.{,9000}/){y<<",\\n"+E[$&];"%s"}}")+y)
+  Code = %q(%(write,format="#{y="";PREV.gsub(/.{,9000}/m){y<<",\\n"+E[$&];"%s"}}")+y)
 end
 
 class XSLT < CodeGen
