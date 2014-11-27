@@ -627,6 +627,13 @@ class ALGOL68 < CodeGen
   Code = %q(%(print("#{d[PREV]}")))
 end
 
+class AFNIX < CodeGen
+  File = "QR.als"
+  Cmd = "axi QR.als > OUTFILE"
+  Apt = "afnix"
+  Code = %q(%(print"#{e[PREV]}"))
+end
+
 class Ada < CodeGen
   File = "qr.adb"
   Cmd = "gnatmake qr.adb && ./qr > OUTFILE"
