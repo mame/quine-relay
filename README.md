@@ -1,5 +1,7 @@
 # Quine Relay
 
+[![Build Status](https://travis-ci.org/mame/quine-relay.svg?branch=master)](https://travis-ci.org/mame/quine-relay)
+
 ### What this is
 
 This is a Ruby program that generates

@@ -57,6 +57,8 @@ File.write("../README.md", ERB.new(DATA.read, nil, "%").result(binding))
 __END__
 # Quine Relay
 
+[![Build Status](https://travis-ci.org/mame/quine-relay.svg?branch=master)](https://travis-ci.org/mame/quine-relay)
+
 ### What this is
 
 This is a <%= langs[0] %> program that generates
