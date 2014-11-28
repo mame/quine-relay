@@ -1,0 +1,19 @@
+---
+language: ruby
+rvm:
+- 2.1.0
+env: PATH=/usr/games:$PATH
+before_install:
+- sudo apt-get install -qq scala gauche scilab bash slsh gnu-smalltalk spl-core mlton
+  tcl valac iverilog mono-vbnc xsltproc yorick zoem aplus-fsf gnat afnix algol68g
+  gawk boo bf gcc g++ mono-mcs clojure open-cobol coffeescript clisp gforth f2c gfortran
+  golang groovy ghc icont iconx intercal jasmin-sable openjdk-6-jdk llvm ucblogo lua5.2
+  make maxima mono-devel nasm neko nickle nodejs gobjc ocaml octave pari-gp parrot
+  fp-compiler perl php5-cli pike7.8 ghostscript bsdgames swi-prolog python r-base
+  ratfor regina-rexx
+before_script:
+- cd vendor/
+- make
+- cd ../
+script:
+- make

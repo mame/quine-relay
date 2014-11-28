@@ -735,7 +735,7 @@ class Verilog < CodeGen
   File = "QR.v"
   Cmd = "iverilog -o QR QR.v && ./QR -vcd-none > OUTFILE"
   Apt = "iverilog"
-  Code = %q(%(module QR;initial begin $write("#{o="";f(PREV,7){o<<?,+$S+N;"%s"}}"#{o});end endmodule))
+  Code = %q(%(module QR;initial begin #{f(PREV,3){%($write("%s",#$S);)+N}}end endmodule))
 end
 
 class Vala < CodeGen

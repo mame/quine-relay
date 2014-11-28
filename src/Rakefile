@@ -26,6 +26,10 @@ file "../Makefile" => ["Makefile.gen.rb", "code-gen.rb"] do |t|
   ruby "Makefile.gen.rb"
 end
 
+file "../.travis.yml" => ["dot.travis.yml.gen.rb", "code-gen.rb"] do |t|
+  ruby "dot.travis.yml.gen.rb"
+end
+
 task :test do
   ruby "test.rb"
 end
@@ -35,4 +39,5 @@ task :default => %w(
   ../README.md
   ../langs.png
   ../Makefile
+  ../.travis.yml
 )
