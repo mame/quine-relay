@@ -18,6 +18,11 @@ Ook!: ook.rb
   * self-made
   * License: MIT
 
+ante: ante.rb
+  * https://github.com/michaeldv
+  * with my patch (see https://github.com/michaeldv/ante/pull/1)
+  * License: MIT
+
 LOLCODE: lci-0.10.5.zip
   * http://lolcode.org/
   * License: GPL3+

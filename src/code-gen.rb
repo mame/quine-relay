@@ -353,7 +353,7 @@ class Java < CodeGen
       %(
         class QR{
           public static void main(String[]v){
-            String c[]=new String[8000],y="",z=y,s="#{
+            String c[]=new String[9000],y="",z=y,s="#{
               z=t=(0..r=q=126).map{|n|[n,[]]};
               a="";
               b=->n{a<<(n%78+55)%84+42};
@@ -620,11 +620,20 @@ class Awk < CodeGen
   Code = %q(%(BEGIN{s=#{E[PREV.tr B,?!]};gsub(/!/,"\\\\\\\\",s);print s}))
 end
 
-class ALGOL68 < CodeGen
-  File = "QR.a68"
-  Cmd = "a68g QR.a68 > OUTFILE"
-  Apt = "algol68g"
-  Code = %q(%(print("#{d[PREV]}")))
+class ALGOL68_Ante < CodeGen
+  File = ["QR.a68", "QR.ante"]
+  Cmd = ["a68g QR.a68 > OUTFILE", "ruby vendor/ante.rb QR.ante > OUTFILE"]
+  Apt = ["algol68g", nil]
+  def code
+    <<-'end'.lines.map {|l| l.strip }.join
+      %W[
+        STRINGz:= 226+ 153,a:=z+ 166,b:=a+"2"+z+ 160,c:=b+"8"+z+ 165,t:="#{d[PREV]}";
+        FORiTO\ UPBtDO\ INTn:=ABSt[i];
+          print( (50+n%64)+c+ (50+n%8MOD8)+c+ (50+nMOD8)+b+"J"+a)
+        OD
+      ]*"REPR"
+    end
+  end
 end
 
 class AFNIX < CodeGen
