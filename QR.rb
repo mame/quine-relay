@@ -37,26 +37,26 @@ T".gzcompress($m),"IEN D")as$d)echo~pa  c  k("NA*N",strlen($d)  -  4,$d,crc32($d
 eg;Z~pack"B*",$_).scan (/[~,-:A-z]+|(.  )  /){p="s++#{$1?"chr~  #  {$1.ord}+e":$&+?+};"+p};     p          ),1){"'#$s',"}}'')
 end."]}"`nend)]};quit"  ]};t=num2cell  (b=  11-ceil(s/13));fo  r~n  =1:9m={};for               ~          i  =1:141f=@(x,y,n)
 repmat(["Ook"~x~"~Ook"~ y~32],[1~abs  (n)])  ;m(i)=[f(z=46,6  3,n)~  f(q=z-(i                  <          1   3)*13,q,i-13)~f
-(33,z,1)~f(63,z,n)];end  ;t(x)=m(di  ff([0~s  (x=b==n)])+13  );end;Z  f(strjo!(t,"")          )          )     ]]]}"]})+N]};"
-+N]}`x60`nglobal~_start` n_start:m                                     ov~edx,#{s.s           i          z      e}`nmov~ecx,m
-`nmov~ebx,1`nmov~eax,4`n  !t~128`nmov~ebx,0`nmo  v~eax,1  `n!t~128)]}"call~void~[ms corlib]S y          s       tem.Console::
-Write(sJ)ret})]};quit();"  ,?$].K(?'){"'^''"}}')  ].K(/  [:"]/,":^0"),/[~Y`t;"(){}`[`]]/]}" ~          P         R~"`x4bT`x48
-`x58B`x59E~B`x59E)).size+1  }x~i8]c"#{s.K(/[^"]/)  {"^  %`x58"%$&.ord}}^00"declare~i32@puts(          i          8*)def!e~i32
-@mX{%1=call~i32@puts(i8*get  elementptr([#{i}x~i8]  *  @s,i32~0,i32~0))ret~i32~0})).bytes{|          n           |r,z=z[n]||(
-b[r/78];b[r];q<6083&&z[n]=[q   +=1,[]];t[n])};b[r/7   8];b[r]}";!t~i=0,n=0,q=0;for(;++n<1           2             6;)c[n]=""+
-(char)n;for(;i<s.length();){q   =q*78+(s.charAt(i)-1 3)%84;if(i++%2>0){y=q<n?c[q]:y;c[n+           +              ]=z+y.charA
-t(0);System.out.Z(z=c[q]);q=0;    }}}})]}"`n!vokevirtual~#$T/Zln(L#{S}SJ;)V`nreturn`n.           end~met          hod)+N]};H(
-"DO,1<-#"||*s);s?while~t:=ord(mo    ve(1))do{i+:=1;u:=-i;every~0to~7do{u:=u*2+t%2;t/           :=2};H("P          LEASE")^(i%
-4/3);H("DO,1SUB#"||i||"<-#"||((c-      u)%256));c:=u;};H("PLEASEREADOUT,1^nPLEASE            GIVEUP");end)]).tr(  B,?&)]}'.tr
-('&','YY');)]};})]}"~DUP~FOR~S"~&A,       &"~C~NE`x58T~S^"~&A)^",&"~C~0~DO~B~.             "~&char("~COUNT~.~."~)  ,&'"~CR~LO
-OP~S^"~&^"^""~C~S"~end~#$D"~C~A~."~STO        P"~CR~A~."~END"~CR~B`x59E~;~               D~)]}"))],'#{f(',')}']})  )]}"))["~~
-~~^"~^".""STOP~RUN."])](Zln(str"#{g*8}"s             )))))]};}})]}                    ;}"]]],"$(f(","))"]};for~i~!~range(len(
-s)):b~as~!t=s[i];a-=b;Z(('+'*-a~if~0>a~else'                                       -'*a)+'.');a=b;).tr~B,?`x21]};K(/`x21/,"Y"
-,s);Z~s})]}";FORiTO`~UPBtDO`~INTn:=ABSt[i];Z(~(5                              0+n%64)+c+~(50+n%8MOD8)+c+~(50+nMOD8)+b+"`x4a"+
-a)OD]*"REPR"]}")]}");end;)]+"`nsys.exit~0",/[^{}]/]}}",                35){y<<",`n"+$S;"%s"}}")+y}]]></#{U}></xsl:#{I}>"].K~N
-,'"&~VbLf~&"'}":s="~~~":For~i=0To~7:s~&=Chr(32-(Asc(c)>>7-i~And~1)*23):Next:#{C}(s~&n~&Chr(9)&n~&"~~"):Next:#{C}(n~&n~&n):End
-~Sub:End~Module),7){o<<?,+$S+N;"%s"}}"#{o});end~endmodule)],?%]};return~0;}).reverse],/[`[`]$]/],"[f~",?]]}"~^x60.&]k^n::=^na
-)]};Z"0~0~-1";)]]};),?']}';cr"]]]}"|sed~-E~-e~'s/([`x5eY]|Y.){1,120}/Zf("%s","^0");^n/g'],7){%(Zf("%s","#{d[d[$s],?']}")`n)}}
-quit)]}")),196){%(Z#$S;)}}})).gsub(/[!HJKXYZ^`~]/){[B*2,:write,B,:tring,:gsub,"ain()",B*4,:print,g,:in][$&.ord%47%12]})))*"")
+(33,z,1)~f(63,z,n)];end  ;t(x)=m(di  ff([0~s  (x=b==n)])+13  );end;Z  f("%%s",t{:}))          ]          ]     ]}"]})+N]};"+N
+]}`x60`nglobal~_start`n_ start:mov                                     ~edx,#{s.siz           e          }      `nmov~ecx,m`n
+mov~ebx,1`nmov~eax,4`n!t  ~128`nmov~ebx,0`nmov~  eax,1`n  !t~128)]}"call~void~[msco rlib]Sys t          e       m.Console::Wr
+ite(sJ)ret})]};quit();",?  $].K(?'){"'^''"}}')].  K(/[:  "]/,":^0"),/[~Y`t;"(){}`[`]]/]}"~P R          ~         "`x4bT`x48`x
+58B`x59E~B`x59E)).size+1}x  ~i8]c"#{s.K(/[^"]/){"  ^%`  x58"%$&.ord}}^00"declare~i32@puts(i8          *          )def!e~i32@m
+X{%1=call~i32@puts(i8*getel  ementptr([#{i}x~i8]*@  s  ,i32~0,i32~0))ret~i32~0})).bytes{|n|          r           ,z=z[n]||(b[
+r/78];b[r];q<6083&&z[n]=[q+=   1,[]];t[n])};b[r/78]   ;b[r]}";!t~i=0,n=0,q=0;for(;++n<126           ;             )c[n]=""+(c
+har)n;for(;i<s.length();){q=q   *78+(s.charAt(i)-13) %84;if(i++%2>0){y=q<n?c[q]:y;c[n++]           =              z+y.charAt(
+0);System.out.Z(z=c[q]);q=0;}}    }})]}"`n!vokevirtual~#$T/Zln(L#{S}SJ;)V`nreturn`n.en           d~metho          d)+N]};H("D
+O,1<-#"||*s);s?while~t:=ord(move    (1))do{i+:=1;u:=-i;every~0to~7do{u:=u*2+t%2;t/:=           2};H("PLE          ASE")^(i%4/
+3);H("DO,1SUB#"||i||"<-#"||((c-u)      %256));c:=u;};H("PLEASEREADOUT,1^nPLEASEGI            VEUP");end)]).tr(B,  ?&)]}'.tr('
+&','YY');)]};})]}"~DUP~FOR~S"~&A,&"       ~C~NE`x58T~S^"~&A)^",&"~C~0~DO~B~."~             &char("~COUNT~.~."~),&  '"~CR~LOOP
+~S^"~&^"^""~C~S"~end~#$D"~C~A~."~STOP"        ~CR~A~."~END"~CR~B`x59E~;~D~               )]}"))],'#{f(',')}']}))]  }"))["~~~~
+^"~^".""STOP~RUN."])](Zln(str"#{g*8}"s))             )))]};}})]};}                    "]]],"$(f(","))"]};for~i~!~range(len(s)
+):b~as~!t=s[i];a-=b;Z(('+'*-a~if~0>a~else'-'                                       *a)+'.');a=b;).tr~B,?`x21]};K(/`x21/,"Y",s
+);Z~s})]}";FORiTO`~UPBtDO`~INTn:=ABSt[i];Z(~(50+                              n%64)+c+~(50+n%8MOD8)+c+~(50+nMOD8)+b+"`x4a"+a)
+OD]*"REPR"]}")]}");end;)]+"`nsys.exit~0",/[^{}]/]}}",35                ){y<<",`n"+$S;"%s"}}")+y}]]></#{U}></xsl:#{I}>"].K~N,'
+"&~VbLf~&"'}":s="~~~":For~i=0To~7:s~&=Chr(32-(Asc(c)>>7-i~And~1)*23):Next:#{C}(s~&n~&Chr(9)&n~&"~~"):Next:#{C}(n~&n~&n):End~S
+ub:End~Module),7){o<<?,+$S+N;"%s"}}"#{o});end~endmodule)],?%]};return~0;}).reverse],/[`[`]$]/],"[f~",?]]}"~^x60.&]k^n::=^na)]
+};Z"0~0~-1";)]]};),?']}';cr"]]]}"|sed~-E~-e~'s/([`x5eY]|Y.){1,120}/Zf("%s","^0");^n/g'],7){%(Zf("%s","#{d[d[$s],?']}")`n)}}qu
+it)]}")),196){%(Z#$S;)}}})).gsub(/[!HJKXYZ^`~]/){[B*2,:write,B,:tring,:gsub,"ain()",B*4,:print,g,:in][$&.ord%47%12]})))*"")#_
 #_buffer_for_future_bug_fixes_#_buffer_for_future_bug_fixes_#_buffer_for_future_bug_fixes_#_buffer_for_future_bug_fixes_#_buf
 #######################  Quine Relay -- Copyright (c) 2013, 2014 Yusuke Endoh (@mametter), @hirekoke  ######################)

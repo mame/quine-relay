@@ -206,9 +206,10 @@ class Octave_Ook < CodeGen
             end;
             t(x)=m(diff([0 s(x=b==n)])+13);
         end;
-        printf(strjoin(t,""))
+        printf("%%s",t{:})
       )
     END
+    # NOTE: %% is a hack for Nickle printf escaping.
   end
 end
 
