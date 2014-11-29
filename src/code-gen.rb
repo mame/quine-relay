@@ -621,6 +621,13 @@ class Awk < CodeGen
   Code = %q(%(BEGIN{s=#{E[PREV.tr B,?!]};gsub(/!/,"\\\\\\\\",s);print s}))
 end
 
+class Asymptote < CodeGen
+  File = "QR.asy"
+  Cmd = "asy QR.asy > OUTFILE"
+  Apt = "asymptote"
+  Code = %q(%(write('#{Q[e[PREV],?']}');))
+end
+
 class ALGOL68_Ante < CodeGen
   File = ["QR.a68", "QR.ante"]
   Cmd = ["a68g QR.a68 > OUTFILE", "ruby vendor/ante.rb QR.ante > OUTFILE"]
