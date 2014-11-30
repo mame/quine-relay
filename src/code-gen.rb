@@ -621,6 +621,13 @@ class Awk < CodeGen
   Code = %q(%(BEGIN{s=#{E[PREV.tr B,?!]};gsub(/!/,"\\\\\\\\",s);print s}))
 end
 
+class ATS < CodeGen
+  File = "QR.dats"
+  Cmd = "atscc -o QR QR.dats && ./QR > OUTFILE"
+  Apt = "ats-lang-anairiats"
+  Code = %q(%(implement main()=print)+E[PREV])
+end
+
 class Asymptote < CodeGen
   File = "QR.asy"
   Cmd = "asy QR.asy > OUTFILE"
