@@ -4,6 +4,9 @@ rvm:
 - 2.1.0
 env: PATH=/usr/games:$PATH
 before_install:
+- sudo apt-get update -qq
+- sudo apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
+  dist-upgrade -qq
 - sudo apt-get install -qq scala gauche scilab bash slsh gnu-smalltalk spl-core mlton
   tcl valac iverilog mono-vbnc xsltproc yorick zoem aplus-fsf gnat afnix algol68g
   asymptote ats-lang-anairiats gawk boo bf gcc g++ mono-mcs clojure open-cobol coffeescript
