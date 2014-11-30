@@ -23,6 +23,10 @@ ante: ante.rb
   * with my patch (see https://github.com/michaeldv/ante/pull/1)
   * License: MIT
 
+Befunge: cfunge-0.9.0.tar.bz2
+  * http://sourceforge.net/projects/cfunge/
+  * License: GPL3
+
 LOLCODE: lci-0.10.5.zip
   * http://lolcode.org/
   * License: GPL3+

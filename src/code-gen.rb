@@ -614,11 +614,11 @@ class Boo_Brainfuck < CodeGen
   end
 end
 
-class Awk < CodeGen
-  File = "QR.awk"
-  Cmd = "awk -f QR.awk > OUTFILE"
-  Apt = "gawk"
-  Code = %q(%(BEGIN{s=#{E[PREV.tr B,?!]};gsub(/!/,"\\\\\\\\",s);print s}))
+class Awk_Befunge < CodeGen
+  File = ["QR.awk", "QR.bef"]
+  Cmd = ["awk -f QR.awk > OUTFILE", "vendor/cfunge-*/cfunge QR.bef > OUTFILE"]
+  Apt = ["gawk", nil]
+  Code = %q(%(BEGIN{s=#{E[PREV.tr B,?!]};gsub(/!/,"\\\\\\\\",s);gsub(/./,"\\\\"&\\\\",",s);gsub(/"""/,"75*1-",s);print s,"@"}))
 end
 
 class ATS < CodeGen

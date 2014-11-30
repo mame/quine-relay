@@ -52,11 +52,11 @@ nd)]).tr(B,?&)]}'.tr('&','YY');)]};       })]}"~DUP~FOR~S"~&A,&"~C~NE`x58T~S^"  
 UNT~.~."~),&'"~CR~LOOP~S^"~&^"^""~C~S"        ~end~#$D"~C~A~."~STOP"~CR~A~               ."~END"~CR~B`x59E~;~D~)]  }"))],'#{f
 (',')}']}))]}"))["~~~~^"~^".""STOP~RUN."             ])](Zln(str"#                    {g*8}"s)))))]};}})]};}"]]],"$(f(","))"]
 };for~i~!~range(len(s)):b~as~!t=s[i];a-=b;Z(                                       ('+'*-a~if~0>a~else'-'*a)+'.');a=b;).tr~B,
-?`x21]};K(/`x21/,"Y",s);Z~s})]],?']}');)]}";FORi                              TO`~UPBtDO`~INTn:=ABSt[i];Z(~(50+n%64)+c+~(50+n
-%8MOD8)+c+~(50+nMOD8)+b+"`x4a"+a)OD]*"REPR"]}")]}");end                ;)]+"`nsys.exit~0",/[^{}]/]}}",35){y<<",`n"+$S;"%s"}}"
-)+y}]]></#{U}></xsl:#{I}>"].K~N,'"&~VbLf~&"'}":s="~~~":For~i=0To~7:s~&=Chr(32-(Asc(c)>>7-i~And~1)*23):Next:#{C}(s~&n~&Chr(9)&
-n~&"~~"):Next:#{C}(n~&n~&n):End~Sub:End~Module),3){%($H("%s",#$S);)+N}}end~endmodule)],?%]};return~0;}).reverse],/[`[`]$]/],"
-[f~",?]]}"~^x60.&]k^n::=^na)]};Z"0~0~-1";)]]};),?']}';cr"]]]}"|sed~-E~-e~'s/([`x5eY]|Y.){1,120}/Zf("%s","^0");^n/g'],7){%(Zf(
-"%s","#{d[d[$s],?']}")`n)}}quit)]}")),196){%(Z#$S;)}}})).gsub(/[!HJKXYZ^`~]/){[B*2,:write,B,:tring,:gsub,"ain()",B*4,:print,g
-,:in][$&.ord%47%12]})))*"")#_buffer_for_future_bug_fixes_#_buffer_for_future_bug_fixes_#_buffer_for_future_bug_fixes_#_buffer
+?`x21]};K(/`x21/,"Y",s);K(/./,"^"&^",",s);K(/"""                              /,"75*1-",s);Z~s,"@"})]],?']}');)]}";FORiTO`~UP
+BtDO`~INTn:=ABSt[i];Z(~(50+n%64)+c+~(50+n%8MOD8)+c+~(50                +nMOD8)+b+"`x4a"+a)OD]*"REPR"]}")]}");end;)]+"`nsys.ex
+it~0",/[^{}]/]}}",35){y<<",`n"+$S;"%s"}}")+y}]]></#{U}></xsl:#{I}>"].K~N,'"&~VbLf~&"'}":s="~~~":For~i=0To~7:s~&=Chr(32-(Asc(c
+)>>7-i~And~1)*23):Next:#{C}(s~&n~&Chr(9)&n~&"~~"):Next:#{C}(n~&n~&n):End~Sub:End~Module),3){%($H("%s",#$S);)+N}}end~endmodule
+)],?%]};return~0;}).reverse],/[`[`]$]/],"[f~",?]]}"~^x60.&]k^n::=^na)]};Z"0~0~-1";)]]};),?']}';cr"]]]}"|sed~-E~-e~'s/([`x5eY]
+|Y.){1,120}/Zf("%s","^0");^n/g'],7){%(Zf("%s","#{d[d[$s],?']}")`n)}}quit)]}")),196){%(Z#$S;)}}})).gsub(/[!HJKXYZ^`~]/){[B*2,:
+write,B,:tring,:gsub,"ain()",B*4,:print,g,:in][$&.ord%47%12]})))*"")#_buffer_for_future_bug_fixes_#_buffer_for_future_bug_fix
 #######################  Quine Relay -- Copyright (c) 2013, 2014 Yusuke Endoh (@mametter), @hirekoke  ######################)
