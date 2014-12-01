@@ -15,8 +15,6 @@ before_install:
   pari-gp parrot fp-compiler perl php5-cli pike7.8 ghostscript bsdgames swi-prolog
   python r-base ratfor regina-rexx
 before_script:
-- cd vendor/
-- make
-- cd ../
+- make -C vendor/
 script:
 - make

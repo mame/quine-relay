@@ -20,9 +20,7 @@ yaml["before_install"] = [
   "sudo apt-get install -qq #{ apts.join(" ") }",
 ]
 yaml["before_script"] = [
-  "cd vendor/",
-  "make",
-  "cd ../",
+  "make -C vendor/",
 ]
 yaml["script"] = ["make"]
 
