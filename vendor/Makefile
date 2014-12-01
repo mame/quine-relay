@@ -2,7 +2,7 @@ LCI=lci-0.10.5
 NPIET=npiet-1.3c
 CFUNGE=cfunge-0.9.0
 
-all: $(LCI)/lci $(NPIET)/npiet
+all: $(LCI)/lci $(NPIET)/npiet $(CFUNGE)/cfunge
 
 $(LCI)/lci:
 	unzip $(LCI).zip
@@ -17,4 +17,4 @@ $(CFUNGE)/cfunge:
 	(cd $(CFUNGE) && cmake . && make)
 
 clean:
-	rm -rf $(LCI)/ $(NPIET)/
+	rm -rf $(LCI)/ $(NPIET)/ $(CFUNGE)/
