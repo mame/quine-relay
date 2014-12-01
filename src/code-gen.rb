@@ -328,7 +328,7 @@ end
 class LLVMAsm < CodeGen
   Name = "LLVM asm"
   File = "QR.ll"
-  Cmd = "llvm-as QR.ll && lli QR.bc > OUTFILE"
+  Cmd = "mv QR.bc QR.bc.bak && llvm-as QR.ll && lli QR.bc > OUTFILE && mv QR.bc.bak QR.bc"
   Apt = "llvm"
   def code
     <<-'END'.lines.map {|l| l.strip }.join
@@ -614,11 +614,26 @@ class Boo_Brainfuck < CodeGen
   end
 end
 
-class Awk_Befunge < CodeGen
-  File = ["QR.awk", "QR.bef"]
-  Cmd = ["awk -f QR.awk > OUTFILE", "vendor/cfunge-*/cfunge QR.bef > OUTFILE"]
-  Apt = ["gawk", nil]
-  Code = %q(%(BEGIN{s=#{E[PREV.tr B,?!]};gsub(/!/,"\\\\\\\\",s);gsub(/./,"\\\\"&\\\\",",s);gsub(/"""/,"75*1-",s);print s,"@"}))
+class Awk_Bc_Befunge < CodeGen
+  Name = ["Awk", "bc", "Befunge"]
+  File = ["QR.awk", "QR.bc", "QR.bef"]
+  Cmd = ["awk -f QR.awk > OUTFILE", "BC_LINE_LENGTH=3000000 bc -q QR.bc > OUTFILE", "vendor/cfunge-*/cfunge QR.bef > OUTFILE"]
+  Apt = ["gawk", "bc", nil]
+  def code
+    <<-'END'.lines.map {|l| l.strip }.join
+      %(
+        BEGIN{
+          s=#{E[PREV.tr B,?!]};g
+          sub(/!/,"\\\\",s);
+          gsub(/./,"\\"&\\",",s);
+          gsub(/"""/,"75*1-",s);
+          gsub(/\\\\/,"\\\\\\\\",s);
+          gsub(/"/,"\\\\q",s);
+          print "print\\"",s,"@","\\"";print "quit";
+        }
+      )
+    END
+  end
 end
 
 class ATS < CodeGen
