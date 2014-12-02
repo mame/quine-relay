@@ -14,9 +14,9 @@ end
 OUT << <<-END
 MAKEFLAGS += --no-print-directory
 
-NODE := $(shell which nodejs 2>/dev/null || which node)
-ifeq ($(NODE),)
-  $(warning Node.js not found!)
+JAVASCRIPT := $(shell which rhino nodejs node js 2>/dev/null | head -1)
+ifeq ($(JAVASCRIPT),)
+  $(warning JavaScript interpreter not found!)
 endif
 
 SCHEME := $(shell which guile csi gosh 2>/dev/null | head -1)

@@ -1,8 +1,8 @@
 MAKEFLAGS += --no-print-directory
 
-NODE := $(shell which nodejs 2>/dev/null || which node)
-ifeq ($(NODE),)
-  $(warning Node.js not found!)
+JAVASCRIPT := $(shell which rhino nodejs node 2>/dev/null | head -1)
+ifeq ($(JAVASCRIPT),)
+  $(warning JavaScript interpreter not found!)
 endif
 
 SCHEME := $(shell which guile csi gosh 2>/dev/null | head -1)
@@ -435,19 +435,27 @@ QR.java: QR.j
 	jasmin QR.j
 	CLASSPATH=. java QR > QR.java
 
-QR.ll: QR.java
+QR.js: QR.java
 	@echo
-	@echo "############################"
-	@echo "##  49: Java -> LLVM asm  ##"
-	@echo "############################"
+	@echo "##############################"
+	@echo "##  49: Java -> JavaScript  ##"
+	@echo "##############################"
 	@echo
 	javac QR.java
-	CLASSPATH=. java QR > QR.ll
+	CLASSPATH=. java QR > QR.js
+
+QR.ll: QR.js
+	@echo
+	@echo "##################################"
+	@echo "##  50: JavaScript -> LLVM asm  ##"
+	@echo "##################################"
+	@echo
+	$(JAVASCRIPT) QR.js > QR.ll
 
 QR.logo: QR.ll
 	@echo
 	@echo "############################"
-	@echo "##  50: LLVM asm -> Logo  ##"
+	@echo "##  51: LLVM asm -> Logo  ##"
 	@echo "############################"
 	@echo
 	mv QR.bc QR.bc.bak
@@ -458,7 +466,7 @@ QR.logo: QR.ll
 QR.lol: QR.logo
 	@echo
 	@echo "###########################"
-	@echo "##  51: Logo -> LOLCODE  ##"
+	@echo "##  52: Logo -> LOLCODE  ##"
 	@echo "###########################"
 	@echo
 	logo QR.logo > QR.lol
@@ -466,7 +474,7 @@ QR.lol: QR.logo
 QR.lua: QR.lol
 	@echo
 	@echo "##########################"
-	@echo "##  52: LOLCODE -> Lua  ##"
+	@echo "##  53: LOLCODE -> Lua  ##"
 	@echo "##########################"
 	@echo
 	vendor/lci-*/lci QR.lol > QR.lua
@@ -474,7 +482,7 @@ QR.lua: QR.lol
 QR.mk: QR.lua
 	@echo
 	@echo "###########################"
-	@echo "##  53: Lua -> Makefile  ##"
+	@echo "##  54: Lua -> Makefile  ##"
 	@echo "###########################"
 	@echo
 	lua QR.lua > QR.mk
@@ -482,7 +490,7 @@ QR.mk: QR.lua
 QR.mac: QR.mk
 	@echo
 	@echo "##############################"
-	@echo "##  54: Makefile -> Maxima  ##"
+	@echo "##  55: Makefile -> Maxima  ##"
 	@echo "##############################"
 	@echo
 	make -f QR.mk > QR.mac
@@ -490,7 +498,7 @@ QR.mac: QR.mk
 QR.il: QR.mac
 	@echo
 	@echo "##########################"
-	@echo "##  55: Maxima -> MSIL  ##"
+	@echo "##  56: Maxima -> MSIL  ##"
 	@echo "##########################"
 	@echo
 	maxima -q --init-mac=QR.mac > QR.il
@@ -498,7 +506,7 @@ QR.il: QR.mac
 QR.asm: QR.il
 	@echo
 	@echo "########################"
-	@echo "##  56: MSIL -> NASM  ##"
+	@echo "##  57: MSIL -> NASM  ##"
 	@echo "########################"
 	@echo
 	ilasm QR.il
@@ -507,7 +515,7 @@ QR.asm: QR.il
 QR.neko: QR.asm
 	@echo
 	@echo "########################"
-	@echo "##  57: NASM -> Neko  ##"
+	@echo "##  58: NASM -> Neko  ##"
 	@echo "########################"
 	@echo
 	nasm -felf QR.asm
@@ -517,27 +525,19 @@ QR.neko: QR.asm
 QR.5c: QR.neko
 	@echo
 	@echo "##########################"
-	@echo "##  58: Neko -> Nickle  ##"
+	@echo "##  59: Neko -> Nickle  ##"
 	@echo "##########################"
 	@echo
 	nekoc QR.neko
 	neko QR.n > QR.5c
 
-QR.js: QR.5c
-	@echo
-	@echo "############################"
-	@echo "##  59: Nickle -> NodeJS  ##"
-	@echo "############################"
-	@echo
-	nickle QR.5c > QR.js
-
-QR.m: QR.js
+QR.m: QR.5c
 	@echo
 	@echo "#################################"
-	@echo "##  60: NodeJS -> Objective-C  ##"
+	@echo "##  60: Nickle -> Objective-C  ##"
 	@echo "#################################"
 	@echo
-	$(NODE) QR.js > QR.m
+	nickle QR.5c > QR.m
 
 QR.ml: QR.m
 	@echo

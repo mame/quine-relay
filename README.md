@@ -30,9 +30,9 @@ First, you have to type the following apt-get command to install all of them.
       coffeescript f2c fp-compiler g++ gauche gawk gcc gforth gfortran ghc \
       ghostscript gnat gnu-smalltalk gobjc golang groovy icont iconx \
       intercal iverilog jasmin-sable libpng12-dev llvm lua5.2 make maxima \
-      mlton mono-devel mono-mcs mono-vbnc nasm neko nickle nodejs ocaml \
-      octave open-cobol openjdk-6-jdk pari-gp parrot perl php5-cli pike7.8 \
-      python r-base ratfor regina-rexx ruby2.0 scala scilab slsh spl-core \
+      mlton mono-devel mono-mcs mono-vbnc nasm neko nickle ocaml octave \
+      open-cobol openjdk-6-jdk pari-gp parrot perl php5-cli pike7.8 python \
+      r-base ratfor regina-rexx rhino ruby2.0 scala scilab slsh spl-core \
       swi-prolog tcl ucblogo valac xsltproc yorick zoem
 
 Then, you have to build the bundled interpreters.
@@ -98,7 +98,8 @@ If you could do it, please let me know.  Good luck.
     $ icont -s QR.icn && ./QR > QR.i
     $ ick -bfO QR.i && ./QR > QR.j
     $ jasmin QR.j && CLASSPATH=. java QR > QR.java
-    $ javac QR.java && CLASSPATH=. java QR > QR.ll
+    $ javac QR.java && CLASSPATH=. java QR > QR.js
+    $ $(JAVASCRIPT) QR.js > QR.ll
     $ mv QR.bc QR.bc.bak && llvm-as QR.ll && lli QR.bc > QR.logo && mv QR.bc.bak QR.bc
     $ logo QR.logo > QR.lol
     $ vendor/lci-*/lci QR.lol > QR.lua
@@ -108,8 +109,7 @@ If you could do it, please let me know.  Good luck.
     $ ilasm QR.il && mono QR.exe > QR.asm
     $ nasm -felf QR.asm && ld -m elf_i386 -o QR QR.o && ./QR > QR.neko
     $ nekoc QR.neko && neko QR.n > QR.5c
-    $ nickle QR.5c > QR.js
-    $ nodejs QR.js > QR.m
+    $ nickle QR.5c > QR.m
     $ gcc -o QR QR.m && ./QR > QR.ml
     $ ocaml QR.ml > QR.octave
     $ octave -qf QR.octave > QR.ook
@@ -195,17 +195,17 @@ I used the following Ubuntu deb packages to test this program.
 47 |INTERCAL           |intercal           |29:0.29-3
 48 |Jasmin             |jasmin-sable       |2.4.0-3
 49 |Java               |openjdk-6-jdk      |6b33-1.13.5-1ubuntu0.14.04
-50 |LLVM asm           |llvm               |1:3.4-0ubuntu1
-51 |Logo               |ucblogo            |5.5-2.1
-52 |LOLCODE            |*N/A*              |-
-53 |Lua                |lua5.2             |5.2.3-1
-54 |Makefile           |make               |3.81-8.2ubuntu3
-55 |Maxima             |maxima             |5.32.1-1
-56 |MSIL               |mono-devel         |3.2.8+dfsg-4ubuntu1
-57 |NASM               |nasm               |2.10.09-1
-58 |Neko               |neko               |2.0.0-3
-59 |Nickle             |nickle             |2.77-1
-60 |NodeJS             |nodejs             |0.10.25~dfsg2-2ubuntu1
+50 |JavaScript         |rhino              |1.7R4-2
+51 |LLVM asm           |llvm               |1:3.4-0ubuntu1
+52 |Logo               |ucblogo            |5.5-2.1
+53 |LOLCODE            |*N/A*              |-
+54 |Lua                |lua5.2             |5.2.3-1
+55 |Makefile           |make               |3.81-8.2ubuntu3
+56 |Maxima             |maxima             |5.32.1-1
+57 |MSIL               |mono-devel         |3.2.8+dfsg-4ubuntu1
+58 |NASM               |nasm               |2.10.09-1
+59 |Neko               |neko               |2.0.0-3
+60 |Nickle             |nickle             |2.77-1
 61 |Objective-C        |gobjc              |4:4.8.2-1ubuntu6
 62 |OCaml              |ocaml              |4.01.0-3ubuntu3
 63 |Octave             |octave             |3.8.1-1ubuntu1

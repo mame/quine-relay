@@ -228,14 +228,6 @@ class ObjC < CodeGen
   Code = %q("#import"+M[PREV])
 end
 
-class NodeJS < CodeGen
-  Name = "NodeJS"
-  File = "QR.js"
-  Cmd = "$(NODE) QR.js > OUTFILE"
-  Apt = "nodejs"
-  Code = %q("require('util').print#{E[PREV]}")
-end
-
 class Nickle < CodeGen
   File = "QR.5c"
   Cmd = "nickle QR.5c > OUTFILE"
@@ -343,6 +335,13 @@ class LLVMAsm < CodeGen
       )
     END
   end
+end
+
+class JavaScript < CodeGen
+  File = "QR.js"
+  Cmd = "$(JAVASCRIPT) QR.js > OUTFILE"
+  Apt = "rhino"
+  Code = %q("s=#{E[PREV]};typeof print=='function'?print(s):console.log('%s',s)")
 end
 
 class Java < CodeGen

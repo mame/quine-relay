@@ -11,7 +11,7 @@ before_install:
   tcl valac iverilog mono-vbnc xsltproc yorick zoem aplus-fsf gnat afnix algol68g
   asymptote ats-lang-anairiats gawk bc boo bf gcc g++ mono-mcs clojure open-cobol
   coffeescript clisp gforth f2c gfortran golang groovy ghc icont iconx intercal jasmin-sable
-  openjdk-6-jdk llvm ucblogo lua5.2 make maxima mono-devel nasm neko nickle nodejs
+  openjdk-6-jdk rhino llvm ucblogo lua5.2 make maxima mono-devel nasm neko nickle
   gobjc ocaml octave pari-gp parrot fp-compiler perl php5-cli pike7.8 ghostscript
   bsdgames swi-prolog python r-base ratfor regina-rexx
 before_script:
