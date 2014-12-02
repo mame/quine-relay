@@ -7,7 +7,7 @@
 This is a Ruby program that generates
 Scala program that generates
 Scheme program that generates
-...(through 78 languages in total)...
+...(through 79 languages in total)...
 REXX program that generates
 the original Ruby code again.
 
@@ -79,7 +79,8 @@ If you could do it, please let me know.  Good luck.
     $ atscc -o QR QR.dats && ./QR > QR.awk
     $ awk -f QR.awk > QR.bc
     $ BC_LINE_LENGTH=3000000 bc -q QR.bc > QR.bef
-    $ vendor/cfunge-*/cfunge QR.bef > QR.boo
+    $ vendor/cfunge-*/cfunge QR.bef > QR.Blc
+    $ ruby vendor/blc.rb < QR.Blc > QR.boo
     $ booi QR.boo > QR.bf
     $ bf QR.bf > QR.c
     $ gcc -o QR QR.c && ./QR > QR.cpp
@@ -175,55 +176,56 @@ I used the following Ubuntu deb packages to test this program.
 28 |Awk                |gawk               |1:4.0.1+dfsg-2.1ubuntu2
 29 |bc                 |bc                 |1.06.95-8ubuntu1
 30 |Befunge            |*N/A*              |-
-31 |Boo                |boo                |0.9.5~git20110729.r1.202a430-2
-32 |Brainfuck          |bf                 |20041219ubuntu5
-33 |C                  |gcc                |4:4.8.2-1ubuntu6
-34 |C++                |g++                |4:4.8.2-1ubuntu6
-35 |C#                 |mono-mcs           |3.2.8+dfsg-4ubuntu1
-36 |Clojure            |clojure1.4         |1.4.0+dfsg-3
-37 |Cobol              |open-cobol         |1.1-1build1
-38 |CoffeeScript       |coffeescript       |1.4.0-1
-39 |Common Lisp        |clisp              |1:2.49-9ubuntu1
-40 |Forth              |gforth             |0.7.0+ds2-0.1
-41 |FORTRAN77          |f2c                |20100827-1
-42 |Fortran90          |gfortran           |4:4.8.2-1ubuntu6
-43 |Go                 |golang             |2:1.2.1-2ubuntu1
-44 |Groovy             |groovy             |2.0.0~beta2+isreally1.8.6-0ubuntu1
-45 |Haskell            |ghc                |7.6.3-10
-46 |Icon               |icont              |9.4.3-4.2ubuntu1
+31 |BLC8               |*N/A*              |-
+32 |Boo                |boo                |0.9.5~git20110729.r1.202a430-2
+33 |Brainfuck          |bf                 |20041219ubuntu5
+34 |C                  |gcc                |4:4.8.2-1ubuntu6
+35 |C++                |g++                |4:4.8.2-1ubuntu6
+36 |C#                 |mono-mcs           |3.2.8+dfsg-4ubuntu1
+37 |Clojure            |clojure1.4         |1.4.0+dfsg-3
+38 |Cobol              |open-cobol         |1.1-1build1
+39 |CoffeeScript       |coffeescript       |1.4.0-1
+40 |Common Lisp        |clisp              |1:2.49-9ubuntu1
+41 |Forth              |gforth             |0.7.0+ds2-0.1
+42 |FORTRAN77          |f2c                |20100827-1
+43 |Fortran90          |gfortran           |4:4.8.2-1ubuntu6
+44 |Go                 |golang             |2:1.2.1-2ubuntu1
+45 |Groovy             |groovy             |2.0.0~beta2+isreally1.8.6-0ubuntu1
+46 |Haskell            |ghc                |7.6.3-10
+47 |Icon               |icont              |9.4.3-4.2ubuntu1
    |                   |iconx              |9.4.3-4.2ubuntu1
-47 |INTERCAL           |intercal           |29:0.29-3
-48 |Jasmin             |jasmin-sable       |2.4.0-3
-49 |Java               |openjdk-6-jdk      |6b33-1.13.5-1ubuntu0.14.04
-50 |JavaScript         |rhino              |1.7R4-2
-51 |LLVM asm           |llvm               |1:3.4-0ubuntu1
-52 |Logo               |ucblogo            |5.5-2.1
-53 |LOLCODE            |*N/A*              |-
-54 |Lua                |lua5.2             |5.2.3-1
-55 |Makefile           |make               |3.81-8.2ubuntu3
-56 |Maxima             |maxima             |5.32.1-1
-57 |MSIL               |mono-devel         |3.2.8+dfsg-4ubuntu1
-58 |NASM               |nasm               |2.10.09-1
-59 |Neko               |neko               |2.0.0-3
-60 |Nickle             |nickle             |2.77-1
-61 |Objective-C        |gobjc              |4:4.8.2-1ubuntu6
-62 |OCaml              |ocaml              |4.01.0-3ubuntu3
-63 |Octave             |octave             |3.8.1-1ubuntu1
-64 |Ook!               |*N/A*              |-
-65 |PARI/GP            |pari-gp            |2.5.5-1
-66 |Parrot asm         |parrot             |5.9.0-1build1
-67 |Pascal             |fp-compiler        |2.6.2-8
-68 |Perl               |perl               |5.18.2-2ubuntu1
-69 |PHP                |php5-cli           |5.5.9+dfsg-1ubuntu4.4
-70 |Piet               |*N/A*              |-
-71 |Pike               |pike7.8            |7.8.700-7
-72 |PostScript         |ghostscript        |9.10~dfsg-0ubuntu10.2
-73 |PPT (Punched tape) |bsdgames           |2.17-21
-74 |Prolog             |swi-prolog         |6.6.4-2ubuntu1
-75 |Python             |python             |2.7.5-5ubuntu3
-76 |R                  |r-base             |3.0.2-1ubuntu1
-77 |Ratfor             |ratfor             |1.0-15
-78 |REXX               |regina-rexx        |3.6-2
+48 |INTERCAL           |intercal           |29:0.29-3
+49 |Jasmin             |jasmin-sable       |2.4.0-3
+50 |Java               |openjdk-6-jdk      |6b33-1.13.5-1ubuntu0.14.04
+51 |JavaScript         |rhino              |1.7R4-2
+52 |LLVM asm           |llvm               |1:3.4-0ubuntu1
+53 |Logo               |ucblogo            |5.5-2.1
+54 |LOLCODE            |*N/A*              |-
+55 |Lua                |lua5.2             |5.2.3-1
+56 |Makefile           |make               |3.81-8.2ubuntu3
+57 |Maxima             |maxima             |5.32.1-1
+58 |MSIL               |mono-devel         |3.2.8+dfsg-4ubuntu1
+59 |NASM               |nasm               |2.10.09-1
+60 |Neko               |neko               |2.0.0-3
+61 |Nickle             |nickle             |2.77-1
+62 |Objective-C        |gobjc              |4:4.8.2-1ubuntu6
+63 |OCaml              |ocaml              |4.01.0-3ubuntu3
+64 |Octave             |octave             |3.8.1-1ubuntu1
+65 |Ook!               |*N/A*              |-
+66 |PARI/GP            |pari-gp            |2.5.5-1
+67 |Parrot asm         |parrot             |5.9.0-1build1
+68 |Pascal             |fp-compiler        |2.6.2-8
+69 |Perl               |perl               |5.18.2-2ubuntu1
+70 |PHP                |php5-cli           |5.5.9+dfsg-1ubuntu4.4
+71 |Piet               |*N/A*              |-
+72 |Pike               |pike7.8            |7.8.700-7
+73 |PostScript         |ghostscript        |9.10~dfsg-0ubuntu10.2
+74 |PPT (Punched tape) |bsdgames           |2.17-21
+75 |Prolog             |swi-prolog         |6.6.4-2ubuntu1
+76 |Python             |python             |2.7.5-5ubuntu3
+77 |R                  |r-base             |3.0.2-1ubuntu1
+78 |Ratfor             |ratfor             |1.0-15
+79 |REXX               |regina-rexx        |3.6-2
 
 Note that some languages are not available in Ubuntu (marked as *N/A*).
 This repository includes their implementations in `vendor/`.

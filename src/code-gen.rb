@@ -613,22 +613,43 @@ class Boo_Brainfuck < CodeGen
   end
 end
 
-class Awk_Bc_Befunge < CodeGen
-  Name = ["Awk", "bc", "Befunge"]
-  File = ["QR.awk", "QR.bc", "QR.bef"]
-  Cmd = ["awk -f QR.awk > OUTFILE", "BC_LINE_LENGTH=3000000 bc -q QR.bc > OUTFILE", "vendor/cfunge-*/cfunge QR.bef > OUTFILE"]
-  Apt = ["gawk", "bc", nil]
+class Awk_Bc_Befunge_BLC8 < CodeGen
+  Name = ["Awk", "bc", "Befunge", "BLC8"]
+  File = ["QR.awk", "QR.bc", "QR.bef", "QR.Blc"]
+  Cmd = ["awk -f QR.awk > OUTFILE", "BC_LINE_LENGTH=3000000 bc -q QR.bc > OUTFILE", "vendor/cfunge-*/cfunge QR.bef > OUTFILE", "ruby vendor/blc.rb < QR.Blc > OUTFILE"]
+  Apt = ["gawk", "bc", nil, nil]
   def code
+    # 389**6+ = 22
+    # 29*     = 18
+    # 44*6+   = 22
+    #
+    # 18 x   = 00010010 x = \a (\b b) x = \a x = K x
+    # 22 x y = 00010110 x y = \a a x y = cons x y
+    # 4 222  = 00000100 11011110 = \a \b (\c b) (????) = \a \b b = false
+    # 4 226  = 00000100 11100010 = \a \b (\c a) (\c c) = \a \b a = true
     <<-'END'.lines.map {|l| l.strip }.join
       %(
         BEGIN{
-          s=#{E[PREV.tr B,?!]};g
-          sub(/!/,"\\\\",s);
-          gsub(/./,"\\"&\\",",s);
-          gsub(/"""/,"75*1-",s);
-          gsub(/\\\\/,"\\\\\\\\",s);
-          gsub(/"/,"\\\\q",s);
-          print "print\\"",s,"@","\\"";print "quit";
+          s=#{E[PREV.tr B,?!]};
+          gsub(/!/,"\\\\",s);
+          for(
+            print"
+              define void f(n){
+                \\"00g,\\";
+                for(m=128;m;m/=2){
+                  \\"00g,4,:\\";
+                  if(n/m%2<1)\\"4+\\";
+                  \\",\\";
+                };
+                \\"4,:,\\"
+              }
+              \\"389**6+44*6+00p29*,\\";
+            ";
+            ++j<=length(s);
+            print"f("n");"
+          )
+            for(n=9;substr(s,j,1)!=sprintf("%c",++n););
+          print"\\"4,:,@\\"\\nquit"
         }
       )
     END
