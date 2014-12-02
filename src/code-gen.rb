@@ -297,8 +297,8 @@ class Maxima < CodeGen
 end
 
 class Makefile < CodeGen
-  File = "QR.makefile"
-  Cmd = "make -f QR.makefile > OUTFILE"
+  File = "QR.mk"
+  Cmd = "make -f QR.mk > OUTFILE"
   Apt = "make"
   Code = %q(%(all:\n\t@echo '#{d[PREV,?$].gsub(?'){"'\\\\''"}}'))
 end

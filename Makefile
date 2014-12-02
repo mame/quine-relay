@@ -471,21 +471,21 @@ QR.lua: QR.lol
 	@echo
 	vendor/lci-*/lci QR.lol > QR.lua
 
-QR.makefile: QR.lua
+QR.mk: QR.lua
 	@echo
 	@echo "###########################"
 	@echo "##  53: Lua -> Makefile  ##"
 	@echo "###########################"
 	@echo
-	lua QR.lua > QR.makefile
+	lua QR.lua > QR.mk
 
-QR.mac: QR.makefile
+QR.mac: QR.mk
 	@echo
 	@echo "##############################"
 	@echo "##  54: Makefile -> Maxima  ##"
 	@echo "##############################"
 	@echo
-	make -f QR.makefile > QR.mac
+	make -f QR.mk > QR.mac
 
 QR.il: QR.mac
 	@echo

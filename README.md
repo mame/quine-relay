@@ -102,8 +102,8 @@ If you could do it, please let me know.  Good luck.
     $ mv QR.bc QR.bc.bak && llvm-as QR.ll && lli QR.bc > QR.logo && mv QR.bc.bak QR.bc
     $ logo QR.logo > QR.lol
     $ vendor/lci-*/lci QR.lol > QR.lua
-    $ lua QR.lua > QR.makefile
-    $ make -f QR.makefile > QR.mac
+    $ lua QR.lua > QR.mk
+    $ make -f QR.mk > QR.mac
     $ maxima -q --init-mac=QR.mac > QR.il
     $ ilasm QR.il && mono QR.exe > QR.asm
     $ nasm -felf QR.asm && ld -m elf_i386 -o QR QR.o && ./QR > QR.neko
