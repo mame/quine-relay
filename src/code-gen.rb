@@ -551,6 +551,13 @@ class Clojure_Cobol < CodeGen
   end
 end
 
+class CDuce < CodeGen
+  File = "QR.cd"
+  Cmd = "cduce QR.cd > OUTFILE"
+  Apt = "cduce"
+  Code = %q("print#{E[PREV]};;")
+end
+
 class CSharp < CodeGen
   Name = "C#"
   File = "QR.cs"
