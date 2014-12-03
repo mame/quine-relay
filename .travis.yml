@@ -14,6 +14,8 @@ before_install:
   openjdk-6-jdk rhino llvm ucblogo lua5.2 make maxima mono-devel nasm neko nickle
   gobjc ocaml octave pari-gp parrot fp-compiler perl php5-cli pike7.8 ghostscript
   bsdgames swi-prolog python r-base ratfor regina-rexx
+- sudo service postgresql stop
+- sudo service mysql stop
 before_script:
 - make -C vendor/
 script:
