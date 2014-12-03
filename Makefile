@@ -200,7 +200,7 @@ qr.adb: QR.+
 	@echo "##  21: A+ -> Ada  ##"
 	@echo "#####################"
 	@echo
-	a+ -q < QR.+ > qr.adb
+	a+ QR.+ > qr.adb
 
 QR.als: qr.adb
 	@echo
@@ -306,7 +306,7 @@ QR.cpp: QR.c
 	@echo "##  34: C -> C++  ##"
 	@echo "####################"
 	@echo
-	${CC} -o QR QR.c
+	$(CC) -o QR QR.c
 	./QR > QR.cpp
 
 QR.cs: QR.cpp
@@ -315,7 +315,7 @@ QR.cs: QR.cpp
 	@echo "##  35: C++ -> C#  ##"
 	@echo "#####################"
 	@echo
-	${CXX} -o QR QR.cpp
+	$(CXX) -o QR QR.cpp
 	./QR > QR.cs
 
 QR.clj: QR.cs
@@ -376,7 +376,7 @@ QR.f90: QR.f
 	@echo
 	mv QR.c QR.c.bak
 	f2c QR.f
-	${CC} -o QR QR.c -L/usr/lib -lf2c -lm
+	$(CC) -o QR QR.c -L/usr/lib -lf2c -lm
 	mv QR.c.bak QR.c
 	./QR > QR.f90
 

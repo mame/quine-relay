@@ -42,10 +42,10 @@ cmds = cmds.zip(srcs.drop(1) + ["QR.rb"]).map do |cmd, src|
   cmd = cmd.gsub("OUTFILE", src).gsub(/mv QR\.c(\.bak)? QR\.c(\.bak)? && /, "")
 
   cmd = cmd.gsub("$(SCHEME)", "gosh")
-  cmd = cmd.gsub("$(NODE)", "nodejs")
+  cmd = cmd.gsub("$(JAVASCRIPT)", "rhino")
   cmd = cmd.gsub("$(BF)", "bf")
-  cmd = cmd.gsub("${CC}", "gcc")
-  cmd = cmd.gsub("${CXX}", "g++")
+  cmd = cmd.gsub("$(CC)", "gcc")
+  cmd = cmd.gsub("$(CXX)", "g++")
 
   cmd
 end

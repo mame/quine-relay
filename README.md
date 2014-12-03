@@ -70,7 +70,7 @@ If you could do it, please let me know.  Good luck.
     $ xsltproc QR.xslt > QR.yorick
     $ yorick -batch QR.yorick > QR.azm
     $ zoem -i QR.azm > QR.+
-    $ a+ -q < QR.+ > qr.adb
+    $ a+ QR.+ > qr.adb
     $ gnatmake qr.adb && ./qr > QR.als
     $ axi QR.als > QR.a68
     $ a68g QR.a68 > QR.ante
@@ -100,7 +100,7 @@ If you could do it, please let me know.  Good luck.
     $ ick -bfO QR.i && ./QR > QR.j
     $ jasmin QR.j && CLASSPATH=. java QR > QR.java
     $ javac QR.java && CLASSPATH=. java QR > QR.js
-    $ $(JAVASCRIPT) QR.js > QR.ll
+    $ rhino QR.js > QR.ll
     $ mv QR.bc QR.bc.bak && llvm-as QR.ll && lli QR.bc > QR.logo && mv QR.bc.bak QR.bc
     $ logo QR.logo > QR.lol
     $ vendor/lci-*/lci QR.lol > QR.lua

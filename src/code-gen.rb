@@ -474,7 +474,7 @@ class Forth_FORTRAN77_Fortran90 < CodeGen
   File = ["QR.fs", "QR.f", "QR.f90"]
   Cmd = [
     "gforth QR.fs > OUTFILE",
-    "mv QR.c QR.c.bak && f2c QR.f && ${CC} -o QR QR.c -L/usr/lib -lf2c -lm && mv QR.c.bak QR.c && ./QR > OUTFILE",
+    "mv QR.c QR.c.bak && f2c QR.f && $(CC) -o QR QR.c -L/usr/lib -lf2c -lm && mv QR.c.bak QR.c && ./QR > OUTFILE",
     "gfortran -o QR QR.f90 && ./QR > OUTFILE"
   ]
   Apt = ["gforth", "f2c", "gfortran"]
@@ -572,7 +572,7 @@ end
 class Cplusplus < CodeGen
   Name = "C++"
   File = "QR.cpp"
-  Cmd = "${CXX} -o QR QR.cpp && ./QR > OUTFILE"
+  Cmd = "$(CXX) -o QR QR.cpp && ./QR > OUTFILE"
   Apt = "g++"
   def code
     <<-'END'.lines.map {|l| l.strip }.join
@@ -588,7 +588,7 @@ end
 
 class C < CodeGen
   File = "QR.c"
-  Cmd = "${CC} -o QR QR.c && ./QR > OUTFILE"
+  Cmd = "$(CC) -o QR QR.c && ./QR > OUTFILE"
   Apt = "gcc"
   Code = %q("#include"+M[PREV])
 end
@@ -713,7 +713,7 @@ end
 class Aplus < CodeGen
   Name = "A+"
   File = "QR.+"
-  Cmd = "a+ -q < QR.+ > OUTFILE"
+  Cmd = "a+ QR.+ > OUTFILE"
   Apt = "aplus-fsf"
   Code = %q(E[PREV]+"\nsys.exit 0")
 end
