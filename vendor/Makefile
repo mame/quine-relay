@@ -1,20 +1,22 @@
-LCI=lci-0.10.5
-NPIET=npiet-1.3c
-CFUNGE=cfunge-0.9.0
+LCI    := lci-0.10.5
+NPIET  := npiet-1.3c
+CFUNGE := cfunge-0.9.0
+LOCAL  := $(CURDIR)/local
 
-all: $(LCI)/lci $(NPIET)/npiet $(CFUNGE)/cfunge
+all: $(LOCAL)/bin/lci $(LOCAL)/bin/npiet $(LOCAL)/bin/cfunge
 
-$(LCI)/lci:
+$(LOCAL)/bin/lci:
 	unzip $(LCI).zip
-	(cd $(LCI) && cmake . && make)
+	(cd $(LCI) && cmake -DCMAKE_INSTALL_PREFIX=$(LOCAL) . && make && make install)
 
-$(NPIET)/npiet:
+$(LOCAL)/bin/npiet:
+	mkdir -p $(LOCAL)/man # workaround
 	tar xzf $(NPIET).tar.gz
-	(cd $(NPIET) && ./configure && make npiet)
+	(cd $(NPIET) && ./configure --prefix=$(LOCAL) && make && make install)
 
-$(CFUNGE)/cfunge:
+$(LOCAL)/bin/cfunge:
 	tar xjf $(CFUNGE).tar.bz2
-	(cd $(CFUNGE) && cmake . && make)
+	(cd $(CFUNGE) && cmake -DCMAKE_INSTALL_PREFIX=$(LOCAL) . && make && make install)
 
 clean:
-	rm -rf $(LCI)/ $(NPIET)/ $(CFUNGE)/
+	rm -rf $(LOCAL)/ $(LCI)/ $(NPIET)/ $(CFUNGE)/

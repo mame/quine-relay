@@ -28,12 +28,12 @@ First, you have to type the following apt-get command to install all of them.
     $ sudo apt-get install afnix algol68g aplus-fsf asymptote \
       ats-lang-anairiats bash bc bf boo bsdgames clisp clojure1.4 cmake \
       coffeescript f2c fp-compiler g++ gauche gawk gcc gforth gfortran ghc \
-      ghostscript gnat gnu-smalltalk gobjc golang groovy icont iconx \
-      intercal iverilog jasmin-sable libpng12-dev llvm lua5.2 make maxima \
-      mlton mono-devel mono-mcs mono-vbnc nasm neko nickle ocaml octave \
-      open-cobol openjdk-6-jdk pari-gp parrot perl php5-cli pike7.8 python \
-      r-base ratfor regina-rexx rhino ruby2.0 scala scilab slsh spl-core \
-      swi-prolog tcl ucblogo valac xsltproc yorick zoem
+      ghostscript gnat gnu-smalltalk gobjc golang groff groovy icont iconx \
+      intercal iverilog jasmin-sable libgd2-xpm-dev libpng12-dev llvm lua5.2 \
+      make maxima mlton mono-devel mono-mcs mono-vbnc nasm neko nickle ocaml \
+      octave open-cobol openjdk-6-jdk pari-gp parrot perl php5-cli pike7.8 \
+      python r-base ratfor regina-rexx rhino ruby2.0 scala scilab slsh \
+      spl-core swi-prolog tcl ucblogo valac xsltproc yorick zoem
 
 Then, you have to build the bundled interpreters.
 
@@ -79,7 +79,7 @@ If you could do it, please let me know.  Good luck.
     $ atscc -o QR QR.dats && ./QR > QR.awk
     $ awk -f QR.awk > QR.bc
     $ BC_LINE_LENGTH=3000000 bc -q QR.bc > QR.bef
-    $ vendor/cfunge-*/cfunge QR.bef > QR.Blc
+    $ cfunge QR.bef > QR.Blc
     $ ruby vendor/blc.rb < QR.Blc > QR.boo
     $ booi QR.boo > QR.bf
     $ bf QR.bf > QR.c
@@ -103,7 +103,7 @@ If you could do it, please let me know.  Good luck.
     $ rhino QR.js > QR.ll
     $ mv QR.bc QR.bc.bak && llvm-as QR.ll && lli QR.bc > QR.logo && mv QR.bc.bak QR.bc
     $ logo QR.logo > QR.lol
-    $ vendor/lci-*/lci QR.lol > QR.lua
+    $ lci QR.lol > QR.lua
     $ lua QR.lua > QR.mk
     $ make -f QR.mk > QR.mac
     $ maxima -q --init-mac=QR.mac > QR.il
@@ -120,7 +120,7 @@ If you could do it, please let me know.  Good luck.
     $ fpc QR.pas && ./QR > QR.pl
     $ perl QR.pl > QR.php
     $ php QR.php > QR.png
-    $ vendor/npiet-*/npiet QR.png > QR.pike
+    $ npiet QR.png > QR.pike
     $ pike QR.pike > QR.ps
     $ gs -dNODISPLAY -q QR.ps > QR.ppt
     $ ppt -d < QR.ppt > QR.prolog

@@ -1,5 +1,7 @@
 MAKEFLAGS += --no-print-directory
 
+PATH := $(CURDIR)/vendor/local/bin:$(PATH)
+
 JAVASCRIPT := $(shell which rhino nodejs node js 2>/dev/null | head -1)
 ifeq ($(JAVASCRIPT),)
   $(warning JavaScript interpreter not found!)
@@ -274,7 +276,7 @@ QR.Blc: QR.bef
 	@echo "##  30: Befunge -> BLC8  ##"
 	@echo "###########################"
 	@echo
-	vendor/cfunge-*/cfunge QR.bef > QR.Blc
+	cfunge QR.bef > QR.Blc
 
 QR.boo: QR.Blc
 	@echo
@@ -485,7 +487,7 @@ QR.lua: QR.lol
 	@echo "##  54: LOLCODE -> Lua  ##"
 	@echo "##########################"
 	@echo
-	vendor/lci-*/lci QR.lol > QR.lua
+	lci QR.lol > QR.lua
 
 QR.mk: QR.lua
 	@echo
@@ -627,7 +629,7 @@ QR.pike: QR.png
 	@echo "##  71: Piet -> Pike  ##"
 	@echo "########################"
 	@echo
-	vendor/npiet-*/npiet QR.png > QR.pike
+	npiet QR.png > QR.pike
 
 QR.ps: QR.pike
 	@echo

@@ -14,6 +14,8 @@ end
 OUT << <<-END
 MAKEFLAGS += --no-print-directory
 
+PATH := $(CURDIR)/vendor/local/bin:$(PATH)
+
 JAVASCRIPT := $(shell which rhino nodejs node js 2>/dev/null | head -1)
 ifeq ($(JAVASCRIPT),)
   $(warning JavaScript interpreter not found!)

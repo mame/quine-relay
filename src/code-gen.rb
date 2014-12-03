@@ -113,7 +113,7 @@ end
 
 class PHP_Piet < CodeGen
   File = ["QR.php", "QR.png"]
-  Cmd = ["php QR.php > OUTFILE", "vendor/npiet-*/npiet QR.png > OUTFILE"]
+  Cmd = ["php QR.php > OUTFILE", "npiet QR.png > OUTFILE"]
   Apt = ["php5-cli", nil]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
@@ -304,7 +304,7 @@ end
 
 class Logo_LOLCODE < CodeGen
   File = ["QR.logo", "QR.lol"]
-  Cmd = ["logo QR.logo > OUTFILE", "vendor/lci-*/lci QR.lol > OUTFILE"]
+  Cmd = ["logo QR.logo > OUTFILE", "lci QR.lol > OUTFILE"]
   Apt = ["ucblogo", nil]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
@@ -616,7 +616,12 @@ end
 class Awk_Bc_Befunge_BLC8 < CodeGen
   Name = ["Awk", "bc", "Befunge", "BLC8"]
   File = ["QR.awk", "QR.bc", "QR.bef", "QR.Blc"]
-  Cmd = ["awk -f QR.awk > OUTFILE", "BC_LINE_LENGTH=3000000 bc -q QR.bc > OUTFILE", "vendor/cfunge-*/cfunge QR.bef > OUTFILE", "ruby vendor/blc.rb < QR.Blc > OUTFILE"]
+  Cmd = [
+    "awk -f QR.awk > OUTFILE",
+    "BC_LINE_LENGTH=3000000 bc -q QR.bc > OUTFILE",
+    "cfunge QR.bef > OUTFILE",
+    "ruby vendor/blc.rb < QR.Blc > OUTFILE"
+  ]
   Apt = ["gawk", "bc", nil, nil]
   def code
     # 389**6+ = 22

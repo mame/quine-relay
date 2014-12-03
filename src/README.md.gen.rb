@@ -2,7 +2,7 @@ require_relative "code-gen"
 require "erb"
 require "cairo"
 
-other_packages = %w(cmake libpng12-dev) # libgd2-xpm-dev groff (to build npiet-foogol)
+other_packages = %w(cmake libpng12-dev libgd2-xpm-dev groff)
 other_packages.each do |package|
   `dpkg -p #{ package }` # just check the packages
 end
