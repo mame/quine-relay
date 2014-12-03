@@ -7,13 +7,13 @@ before_install:
 - sudo apt-get update -qq
 - sudo apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
   dist-upgrade -qq
-- sudo apt-get install -qq scala gauche scilab bash slsh gnu-smalltalk spl-core mlton
-  tcl valac iverilog mono-vbnc xsltproc yorick zoem aplus-fsf gnat afnix algol68g
-  asymptote ats-lang-anairiats gawk bc boo bf gcc g++ mono-mcs clojure open-cobol
-  coffeescript clisp gforth f2c gfortran golang groovy ghc icont iconx intercal jasmin-sable
-  openjdk-6-jdk rhino llvm ucblogo lua5.2 make maxima mono-devel nasm neko nickle
-  gobjc ocaml octave pari-gp parrot fp-compiler perl php5-cli pike7.8 ghostscript
-  bsdgames swi-prolog python r-base ratfor regina-rexx
+- sudo apt-get install -qq afnix algol68g aplus-fsf asymptote ats-lang-anairiats bash
+  bc bf boo bsdgames clisp clojure cmake coffeescript f2c fp-compiler g++ gauche gawk
+  gcc gforth gfortran ghc ghostscript gnat gnu-smalltalk gobjc golang groff groovy
+  icont iconx intercal iverilog jasmin-sable libgd2-xpm-dev libpng12-dev llvm lua5.2
+  make maxima mlton mono-devel mono-mcs mono-vbnc nasm neko nickle ocaml octave open-cobol
+  openjdk-6-jdk pari-gp parrot perl php5-cli pike7.8 python r-base ratfor regina-rexx
+  rhino scala scilab slsh spl-core swi-prolog tcl ucblogo valac xsltproc yorick zoem
 - sudo service postgresql stop
 - sudo service mysql stop
 before_script:
