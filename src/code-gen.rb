@@ -47,6 +47,7 @@ class CodeGen
   V=->s,a,z{s.gsub(/(#{B*4})+/){a+"#{$&.size/2}"+z}};
   C="Console.Write";
   $D="program QR";
+  $G=" contents of"+$F=" the mixing bowl";
   END
 
   def self.setup_dir(name)
@@ -551,11 +552,31 @@ class Clojure_Cobol < CodeGen
   end
 end
 
-class CDuce < CodeGen
-  File = "QR.cd"
-  Cmd = "cduce QR.cd > OUTFILE"
-  Apt = "cduce"
-  Code = %q("print#{E[PREV]};;")
+class CDuce_Chef < CodeGen
+  File = ["QR.cd", "QR.chef"]
+  Cmd = [
+    "cduce QR.cd > OUTFILE",
+    "PERL5LIB=vendor/local/lib/perl5 compilechef QR.chef QR.chef.pl && perl QR.chef.pl > OUTFILE"
+  ]
+  Apt = ["cduce", nil]
+  def code
+    <<-'END'.lines.map {|l| l.strip }.join("\\n")
+%(let f(c :Int):Latin1=if c=127then""else(string_of c@" g caffeine "@string_of c@"
+")@f(c+1)in print("Quine Relay Coffee.
+
+Ingredients.
+"@f 10@"
+Method.
+");let g(String ->[])
+[c;t]->print("Put caffeine "@string_of(int_of_char c)@" into#$F.
+");g t
+|_ ->print("Liquify#$G.
+Pour#$G into the baking dish.
+
+Serves 1.
+")in g#{E[PREV.reverse]})
+    END
+  end
 end
 
 class CSharp < CodeGen
