@@ -4,7 +4,7 @@ require "cairo"
 
 other_packages = %w(cmake libpng12-dev libgd2-xpm-dev groff)
 other_packages.each do |package|
-  `dpkg -p #{ package }` # just check the packages
+  `dpkg -s #{ package }` # just check the packages
 end
 
 langs = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.name } }
@@ -13,7 +13,7 @@ srcs = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.src } }
 apts = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.apt } }
 
 pkg_versions = {}
-`which apt-get >/dev/null && dpkg -p #{ apts.join(" ") }`.b.split("\n\n").each do |s|
+`which apt-get >/dev/null && dpkg -s #{ apts.join(" ") }`.b.split("\n\n").each do |s|
   name = s[/^Package: (.*)$/, 1]
   version = s[/^Version: (.*)$/, 1]
   pkg_versions[name] = version if name && version
@@ -59,7 +59,7 @@ __END__
 
 [![Build Status](https://travis-ci.org/mame/quine-relay.svg?branch=master)](https://travis-ci.org/mame/quine-relay)
 
-### What this is
+## What this is
 
 This is a <%= langs[0] %> program that generates
 <%= langs[1] %> program that generates
@@ -74,7 +74,9 @@ the original <%= langs[0] %> code again.
 
 (If you want to see the old 50-language version, see [50](https://github.com/mame/quine-relay/tree/50) branch.)
 
-### Usage
+## Usage
+
+### Ubuntu
 
 #### 1. Install all interpreters/compilers.
 
@@ -86,16 +88,9 @@ First, you have to type the following apt-get command to install all of them.
 
 Then, you have to build the bundled interpreters.
 
-    $ cd vendor
-    $ make
+    $ make -C vendor
 
-If you are using Arch Linux, just install [quine-relay-git](https://aur.archlinux.org/packages/quine-relay-git/) from AUR and run `quine-relay`.
-Report any problems as comments to the AUR package or to the respective packages, if one of the many compilers should have issues.
-
-You may find [instructions for other platforms in the wiki](https://github.com/mame/quine-relay/wiki/Installation).
-
-If you are not using these Linux distributions, please find your way yourself.
-If you could do it, please let me know.  Good luck.
+To run it on Ubuntu 12.04 LTS, you might want to refer to `.travis.yml`.
 
 #### 2. Run each program on each interpreter/compiler.
 
@@ -113,7 +108,19 @@ Alternatively, just type `make`.
 
 Note: It may require huge memory to compile some files.
 
-### Tested interpreter/compiler versions
+### Arch Linux
+
+Just install [quine-relay-git](https://aur.archlinux.org/packages/quine-relay-git/) from AUR and run `quine-relay`.
+Report any problems as comments to the AUR package or to the respective packages, if one of the many compilers should have issues.
+
+### Other platforms
+
+You may find [instructions for other platforms in the wiki](https://github.com/mame/quine-relay/wiki/Installation).
+
+If you are not using these Linux distributions, please find your way yourself.
+If you could do it, please let me know.  Good luck.
+
+## Tested interpreter/compiler versions
 
 I used the following Ubuntu deb packages to test this program.
 
@@ -125,7 +132,7 @@ Note that some languages are not available in Ubuntu (marked as *N/A*).
 This repository includes their implementations in `vendor/`.
 See also `vendor/README` in detail.
 
-### How to re-generate the source
+## How to re-generate the source
 
     $ sudo apt-get install rake ruby-cairo ruby-rsvg2 ruby-gdk-pixbuf2 \
       optipng advancecomp
@@ -133,11 +140,20 @@ See also `vendor/README` in detail.
     $ rake2.0 clobber
     $ rake2.0
 
-### License
+## License
+
+The MIT License applies to all resources
+*except* the files in the `vendor/` directory.
+
+The files in the `vendor/` directory are from third-parties
+and are distributed under different licenses.
+See `vendor/README` in detail.
+
+---
+
+The MIT License (MIT)
 
 Copyright (c) 2013, 2014 Yusuke Endoh (@mametter), @hirekoke
-
-MIT License
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
