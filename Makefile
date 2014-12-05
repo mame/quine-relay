@@ -102,7 +102,7 @@ QR.sq: QR.sml
 	@echo "##  9: Standard ML -> Subleq  ##"
 	@echo "################################"
 	@echo
-	mlton QR.sml
+	mlton @MLton fixed-heap 200M -- QR.sml
 	./QR > QR.sq
 
 QR.tcl: QR.sq

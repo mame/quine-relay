@@ -53,7 +53,7 @@ To run it on Ubuntu 12.04 LTS, you might want to refer to `.travis.yml`.
     $ slsh QR.sl > QR.st
     $ gst QR.st > QR.spl
     $ splrun QR.spl > QR.sml
-    $ mlton QR.sml && ./QR > QR.sq
+    $ mlton @MLton fixed-heap 200M -- QR.sml && ./QR > QR.sq
     $ ruby vendor/subleq.rb QR.sq > QR.tcl
     $ tclsh QR.tcl > QR.t
     $ ruby vendor/thue.rb QR.t > QR.unl

@@ -844,7 +844,7 @@ end
 class StandardML_Subleq < CodeGen
   Name = ["Standard ML", "Subleq"]
   File = ["QR.sml", "QR.sq"]
-  Cmd = ["mlton QR.sml && ./QR > OUTFILE", "ruby vendor/subleq.rb QR.sq > OUTFILE"]
+  Cmd = ["mlton @MLton fixed-heap 200M -- QR.sml && ./QR > OUTFILE", "ruby vendor/subleq.rb QR.sq > OUTFILE"]
   Apt = ["mlton", nil]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
