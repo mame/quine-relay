@@ -503,6 +503,14 @@ class Forth_FORTRAN77_Fortran90 < CodeGen
   end
 end
 
+class Dc < CodeGen
+  Name = "dc"
+  File = "QR.dc"
+  Cmd = "dc QR.dc > OUTFILE"
+  Apt = "dc"
+  Code = %q("[#{PREV}]pq")
+end
+
 class D < CodeGen
   File = "QR.d"
   Cmd = "gdc -o QR QR.d && ./QR > OUTFILE"
