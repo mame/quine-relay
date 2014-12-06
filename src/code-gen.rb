@@ -503,6 +503,13 @@ class Forth_FORTRAN77_Fortran90 < CodeGen
   end
 end
 
+class D < CodeGen
+  File = "QR.d"
+  Cmd = "gdc -o QR QR.d && ./QR > OUTFILE"
+  Apt = "gdc"
+  Code = %q("import std.stdio;void main(){write#{E[PREV]};}")
+end
+
 class CommonLisp < CodeGen
   Name = "Common Lisp"
   File = "QR.lisp"

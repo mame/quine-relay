@@ -9,11 +9,12 @@ before_install:
   dist-upgrade -qq
 - sudo apt-get install -qq afnix algol68g aplus-fsf asymptote ats-lang-anairiats bash
   bc bf boo bsdgames cduce clisp clojure cmake coffeescript f2c fp-compiler g++ gauche
-  gawk gcc gforth gfortran ghc ghostscript gnat gnu-smalltalk gobjc golang groff groovy
-  icont iconx intercal iverilog jasmin-sable libgd2-xpm-dev libpng12-dev llvm lua5.2
-  make maxima mlton mono-devel mono-mcs mono-vbnc nasm neko nickle ocaml octave open-cobol
-  openjdk-6-jdk pari-gp parrot perl php5-cli pike7.8 python r-base ratfor regina-rexx
-  rhino scala scilab slsh spl-core swi-prolog tcl ucblogo valac xsltproc yorick zoem
+  gawk gcc gdc gforth gfortran ghc ghostscript gnat gnu-smalltalk gobjc golang groff
+  groovy icont iconx intercal iverilog jasmin-sable libgd2-xpm-dev libpng12-dev llvm
+  lua5.2 make maxima mlton mono-devel mono-mcs mono-vbnc nasm neko nickle ocaml octave
+  open-cobol openjdk-6-jdk pari-gp parrot perl php5-cli pike7.8 python r-base ratfor
+  regina-rexx rhino scala scilab slsh spl-core swi-prolog tcl ucblogo valac xsltproc
+  yorick zoem
 - sudo service postgresql stop
 - sudo service mysql stop
 before_script:
