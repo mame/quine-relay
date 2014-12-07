@@ -1,5 +1,5 @@
 LCI       := lci-0.10.5
-NPIET     := npiet-1.3c
+NPIET     := npiet-1.3d
 CFUNGE    := cfunge-0.9.0
 ACME_CHEF := Acme-Chef-1.01
 LOCAL     := $(CURDIR)/local
@@ -11,7 +11,6 @@ $(LOCAL)/bin/lci:
 	(cd $(LCI) && cmake -DCMAKE_INSTALL_PREFIX=$(LOCAL) . && make && make install)
 
 $(LOCAL)/bin/npiet:
-	mkdir -p $(LOCAL)/man/man1 $(LOCAL)/man/man3 # workaround
 	tar xzf $(NPIET).tar.gz
 	(cd $(NPIET) && ./configure --prefix=$(LOCAL) && make && make install)
 
