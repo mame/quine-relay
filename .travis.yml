@@ -2,7 +2,8 @@
 language: ruby
 rvm:
 - 2.1.0
-env: PATH=/usr/games:$PATH
+env:
+- PATH=/usr/games:$PATH
 before_install:
 - sudo apt-get update -qq
 - sudo apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
@@ -13,11 +14,11 @@ before_install:
   groff groovy icont iconx intercal iverilog jasmin-sable libgd2-xpm-dev libpng12-dev
   llvm lua5.2 make maxima mlton mono-devel mono-mcs mono-vbnc nasm neko nickle ocaml
   octave open-cobol openjdk-6-jdk pari-gp parrot perl php5-cli pike7.8 python r-base
-  ratfor regina-rexx rhino scala scilab slsh spl-core swi-prolog tcl ucblogo valac
+  ratfor regina-rexx rhino scala scilab slsh spl-core swi-prolog tcc tcl ucblogo valac
   xsltproc yorick zoem
 - sudo service postgresql stop
 - sudo service mysql stop
 before_script:
 - make -C vendor/
 script:
-- make
+- make CC=tcc
