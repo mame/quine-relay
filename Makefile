@@ -614,7 +614,8 @@ QR.gp: QR.ook
 	@echo "##  69: Ook! -> PARI/GP  ##"
 	@echo "###########################"
 	@echo
-	ruby vendor/ook.rb QR.ook > QR.gp
+	ruby vendor/ook-to-bf.rb QR.ook QR.ook.bf
+	$(BF) QR.ook.bf > QR.gp
 
 QR.pasm: QR.gp
 	@echo

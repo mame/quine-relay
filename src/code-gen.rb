@@ -192,7 +192,10 @@ end
 class Octave_Ook < CodeGen
   Name = ["Octave", "Ook!"]
   File = ["QR.octave", "QR.ook"]
-  Cmd = ["octave -qf QR.octave > OUTFILE", "ruby vendor/ook.rb QR.ook > OUTFILE"]
+  Cmd = [
+    "octave -qf QR.octave > OUTFILE",
+    "ruby vendor/ook-to-bf.rb QR.ook QR.ook.bf && $(BF) QR.ook.bf > OUTFILE"
+  ]
   Apt = ["octave", nil]
   def code
     <<-'END'.lines.map {|l| l.strip }.join

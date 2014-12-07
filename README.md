@@ -113,7 +113,7 @@ To run it on Ubuntu 12.04 LTS, you might want to refer to `.travis.yml`.
     $ gcc -o QR QR.m && ./QR > QR.ml
     $ ocaml QR.ml > QR.octave
     $ octave -qf QR.octave > QR.ook
-    $ ruby vendor/ook.rb QR.ook > QR.gp
+    $ ruby vendor/ook-to-bf.rb QR.ook QR.ook.bf && bf QR.ook.bf > QR.gp
     $ gp -f -q QR.gp > QR.pasm
     $ parrot QR.pasm > QR.pas
     $ fpc QR.pas && ./QR > QR.pl
