@@ -506,6 +506,14 @@ class Forth_FORTRAN77_Fortran90 < CodeGen
   end
 end
 
+class EC < CodeGen
+  Name = "eC"
+  File = "QR.ec"
+  Cmd = "mv QR.c QR.c.bak && ecp -c QR.ec -o QR.sym && ecc -c QR.ec -o QR.c && ecs -console QR.sym QR.imp -o QR.main.ec && ecp -c QR.main.ec -o QR.main.sym && ecc -c QR.main.ec -o QR.main.c && gcc -o QR QR.c QR.main.c -lecereCOM && mv QR.c.bak QR.c && ./QR > OUTFILE"
+  Apt = "ecere-sdk"
+  Code = %q("class QR:Application{void Main(){#{f(PREV,15){"Print#$S;"}}}}")
+end
+
 class Dc < CodeGen
   Name = "dc"
   File = "QR.dc"

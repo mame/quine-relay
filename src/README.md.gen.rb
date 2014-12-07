@@ -47,6 +47,8 @@ cmds = cmds.zip(srcs.drop(1) + ["QR.rb"]).map do |cmd, src|
   cmd = cmd.gsub("$(CC)", "gcc")
   cmd = cmd.gsub("$(CXX)", "g++")
 
+  cmd = cmd.gsub(/.{60,}?&&/, "\\0\n     ")
+
   cmd
 end
 cmds[-1].gsub!("QR.rb", "QR2.rb")

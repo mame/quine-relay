@@ -19,6 +19,9 @@ yaml["env"] = ["PATH=/usr/games:$PATH"]
 yaml["before_install"] = [
   "sudo apt-get update -qq",
   'sudo apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" dist-upgrade -qq',
+  "sudo add-apt-repository ppa:ecere-team/ppa",
+  "sudo apt-get update -qq",
+  'sudo apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" dist-upgrade -qq',
   "sudo apt-get install -qq #{ [*apts.flatten.compact.uniq, *other_packages].sort * " " }",
   "sudo service postgresql stop",
   "sudo service mysql stop",
