@@ -1,6 +1,7 @@
 MAKEFLAGS += --no-print-directory
 
 PATH := $(CURDIR)/vendor/local/bin:$(PATH)
+CLASSPATH := .
 
 JAVASCRIPT := $(shell which rhino nodejs node js 2>/dev/null | head -1)
 ifeq ($(JAVASCRIPT),)
@@ -46,7 +47,7 @@ QR.scm: QR.scala
 	@echo "##########################"
 	@echo
 	scalac QR.scala
-	CLASSPATH=. scala QR > QR.scm
+	scala QR > QR.scm
 
 QR.sci: QR.scm
 	@echo
@@ -477,7 +478,7 @@ QR.java: QR.j
 	@echo "##########################"
 	@echo
 	jasmin QR.j
-	CLASSPATH=. java QR > QR.java
+	java QR > QR.java
 
 QR.js: QR.java
 	@echo
@@ -486,7 +487,7 @@ QR.js: QR.java
 	@echo "##############################"
 	@echo
 	javac QR.java
-	CLASSPATH=. java QR > QR.js
+	java QR > QR.js
 
 QR.ll: QR.js
 	@echo

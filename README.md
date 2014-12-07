@@ -46,7 +46,7 @@ To run it on Ubuntu 12.04 LTS, you might want to refer to `.travis.yml`.
 #### 2. Run each program on each interpreter/compiler.
 
     $ ruby QR.rb > QR.scala
-    $ scalac QR.scala && CLASSPATH=. scala QR > QR.scm
+    $ scalac QR.scala && scala QR > QR.scm
     $ gosh QR.scm > QR.sci
     $ scilab -nw -nb -f QR.sci > QR.bash
     $ bash QR.bash > QR.sl
@@ -97,8 +97,8 @@ To run it on Ubuntu 12.04 LTS, you might want to refer to `.travis.yml`.
     $ ghc QR.hs && ./QR > QR.icn
     $ icont -s QR.icn && ./QR > QR.i
     $ ick -bfO QR.i && ./QR > QR.j
-    $ jasmin QR.j && CLASSPATH=. java QR > QR.java
-    $ javac QR.java && CLASSPATH=. java QR > QR.js
+    $ jasmin QR.j && java QR > QR.java
+    $ javac QR.java && java QR > QR.js
     $ rhino QR.js > QR.ll
     $ mv QR.bc QR.bc.bak && llvm-as QR.ll && lli QR.bc > QR.logo && mv QR.bc.bak QR.bc
     $ logo QR.logo > QR.lol

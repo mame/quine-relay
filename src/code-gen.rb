@@ -350,7 +350,7 @@ end
 
 class Java < CodeGen
   File = "QR.java"
-  Cmd = "javac QR.java && CLASSPATH=. java QR > OUTFILE"
+  Cmd = "javac QR.java && java QR > OUTFILE"
   Apt = "openjdk-6-jdk"
   def code
     <<-'END'.lines.map {|l| l.strip }.join
@@ -389,7 +389,7 @@ end
 
 class Jasmin < CodeGen
   File = "QR.j"
-  Cmd = "jasmin QR.j && CLASSPATH=. java QR > OUTFILE"
+  Cmd = "jasmin QR.j && java QR > OUTFILE"
   Apt = "jasmin-sable"
   def code
     <<-'END'.lines.map {|l| l.strip }.join
@@ -919,7 +919,7 @@ end
 
 class Scala < CodeGen
   File = "QR.scala"
-  Cmd = "scalac QR.scala && CLASSPATH=. scala QR > OUTFILE"
+  Cmd = "scalac QR.scala && scala QR > OUTFILE"
   Apt = "scala"
   def code
     <<-'END'.lines.map {|l| l.strip }.join
