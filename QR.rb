@@ -17,48 +17,48 @@ g~dish.`n`nServes~1.`n")!~g                                                     
 CATION~DIVISION.""PROGRAM-                                                                       ID.~QR.""PROCEDURE~DIVISION."'DISP
 LA`x59](map~#(str"~~~~^"                                    "(.replac                                e~%1"^"""^"^"")"^"&")(re-seq~#
 ".{1,45}""#{e[%((f=(n)                              ->Array(n+1).jo!~"Y");con                       sole.log("%s",#{V[E[%((H-l!e"#{
-e["import~std.stdio;v                           oid~mX{H#{E["[#{"class~QR:Applicat                   ion{void~MX{#{f(%(~:~A~."#{g*9
-}"~;~:~B~A~."~WRITE                         (*,*)'"~A~;~:~C~B~T`x59PE~."~'"~CR~;~:~D~                  S"~#$D"~C~S^"~Z~^"(&"~C~S^"~
-#{e[%(package~ma!;                        import"fmt";func~mX{fmt.Pr!t#{E[%(Z'#{e[("ma!=                putStr"+E[%(procedure~mX;i:
-=c:=0;s:=#{E[%(.c                       lass~public~QR`n.super~#{$T="java/io/Pr!tStream"}`               n.method~public~static~ma!
-([L#{S="java/lan                      g/"}SJ;)V~;]`n.limit~stack~2`ngetstatic~#{S}System/ou               t~L#$T;`nldc~"#{e[%(class
-~QR{public~stat                      ic~void~ma!(SJ[]v){SJ~c[]=new~SJ[9000],y="",z=y,s="#{z=t              =(0..r=q=126).map{|n|[n,
-[]]};a="";b=->                     n{a<<(n%78+55)%84+42 };("s=#{E[%(@s=global[#{i=(s=%(PR~"`x4             8AI^~1.2~PR~"VISIBLE^~"#
-{Q["Z"+E[%(all                    :`n`t@echo~'#{d["l!e   l:99999;Z#{E[%(.assembly~t{}.method~sta            tic~void~MX{.entrypo!t~
-ldstr"#{e[%(m                    :db`x60#{e[s="$Z#{E[  %  (Zf#{E["#import"+M["Z_sJ"+E[%(s=toascii            #{E["Z#{E[%(say"#{e["#
-$D(output);be                   g!~H(#{f((p="eval";%  ($_  ="#{s=%(<?php~function~f($n){return~st            r_repeat("Y",$n);};$f=
-"f";$z=3+$w=s       tr         len($s=#{V[Q[E["!t~m  X{H#{  E[%((___________)dup~=/s(|~~~~~.~~~|)d            ef(#{Q["qr:-H('#{Q[e[
-%(for~c~!"".j                 o!(["say~'%s'^n"%l~f  or~l~!#  {E[d[%(eval$s=%q(#$s)),?']]}.split("^n           ")]):Z('cat("r=fput(c
-har(%d))^n")'%               ord(c))`                                     nZ('cat("end^n")'))],?']}           ').",B]}){9~7{exch~du
-p~1~and~79~mul~        32~  add~exch~2  ~idiv~3  ~1~roll~s~exc  h~2~!de  x~exch~put~1~sub~dup~6~eq{1          ~sub}if}repeat~s~=~po
-p~pop}forall~=~q       uit)]};return~0;  }"]],  "{$f(",")}"]})*  3;ech  o"^x89PNG^r^n^x1a^n";$m="";$          t="^xc0^0^xff";for($i
-=-1;$i<128*$z;$m.=$   c--?($w-$c||$i>$z)  &&$  i/$z<($c<$w?ord($  s[(  !t)($c/3)]):$c--%3+2)?$t[2].$          t[$c%3%2].$t[$c%3]:"^
-0^0^0":"^0")$c=++$i%$z;fo reach(array("I`  x  48DR".pack("NNCV",$  w  +2,128,8,2),"IDAT".gzcompress(          $m),"IEND")as$d)echo~
-pack("NA*N",strlen($d)-4, $d,crc32($d));?>   );(s+N*(-s.size%6)).u   npack("B*")[0].K(/.{6}/){n=$&.t          o_i~2;((n+14)/26*6+n+
-47).chr}}";s|.|$n=ord$&;s ubstr~unpack(B8  ,  chr$n-!t($n/32)*6-4  1  ),2|eg;Z~pack"B*",$_).sc     a          n(/[~,-:A-z]+|(.)/){p
-="s++#{$1?"chr~#{$1.ord}+  e":$&+?+};"+p  };p  ),1){"'#$s',"}}''  )en  d."]}"`nend)               ]          }  ;quit"]};t=num2cell
-(b=11-ceil(s/13));for~n=1: 9m={};for~i=  1:141  f=@(x,y,n)repma  t(["O  ok"~x~"~                  O          o   k"~y~32],[1~abs(n)
-]);m(i)=[f(z=46,63,n)~f(q=  z-(i<13)*1  3,q,i-1  3)~f(33,z,1)~  f(63,z,  n)];end;t(x)=m          (          d     iff([0~s(x=b==n)]
-)+13);end;Zf("%%s",t{:}))]] ]})+N]};"                                     +N]}`x60`ngl           o          b      al~_start`n_star
-t:mov~edx,#{s.size}`nmov~ec  x,m`nmov~ebx,1`nmov~e  ax,4`n!  t~128`nmov~ebx,0`nmov~eax ,1`n!t~1 2          8       )]}"call~void~[m
-scorlib]System.Console::Writ  e(sJ)ret})]};quit();"  ,?$].  K(?'){"'^''"}}')].K(/[:"]/,":^0"), /          [         ~Y`t;"(){}`[`]]
-/]}"~PR~"`x4bT`x48`x58B`x59E~  B`x59E)).size+1}x~i8]  c"#  {s.K(/[^"]/){"^%`x58"%$&.ord}}^00"de          c          lare~i32@puts(i
-8*)def!e~i32@mX{%1=call~i32@pu  ts(i8*getelementptr([  #  {i}x~i8]*@s,i32~0,i32~0))ret~i32~0})          ]           };typeof~Z=='fu
-nction'?Z(s):console.log('%s',s   )").bytes{|n|r,z=z[n   ]||(b[r/78];b[r];q<6083&&z[n]=[q+=1           ,             []];t[n])};b[r
-/78];b[r]}";!t~i=0,n=0,q=0;for(;   ++n<126;)c[n]=""+(ch ar)n;for(;i<s.length();){q=q*78+(s.           c              harAt(i)-13)%8
-4;if(i++%2>0){y=q<n?c[q]:y;c[n++]    =z+y.charAt(0);System.out.Z(z=c[q]);q=0;}}}})]}"`n!v           okevirt          ual~#$T/Zln(L#
-{S}SJ;)V`nreturn`n.end~method)+N]};    H("DO,1<-#"||*s);s?while~t:=ord(move(1))do{i+:=1           ;u:=-i;ev          ery~0to~7do{u:
-=u*2+t%2;t/:=2};H("PLEASE")^(i%4/3);      H("DO,1SUB#"||i||"<-#"||((c-u)%256));c:=u;            };H("PLEASEREADOUT,  1^nPLEASEGIVEU
-P");end)]).tr(B,?&)]}'.tr('&','YY');)]       };})]}"~DUP~FOR~S"~&A,&"~C~NE`x58T~S             ^"~&A)^",&"~C~0~DO~B~.  "~&char("~COU
-NT~.~."~),&'"~CR~LOOP~S^"~&^"^""~C~S"~end        ~#$D"~C~A~."~STOP"~CR~A~."~E               ND"~CR~B`x59E~;~D~),15){  "Pr!t#$S;"}}}
-}"}]pq"]};}"]}"))],'#{f(',')}']}))]}"))["~~             ~~^"~^".""STO                    P~RUN."])](Zln(str"#{g*8}"s)))).reverse]})
-)]};}})]};}"]]],"$(f(","))"]};for~i~!~range(len                                       (s)):b~as~!t=s[i];a-=b;Z(('+'*-a~if~0>a~else'
--'*a)+'.');a=b;).tr~B,?`x21]};K(/`x21/,"Y",s);for(Z                              "def!e~void~f(n){^"00g,^";for(m=128;m;m/=2){^"00g,
-4,:^";if(n/m%2<1)^"4+^";^",^";};^"4,:,^"}^"389**6+44*6+00p                29*,^";";++j<=length(s);Z"f("n");")for(n=9;substr(s,j,1)`
-x21=sZf("%c",++n););Z"^"4,:,@^"^nquit"})]],?']}');)]}";FORiTO`~UPBtDO`~INTn:=ABSt[i];Z(~(50+n%64)+c+~(50+n%8MOD8)+c+~(50+nMOD8)+b+"
-`x4a"+a)OD]*"REPR"]}")]}");end;)]+"`nsys.exit~0",/[^{}]/]}}",35){y<<",`n"+$S;"%s"}}")+y}]]></#{U}></xsl:#{I}>"].K~N,'"&~VbLf~&"'}":
-s="~~~":For~i=0To~7:s~&=Chr(32-(Asc(c)>>7-i~And~1)*23):Next:#{C}(s~&n~&Chr(9)&n~&"~~"):Next:#{C}(n~&n~&n):End~Sub:End~Module),3){%(
-$H("%s",#$S);)+N}}end~endmodule)],?%]};return~0;}).reverse],/[`[`]$]/],"[f~",?]]}"~^x60.&]k^n::=^na)]};Z"0~0~-1";)]]};),?']}';cr"]]
-]}"|sed~-E~-e~'s/([`x5eY]|Y.){1,120}/Zf("%s","^0");^n/g'],7){%(Zf("%s","#{d[d[$s],?']}")`n)}}quit)]}")),196){%(Z#$S;)}}})).gsub(/[!
-HJKXYZ^`~]/){[B*2,:write,B,:tring,:gsub,"ain()",B*4,:print,g,:in][$&.ord%47%12]})))*"")#_buffer_for_future_bug_fixes_#_buffer_for_f
+e["import~std.stdio;v                           oid~mX{H#{E["[#{"class~QR:Applicat                   ion{void~MX{#{f(%((pr!c~"#{e[%
+(~:~A~."#{g*9}"~;~:                         ~B~A~."~WRITE(*,*)'"~A~;~:~C~B~T`x59PE~."                  ~'"~CR~;~:~D~S"~#$D"~C~S^"~Z
+~^"(&"~C~S^"~#{e[%                        (package~ma!;import"fmt";func~mX{fmt.Pr!t#{E[%                (Z'#{e[("ma!=putStr"+E[%(pr
+ocedure~mX;i:=c:=                       0;s:=#{E[%(.class~public~QR`n.super~#{$T="java/io/               Pr!tStream"}`n.method~publ
+ic~static~ma!([L                      #{S="java/lang/"}SJ;)V~;]`n.limit~stack~2`ngetstatic~               #{S}System/out~L#$T;`nldc
+~"#{e[%(class~Q                      R{public~static~void~ma!(SJ[]v){SJ~c[]=new~SJ[9000],y=""              ,z=y,s="#{z=t=(0..r=q=12
+6).map{|n|[n,[                     ]]};a="";b=->n{a<<(n %78+55)%84+42};("s=#{E[%(@s=global[#{i             =(s=%(PR~"`x48AI^~1.2~PR
+~"VISIBLE^~"#{                    Q["Z"+E[%(all:`n`t@e   cho~'#{d["l!el:99999;Z#{E[%(.assembly~t            {}.method~static~void~M
+X{.entrypo!t~                    ldstr"#{e[%(m:db`x60  #  {e[s="$Z#{E[%(Zf#{E["#import"+M["Z_sJ"+            E[%(s=toascii#{E["Z#{E
+[%(say"#{e["#                   $D(output);beg!~H(#{  f((  p="eval";%($_="#{s=%(<?php~function~f(            $n){return~str_repeat(
+"Y",$n);};$f=       "f         ";$z=3+$w=strlen($s=  #{V[Q  [E["!t~mX{H#{E[%((___________)dup~=/s(            |~~~~~.~~~|)def(#{Q["
+qr:-H('#{Q[e[                 %(for~c~!"".jo!(["sa  y~'%s'^  n"%l~for~l~!#{E[d[%(eval$s=%q(#$s)),?'           ]]}.split("^n")]):Z('
+cat("r=fput(ch               ar(%d))^                                     n")'%ord(c))`nZ('cat("end           ^n")'))],?']}').",B]}
+){9~7{exch~dup~        1~a  nd~79~mul~  32~add~  exch~2~idiv~3  ~1~roll  ~s~exch~2~!dex~exch~put~1~s          ub~dup~6~eq{1~sub}if}
+repeat~s~=~pop~p       op}forall~=~quit  )]};r  eturn~0;}"]],"{  $f(",  ")}"]})*3;echo"^x89PNG^r^n^x          1a^n";$m="";$t="^xc0^
+0^xff";for($i=-1;$i   <128*$z;$m.=$c--?(  $w-  $c||$i>$z)&&$i/$z  <($  c<$w?ord($s[(!t)($c/3)]):$c--          %3+2)?$t[2].$t[$c%3%2
+].$t[$c%3]:"^0^0^0":"^0") $c=++$i%$z;fore  a  ch(array("I`x48DR".  p  ack("NNCV",$w+2,128,8,2),"IDAT          ".gzcompress($m),"IEN
+D")as$d)echo~pack("NA*N", strlen($d)-4,$d,   crc32($d));?>);(s+N*(   -s.size%6)).unpack("B*")[0].K(/          .{6}/){n=$&.to_i~2;((
+n+14)/26*6+n+47).chr}}";s |.|$n=ord$&;sub  s  tr~unpack(B8,chr$n-  !  t($n/32)*6-41),2|eg;Z~pa     c          k"B*",$_).scan(/[~,-:
+A-z]+|(.)/){p="s++#{$1?"c  hr~#{$1.ord}+  e":  $&+?+};"+p};p),1)  {"'  #$s',"}}'')e               n          d  ."]}"`nend)]};quit"
+]};t=num2cell(b=11-ceil(s/ 13));for~n=1  :9m={  };for~i=1:141f=  @(x,y  ,n)repma                  t          (   ["Ook"~x~"~Ook"~y~
+32],[1~abs(n)]);m(i)=[f(z=  46,63,n)~f  (q=z-(i  <13)*13,q,i-1  3)~f(33  ,z,1)~f(63,z,n          )          ]     ;end;t(x)=m(diff(
+[0~s(x=b==n)])+13);end;Zf(" %%s",t{:}                                     ))]]]})+N]};           "          +      N]}`x60`nglobal~
+_start`n_start:mov~edx,#{s.  size}`nmov~ecx,m`nmov  ~ebx,1`  nmov~eax,4`n!t~128`nmov~e bx,0`nmo v          ~       eax,1`n!t~128)]}
+"call~void~[mscorlib]System.  Console::Write(sJ)ret  })]};  quit();",?$].K(?'){"'^''"}}')].K(/ [          :         "]/,":^0"),/[~Y
+`t;"(){}`[`]]/]}"~PR~"`x4bT`x  48`x58B`x59E~B`x59E))  .si  ze+1}x~i8]c"#{s.K(/[^"]/){"^%`x58"%$          &          .ord}}^00"decla
+re~i32@puts(i8*)def!e~i32@mX{%  1=call~i32@puts(i8*ge  t  elementptr([#{i}x~i8]*@s,i32~0,i32~0          )           )ret~i32~0})]};
+typeof~Z=='function'?Z(s):conso   le.log('%s',s)").byt   es{|n|r,z=z[n]||(b[r/78];b[r];q<608           3             &&z[n]=[q+=1,[
+]];t[n])};b[r/78];b[r]}";!t~i=0,   n=0,q=0;for(;++n<126 ;)c[n]=""+(char)n;for(;i<s.length()           ;              ){q=q*78+(s.ch
+arAt(i)-13)%84;if(i++%2>0){y=q<n?    c[q]:y;c[n++]=z+y.charAt(0);System.out.Z(z=c[q]);q=0           ;}}}})]          }"`n!vokevirtu
+al~#$T/Zln(L#{S}SJ;)V`nreturn`n.end    ~method)+N]};H("DO,1<-#"||*s);s?while~t:=ord(mov           e(1))do{i          +:=1;u:=-i;eve
+ry~0to~7do{u:=u*2+t%2;t/:=2};H("PLEA      SE")^(i%4/3);H("DO,1SUB#"||i||"<-#"||((c-u            )%256));c:=u;};H("P  LEASEREADOUT,1
+^nPLEASEGIVEUP");end)]).tr(B,?&)]}'.tr       ('&','YY');)]};})]}"~DUP~FOR~S"~&A,&             "~C~NE`x58T~S^"~&A)^",  &"~C~0~DO~B~.
+"~&char("~COUNT~.~."~),&'"~CR~LOOP~S^"~&^        "^""~C~S"~end~#$D"~C~A~."~ST               OP"~CR~A~."~END"~CR~B`x5  9E~;~D~)]}"))
+,15){"Pr!t#$S;"}}}}"}]pq"]};}"]}"))],'#{f('             ,')}']}))]}")                    )["~~~~^"~^".""STOP~RUN."])](Zln(str"#{g*8
+}"s)))).reverse]}))]};}})]};}"]]],"$(f(","))"]}                                       ;for~i~!~range(len(s)):b~as~!t=s[i];a-=b;Z(('
++'*-a~if~0>a~else'-'*a)+'.');a=b;).tr~B,?`x21]};K(/                              `x21/,"Y",s);for(Z"def!e~void~f(n){^"00g,^";for(m=
+128;m;m/=2){^"00g,4,:^";if(n/m%2<1)^"4+^";^",^";};^"4,:,^"                }^"389**6+44*6+00p29*,^";";++j<=length(s);Z"f("n");")for(
+n=9;substr(s,j,1)`x21=sZf("%c",++n););Z"^"4,:,@^"^nquit"})]],?']}');)]}";FORiTO`~UPBtDO`~INTn:=ABSt[i];Z(~(50+n%64)+c+~(50+n%8MOD8)
++c+~(50+nMOD8)+b+"`x4a"+a)OD]*"REPR"]}")]}");end;)]+"`nsys.exit~0",/[^{}]/]}}",35){y<<",`n"+$S;"%s"}}")+y}]]></#{U}></xsl:#{I}>"].K
+~N,'"&~VbLf~&"'}":s="~~~":For~i=0To~7:s~&=Chr(32-(Asc(c)>>7-i~And~1)*23):Next:#{C}(s~&n~&Chr(9)&n~&"~~"):Next:#{C}(n~&n~&n):End~Sub
+:End~Module),3){%($H("%s",#$S);)+N}}end~endmodule)],?%]};return~0;}).reverse],/[`[`]$]/],"[f~",?]]}"~^x60.&]k^n::=^na)]};Z"0~0~-1";
+)]]};),?']}';cr"]]]}"|sed~-E~-e~'s/([`x5eY]|Y.){1,120}/Zf("%s","^0");^n/g'],7){%(Zf("%s","#{d[d[$s],?']}")`n)}}quit)]}")),196){%(Z#
+$S;)}}})).gsub(/[!HJKXYZ^`~]/){[B*2,:write,B,:tring,:gsub,"ain()",B*4,:print,g,:in][$&.ord%47%12]})))*"")#_buffer_for_future_bug_fi
 ##########################  Quine Relay -- Copyright (c) 2013, 2014 Yusuke Endoh (@mametter), @hirekoke  #########################)

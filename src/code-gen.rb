@@ -507,6 +507,14 @@ class Forth_FORTRAN77_Fortran90 < CodeGen
   end
 end
 
+class EmacsLisp < CodeGen
+  Name = "Emacs Lisp"
+  File = "QR.el"
+  Cmd = "emacs -Q --script QR.el > OUTFILE"
+  Apt = "emacs23"
+  Code = %q(%((princ "#{e[PREV]}")))
+end
+
 class EC < CodeGen
   Name = "eC"
   File = "QR.ec"
