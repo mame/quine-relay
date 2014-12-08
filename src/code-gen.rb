@@ -54,6 +54,7 @@ class CodeGen
     dir = File.join(File.dirname(__dir__), name)
     Dir.mkdir(dir) unless File.directory?(dir)
     Dir.chdir(dir)
+    File.symlink("../vendor", "vendor") unless File.symlink?("vendor")
   end
 end
 
