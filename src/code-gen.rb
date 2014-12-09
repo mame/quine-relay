@@ -507,6 +507,13 @@ class Forth_FORTRAN77_Fortran90 < CodeGen
   end
 end
 
+class Erlang < CodeGen
+  File = "qr.erl"
+  Cmd = "erl -compile qr && erl -noshell -s init stop -s qr qr > OUTFILE"
+  Apt = "erlang"
+  Code = %q(%(-module(qr).\n-export([qr/0]).\nqr()->io:fwrite#{E[PREV]}.))
+end
+
 class EmacsLisp < CodeGen
   Name = "Emacs Lisp"
   File = "QR.el"
