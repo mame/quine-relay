@@ -427,8 +427,7 @@ QR.fs: qr.erl
 	@echo "##  47: Erlang -> Forth  ##"
 	@echo "###########################"
 	@echo
-	erl -compile qr
-	erl -noshell -s init stop -s qr qr > QR.fs
+	escript qr.erl > QR.fs
 
 QR.f: QR.fs
 	@echo

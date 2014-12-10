@@ -95,7 +95,7 @@ To run it on Ubuntu 12.04 LTS, you might want to refer to `.travis.yml`.
       ecp -c QR.main.ec -o QR.main.sym && ecc -c QR.main.ec -o QR.main.c &&
       gcc -o QR QR.c QR.main.c -lecereCOM && ./QR > QR.el
     $ emacs -Q --script QR.el > qr.erl
-    $ erl -compile qr && erl -noshell -s init stop -s qr qr > QR.fs
+    $ escript qr.erl > QR.fs
     $ gforth QR.fs > QR.f
     $ f2c QR.f && gcc -o QR QR.c -L/usr/lib -lf2c -lm && ./QR > QR.f90
     $ gfortran -o QR QR.f90 && ./QR > QR.go

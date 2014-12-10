@@ -509,9 +509,9 @@ end
 
 class Erlang < CodeGen
   File = "qr.erl"
-  Cmd = "erl -compile qr && erl -noshell -s init stop -s qr qr > OUTFILE"
+  Cmd = "escript qr.erl > OUTFILE"
   Apt = "erlang"
-  Code = %q(%(-module(qr).\n-export([qr/0]).\nqr()->io:fwrite#{E[PREV]}.))
+  Code = %q(%(\nmain(_)->\nio:fwrite#{E[PREV]}.))
 end
 
 class EmacsLisp < CodeGen
