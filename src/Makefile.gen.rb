@@ -1,5 +1,9 @@
 require_relative "code-gen"
 
+langs = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.name } } + ["Ruby"]
+cmds = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.cmd } }
+srcs = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.src } } + ["QR2.rb"]
+
 OUT = []
 
 def banner(s1, s2=nil, i=nil)
@@ -41,10 +45,9 @@ END
 OUT << "all: QR2.rb"
 banner("CHECK")
 OUT << "\tdiff QR.rb QR2.rb"
-
-langs = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.name } } + ["Ruby"]
-cmds = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.cmd } }
-srcs = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.src } } + ["QR2.rb"]
+OUT << ""
+OUT << "SHA1SUMS: all"
+OUT << "\tsha1sum -b #{ srcs[0..-2].join(" ") } > SHA1SUMS"
 
 cmds.size.times do |i|
   cmd = cmds[i].gsub("OUTFILE", srcs[i + 1])
