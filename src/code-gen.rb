@@ -507,6 +507,13 @@ class Forth_FORTRAN77_Fortran90 < CodeGen
   end
 end
 
+class Falcon < CodeGen
+  File = "QR.fal"
+  Cmd = "falcon QR.fal > OUTFILE"
+  Apt = "falconpl"
+  Code = %q(?>+E[PREV])
+end
+
 class FSharp < CodeGen
   Name = "F#"
   File = "QR.fsx"

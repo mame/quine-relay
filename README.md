@@ -7,7 +7,7 @@
 This is a Ruby program that generates
 Scala program that generates
 Scheme program that generates
-...(through 87 languages in total)...
+...(through 88 languages in total)...
 REXX program that generates
 the original Ruby code again.
 
@@ -29,14 +29,14 @@ First, you have to type the following apt-get command to install all of them.
 
     $ sudo apt-get install afnix algol68g aplus-fsf asymptote \
       ats-lang-anairiats bash bc bf boo bsdgames cduce clisp clojure1.4 \
-      cmake coffeescript dc ecere-sdk emacs23 erlang f2c fp-compiler fsharp \
-      g++ gauche gawk gcc gdc gforth gfortran ghc ghostscript gnat \
-      gnu-smalltalk gobjc golang groff groovy icont iconx intercal iverilog \
-      jasmin-sable libgd2-xpm-dev libpng12-dev llvm lua5.2 make maxima mlton \
-      mono-devel mono-mcs mono-vbnc nasm neko nickle ocaml octave open-cobol \
-      openjdk-6-jdk pari-gp parrot perl php5-cli pike7.8 python r-base \
-      ratfor regina-rexx rhino ruby2.0 scala scilab slsh spl-core swi-prolog \
-      tcl ucblogo valac xsltproc yorick zoem
+      cmake coffeescript dc ecere-sdk emacs23 erlang f2c falconpl \
+      fp-compiler fsharp g++ gauche gawk gcc gdc gforth gfortran ghc \
+      ghostscript gnat gnu-smalltalk gobjc golang groff groovy icont iconx \
+      intercal iverilog jasmin-sable libgd2-xpm-dev libpng12-dev llvm lua5.2 \
+      make maxima mlton mono-devel mono-mcs mono-vbnc nasm neko nickle ocaml \
+      octave open-cobol openjdk-6-jdk pari-gp parrot perl php5-cli pike7.8 \
+      python r-base ratfor regina-rexx rhino ruby2.0 scala scilab slsh \
+      spl-core swi-prolog tcl ucblogo valac xsltproc yorick zoem
 
 Then, you have to build the bundled interpreters.
 
@@ -96,7 +96,8 @@ To run it on Ubuntu 12.04 LTS, you might want to refer to `.travis.yml`.
       gcc -o QR QR.c QR.main.c -lecereCOM && ./QR > QR.el
     $ emacs -Q --script QR.el > QR.erl
     $ escript QR.erl > QR.fsx
-    $ fsharpc QR.fsx -o QR.exe && mono QR.exe > QR.fs
+    $ fsharpc QR.fsx -o QR.exe && mono QR.exe > QR.fal
+    $ falcon QR.fal > QR.fs
     $ gforth QR.fs > QR.f
     $ f2c QR.f && gcc -o QR QR.c -L/usr/lib -lf2c -lm && ./QR > QR.f90
     $ gfortran -o QR QR.f90 && ./QR > QR.go
@@ -213,46 +214,47 @@ I used the following Ubuntu deb packages to test this program.
 46 |Emacs Lisp         |emacs23            |23.4+1-4.1ubuntu1
 47 |Erlang             |erlang             |1:17.1-dfsg-4ubuntu2
 48 |F#                 |fsharp             |3.0.34+dfsg-5
-49 |Forth              |gforth             |0.7.2+dfsg1-1
-50 |FORTRAN77          |f2c                |20100827-1
-51 |Fortran90          |gfortran           |4:4.9.1-4ubuntu2
-52 |Go                 |golang             |2:1.2.1-2ubuntu1
-53 |Groovy             |groovy             |2.0.0~beta2+isreally1.8.6-4ubuntu1
-54 |Haskell            |ghc                |7.6.3-19
-55 |Icon               |icont              |9.4.3-4.2ubuntu1
+49 |Falcon             |falconpl           |0.9.6.9-git20120606-2.1
+50 |Forth              |gforth             |0.7.2+dfsg1-1
+51 |FORTRAN77          |f2c                |20100827-1
+52 |Fortran90          |gfortran           |4:4.9.1-4ubuntu2
+53 |Go                 |golang             |2:1.2.1-2ubuntu1
+54 |Groovy             |groovy             |2.0.0~beta2+isreally1.8.6-4ubuntu1
+55 |Haskell            |ghc                |7.6.3-19
+56 |Icon               |icont              |9.4.3-4.2ubuntu1
    |                   |iconx              |9.4.3-4.2ubuntu1
-56 |INTERCAL           |intercal           |29:0.29-3
-57 |Jasmin             |jasmin-sable       |2.4.0-4
-58 |Java               |openjdk-6-jdk      |6b33-1.13.5-1ubuntu1
-59 |JavaScript         |rhino              |1.7R4-3
-60 |LLVM asm           |llvm               |1:3.5-23ubuntu1
-61 |Logo               |ucblogo            |5.5-2.1
-62 |LOLCODE            |*N/A*              |-
-63 |Lua                |lua5.2             |5.2.3-1
-64 |Makefile           |make               |4.0-8
-65 |Maxima             |maxima             |5.33.0-14
-66 |MSIL               |mono-devel         |3.2.8+dfsg-4ubuntu2
-67 |NASM               |nasm               |2.11-1
-68 |Neko               |neko               |2.0.0-3
-69 |Nickle             |nickle             |2.77-1
-70 |Objective-C        |gobjc              |4:4.9.1-4ubuntu2
-71 |OCaml              |ocaml              |4.01.0-4ubuntu1
-72 |Octave             |octave             |3.8.1-1ubuntu1
-73 |Ook!               |*N/A*              |-
-74 |PARI/GP            |pari-gp            |2.7.1-1
-75 |Parrot asm         |parrot             |6.3.0-1
-76 |Pascal             |fp-compiler        |2.6.4+dfsg-3
-77 |Perl               |perl               |5.20.1-1
-78 |PHP                |php5-cli           |5.5.12+dfsg-2ubuntu4.1
-79 |Piet               |*N/A*              |-
-80 |Pike               |pike7.8            |7.8.866-3
-81 |PostScript         |ghostscript        |9.14~dfsg-0ubuntu3
-82 |PPT (Punched tape) |bsdgames           |2.17-22
-83 |Prolog             |swi-prolog         |6.6.4-2ubuntu1
-84 |Python             |python             |2.7.8-1
-85 |R                  |r-base             |3.1.1-1
-86 |Ratfor             |ratfor             |1.0-15
-87 |REXX               |regina-rexx        |3.6-2
+57 |INTERCAL           |intercal           |29:0.29-3
+58 |Jasmin             |jasmin-sable       |2.4.0-4
+59 |Java               |openjdk-6-jdk      |6b33-1.13.5-1ubuntu1
+60 |JavaScript         |rhino              |1.7R4-3
+61 |LLVM asm           |llvm               |1:3.5-23ubuntu1
+62 |Logo               |ucblogo            |5.5-2.1
+63 |LOLCODE            |*N/A*              |-
+64 |Lua                |lua5.2             |5.2.3-1
+65 |Makefile           |make               |4.0-8
+66 |Maxima             |maxima             |5.33.0-14
+67 |MSIL               |mono-devel         |3.2.8+dfsg-4ubuntu2
+68 |NASM               |nasm               |2.11-1
+69 |Neko               |neko               |2.0.0-3
+70 |Nickle             |nickle             |2.77-1
+71 |Objective-C        |gobjc              |4:4.9.1-4ubuntu2
+72 |OCaml              |ocaml              |4.01.0-4ubuntu1
+73 |Octave             |octave             |3.8.1-1ubuntu1
+74 |Ook!               |*N/A*              |-
+75 |PARI/GP            |pari-gp            |2.7.1-1
+76 |Parrot asm         |parrot             |6.3.0-1
+77 |Pascal             |fp-compiler        |2.6.4+dfsg-3
+78 |Perl               |perl               |5.20.1-1
+79 |PHP                |php5-cli           |5.5.12+dfsg-2ubuntu4.1
+80 |Piet               |*N/A*              |-
+81 |Pike               |pike7.8            |7.8.866-3
+82 |PostScript         |ghostscript        |9.14~dfsg-0ubuntu3
+83 |PPT (Punched tape) |bsdgames           |2.17-22
+84 |Prolog             |swi-prolog         |6.6.4-2ubuntu1
+85 |Python             |python             |2.7.8-1
+86 |R                  |r-base             |3.1.1-1
+87 |Ratfor             |ratfor             |1.0-15
+88 |REXX               |regina-rexx        |3.6-2
 
 Note that some languages are not available in Ubuntu (marked as *N/A*).
 This repository includes their implementations in `vendor/`.

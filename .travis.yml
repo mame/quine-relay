@@ -35,6 +35,7 @@ before_install:
 - sudo apt-get install emacs23
 - sudo apt-get install erlang
 - sudo apt-get install f2c
+- sudo apt-get install falconpl
 - sudo apt-get install fp-compiler
 - sudo apt-get install fsharp
 - sudo apt-get install g++
