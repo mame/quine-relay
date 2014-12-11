@@ -17,16 +17,18 @@ yaml["language"] = "ruby"
 yaml["rvm"] = ["2.1.0"]
 yaml["env"] = ["PATH=/usr/games:$PATH"]
 yaml["before_install"] = [
-  "sudo apt-get update -qq",
-  'sudo apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" dist-upgrade -qq',
-  "sudo add-apt-repository ppa:ecere-team/ppa -y",
-  "sudo add-apt-repository ppa:directhex/ppa -y",
-  "sudo apt-get update -qq",
-  'sudo apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" dist-upgrade -qq',
-  "sudo apt-get install -qq #{ [*apts.flatten.compact.uniq, *other_packages].sort * " " }",
   "sudo service postgresql stop",
   "sudo service mysql stop",
+  "sudo apt-get update",
+  'sudo apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" dist-upgrade',
+  "sudo add-apt-repository ppa:ecere-team/ppa -y",
+  "sudo add-apt-repository ppa:directhex/ppa -y",
+  "sudo apt-get update",
+  'sudo apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" dist-upgrade',
 ]
+[*apts.flatten.compact.uniq, *other_packages].sort.each do |apt|
+  yaml["before_install"] << "sudo apt-get install #{ apt }"
+end
 yaml["before_script"] = [
   "make -C vendor/",
 ]
