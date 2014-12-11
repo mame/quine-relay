@@ -516,8 +516,8 @@ class FSharp < CodeGen
 end
 
 class Erlang < CodeGen
-  File = "qr.erl"
-  Cmd = "escript qr.erl > OUTFILE"
+  File = "QR.erl"
+  Cmd = "escript QR.erl > OUTFILE"
   Apt = "erlang"
   Code = %q(%(\nmain(_)->\nio:fwrite#{E[PREV]}.))
 end

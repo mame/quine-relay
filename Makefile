@@ -33,7 +33,7 @@ all: QR2.rb
 	diff QR.rb QR2.rb
 
 SHA1SUMS: all
-	sha1sum -b QR.rb QR.scala QR.scm QR.sci QR.bash QR.sl QR.st QR.spl QR.sml QR.sq QR.tcl QR.t QR.unl QR.vala QR.v QR.vb QR.ws QR.xslt QR.yorick QR.azm QR.+ qr.adb QR.als QR.a68 QR.ante QR.asy QR.dats QR.awk QR.bc QR.bef QR.Blc QR.boo QR.bf QR.c QR.cpp QR.cs QR.cd QR.chef QR.clj QR.cob QR.coffee QR.lisp QR.d QR.dc QR.ec QR.el qr.erl QR.fsx QR.fs QR.f QR.f90 QR.go QR.groovy QR.hs QR.icn QR.i QR.j QR.java QR.js QR.ll QR.logo QR.lol QR.lua QR.mk QR.mac QR.il QR.asm QR.neko QR.5c QR.m QR.ml QR.octave QR.ook QR.gp QR.pasm QR.pas QR.pl QR.php QR.png QR.pike QR.ps QR.ppt QR.prolog QR.py QR.R QR.r QR.rexx > SHA1SUMS
+	sha1sum -b QR.rb QR.scala QR.scm QR.sci QR.bash QR.sl QR.st QR.spl QR.sml QR.sq QR.tcl QR.t QR.unl QR.vala QR.v QR.vb QR.ws QR.xslt QR.yorick QR.azm QR.+ qr.adb QR.als QR.a68 QR.ante QR.asy QR.dats QR.awk QR.bc QR.bef QR.Blc QR.boo QR.bf QR.c QR.cpp QR.cs QR.cd QR.chef QR.clj QR.cob QR.coffee QR.lisp QR.d QR.dc QR.ec QR.el QR.erl QR.fsx QR.fs QR.f QR.f90 QR.go QR.groovy QR.hs QR.icn QR.i QR.j QR.java QR.js QR.ll QR.logo QR.lol QR.lua QR.mk QR.mac QR.il QR.asm QR.neko QR.5c QR.m QR.ml QR.octave QR.ook QR.gp QR.pasm QR.pas QR.pl QR.php QR.png QR.pike QR.ps QR.ppt QR.prolog QR.py QR.R QR.r QR.rexx > SHA1SUMS
 
 QR.scala: QR.rb
 	@echo
@@ -416,21 +416,21 @@ QR.el: QR.ec
 	mv QR.c.bak QR.c
 	./QR > QR.el
 
-qr.erl: QR.el
+QR.erl: QR.el
 	@echo
 	@echo "################################"
 	@echo "##  46: Emacs Lisp -> Erlang  ##"
 	@echo "################################"
 	@echo
-	emacs -Q --script QR.el > qr.erl
+	emacs -Q --script QR.el > QR.erl
 
-QR.fsx: qr.erl
+QR.fsx: QR.erl
 	@echo
 	@echo "########################"
 	@echo "##  47: Erlang -> F#  ##"
 	@echo "########################"
 	@echo
-	escript qr.erl > QR.fsx
+	escript QR.erl > QR.fsx
 
 QR.fs: QR.fsx
 	@echo
