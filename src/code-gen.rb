@@ -507,6 +507,14 @@ class Forth_FORTRAN77_Fortran90 < CodeGen
   end
 end
 
+class FSharp < CodeGen
+  Name = "F#"
+  File = "QR.fsx"
+  Cmd = "fsharpc QR.fsx -o QR.exe && mono QR.exe > OUTFILE"
+  Apt = "fsharp"
+  Code = %q("printfn"+d[E[PREV],?%])
+end
+
 class Erlang < CodeGen
   File = "qr.erl"
   Cmd = "escript qr.erl > OUTFILE"
