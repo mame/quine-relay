@@ -507,6 +507,14 @@ class Forth_FORTRAN77_Fortran90 < CodeGen
   end
 end
 
+class FALSELang < CodeGen
+  Name = "FALSE"
+  File = "QR.false"
+  Cmd = "ruby vendor/false.rb QR.false > OUTFILE"
+  Apt = [nil]
+  Code = %q(?"+PREV.gsub(?"){'"34,"'}+?")
+end
+
 class Falcon < CodeGen
   File = "QR.fal"
   Cmd = "falcon QR.fal > OUTFILE"
