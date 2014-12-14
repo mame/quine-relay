@@ -15,89 +15,89 @@ before_install:
 - sudo apt-get update
 - sudo apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
   dist-upgrade
-- sudo apt-get install afnix
-- sudo apt-get install algol68g
-- sudo apt-get install aplus-fsf
-- sudo apt-get install asymptote
-- sudo apt-get install ats-lang-anairiats
-- sudo apt-get install bash
-- sudo apt-get install bc
-- sudo apt-get install bf
-- sudo apt-get install boo
-- sudo apt-get install bsdgames
-- sudo apt-get install cduce
-- sudo apt-get install clisp
-- sudo apt-get install clojure
-- sudo apt-get install cmake
-- sudo apt-get install coffeescript
-- sudo apt-get install dc
-- sudo apt-get install ecere-sdk
-- sudo apt-get install emacs23
-- sudo apt-get install erlang
-- sudo apt-get install f2c
-- sudo apt-get install falconpl
-- sudo apt-get install fp-compiler
-- sudo apt-get install fsharp
-- sudo apt-get install g++
-- sudo apt-get install gambas2-script
-- sudo apt-get install gauche
-- sudo apt-get install gawk
-- sudo apt-get install gcc
-- sudo apt-get install gdc
-- sudo apt-get install gforth
-- sudo apt-get install gfortran
-- sudo apt-get install ghc
-- sudo apt-get install ghostscript
-- sudo apt-get install gnat
-- sudo apt-get install gnu-smalltalk
-- sudo apt-get install gobjc
-- sudo apt-get install golang
-- sudo apt-get install groff
-- sudo apt-get install groovy
-- sudo apt-get install icont
-- sudo apt-get install iconx
-- sudo apt-get install intercal
-- sudo apt-get install iverilog
-- sudo apt-get install jasmin-sable
-- sudo apt-get install libgd2-xpm-dev
-- sudo apt-get install libpng12-dev
-- sudo apt-get install llvm
-- sudo apt-get install lua5.2
-- sudo apt-get install make
-- sudo apt-get install maxima
-- sudo apt-get install mlton
-- sudo apt-get install mono-devel
-- sudo apt-get install mono-mcs
-- sudo apt-get install mono-vbnc
-- sudo apt-get install nasm
-- sudo apt-get install neko
-- sudo apt-get install nickle
-- sudo apt-get install ocaml
-- sudo apt-get install octave
-- sudo apt-get install open-cobol
-- sudo apt-get install openjdk-6-jdk
-- sudo apt-get install pari-gp
-- sudo apt-get install parrot
-- sudo apt-get install perl
-- sudo apt-get install php5-cli
-- sudo apt-get install pike7.8
-- sudo apt-get install python
-- sudo apt-get install r-base
-- sudo apt-get install ratfor
-- sudo apt-get install regina-rexx
-- sudo apt-get install rhino
-- sudo apt-get install scala
-- sudo apt-get install scilab
-- sudo apt-get install slsh
-- sudo apt-get install spl-core
-- sudo apt-get install swi-prolog
-- sudo apt-get install tcc
-- sudo apt-get install tcl
-- sudo apt-get install ucblogo
-- sudo apt-get install valac
-- sudo apt-get install xsltproc
-- sudo apt-get install yorick
-- sudo apt-get install zoem
+- 'sudo apt-get install afnix              #  1 / 83'
+- 'sudo apt-get install algol68g           #  2 / 83'
+- 'sudo apt-get install aplus-fsf          #  3 / 83'
+- 'sudo apt-get install asymptote          #  4 / 83'
+- 'sudo apt-get install ats-lang-anairiats #  5 / 83'
+- 'sudo apt-get install bash               #  6 / 83'
+- 'sudo apt-get install bc                 #  7 / 83'
+- 'sudo apt-get install bf                 #  8 / 83'
+- 'sudo apt-get install boo                #  9 / 83'
+- 'sudo apt-get install bsdgames           # 10 / 83'
+- 'sudo apt-get install cduce              # 11 / 83'
+- 'sudo apt-get install clisp              # 12 / 83'
+- 'sudo apt-get install clojure            # 13 / 83'
+- 'sudo apt-get install cmake              # 14 / 83'
+- 'sudo apt-get install coffeescript       # 15 / 83'
+- 'sudo apt-get install dc                 # 16 / 83'
+- 'sudo apt-get install ecere-sdk          # 17 / 83'
+- 'sudo apt-get install emacs23            # 18 / 83'
+- 'sudo apt-get install erlang             # 19 / 83'
+- 'sudo apt-get install f2c                # 20 / 83'
+- 'sudo apt-get install falconpl           # 21 / 83'
+- 'sudo apt-get install fp-compiler        # 22 / 83'
+- 'sudo apt-get install fsharp             # 23 / 83'
+- 'sudo apt-get install g++                # 24 / 83'
+- 'sudo apt-get install gambas2-script     # 25 / 83'
+- 'sudo apt-get install gauche             # 26 / 83'
+- 'sudo apt-get install gawk               # 27 / 83'
+- 'sudo apt-get install gcc                # 28 / 83'
+- 'sudo apt-get install gdc                # 29 / 83'
+- 'sudo apt-get install gforth             # 30 / 83'
+- 'sudo apt-get install gfortran           # 31 / 83'
+- 'sudo apt-get install ghc                # 32 / 83'
+- 'sudo apt-get install ghostscript        # 33 / 83'
+- 'sudo apt-get install gnat               # 34 / 83'
+- 'sudo apt-get install gnu-smalltalk      # 35 / 83'
+- 'sudo apt-get install gobjc              # 36 / 83'
+- 'sudo apt-get install golang             # 37 / 83'
+- 'sudo apt-get install groff              # 38 / 83'
+- 'sudo apt-get install groovy             # 39 / 83'
+- 'sudo apt-get install icont              # 40 / 83'
+- 'sudo apt-get install iconx              # 41 / 83'
+- 'sudo apt-get install intercal           # 42 / 83'
+- 'sudo apt-get install iverilog           # 43 / 83'
+- 'sudo apt-get install jasmin-sable       # 44 / 83'
+- 'sudo apt-get install libgd2-xpm-dev     # 45 / 83'
+- 'sudo apt-get install libpng12-dev       # 46 / 83'
+- 'sudo apt-get install llvm               # 47 / 83'
+- 'sudo apt-get install lua5.2             # 48 / 83'
+- 'sudo apt-get install make               # 49 / 83'
+- 'sudo apt-get install maxima             # 50 / 83'
+- 'sudo apt-get install mlton              # 51 / 83'
+- 'sudo apt-get install mono-devel         # 52 / 83'
+- 'sudo apt-get install mono-mcs           # 53 / 83'
+- 'sudo apt-get install mono-vbnc          # 54 / 83'
+- 'sudo apt-get install nasm               # 55 / 83'
+- 'sudo apt-get install neko               # 56 / 83'
+- 'sudo apt-get install nickle             # 57 / 83'
+- 'sudo apt-get install ocaml              # 58 / 83'
+- 'sudo apt-get install octave             # 59 / 83'
+- 'sudo apt-get install open-cobol         # 60 / 83'
+- 'sudo apt-get install openjdk-6-jdk      # 61 / 83'
+- 'sudo apt-get install pari-gp            # 62 / 83'
+- 'sudo apt-get install parrot             # 63 / 83'
+- 'sudo apt-get install perl               # 64 / 83'
+- 'sudo apt-get install php5-cli           # 65 / 83'
+- 'sudo apt-get install pike7.8            # 66 / 83'
+- 'sudo apt-get install python             # 67 / 83'
+- 'sudo apt-get install r-base             # 68 / 83'
+- 'sudo apt-get install ratfor             # 69 / 83'
+- 'sudo apt-get install regina-rexx        # 70 / 83'
+- 'sudo apt-get install rhino              # 71 / 83'
+- 'sudo apt-get install scala              # 72 / 83'
+- 'sudo apt-get install scilab             # 73 / 83'
+- 'sudo apt-get install slsh               # 74 / 83'
+- 'sudo apt-get install spl-core           # 75 / 83'
+- 'sudo apt-get install swi-prolog         # 76 / 83'
+- 'sudo apt-get install tcc                # 77 / 83'
+- 'sudo apt-get install tcl                # 78 / 83'
+- 'sudo apt-get install ucblogo            # 79 / 83'
+- 'sudo apt-get install valac              # 80 / 83'
+- 'sudo apt-get install xsltproc           # 81 / 83'
+- 'sudo apt-get install yorick             # 82 / 83'
+- 'sudo apt-get install zoem               # 83 / 83'
 before_script:
 - make -C vendor/
 script:
