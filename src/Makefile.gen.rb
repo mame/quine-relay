@@ -46,13 +46,15 @@ endif
 
 .DELETE_ON_ERROR:
 
+SRCS = #{ srcs[0..-2].join(" ") }
+
 END
 OUT << "all: QR2.rb"
 banner("CHECK")
 OUT << "\tdiff QR.rb QR2.rb"
 OUT << ""
-OUT << "SHA1SUMS: all"
-OUT << "\tsha1sum -b #{ srcs[0..-2].join(" ") } > SHA1SUMS"
+OUT << "SHA1SUMS: $(SRCS)"
+OUT << "\tsha1sum -b $+ > $@"
 
 cmds.size.times do |i|
   cmd = cmds[i].gsub("OUTFILE", srcs[i + 1])
