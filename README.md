@@ -102,7 +102,7 @@ To run it on Ubuntu 12.04 LTS, you might want to refer to `.travis.yml`.
     $ gforth QR.fs > QR.f
     $ f2c QR.f && gcc -o QR QR.c -L/usr/lib -lf2c -lm && ./QR > QR.f90
     $ gfortran -o QR QR.f90 && ./QR > QR.gbs
-    $ $(GBS) QR.gbs > QR.go
+    $ gbs3 QR.gbs > QR.go
     $ go run QR.go > QR.groovy
     $ groovy QR.groovy > QR.hs
     $ ghc QR.hs && ./QR > QR.icn

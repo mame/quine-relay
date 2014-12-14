@@ -32,6 +32,7 @@ gens.each do |gen|
     cmd = cmd.gsub("$(BF)", "bf")
     cmd = cmd.gsub("$(CC)", "gcc")
     cmd = cmd.gsub("$(CXX)", "g++")
+    cmd = cmd.gsub("$(GBS)", "gbs3")
     puts "cmd: " + cmd
     system(cmd) || raise("failed")
   end
