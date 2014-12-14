@@ -1,5 +1,8 @@
 # A source for generating Quine Relay
 
+GenStep = Struct.new(:name, :code, :run_steps)
+RunStep = Struct.new(:name, :src, :cmd, :apt)
+
 # A class that generates Ruby code that generates a code (in a language X) that prints PREV.
 class CodeGen
   # File = source file name of X
@@ -11,29 +14,28 @@ class CodeGen
     List << c
   end
 
-  def self.gen_code(s)
-    new.code.sub("PREV"){ s }.chomp
+  def self.gen_step
+    GenStep[name, new.code, run_steps]
   end
 
   def code
     self.class::Code
   end
 
-  Step = Struct.new(:name, :src, :cmd, :apt)
-
-  def self.steps
+  def self.run_steps
     a = []
     a << (defined?(self::Name) ? [*self::Name] : self.to_s.split("_"))
     a << [*self::File]
     a << [*self::Cmd]
     a << [*self::Apt]
     a.transpose.map do |name, src, cmd, apt|
-      Step[name, src, cmd, apt]
+      RunStep[name, src, cmd, apt]
     end
   end
+end
 
-  # Common part
-  PROLOGUE = <<-'END'.lines.map {|l| l.strip }.join
+# Common part
+GenPrologue = <<-'END'.lines.map {|l| l.strip }.join
   B=92.chr;
   g=32.chr;
   N=10.chr;
@@ -48,15 +50,7 @@ class CodeGen
   C="Console.Write";
   $D="program QR";
   $G=" contents of"+$F=" the mixing bowl";
-  END
-
-  def self.setup_dir(name)
-    dir = File.join(File.dirname(__dir__), name)
-    Dir.mkdir(dir) unless File.directory?(dir)
-    Dir.chdir(dir)
-    File.symlink("../vendor", "vendor") unless File.symlink?("vendor")
-  end
-end
+END
 
 
 class Python_R_Ratfor_REXX < CodeGen
@@ -991,4 +985,8 @@ class Ruby < CodeGen
   File = "QR.rb"
   Cmd = "ruby QR.rb > OUTFILE"
   Apt = "ruby2.0"
+  Code = nil
 end
+
+GenSteps = CodeGen::List.map {|s| s.gen_step }
+RunSteps = CodeGen::List.reverse.flat_map {|s| s.run_steps }

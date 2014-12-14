@@ -7,12 +7,8 @@ other_packages.each do |package|
   `dpkg -s #{ package }` # just check the packages
 end
 
-langs = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.name } }
-cmds = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.cmd } }
-srcs = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.src } }
-apts = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.apt } }
-
 pkg_versions = {}
+apts = RunSteps.map {|s| s.apt }
 `which apt-get >/dev/null && dpkg -s #{ apts.join(" ") }`.b.split("\n\n").each do |s|
   name = s[/^Package: (.*)$/, 1]
   version = s[/^Version: (.*)$/, 1]
@@ -20,10 +16,9 @@ pkg_versions = {}
 end
 
 rows = [["\\#", "language", "ubuntu package", "version"]]
-rows += langs.zip(apts).flat_map.with_index do |(lang, apt), idx|
-  apt = [apt] unless apt.is_a?(Array)
-  apt.map.with_index do |apt, i|
-    [i == 0 ? (idx + 1).to_s : "", i == 0 ? lang : "", apt || "*N/A*", pkg_versions[apt] || '-']
+rows += RunSteps.flat_map.with_index do |s, idx|
+  (s.apt.is_a?(Array) ? s.apt : [s.apt]).map.with_index do |apt, i|
+    [i == 0 ? (idx + 1).to_s : "", i == 0 ? s.name : "", apt || "*N/A*", pkg_versions[apt] || '-']
   end
 end
 
@@ -38,7 +33,9 @@ apt_get.gsub!(/.{,70}( |\z)/) do
   $&[-1] == " " ? $& + "\\\n      " : $&
 end
 
-cmds = cmds.zip(srcs.drop(1) + ["QR.rb"]).map do |cmd, src|
+cmds = [*RunSteps, RunStep["Ruby", "QR2.rb"]].each_cons(2).map do |s1, s2|
+  cmd = s1.cmd
+  src = s2.src
   cmd = cmd.gsub("OUTFILE", src).gsub(/mv QR\.c(\.bak)? QR\.c(\.bak)? && /, "")
 
   cmd = cmd.gsub("$(SCHEME)", "gosh")
@@ -52,7 +49,6 @@ cmds = cmds.zip(srcs.drop(1) + ["QR.rb"]).map do |cmd, src|
 
   cmd
 end
-cmds[-1].gsub!("QR.rb", "QR2.rb")
 
 File.write("../README.md", ERB.new(DATA.read, nil, "%").result(binding))
 
@@ -64,12 +60,12 @@ __END__
 
 ## What this is
 
-This is a <%= langs[0] %> program that generates
-<%= langs[1] %> program that generates
-<%= langs[2] %> program that generates
-...(through <%= langs.size %> languages in total)...
-<%= langs[-1] %> program that generates
-the original <%= langs[0] %> code again.
+This is a <%= RunSteps[0].name %> program that generates
+<%= RunSteps[1].name %> program that generates
+<%= RunSteps[2].name %> program that generates
+...(through <%= RunSteps.size %> languages in total)...
+<%= RunSteps[-1].name %> program that generates
+the original <%= RunSteps[0].name %> code again.
 
 ![Language Uroboros][langs]
 

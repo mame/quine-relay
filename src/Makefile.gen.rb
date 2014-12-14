@@ -1,9 +1,5 @@
 require_relative "code-gen"
 
-langs = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.name } } + ["Ruby"]
-cmds = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.cmd } }
-srcs = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.src } } + ["QR2.rb"]
-
 OUT = []
 
 def banner(s1, s2=nil, i=nil)
@@ -46,7 +42,7 @@ endif
 
 .DELETE_ON_ERROR:
 
-SRCS = #{ srcs[0..-2].join(" ") }
+SRCS = #{ RunSteps.map {|s| s.src }.join(" ") }
 
 END
 OUT << "all: QR2.rb"
@@ -56,13 +52,12 @@ OUT << ""
 OUT << "SHA1SUMS: $(SRCS)"
 OUT << "\tsha1sum -b $+ > $@"
 
-cmds.size.times do |i|
-  cmd = cmds[i].gsub("OUTFILE", srcs[i + 1])
-  cmd = cmd.gsub("gosh", "$(SCHEME)")
+[*RunSteps, RunStep["Ruby", "QR2.rb"]].each_cons(2).with_index do |(s1, s2), i|
+  cmd = s1.cmd.gsub("OUTFILE", s2.src)
 
   OUT << ""
-  OUT << "#{ srcs[i + 1] }: #{ srcs[i] }"
-  banner(langs[i], langs[i + 1], i)
+  OUT << "#{ s2.src }: #{ s1.src }"
+  banner(s1.name, s2.name, i)
   cmd.split("&&").each {|c| OUT << "\t" + c.strip }
 end
 

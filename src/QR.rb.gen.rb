@@ -1,8 +1,11 @@
 require_relative "code-gen"
 
+gen_prologue_1 = GenPrologue.split(?;)[0, 2].join(?;)
+gen_prologue_2 = GenPrologue.split(?;)[2..-1].join(?;)
+
 s =
-  CodeGen::PROLOGUE.split(?;).drop(2).join(?;) + ?; +
-  CodeGen::List[0..-2].inject('%(eval$s=%q(#$s))') {|c, lang| lang.gen_code(c) }
+  gen_prologue_2 + ?; +
+  GenSteps[0..-2].inject('%(eval$s=%q(#$s))') {|code, s| s.code.sub("PREV"){ code }.chomp }
 
 if false
   # search characters rarely used
@@ -78,7 +81,7 @@ a = a.join(",")
 code = <<-END.split.join
   eval$s=%q(eval(%w(
 
-    #{CodeGen::PROLOGUE.split(?;)[0,2].join(?;)};
+    #{gen_prologue_1};
     puts(eval(
       %q(#{ s }).gsub(/[#{ ABBREV.keys.sort.join }]/){[#{ a }][$&.ord%#{ $N }%#{ $M }]}
     ))

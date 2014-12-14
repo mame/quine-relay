@@ -6,8 +6,6 @@ W = H = 512
 surface = Cairo::ImageSurface.new(W, H)
 ctx = Cairo::Context.new(surface)
 
-langs = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.name } }
-
 ctx.line_width = 1
 ctx.set_source_rgb(1, 1, 1)
 ctx.rectangle(0, 0, W, H)
@@ -19,9 +17,9 @@ ctx.font_size = 13
 ctx.select_font_face("non-serif")
 
 Radius = 210.0
-langs.size.times do |i|
+RunSteps.each_with_index do |s, i|
   ctx.save do
-    ctx.rotate(Math::PI * (2 * i + 1) / langs.size)
+    ctx.rotate(Math::PI * (2 * i + 1) / RunSteps.size)
     ctx.move_to(-Radius    ,  2)
     ctx.line_to(-Radius - 3, -1)
     ctx.line_to(-Radius + 3, -1)
@@ -29,14 +27,13 @@ langs.size.times do |i|
   end
 
   ctx.save do
-    angle = i / (langs.size / 4.0)
+    angle = i / (RunSteps.size / 4.0)
     dir = 1 <= angle && angle < 3 ? 1 : -1
     ctx.rotate(Math::PI / 2 * (dir + 1 - angle))
 
-    name = langs[i]
-    e = ctx.text_extents(name)
+    e = ctx.text_extents(s.name)
     ctx.move_to(dir * Radius - e.width / 2, e.height / 2 - 1)
-    ctx.show_text(name)
+    ctx.show_text(s.name)
   end
 end
 

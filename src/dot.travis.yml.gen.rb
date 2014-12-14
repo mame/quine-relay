@@ -1,7 +1,7 @@
 require "yaml"
 require_relative "code-gen"
 
-apts = CodeGen::List.reverse.flat_map {|c| c.steps.map {|step| step.apt } }
+apts = RunSteps.flat_map {|s| s.apt }
 other_packages = %w(cmake libpng12-dev libgd2-xpm-dev groff tcc)
 
 
