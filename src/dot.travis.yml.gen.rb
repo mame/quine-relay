@@ -7,6 +7,7 @@ other_packages = %w(cmake libpng12-dev libgd2-xpm-dev groff tcc)
 
 utopic_to_precise = {
   "clojure1.4" => "clojure",
+  "gambas3-script" => "gambas2-script",
 }
 
 apts = apts.flatten.map {|apt| utopic_to_precise[apt] || apt }.compact

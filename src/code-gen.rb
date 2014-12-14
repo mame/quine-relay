@@ -475,6 +475,14 @@ class Go < CodeGen
   end
 end
 
+class Gambas < CodeGen
+  Name = "Gambas script"
+  File = "QR.gbs"
+  Cmd = "$(GBS) QR.gbs > OUTFILE"
+  Apt = "gambas3-script"
+  Code = %q(%(print"#{e[PREV]}"))
+end
+
 class Forth_FORTRAN77_Fortran90 < CodeGen
   File = ["QR.fs", "QR.f", "QR.f90"]
   Cmd = [

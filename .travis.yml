@@ -39,6 +39,7 @@ before_install:
 - sudo apt-get install fp-compiler
 - sudo apt-get install fsharp
 - sudo apt-get install g++
+- sudo apt-get install gambas2-script
 - sudo apt-get install gauche
 - sudo apt-get install gawk
 - sudo apt-get install gcc

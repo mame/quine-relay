@@ -39,6 +39,11 @@ ifeq ($(BF),)
   $(warning Brainfuck interpreter not found!)
 endif
 
+GBS := $(shell which gbs3 gbs2 2>/dev/null | head -1)
+ifeq ($(GBS),)
+  $(warning Gambas Script interpreter not found!)
+endif
+
 .DELETE_ON_ERROR:
 
 END
