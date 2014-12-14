@@ -479,6 +479,13 @@ class Go < CodeGen
   end
 end
 
+class GAP < CodeGen
+  File = "QR.g"
+  Cmd = "gap -q QR.g > OUTFILE"
+  Apt = "gap"
+  Code = %q("s:=OutputTextUser();WriteAll(s,#{E[PREV]});CloseStream(s);QUIT;")
+end
+
 class Gambas < CodeGen
   Name = "Gambas script"
   File = "QR.gbs"
