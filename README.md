@@ -111,7 +111,7 @@ To run it on Ubuntu 12.04 LTS, you might want to refer to `.travis.yml`.
     $ jasmin QR.j && java QR > QR.java
     $ javac QR.java && java QR > QR.js
     $ rhino QR.js > QR.ll
-    $ mv QR.bc QR.bc.bak && llvm-as QR.ll && lli QR.bc > QR.logo && mv QR.bc.bak QR.bc
+    $ llvm-as QR.ll && lli QR.bc > QR.logo
     $ logo QR.logo > QR.lol
     $ lci QR.lol > QR.lua
     $ lua QR.lua > QR.mk

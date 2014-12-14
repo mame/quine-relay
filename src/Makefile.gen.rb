@@ -53,12 +53,14 @@ OUT << "SHA1SUMS: $(SRCS)"
 OUT << "\tsha1sum -b $+ > $@"
 
 [*RunSteps, RunStep["Ruby", "QR2.rb"]].each_cons(2).with_index do |(s1, s2), i|
-  cmd = s1.cmd.gsub("OUTFILE", s2.src)
+  cmd = s1.cmd_make.gsub("OUTFILE", s2.src)
 
   OUT << ""
   OUT << "#{ s2.src }: #{ s1.src }"
   banner(s1.name, s2.name, i)
+  OUT << "\t@mv #{ s1.backup } #{ s1.backup }.bak" if s1.backup
   cmd.split("&&").each {|c| OUT << "\t" + c.strip }
+  OUT << "\t@mv #{ s1.backup }.bak #{ s1.backup }" if s1.backup
 end
 
 OUT << <<-END

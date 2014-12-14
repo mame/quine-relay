@@ -27,15 +27,7 @@ gens.each do |gen_step|
   File.write(steps.first.src, code)
 
   steps.each_cons(2) do |src, dst|
-    cmd = src.cmd.gsub("OUTFILE", dst.src)
-    cmd = cmd.gsub(/mv QR\.c QR\.c\.bak &&|&& mv QR\.c\.bak QR\.c/, "")
-    cmd = cmd.gsub(/mv QR\.bc QR\.bc\.bak &&|&& mv QR\.bc\.bak QR\.bc/, "")
-    cmd = cmd.gsub("$(SCHEME)", "gosh")
-    cmd = cmd.gsub("$(JAVASCRIPT)", "rhino")
-    cmd = cmd.gsub("$(BF)", "bf")
-    cmd = cmd.gsub("$(CC)", "gcc")
-    cmd = cmd.gsub("$(CXX)", "g++")
-    cmd = cmd.gsub("$(GBS)", "gbs3")
+    cmd = src.cmd_raw.gsub("OUTFILE", dst.src)
     puts "cmd: " + cmd
     system(cmd) || raise("failed")
   end

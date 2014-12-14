@@ -1,7 +1,7 @@
 # A source for generating Quine Relay
 
 GenStep = Struct.new(:name, :code, :run_steps)
-RunStep = Struct.new(:name, :src, :cmd, :apt)
+RunStep = Struct.new(:name, :src, :cmd_make, :cmd_raw, :backup, :apt)
 
 # A class that generates Ruby code that generates a code (in a language X) that prints PREV.
 class CodeGen
@@ -27,9 +27,17 @@ class CodeGen
     a << (defined?(self::Name) ? [*self::Name] : self.to_s.split("_"))
     a << [*self::File]
     a << [*self::Cmd]
+    a << (defined?(self::Backup) ? [*self::Backup] : [*self::Cmd].map { nil })
     a << [*self::Apt]
-    a.transpose.map do |name, src, cmd, apt|
-      RunStep[name, src, cmd, apt]
+    a.transpose.map do |name, src, cmd_make, backup, apt|
+      cmd_raw = cmd_make
+      cmd_raw = cmd_raw.gsub("$(SCHEME)", "gosh")
+      cmd_raw = cmd_raw.gsub("$(JAVASCRIPT)", "rhino")
+      cmd_raw = cmd_raw.gsub("$(BF)", "bf")
+      cmd_raw = cmd_raw.gsub("$(CC)", "gcc")
+      cmd_raw = cmd_raw.gsub("$(CXX)", "g++")
+      cmd_raw = cmd_raw.gsub("$(GBS)", "gbs3")
+      RunStep[name, src, cmd_make, cmd_raw, backup, apt]
     end
   end
 end
@@ -319,8 +327,9 @@ end
 class LLVMAsm < CodeGen
   Name = "LLVM asm"
   File = "QR.ll"
-  Cmd = "mv QR.bc QR.bc.bak && llvm-as QR.ll && lli QR.bc > OUTFILE && mv QR.bc.bak QR.bc"
+  Cmd = "llvm-as QR.ll && lli QR.bc > OUTFILE"
   Apt = "llvm"
+  Backup = "QR.bc"
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
@@ -407,8 +416,9 @@ class Icon_INTERCAL < CodeGen
   File = ["QR.icn", "QR.i"]
   Cmd = [
     "icont -s QR.icn && ./QR > OUTFILE",
-    "mv QR.c QR.c.bak && ick -bfO QR.i && mv QR.c.bak QR.c && ./QR > OUTFILE"
+    "ick -bfO QR.i && ./QR > OUTFILE"
   ]
+  Backup = [nil, "QR.c"]
   Apt = [["icont", "iconx"], "intercal"]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
@@ -481,9 +491,10 @@ class Forth_FORTRAN77_Fortran90 < CodeGen
   File = ["QR.fs", "QR.f", "QR.f90"]
   Cmd = [
     "gforth QR.fs > OUTFILE",
-    "mv QR.c QR.c.bak && f2c QR.f && $(CC) -o QR QR.c -L/usr/lib -lf2c -lm && mv QR.c.bak QR.c && ./QR > OUTFILE",
+    "f2c QR.f && $(CC) -o QR QR.c -L/usr/lib -lf2c -lm && ./QR > OUTFILE",
     "gfortran -o QR QR.f90 && ./QR > OUTFILE"
   ]
+  Backup = [nil, "QR.c", nil]
   Apt = ["gforth", "f2c", "gfortran"]
   def code
     # assuming that PREV has no '
@@ -550,7 +561,8 @@ end
 class EC < CodeGen
   Name = "eC"
   File = "QR.ec"
-  Cmd = "mv QR.c QR.c.bak && ecp -c QR.ec -o QR.sym && ecc -c QR.ec -o QR.c && ecs -console QR.sym QR.imp -o QR.main.ec && ecp -c QR.main.ec -o QR.main.sym && ecc -c QR.main.ec -o QR.main.c && gcc -o QR QR.c QR.main.c -lecereCOM && mv QR.c.bak QR.c && ./QR > OUTFILE"
+  Cmd = "ecp -c QR.ec -o QR.sym && ecc -c QR.ec -o QR.c && ecs -console QR.sym QR.imp -o QR.main.ec && ecp -c QR.main.ec -o QR.main.sym && ecc -c QR.main.ec -o QR.main.c && gcc -o QR QR.c QR.main.c -lecereCOM && ./QR > OUTFILE"
+  Backup = "QR.c"
   Apt = "ecere-sdk"
   Code = %q("class QR:Application{void Main(){#{f(PREV,15){"Print#$S;"}}}}")
 end

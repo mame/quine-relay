@@ -34,16 +34,9 @@ apt_get.gsub!(/.{,70}( |\z)/) do
 end
 
 cmds = [*RunSteps, RunStep["Ruby", "QR2.rb"]].each_cons(2).map do |s1, s2|
-  cmd = s1.cmd
+  cmd = s1.cmd_raw
   src = s2.src
-  cmd = cmd.gsub("OUTFILE", src).gsub(/mv QR\.c(\.bak)? QR\.c(\.bak)? && /, "")
-
-  cmd = cmd.gsub("$(SCHEME)", "gosh")
-  cmd = cmd.gsub("$(JAVASCRIPT)", "rhino")
-  cmd = cmd.gsub("$(BF)", "bf")
-  cmd = cmd.gsub("$(CC)", "gcc")
-  cmd = cmd.gsub("$(CXX)", "g++")
-  cmd = cmd.gsub("$(GBS)", "gbs3")
+  cmd = cmd.gsub("OUTFILE", src)
 
   cmd = cmd.gsub(/.{60,}?&&/, "\\0\n     ")
 

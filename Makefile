@@ -413,15 +413,15 @@ QR.el: QR.ec
 	@echo "##  45: eC -> Emacs Lisp  ##"
 	@echo "############################"
 	@echo
-	mv QR.c QR.c.bak
+	@mv QR.c QR.c.bak
 	ecp -c QR.ec -o QR.sym
 	ecc -c QR.ec -o QR.c
 	ecs -console QR.sym QR.imp -o QR.main.ec
 	ecp -c QR.main.ec -o QR.main.sym
 	ecc -c QR.main.ec -o QR.main.c
 	gcc -o QR QR.c QR.main.c -lecereCOM
-	mv QR.c.bak QR.c
 	./QR > QR.el
+	@mv QR.c.bak QR.c
 
 QR.erl: QR.el
 	@echo
@@ -478,11 +478,11 @@ QR.f90: QR.f
 	@echo "##  52: FORTRAN77 -> Fortran90  ##"
 	@echo "##################################"
 	@echo
-	mv QR.c QR.c.bak
+	@mv QR.c QR.c.bak
 	f2c QR.f
 	$(CC) -o QR QR.c -L/usr/lib -lf2c -lm
-	mv QR.c.bak QR.c
 	./QR > QR.f90
+	@mv QR.c.bak QR.c
 
 QR.gbs: QR.f90
 	@echo
@@ -541,10 +541,10 @@ QR.j: QR.i
 	@echo "##  59: INTERCAL -> Jasmin  ##"
 	@echo "##############################"
 	@echo
-	mv QR.c QR.c.bak
+	@mv QR.c QR.c.bak
 	ick -bfO QR.i
-	mv QR.c.bak QR.c
 	./QR > QR.j
+	@mv QR.c.bak QR.c
 
 QR.java: QR.j
 	@echo
@@ -578,10 +578,10 @@ QR.logo: QR.ll
 	@echo "##  63: LLVM asm -> Logo  ##"
 	@echo "############################"
 	@echo
-	mv QR.bc QR.bc.bak
+	@mv QR.bc QR.bc.bak
 	llvm-as QR.ll
 	lli QR.bc > QR.logo
-	mv QR.bc.bak QR.bc
+	@mv QR.bc.bak QR.bc
 
 QR.lol: QR.logo
 	@echo
