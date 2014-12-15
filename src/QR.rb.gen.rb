@@ -5,7 +5,7 @@ gen_prologue_2 = GenPrologue.split(?;)[2..-1].join(?;)
 
 s =
   gen_prologue_2 + ?; +
-  GenSteps[0..-2].inject('%(eval$s=%q(#$s))') {|code, s| s.code.sub("PREV"){ code }.chomp }
+  GenSteps[0..-2].inject('"eval$s=%q(#$s)"') {|code, s| s.code.sub("PREV"){ code }.chomp }
 
 if false
   # search characters rarely used
