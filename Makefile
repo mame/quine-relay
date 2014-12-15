@@ -18,7 +18,7 @@ endif
 
 .DELETE_ON_ERROR:
 
-SRCS = QR.rb QR.scala QR.scm QR.sci QR.bash QR.sl QR.st QR.spl QR.sml QR.sq QR.tcl QR.t QR.unl QR.vala QR.v QR.vb QR.ws QR.xslt QR.yorick QR.azm QR.+ qr.adb QR.als QR.a68 QR.ante QR.asy QR.dats QR.awk QR.bc QR.bef QR.Blc QR.boo QR.bf QR.c QR.cpp QR.cs QR.cd QR.chef QR.clj QR.cob QR.coffee QR.lisp QR.d QR.dc QR.ec QR.el QR.erl QR.fsx QR.fal QR.false QR.fs QR.f QR.f90 QR.gbs QR.g QR.go QR.groovy QR.hs QR.icn QR.i QR.j QR.java QR.js QR.ll QR.logo QR.lol QR.lua QR.mk QR.mac QR.il QR.asm QR.neko QR.5c QR.m QR.ml QR.octave QR.ook QR.gp QR.pasm QR.pas QR.pl QR.php QR.png QR.pike QR.ps QR.ppt QR.prolog QR.py QR.R QR.r QR.rexx
+SRCS = QR.rb QR.scala QR.scm QR.sci QR.bash QR.sl QR.st QR.spl QR.sml QR.sq QR.tcl QR.t QR.unl QR.vala QR.v QR.vb QR.ws QR.xslt QR.yorick QR.azm QR.+ qr.adb QR.als QR.a68 QR.ante QR.asy QR.dats QR.awk QR.bc QR.bef QR.Blc QR.boo QR.bf QR.c QR.cpp QR.cs QR.cd QR.chef QR.clj QR.cob QR.coffee QR.lisp QR.d QR.dc QR.ec QR.el QR.erl QR.fsx QR.fal QR.false QR.fs QR.f QR.f90 QR.gbs QR.g QR.gel QR.go QR.groovy QR.hs QR.icn QR.i QR.j QR.java QR.js QR.ll QR.logo QR.lol QR.lua QR.mk QR.mac QR.il QR.asm QR.neko QR.5c QR.m QR.ml QR.octave QR.ook QR.gp QR.pasm QR.pas QR.pl QR.php QR.png QR.pike QR.ps QR.ppt QR.prolog QR.py QR.R QR.r QR.rexx
 
 
 all: QR2.rb
@@ -491,18 +491,26 @@ QR.g: QR.gbs
 	@echo
 	$(GBS) QR.gbs > QR.g
 
-QR.go: QR.g
+QR.gel: QR.g
 	@echo
-	@echo "#####################"
-	@echo "##  55: GAP -> Go  ##"
-	@echo "#####################"
+	@echo "###############################"
+	@echo "##  55: GAP -> GEL (Genius)  ##"
+	@echo "###############################"
 	@echo
-	gap -q QR.g > QR.go
+	gap -q QR.g > QR.gel
+
+QR.go: QR.gel
+	@echo
+	@echo "##############################"
+	@echo "##  56: GEL (Genius) -> Go  ##"
+	@echo "##############################"
+	@echo
+	genius QR.gel > QR.go
 
 QR.groovy: QR.go
 	@echo
 	@echo "########################"
-	@echo "##  56: Go -> Groovy  ##"
+	@echo "##  57: Go -> Groovy  ##"
 	@echo "########################"
 	@echo
 	go run QR.go > QR.groovy
@@ -510,7 +518,7 @@ QR.groovy: QR.go
 QR.hs: QR.groovy
 	@echo
 	@echo "#############################"
-	@echo "##  57: Groovy -> Haskell  ##"
+	@echo "##  58: Groovy -> Haskell  ##"
 	@echo "#############################"
 	@echo
 	groovy QR.groovy > QR.hs
@@ -518,7 +526,7 @@ QR.hs: QR.groovy
 QR.icn: QR.hs
 	@echo
 	@echo "###########################"
-	@echo "##  58: Haskell -> Icon  ##"
+	@echo "##  59: Haskell -> Icon  ##"
 	@echo "###########################"
 	@echo
 	ghc QR.hs
@@ -527,7 +535,7 @@ QR.icn: QR.hs
 QR.i: QR.icn
 	@echo
 	@echo "############################"
-	@echo "##  59: Icon -> INTERCAL  ##"
+	@echo "##  60: Icon -> INTERCAL  ##"
 	@echo "############################"
 	@echo
 	icont -s QR.icn
@@ -536,7 +544,7 @@ QR.i: QR.icn
 QR.j: QR.i
 	@echo
 	@echo "##############################"
-	@echo "##  60: INTERCAL -> Jasmin  ##"
+	@echo "##  61: INTERCAL -> Jasmin  ##"
 	@echo "##############################"
 	@echo
 	@mv QR.c QR.c.bak
@@ -547,7 +555,7 @@ QR.j: QR.i
 QR.java: QR.j
 	@echo
 	@echo "##########################"
-	@echo "##  61: Jasmin -> Java  ##"
+	@echo "##  62: Jasmin -> Java  ##"
 	@echo "##########################"
 	@echo
 	jasmin QR.j
@@ -556,7 +564,7 @@ QR.java: QR.j
 QR.js: QR.java
 	@echo
 	@echo "##############################"
-	@echo "##  62: Java -> JavaScript  ##"
+	@echo "##  63: Java -> JavaScript  ##"
 	@echo "##############################"
 	@echo
 	javac QR.java
@@ -565,7 +573,7 @@ QR.js: QR.java
 QR.ll: QR.js
 	@echo
 	@echo "##################################"
-	@echo "##  63: JavaScript -> LLVM asm  ##"
+	@echo "##  64: JavaScript -> LLVM asm  ##"
 	@echo "##################################"
 	@echo
 	$(JAVASCRIPT) QR.js > QR.ll
@@ -573,7 +581,7 @@ QR.ll: QR.js
 QR.logo: QR.ll
 	@echo
 	@echo "############################"
-	@echo "##  64: LLVM asm -> Logo  ##"
+	@echo "##  65: LLVM asm -> Logo  ##"
 	@echo "############################"
 	@echo
 	@mv QR.bc QR.bc.bak
@@ -584,7 +592,7 @@ QR.logo: QR.ll
 QR.lol: QR.logo
 	@echo
 	@echo "###########################"
-	@echo "##  65: Logo -> LOLCODE  ##"
+	@echo "##  66: Logo -> LOLCODE  ##"
 	@echo "###########################"
 	@echo
 	logo QR.logo > QR.lol
@@ -592,7 +600,7 @@ QR.lol: QR.logo
 QR.lua: QR.lol
 	@echo
 	@echo "##########################"
-	@echo "##  66: LOLCODE -> Lua  ##"
+	@echo "##  67: LOLCODE -> Lua  ##"
 	@echo "##########################"
 	@echo
 	lci QR.lol > QR.lua
@@ -600,7 +608,7 @@ QR.lua: QR.lol
 QR.mk: QR.lua
 	@echo
 	@echo "###########################"
-	@echo "##  67: Lua -> Makefile  ##"
+	@echo "##  68: Lua -> Makefile  ##"
 	@echo "###########################"
 	@echo
 	lua QR.lua > QR.mk
@@ -608,7 +616,7 @@ QR.mk: QR.lua
 QR.mac: QR.mk
 	@echo
 	@echo "##############################"
-	@echo "##  68: Makefile -> Maxima  ##"
+	@echo "##  69: Makefile -> Maxima  ##"
 	@echo "##############################"
 	@echo
 	make -f QR.mk > QR.mac
@@ -616,7 +624,7 @@ QR.mac: QR.mk
 QR.il: QR.mac
 	@echo
 	@echo "##########################"
-	@echo "##  69: Maxima -> MSIL  ##"
+	@echo "##  70: Maxima -> MSIL  ##"
 	@echo "##########################"
 	@echo
 	maxima -q --init-mac=QR.mac > QR.il
@@ -624,7 +632,7 @@ QR.il: QR.mac
 QR.asm: QR.il
 	@echo
 	@echo "########################"
-	@echo "##  70: MSIL -> NASM  ##"
+	@echo "##  71: MSIL -> NASM  ##"
 	@echo "########################"
 	@echo
 	ilasm QR.il
@@ -633,7 +641,7 @@ QR.asm: QR.il
 QR.neko: QR.asm
 	@echo
 	@echo "########################"
-	@echo "##  71: NASM -> Neko  ##"
+	@echo "##  72: NASM -> Neko  ##"
 	@echo "########################"
 	@echo
 	nasm -felf QR.asm
@@ -643,7 +651,7 @@ QR.neko: QR.asm
 QR.5c: QR.neko
 	@echo
 	@echo "##########################"
-	@echo "##  72: Neko -> Nickle  ##"
+	@echo "##  73: Neko -> Nickle  ##"
 	@echo "##########################"
 	@echo
 	nekoc QR.neko
@@ -652,7 +660,7 @@ QR.5c: QR.neko
 QR.m: QR.5c
 	@echo
 	@echo "#################################"
-	@echo "##  73: Nickle -> Objective-C  ##"
+	@echo "##  74: Nickle -> Objective-C  ##"
 	@echo "#################################"
 	@echo
 	nickle QR.5c > QR.m
@@ -660,7 +668,7 @@ QR.m: QR.5c
 QR.ml: QR.m
 	@echo
 	@echo "################################"
-	@echo "##  74: Objective-C -> OCaml  ##"
+	@echo "##  75: Objective-C -> OCaml  ##"
 	@echo "################################"
 	@echo
 	gcc -o QR QR.m
@@ -669,7 +677,7 @@ QR.ml: QR.m
 QR.octave: QR.ml
 	@echo
 	@echo "###########################"
-	@echo "##  75: OCaml -> Octave  ##"
+	@echo "##  76: OCaml -> Octave  ##"
 	@echo "###########################"
 	@echo
 	ocaml QR.ml > QR.octave
@@ -677,7 +685,7 @@ QR.octave: QR.ml
 QR.ook: QR.octave
 	@echo
 	@echo "##########################"
-	@echo "##  76: Octave -> Ook!  ##"
+	@echo "##  77: Octave -> Ook!  ##"
 	@echo "##########################"
 	@echo
 	octave -qf QR.octave > QR.ook
@@ -685,7 +693,7 @@ QR.ook: QR.octave
 QR.gp: QR.ook
 	@echo
 	@echo "###########################"
-	@echo "##  77: Ook! -> PARI/GP  ##"
+	@echo "##  78: Ook! -> PARI/GP  ##"
 	@echo "###########################"
 	@echo
 	ruby vendor/ook-to-bf.rb QR.ook QR.ook.bf
@@ -694,7 +702,7 @@ QR.gp: QR.ook
 QR.pasm: QR.gp
 	@echo
 	@echo "#################################"
-	@echo "##  78: PARI/GP -> Parrot asm  ##"
+	@echo "##  79: PARI/GP -> Parrot asm  ##"
 	@echo "#################################"
 	@echo
 	gp -f -q QR.gp > QR.pasm
@@ -702,7 +710,7 @@ QR.pasm: QR.gp
 QR.pas: QR.pasm
 	@echo
 	@echo "################################"
-	@echo "##  79: Parrot asm -> Pascal  ##"
+	@echo "##  80: Parrot asm -> Pascal  ##"
 	@echo "################################"
 	@echo
 	parrot QR.pasm > QR.pas
@@ -710,7 +718,7 @@ QR.pas: QR.pasm
 QR.pl: QR.pas
 	@echo
 	@echo "##########################"
-	@echo "##  80: Pascal -> Perl  ##"
+	@echo "##  81: Pascal -> Perl  ##"
 	@echo "##########################"
 	@echo
 	fpc QR.pas
@@ -719,7 +727,7 @@ QR.pl: QR.pas
 QR.php: QR.pl
 	@echo
 	@echo "#######################"
-	@echo "##  81: Perl -> PHP  ##"
+	@echo "##  82: Perl -> PHP  ##"
 	@echo "#######################"
 	@echo
 	perl QR.pl > QR.php
@@ -727,7 +735,7 @@ QR.php: QR.pl
 QR.png: QR.php
 	@echo
 	@echo "#######################"
-	@echo "##  82: PHP -> Piet  ##"
+	@echo "##  83: PHP -> Piet  ##"
 	@echo "#######################"
 	@echo
 	php QR.php > QR.png
@@ -735,7 +743,7 @@ QR.png: QR.php
 QR.pike: QR.png
 	@echo
 	@echo "########################"
-	@echo "##  83: Piet -> Pike  ##"
+	@echo "##  84: Piet -> Pike  ##"
 	@echo "########################"
 	@echo
 	npiet QR.png > QR.pike
@@ -743,7 +751,7 @@ QR.pike: QR.png
 QR.ps: QR.pike
 	@echo
 	@echo "##############################"
-	@echo "##  84: Pike -> PostScript  ##"
+	@echo "##  85: Pike -> PostScript  ##"
 	@echo "##############################"
 	@echo
 	pike QR.pike > QR.ps
@@ -751,7 +759,7 @@ QR.ps: QR.pike
 QR.ppt: QR.ps
 	@echo
 	@echo "############################################"
-	@echo "##  85: PostScript -> PPT (Punched tape)  ##"
+	@echo "##  86: PostScript -> PPT (Punched tape)  ##"
 	@echo "############################################"
 	@echo
 	gs -dNODISPLAY -q QR.ps > QR.ppt
@@ -759,7 +767,7 @@ QR.ppt: QR.ps
 QR.prolog: QR.ppt
 	@echo
 	@echo "########################################"
-	@echo "##  86: PPT (Punched tape) -> Prolog  ##"
+	@echo "##  87: PPT (Punched tape) -> Prolog  ##"
 	@echo "########################################"
 	@echo
 	ppt -d < QR.ppt > QR.prolog
@@ -767,7 +775,7 @@ QR.prolog: QR.ppt
 QR.py: QR.prolog
 	@echo
 	@echo "############################"
-	@echo "##  87: Prolog -> Python  ##"
+	@echo "##  88: Prolog -> Python  ##"
 	@echo "############################"
 	@echo
 	swipl -q -t qr -f QR.prolog > QR.py
@@ -775,7 +783,7 @@ QR.py: QR.prolog
 QR.R: QR.py
 	@echo
 	@echo "#######################"
-	@echo "##  88: Python -> R  ##"
+	@echo "##  89: Python -> R  ##"
 	@echo "#######################"
 	@echo
 	python QR.py > QR.R
@@ -783,7 +791,7 @@ QR.R: QR.py
 QR.r: QR.R
 	@echo
 	@echo "#######################"
-	@echo "##  89: R -> Ratfor  ##"
+	@echo "##  90: R -> Ratfor  ##"
 	@echo "#######################"
 	@echo
 	R --slave -f QR.R > QR.r
@@ -791,7 +799,7 @@ QR.r: QR.R
 QR.rexx: QR.r
 	@echo
 	@echo "##########################"
-	@echo "##  90: Ratfor -> REXX  ##"
+	@echo "##  91: Ratfor -> REXX  ##"
 	@echo "##########################"
 	@echo
 	ratfor -o QR.r.f QR.r
@@ -801,7 +809,7 @@ QR.rexx: QR.r
 QR2.rb: QR.rexx
 	@echo
 	@echo "########################"
-	@echo "##  91: REXX -> Ruby  ##"
+	@echo "##  92: REXX -> Ruby  ##"
 	@echo "########################"
 	@echo
 	rexx ./QR.rexx > QR2.rb

@@ -479,6 +479,14 @@ class Go < CodeGen
   end
 end
 
+class GEL < CodeGen
+  Name = "GEL (Genius)"
+  File = "QR.gel"
+  Cmd = "genius QR.gel > OUTFILE"
+  Apt = "genius"
+  Code = %q(f(PREV,62){"printn#$S\n"})
+end
+
 class GAP < CodeGen
   File = "QR.g"
   Cmd = "gap -q QR.g > OUTFILE"
