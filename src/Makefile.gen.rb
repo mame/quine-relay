@@ -17,27 +17,17 @@ MAKEFLAGS += --no-print-directory
 PATH := $(CURDIR)/vendor/local/bin:$(PATH)
 CLASSPATH := .
 
-JAVASCRIPT := $(shell which rhino nodejs node js 2>/dev/null | head -1)
-ifeq ($(JAVASCRIPT),)
-  $(warning JavaScript interpreter not found!)
-endif
+find_any0 = $(firstword $(foreach x,$(1),$(if $(shell which $(x) 2>/dev/null),$(x),)))
+check = $(if $(2),$(2),$(error $(1) interpreter not found!))
+find_any = $(call check,$(1),$(call find_any0,$(2)))
 
-SCHEME := $(shell which guile csi gosh 2>/dev/null | head -1)
-ifeq ($(SCHEME),)
-  $(warning Scheme interpreter not found!)
-endif
-ifeq ($(SCHEME),$(shell which csi 2>/dev/null | head -1))
+JAVASCRIPT := $(call find_any,JavaScript,rhino nodejs node js)
+SCHEME     := $(call find_any,Scheme,guile csi gosh)
+BF         := $(call find_any,Brainfuck,bf beef)
+GBS        := $(call find_any,Gambas script,gbs3 gbs2)
+
+ifeq ($(SCHEME),csi)
   SCHEME := csi -s
-endif
-
-BF := $(shell which bf beef 2>/dev/null | head -1)
-ifeq ($(BF),)
-  $(warning Brainfuck interpreter not found!)
-endif
-
-GBS := $(shell which gbs3 gbs2 2>/dev/null | head -1)
-ifeq ($(GBS),)
-  $(warning Gambas Script interpreter not found!)
 endif
 
 .DELETE_ON_ERROR:
