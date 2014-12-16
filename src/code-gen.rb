@@ -479,6 +479,13 @@ class Go < CodeGen
   end
 end
 
+class Gnuplot < CodeGen
+  File = "QR.plt"
+  Cmd = "gnuplot QR.plt > OUTFILE"
+  Apt = "gnuplot"
+  Code = %q('set print"-";print'+E[PREV])
+end
+
 class GEL < CodeGen
   Name = "GEL (Genius)"
   File = "QR.gel"
