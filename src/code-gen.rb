@@ -462,17 +462,18 @@ class Groovy < CodeGen
   end
 end
 
-class Go < CodeGen
-  File = "QR.go"
-  Cmd = "go run QR.go > OUTFILE"
-  Apt = "golang"
+class Go_GPortugol < CodeGen
+  Name = ["Go", "G-Portugol"]
+  File = ["QR.go", "QR.gpt"]
+  Cmd = ["go run QR.go > OUTFILE", "gpt -o QR QR.gpt && ./QR > OUTFILE"]
+  Apt = ["golang", "gpt"]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
         package main;
         import"fmt";
         func main(){
-          fmt.Print#{E[PREV]};
+          fmt.Print("algoritmo QR;in\\xC3\\xADcio imprima(\\\"#{e[e[PREV]]}\\\");fim")
         }
       )
     END
@@ -837,7 +838,7 @@ class Ada < CodeGen
         with Ada.Text_Io;
         procedure qr is$$$
         begin$$$
-          Ada.Text_Io.Put_Line("#{d[PREV]}");
+          #{ f(PREV,117){%(Ada.Text_Io.Put("#{d[$s]}");\n)} }
         end;
       )
     END
