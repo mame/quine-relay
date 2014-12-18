@@ -449,15 +449,16 @@ class Haskell < CodeGen
   Code = %q(("main=putStr"+E[PREV]))
 end
 
-class Groovy < CodeGen
-  File = "QR.groovy"
-  Cmd = "groovy QR.groovy > OUTFILE"
-  Apt = "groovy"
+class Gri_Groovy < CodeGen
+  File = ["QR.gri", "QR.groovy"]
+  Cmd = ["gri QR.gri > OUTFILE", "groovy QR.groovy > OUTFILE"]
+  Apt = ["gri", "groovy"]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
-      %(
-        print'#{e[PREV.tr(B,?&)]}'.tr('&','\\\\\\\\');
-      )
+      %(\\q="\\""\n)+
+      f(PREV.tr(B,?&),51){
+        %(show "print'#{e[$s].gsub B+?",%(" "\\q" ")}'.tr('&','\\\\\\\\');"\n)
+      }
     END
   end
 end
