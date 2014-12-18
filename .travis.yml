@@ -7,6 +7,7 @@ env:
 before_install:
 - sudo service postgresql stop
 - sudo service mysql stop
+- sudo apt-get remove postgresql-9.3 -y
 - sudo apt-get update
 - sudo apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
   dist-upgrade
