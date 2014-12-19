@@ -442,6 +442,14 @@ class Icon_INTERCAL < CodeGen
   end
 end
 
+class Haxe < CodeGen
+  Name = "haXe"
+  File = "QR.hx"
+  Cmd = "haxe -main QR -neko QR.n && neko QR.n > OUTFILE"
+  Apt = "haxe"
+  Code = %q("class QR{static function main(){neko.Lib.print#{E[PREV]};}}")
+end
+
 class Haskell < CodeGen
   File = "QR.hs"
   Cmd = "ghc QR.hs && ./QR > OUTFILE"
