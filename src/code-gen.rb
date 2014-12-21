@@ -345,6 +345,13 @@ class LLVMAsm < CodeGen
   end
 end
 
+class Julia < CodeGen
+  File = "QR.jl"
+  Cmd = "julia QR.jl > OUTFILE"
+  Apt = "julia"
+  Code = %q("print"+Q[E[PREV]])
+end
+
 class JavaScript < CodeGen
   File = "QR.js"
   Cmd = "$(JAVASCRIPT) QR.js > OUTFILE"
@@ -361,7 +368,7 @@ class Java < CodeGen
       %(
         class QR{
           public static void main(String[]v){
-            String c[]=new String[9000],y="",z=y,s="#{
+            String c[]=new String[9999],y="",z=y,s="#{
               z=t=(0..r=q=126).map{|n|[n,[]]};
               a="";
               b=->n{a<<(n%78+55)%84+42};
