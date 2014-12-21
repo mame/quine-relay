@@ -345,6 +345,23 @@ class LLVMAsm < CodeGen
   end
 end
 
+class Kaya < CodeGen
+  Name = "Kaya"
+  File = "QR.k"
+  Cmd = "kayac QR.k && ./QR > OUTFILE"
+  Apt = "kaya"
+  def code
+    <<-'END'.lines.map {|l| l.strip }.join
+      %(
+        #$D;
+        Void main(){
+          putStr#{E[PREV]};
+        }
+      )
+    END
+  end
+end
+
 class Julia < CodeGen
   File = "QR.jl"
   Cmd = "julia QR.jl > OUTFILE"
@@ -368,7 +385,7 @@ class Java < CodeGen
       %(
         class QR{
           public static void main(String[]v){
-            String c[]=new String[9999],y="",z=y,s="#{
+            String c[]=new String[99999],y="",z=y,s="#{
               z=t=(0..r=q=126).map{|n|[n,[]]};
               a="";
               b=->n{a<<(n%78+55)%84+42};
@@ -764,7 +781,7 @@ class Awk_Bc_Befunge_BLC8 < CodeGen
   File = ["QR.awk", "QR.bc", "QR.bef", "QR.Blc"]
   Cmd = [
     "awk -f QR.awk > OUTFILE",
-    "BC_LINE_LENGTH=3000000 bc -q QR.bc > OUTFILE",
+    "BC_LINE_LENGTH=4000000 bc -q QR.bc > OUTFILE",
     "cfunge QR.bef > OUTFILE",
     "ruby vendor/blc.rb < QR.Blc > OUTFILE"
   ]
