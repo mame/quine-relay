@@ -376,7 +376,8 @@ class JavaScript < CodeGen
   Code = %q("s=#{E[PREV]};typeof print=='function'?print(s):console.log('%s',s)")
 end
 
-class Java < CodeGen
+class Java_ < CodeGen
+  Name = "Java"
   File = "QR.java"
   Cmd = "javac QR.java && java QR > OUTFILE"
   Apt = "openjdk-6-jdk"

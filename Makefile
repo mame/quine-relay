@@ -18,9 +18,6 @@ endif
 
 .DELETE_ON_ERROR:
 
-SRCS = QR.rb QR.scala QR.scm QR.sci QR.bash QR.sl QR.st QR.spl QR.sml QR.sq QR.tcl QR.t QR.unl QR.vala QR.v QR.vb QR.ws QR.xslt QR.yorick QR.azm QR.+ qr.adb QR.als QR.a68 QR.ante QR.asy QR.dats QR.awk QR.bc QR.bef QR.Blc QR.boo QR.bf QR.c QR.cpp QR.cs QR.cd QR.chef QR.clj QR.cob QR.coffee QR.lisp QR.d QR.dc QR.ec QR.el QR.erl QR.fsx QR.fal QR.false QR.fs QR.f QR.f90 QR.gbs QR.g QR.gel QR.plt QR.go QR.gpt QR.gri QR.groovy QR.hs QR.hx QR.icn QR.i QR.j QR.java QR.js QR.jl QR.k QR.ll QR.logo QR.lol QR.lua QR.mk QR.mac QR.il QR.asm QR.neko QR.5c QR.m QR.ml QR.octave QR.ook QR.gp QR.pasm QR.pas QR.pl QR.php QR.png QR.pike QR.ps QR.ppt QR.prolog QR.py QR.R QR.r QR.rexx
-
-
 all: QR2.rb
 	@echo
 	@echo "#############"
@@ -28,9 +25,6 @@ all: QR2.rb
 	@echo "#############"
 	@echo
 	diff QR.rb QR2.rb
-
-SHA1SUMS: $(SRCS)
-	sha1sum -b $+ > $@
 
 QR.scala: QR.rb
 	@echo

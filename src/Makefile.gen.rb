@@ -31,16 +31,10 @@ ifeq ($(SCHEME),csi)
 endif
 
 .DELETE_ON_ERROR:
-
-SRCS = #{ RunSteps.map {|s| s.src }.join(" ") }
-
 END
 OUT << "all: QR2.rb"
 banner("CHECK")
 OUT << "\tdiff QR.rb QR2.rb"
-OUT << ""
-OUT << "SHA1SUMS: $(SRCS)"
-OUT << "\tsha1sum -b $+ > $@"
 
 [*RunSteps, RunStep["Ruby", "QR2.rb"]].each_cons(2).with_index do |(s1, s2), i|
   cmd = s1.cmd_make.gsub("OUTFILE", s2.src)
