@@ -754,7 +754,7 @@ class C < CodeGen
   File = "QR.c"
   Cmd = "$(CC) -o QR QR.c && ./QR > OUTFILE"
   Apt = "gcc"
-  Code = %q("#include"+M[PREV])
+  Code = %q("#include#{M[PREV]}/****//****/")
 end
 
 class Boo_Brainfuck < CodeGen
@@ -762,17 +762,41 @@ class Boo_Brainfuck < CodeGen
   Cmd = ["booi QR.boo > OUTFILE", "$(BF) QR.bf > OUTFILE"]
   Apt = ["boo", "bf"]
   def code
-    <<-'END'.lines.map {|l| l.strip }.join
+    <<-'END'.lines.map {|l| l.strip.gsub(/^_+/) { " " * $&.size } }.join
+    (
+      s=PREV;
+      t={};b="";L="";n=i=0;D=->n{L<<(n+62)%92+35;D};
+      s.bytes{|c|
+        n>0?
+          n-=1:
+          (t[c]=(t[c]||[]).reject{|j|j<i-3560};
+           x=[];
+           t[c].map{|j|
+             k=(0..90).find{|k|not s[i+1+k]==s[j+k]}||91;
+             k>4&&x<<[k,j]
+           };
+           x=x.max)?
+          (
+            n,j=x;
+            x=b.size;(u=[x,3999].min;D[u%87][u/87];L<<b[0,u];b[0,u]="";x-=u)while x>0;
+            x=4001+i-j;D[x%87][x/87][n-5]
+          ):b<<c;
+        t[c]+=[i+=1]
+      };
       %(
-        f={n as int|'\\\\'*n};
+        d=#{Q[E[L]]};s="";while 0<len(d):\n
+        _x as int,y as int=d;i=3;if(n=(x-5)%92+(y-5)%92*87)>3999:\n
+        __for _ in range(((d[2]cast int-5)%92+6)):s+=s[len(s)+4000-n]\n
+        _else:s+=d[2:i=n+2]\n
+        _d=d[i:]\n
         a=0;
-        s=#{V[Q[E[PREV]],"$(f(","))"]};
         for i in range(len(s)):
           b as int=s[i];
           a-=b;
           print(('+'*-a if 0>a else'-'*a)+'.');
-          a=b;
+          a=b
       )
+    )
     END
   end
 end
@@ -872,7 +896,7 @@ class Ada < CodeGen
         with Ada.Text_Io;
         procedure qr is$$$
         begin$$$
-          #{ f(PREV,117){%(Ada.Text_Io.Put("#{d[$s]}");\n)} }
+          Ada.Text_Io.Put_Line("#{d[PREV]}");
         end;
       )
     END
