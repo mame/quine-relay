@@ -7,7 +7,7 @@ LOCAL     := $(CURDIR)/local
 all: $(LOCAL)/bin/lci $(LOCAL)/bin/npiet $(LOCAL)/bin/cfunge $(LOCAL)/bin/compilechef
 
 $(LOCAL)/bin/lci:
-	unzip $(LCI).zip
+	unzip -q $(LCI).zip
 	(cd $(LCI) && cmake -DCMAKE_INSTALL_PREFIX=$(LOCAL) . && make && make install)
 
 $(LOCAL)/bin/npiet:
