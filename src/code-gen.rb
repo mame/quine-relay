@@ -345,17 +345,29 @@ class LLVMAsm < CodeGen
   end
 end
 
-class Kaya < CodeGen
-  Name = "Kaya"
-  File = "QR.k"
-  Cmd = "kayac QR.k && ./QR > OUTFILE"
-  Apt = "kaya"
+class Kaya_Lisaac < CodeGen
+  Name = ["Kaya", "Lisaac"]
+  File = ["QR.k", "qr.li"]
+  Cmd = [
+    "kayac QR.k && ./QR > OUTFILE",
+    "lisaac qr.li && ./qr > OUTFILE",
+  ]
+  Apt = ["kaya", "lisaac"]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
         #$D;
+        import Regex;
         Void main(){
-          putStr#{E[PREV]};
+          t="SectionHeader+name:=QR;SectionPublic-main<-(\\n";
+          for i in[0..#{s=PREV;s.size/99}]{
+            s=substr(#{E[s]},i*99,99);
+            g=[Global()];
+            replace("\\\\\\\\","\\\\\\\\",s,g);
+            replace("\\"","\\\\\\"",s,g);
+            t+="\\""+s+"\\".print;\\n";
+          }
+          putStr(t+");");
         }
       )
     END
