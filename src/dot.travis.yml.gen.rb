@@ -34,7 +34,7 @@ yaml["before_install"] = [
 apts = [*apts.flatten.compact.uniq, *other_packages].sort
 apt_width = apts.map {|apt| apt.size }.max
 apts.each_with_index do |apt, i|
-  yaml["before_install"] << "sudo apt-get install #{ apt }#{ " " * (apt_width - apt.size) } # #{ "%#{ apts.size.to_s.size }d" % (i + 1) } / #{ apts.size }"
+  yaml["before_install"] << "travis_retry sudo apt-get install #{ apt }#{ " " * (apt_width - apt.size) } # #{ "%#{ apts.size.to_s.size }d" % (i + 1) } / #{ apts.size }"
 end
 yaml["before_script"] = [
   "make -C vendor/",
