@@ -42,3 +42,7 @@ LOLCODE: lci-0.10.5.zip
 Piet: npiet-1.3d.tar.gz
   * http://www.bertnase.de/npiet/
   * License: GPL2
+
+Lazy K: lazyk.c
+  * https://github.com/irori/lazyk
+  * License: GPL2+

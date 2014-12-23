@@ -124,7 +124,32 @@ Note that some languages are not available in Ubuntu (marked as *N/A*).
 This repository includes their implementations in `vendor/`.
 See also `vendor/README` in detail.
 
-## How to re-generate the source
+
+## Frequently asked questions
+
+### Q. Why?
+
+A. [Take your pick.](https://github.com/mame/quine-relay/issues/11)
+
+### Q. How?
+
+A. *TBD*
+
+### Q. Language XXX is missing!
+
+A. See [the criteria for language inclusion][criteria] in detail.
+
+In short: please create a deb package and contribute it to Ubuntu.
+
+[criteria]: https://github.com/mame/quine-relay/wiki/Criteria-for-language-inclusion)
+
+### Q. Does it really work?
+
+A. [![Build Status](https://travis-ci.org/mame/quine-relay.svg?branch=master)](https://travis-ci.org/mame/quine-relay)
+
+### Q. How was the code generated?
+
+A.
 
     $ sudo apt-get install rake ruby-cairo ruby-rsvg2 ruby-gdk-pixbuf2 \
       optipng advancecomp

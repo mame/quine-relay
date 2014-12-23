@@ -345,20 +345,51 @@ class LLVMAsm < CodeGen
   end
 end
 
-class Kaya_Lisaac < CodeGen
-  Name = ["Kaya", "Lisaac"]
-  File = ["QR.k", "qr.li"]
+class Kaya_LazyK_Lisaac < CodeGen
+  Name = ["Kaya", "Lazy K", "Lisaac"]
+  File = ["QR.k", "QR.lazy", "qr.li"]
   Cmd = [
     "kayac QR.k && ./QR > OUTFILE",
+    "lazyk QR.lazy > OUTFILE",
     "lisaac qr.li && ./qr > OUTFILE",
   ]
-  Apt = ["kaya", "lisaac"]
+  Apt = ["kaya", nil, "lisaac"]
   def code
-    <<-'END'.lines.map {|l| l.strip }.join
+    lazyk = <<-END.split.join
+      `k`k```sii```sii``s``s`kski
+      `````sii``s``s`ks``s`k`s`ks``s`k`s`k`s`ks``s`k`s``s`ks``s`kk``s`ks``s`kk`
+      `s``s`ks``s`k`s`ks``s`k`s`kk``s``s`ks``s`kk``si`k``s`k`sik`kk`k`k``s`k```
+      s``s`kski```s``s`ksk``s``s`kski``s`k`sikk``s``s`ks``s`k`s`ks``s`k`s`kk``s
+      `k`s`ks``s`k`s`kk``s``s`ks``s`kk``sii`k`s``s`ksk`k`k``s`k`s``s``si`ki`k`s
+      ``s`ksk``s`kk`s`k``s``s`kski`k`k``s``s`ks``s`kk``s`ks``s`k`sik`kk`ki`ki
+    END
+    # (load "../lazier.scm")
+    # (load "../prelude.scm")
+    # (load "../prelude-numbers.scm")
+    #
+    # (lazy-def '(main)
+    #  '((lambda (x) (x x 0 0))
+    #     (lambda (self count num code)
+    #       (if<= count 6
+    #         (self self (1+ count) (code i 1+ (* 2 num))) ; assuming that code is k or i
+    #           (cons num code))))) ; assuming that code is the rest output string
+    #
+    # (print-as-unlambda (laze '(main)))
+    # ;(print-as-unlambda (laze '(lambda (input) ((s (s (s i (k i)) (k k)) (k i) main) k i k i k))))
+    # ;(print-as-unlambda (laze '(lambda (input)
+    #   ((s(s(s(s(s(s(s(s i(k i))(k i))(k i))(k i))(k i))(k i))(k i)) (k(k 256)) main)))))
+    lazyk = lazyk.tr("ski`","0123").scan(/.{1,3}/).map do |n|
+      n = n.reverse.to_i(4)
+      [*93..124,*42..73][n]
+    end.pack("C*")
+    size = lazyk.size
+    lazyk = lazyk.gsub(/[ZHJK\^`~X]/) {|c| "\\x%02x" % c.ord }
+    <<-'END'.lines.map {|l| l.strip }.join.sub("LAZYK"){lazyk}
       %(
         #$D;
         import Regex;
         Void main(){
+          b="`";
           t="SectionHeader+name:=QR;SectionPublic-main<-(\\n";
           for i in[0..#{s=PREV;s.size/99}]{
             s=substr(#{E[s]},i*99,99);
@@ -367,7 +398,15 @@ class Kaya_Lisaac < CodeGen
             replace("\\"","\\\\\\"",s,g);
             t+="\\""+s+"\\".print;\\n";
           }
-          putStr(t+");");
+          putStr("k"+b);
+          for c in array(t+");"){
+            d=rep(b+b+"s",8)+"i";
+            for j in[0..6]d+=b+substr("kki",c>>(6-j)&1,2);
+            putStr(d);
+          }
+          for c in array("LAZYK"){
+            for i in[0..2]putStr(substr("ski"+b,c%83-10>>i*2&3,1));
+          }
         }
       )
     END
