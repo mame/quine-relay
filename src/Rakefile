@@ -23,6 +23,10 @@ file "../langs.png" => ["langs.png.gen.rb", "uroboros.svg", "code-gen.rb"] do |t
   ruby "langs.png.gen.rb"
 end
 
+file "../thumbnail.png" => ["thumbnail.png.gen.rb", "../QR.rb"] do |t|
+  ruby "thumbnail.png.gen.rb"
+end
+
 file "../Makefile" => ["Makefile.gen.rb", "code-gen.rb"] do |t|
   ruby "Makefile.gen.rb"
 end
@@ -39,6 +43,7 @@ task :default => %w(
   ../QR.rb
   ../README.md
   ../langs.png
+  ../thumbnail.png
   ../Makefile
   ../.travis.yml
 )

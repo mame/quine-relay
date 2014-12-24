@@ -129,7 +129,7 @@ See also `vendor/README` in detail.
 
 ### Q. Why?
 
-A. [Take your pick.](https://github.com/mame/quine-relay/issues/11)
+A. [Take your pick](https://github.com/mame/quine-relay/issues/11).
 
 ### Q. How?
 
@@ -147,12 +147,18 @@ In short: please create a deb package and contribute it to Ubuntu.
 
 A. [![Build Status](https://travis-ci.org/mame/quine-relay.svg?branch=master)](https://travis-ci.org/mame/quine-relay)
 
+### Q. The code does not fit into my display!
+
+A. [Here you go][thumbnail].
+
+[thumbnail]: https://raw.github.com/mame/quine-relay/master/thumbnail.png
+
 ### Q. How was the code generated?
 
 A.
 
     $ sudo apt-get install rake ruby-cairo ruby-rsvg2 ruby-gdk-pixbuf2 \
-      optipng advancecomp
+      optipng advancecomp ruby-chunky-png
     $ cd src
     $ rake2.0 clobber
     $ rake2.0
