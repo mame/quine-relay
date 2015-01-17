@@ -20,8 +20,8 @@ yaml["env"] = ["PATH=/usr/games:$PATH"]
 yaml["before_install"] = [
   "sudo service postgresql stop",
   "sudo service mysql stop",
-  "sudo apt-get remove postgresql-9.3 -y",
   "sudo apt-get update",
+  "sudo apt-get remove postgresql-9.3 -y",
   'sudo apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" dist-upgrade',
   "sudo add-apt-repository ppa:ecere-team/ppa -y",
   "sudo add-apt-repository ppa:directhex/ppa -y",

@@ -141,7 +141,7 @@ A. See [the criteria for language inclusion][criteria] in detail.
 
 In short: please create a deb package and contribute it to Ubuntu.
 
-[criteria]: https://github.com/mame/quine-relay/wiki/Criteria-for-language-inclusion)
+[criteria]: https://github.com/mame/quine-relay/wiki/Criteria-for-language-inclusion
 
 ### Q. Does it really work?
 
