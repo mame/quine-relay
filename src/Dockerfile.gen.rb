@@ -5,19 +5,10 @@ other_packages = %w(cmake libpng12-dev libgd2-xpm-dev groff tcc)
 
 apts = [*apts.flatten.compact.uniq, *other_packages].sort
 
-ppas = %w(ecere-team/ppa staticfloat/juliareleases staticfloat/julia-deps)
-
 dockerfile = []
 dockerfile << "FROM ubuntu:14.10"
 dockerfile << "ENV PATH /usr/games:$PATH"
 dockerfile << "RUN apt-get update && apt-get upgrade -y"
-dockerfile << "RUN apt-get install -y software-properties-common"
-
-ppa_width = ppas.map {|ppa| ppa.size }.max
-dockerfile << "RUN " + ppas.map do |ppa|
-  "add-apt-repository -y ppa:#{ppa}#{" " * (ppa_width - ppa.size)}"
-end.join(" && \\\n    ")
-dockerfile << "RUN apt-get update"
 
 apt_width = apts.map {|apt| apt.size}.max
 dockerfile << "RUN " + apts.map do |apt|

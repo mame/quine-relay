@@ -1,11 +1,6 @@
 FROM ubuntu:14.10
 ENV PATH /usr/games:$PATH
 RUN apt-get update && apt-get upgrade -y
-RUN apt-get install -y software-properties-common
-RUN add-apt-repository -y ppa:ecere-team/ppa            && \
-    add-apt-repository -y ppa:staticfloat/juliareleases && \
-    add-apt-repository -y ppa:staticfloat/julia-deps   
-RUN apt-get update
 RUN apt-get install -y afnix              && \
     apt-get install -y algol68g           && \
     apt-get install -y aplus-fsf          && \
