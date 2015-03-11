@@ -519,7 +519,6 @@ class Icon_INTERCAL < CodeGen
 end
 
 class Haxe < CodeGen
-  Name = "haXe"
   File = "QR.hx"
   Cmd = "haxe -main QR -neko QR.n && neko QR.n > OUTFILE"
   Apt = "haxe"

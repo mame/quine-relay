@@ -241,12 +241,12 @@ I used the following Ubuntu deb packages to test this program.
 60  |Gri                |gri                |2.12.23-8
 61  |Groovy             |groovy             |2.0.0~beta2+isreally1.8.6-4ubuntu1
 62  |Haskell            |ghc                |7.6.3-19
-63  |haXe               |haxe               |1:3.0.0~svn6707-4
+63  |Haxe               |haxe               |1:3.0.0~svn6707-4
 64  |Icon               |icont              |9.4.3-4.2ubuntu1
     |                   |iconx              |9.4.3-4.2ubuntu1
 65  |INTERCAL           |intercal           |29:0.29-3
 66  |Jasmin             |jasmin-sable       |2.4.0-4
-67  |Java               |openjdk-6-jdk      |6b33-1.13.5-1ubuntu1
+67  |Java               |openjdk-6-jdk      |6b34-1.13.6-1ubuntu0.14.10.1
 68  |JavaScript         |rhino              |1.7R4-3
 69  |Julia              |julia              |0.2.1+dfsg-3
 70  |Kaya               |kaya               |0.4.4-6.2
@@ -270,7 +270,7 @@ I used the following Ubuntu deb packages to test this program.
 88  |Parrot asm         |parrot             |6.3.0-1
 89  |Pascal             |fp-compiler        |2.6.4+dfsg-3
 90  |Perl               |perl               |5.20.1-1
-91  |PHP                |php5-cli           |5.5.12+dfsg-2ubuntu4.1
+91  |PHP                |php5-cli           |5.5.12+dfsg-2ubuntu4.2
 92  |Piet               |*N/A*              |-
 93  |Pike               |pike7.8            |7.8.866-3
 94  |PostScript         |ghostscript        |9.14~dfsg-0ubuntu3

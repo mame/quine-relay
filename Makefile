@@ -545,7 +545,7 @@ QR.hs: QR.groovy
 QR.hx: QR.hs
 	@echo
 	@echo "###########################"
-	@echo "##  62: Haskell -> haXe  ##"
+	@echo "##  62: Haskell -> Haxe  ##"
 	@echo "###########################"
 	@echo
 	ghc QR.hs
@@ -554,7 +554,7 @@ QR.hx: QR.hs
 QR.icn: QR.hx
 	@echo
 	@echo "########################"
-	@echo "##  63: haXe -> Icon  ##"
+	@echo "##  63: Haxe -> Icon  ##"
 	@echo "########################"
 	@echo
 	haxe -main QR -neko QR.n
