@@ -72,7 +72,7 @@ the original <%= RunSteps[0].name %> code again.
 
 #### 1. Install all interpreters/compilers.
 
-If you are using Ubuntu 14.10 "Utopic Unicorn", you can perform the following steps:
+If you are using Ubuntu 15.04 "Vivid Vervet", you can perform the following steps:
 
 First, you have to type the following apt-get command to install all of them.
 
