@@ -1,4 +1,4 @@
-FROM ubuntu:14.10
+FROM ubuntu:15.04
 ENV PATH /usr/games:$PATH
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y afnix              && \
@@ -13,12 +13,12 @@ RUN apt-get install -y afnix              && \
     apt-get install -y bsdgames           && \
     apt-get install -y cduce              && \
     apt-get install -y clisp              && \
-    apt-get install -y clojure1.4         && \
+    apt-get install -y clojure1.6         && \
     apt-get install -y cmake              && \
     apt-get install -y coffeescript       && \
     apt-get install -y dc                 && \
     apt-get install -y ecere-sdk          && \
-    apt-get install -y emacs23            && \
+    apt-get install -y emacs24            && \
     apt-get install -y erlang             && \
     apt-get install -y f2c                && \
     apt-get install -y falconpl           && \
@@ -81,7 +81,7 @@ RUN apt-get install -y afnix              && \
     apt-get install -y ratfor             && \
     apt-get install -y regina-rexx        && \
     apt-get install -y rhino              && \
-    apt-get install -y ruby2.0            && \
+    apt-get install -y ruby2.1            && \
     apt-get install -y scala              && \
     apt-get install -y scilab             && \
     apt-get install -y slsh               && \

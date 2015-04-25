@@ -35,6 +35,10 @@ file "../.travis.yml" => ["dot.travis.yml.gen.rb", "code-gen.rb"] do |t|
   ruby "dot.travis.yml.gen.rb"
 end
 
+file "../Dockerfile" => ["Dockerfile.gen.rb", "code-gen.rb"] do |t|
+  ruby "Dockerfile.gen.rb"
+end
+
 task :test do
   ruby "test.rb"
 end
@@ -46,6 +50,7 @@ task :default => %w(
   ../thumbnail.png
   ../Makefile
   ../.travis.yml
+  ../Dockerfile
 )
 
 task "../SHA1SUMS" => ["code-gen.rb"] do |t|

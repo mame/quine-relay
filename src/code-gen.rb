@@ -661,7 +661,7 @@ class EmacsLisp < CodeGen
   Name = "Emacs Lisp"
   File = "QR.el"
   Cmd = "emacs -Q --script QR.el > OUTFILE"
-  Apt = "emacs23"
+  Apt = "emacs24"
   Code = %q(%((princ "#{e[PREV]}")))
 end
 
@@ -714,7 +714,7 @@ end
 class Clojure_Cobol < CodeGen
   File = ["QR.clj", "QR.cob"]
   Cmd = ["clojure QR.clj > OUTFILE", "cobc -O2 -x QR.cob && ./QR > OUTFILE"]
-  Apt = ["clojure1.4", "open-cobol"]
+  Apt = ["clojure1.6", "open-cobol"]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
@@ -1127,7 +1127,7 @@ end
 class Ruby < CodeGen
   File = "QR.rb"
   Cmd = "ruby QR.rb > OUTFILE"
-  Apt = "ruby2.0"
+  Apt = "ruby2.1"
   Code = nil
 end
 

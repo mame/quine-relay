@@ -28,15 +28,15 @@ If you are using Ubuntu 15.04 "Vivid Vervet", you can perform the following step
 First, you have to type the following apt-get command to install all of them.
 
     $ sudo apt-get install afnix algol68g aplus-fsf asymptote \
-      ats-lang-anairiats bash bc bf boo bsdgames cduce clisp clojure1.4 \
-      cmake coffeescript dc ecere-sdk emacs23 erlang f2c falconpl \
+      ats-lang-anairiats bash bc bf boo bsdgames cduce clisp clojure1.6 \
+      cmake coffeescript dc ecere-sdk emacs24 erlang f2c falconpl \
       fp-compiler fsharp g++ gambas3-script gap gauche gawk gcc gdc genius \
       gforth gfortran ghc ghostscript gnat gnu-smalltalk gnuplot gobjc \
       golang gpt gri groff groovy haxe icont iconx intercal iverilog \
       jasmin-sable julia kaya libgd2-xpm-dev libpng12-dev lisaac llvm lua5.2 \
       make maxima mlton mono-devel mono-mcs mono-vbnc nasm neko nickle ocaml \
       octave open-cobol openjdk-6-jdk pari-gp parrot perl php5-cli pike7.8 \
-      python r-base ratfor regina-rexx rhino ruby2.0 scala scilab slsh \
+      python r-base ratfor regina-rexx rhino ruby2.1 scala scilab slsh \
       spl-core swi-prolog tcl ucblogo valac xsltproc yorick zoem
 
 Then, you have to build the bundled interpreters.
@@ -179,7 +179,7 @@ I used the following Ubuntu deb packages to test this program.
 
 \#  |language           |ubuntu package     |version
 ----|-------------------|-------------------|-----------------------------------
-1   |Ruby               |ruby2.0            |2.0.0.484+really457-3ubuntu1.2
+1   |Ruby               |ruby2.1            |2.1.2-2ubuntu3
 2   |Scala              |scala              |2.9.2+dfsg-2
 3   |Scheme             |gauche             |0.9.4-5
 4   |Scilab             |scilab             |5.5.1-7
@@ -217,14 +217,14 @@ I used the following Ubuntu deb packages to test this program.
 36  |C#                 |mono-mcs           |3.2.8+dfsg-4ubuntu4
 37  |CDuce              |cduce              |0.6.0-1
 38  |Chef               |*N/A*              |-
-39  |Clojure            |clojure1.4         |1.4.0+dfsg-3
+39  |Clojure            |clojure1.6         |1.6.0+dfsg-1
 40  |Cobol              |open-cobol         |1.1-1build1
 41  |CoffeeScript       |coffeescript       |1.4.0-1.1
 42  |Common Lisp        |clisp              |1:2.49-9ubuntu1
 43  |D                  |gdc                |4.9.2-2ubuntu2
 44  |dc                 |dc                 |1.06.95-9build1
 45  |eC                 |ecere-sdk          |0.44.11-0ubuntu1
-46  |Emacs Lisp         |emacs23            |23.4+1-4.1ubuntu1
+46  |Emacs Lisp         |emacs24            |24.4+1-4ubuntu5
 47  |Erlang             |erlang             |1:17.3-dfsg-3ubuntu1
 48  |F#                 |fsharp             |3.1.1.26+dfsg2-2
 49  |Falcon             |falconpl           |0.9.6.9-git20120606-2.1

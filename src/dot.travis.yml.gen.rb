@@ -6,12 +6,13 @@ other_packages = %w(cmake libpng12-dev libgd2-xpm-dev groff tcc)
 
 
 utopic_to_precise = {
-  "clojure1.4" => "clojure",
+  "clojure1.6" => "clojure",
+  "emacs24" => "emacs23",
   "gambas3-script" => "gambas2-script",
 }
 
 apts = apts.flatten.map {|apt| utopic_to_precise[apt] || apt }.compact
-apts.delete("ruby2.0")
+apts.delete("ruby2.1")
 
 yaml = {}
 yaml["language"] = "ruby"
