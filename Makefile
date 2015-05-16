@@ -850,22 +850,22 @@ QR.R: QR.py
 	@echo
 	python QR.py > QR.R
 
-QR.ra: QR.R
+QR.ratfor: QR.R
 	@echo
 	@echo "#######################"
 	@echo "##  98: R -> Ratfor  ##"
 	@echo "#######################"
 	@echo
-	R --slave -f QR.R > QR.ra
+	R --slave -f QR.R > QR.ratfor
 
-QR.rexx: QR.ra
+QR.rexx: QR.ratfor
 	@echo
 	@echo "##########################"
 	@echo "##  99: Ratfor -> REXX  ##"
 	@echo "##########################"
 	@echo
-	ratfor -o QR.r.f QR.ra
-	gfortran -o QR QR.r.f
+	ratfor -o QR.ratfor.f QR.ratfor
+	gfortran -o QR QR.ratfor.f
 	./QR > QR.rexx
 
 QR2.rb: QR.rexx

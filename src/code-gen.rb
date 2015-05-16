@@ -62,11 +62,11 @@ END
 
 
 class Python_R_Ratfor_REXX < CodeGen
-  File = ["QR.py", "QR.R", "QR.r", "QR.rexx"]
+  File = ["QR.py", "QR.R", "QR.ratfor", "QR.rexx"]
   Cmd = [
     "python QR.py > OUTFILE",
     "R --slave -f QR.R > OUTFILE",
-    "ratfor -o QR.r.f QR.r && gfortran -o QR QR.r.f && ./QR > OUTFILE",
+    "ratfor -o QR.ratfor.f QR.ratfor && gfortran -o QR QR.ratfor.f && ./QR > OUTFILE",
     "rexx ./QR.rexx > OUTFILE"
   ]
   Apt = ["python", "r-base", "ratfor", "regina-rexx"]
