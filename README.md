@@ -315,6 +315,10 @@ In short: please create a deb package and contribute it to Ubuntu.
 
 A. [![Build Status](https://travis-ci.org/mame/quine-relay.svg?branch=master)](https://travis-ci.org/mame/quine-relay)
 
+### Q. How long did it take you?
+
+A. [Do you try to cross the world line?](https://github.com/mame/quine-relay/issues/60)
+
 ### Q. The code does not fit into my display!
 
 A. [Here you go][thumbnail].
