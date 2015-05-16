@@ -147,8 +147,9 @@ To run it on Ubuntu 12.04 LTS, you might want to refer to `.travis.yml`.
     $ ppt -d < QR.ppt > QR.prolog
     $ swipl -q -t qr -f QR.prolog > QR.py
     $ python QR.py > QR.R
-    $ R --slave -f QR.R > QR.r
-    $ ratfor -o QR.r.f QR.r && gfortran -o QR QR.r.f && ./QR > QR.rexx
+    $ R --slave -f QR.R > QR.ratfor
+    $ ratfor -o QR.ratfor.f QR.ratfor && gfortran -o QR QR.ratfor.f &&
+      ./QR > QR.rexx
     $ rexx ./QR.rexx > QR2.rb
 
 You will see that `QR.rb` is the same as `QR2.rb`.
@@ -294,7 +295,13 @@ A. [Take your pick](https://github.com/mame/quine-relay/issues/11).
 
 ### Q. How?
 
-A. *TBD*
+A. Good news: I'm now writing "a book" about obfuscated programming.
+It will include a detailed explanation of how to write a quine,
+an ascii-art quine, and a uroboros quine like this quine-relay.
+It will be published in this year (if successful).
+
+Bad news: It will be written in Japanese.
+I hope you could translate it to English <strike>and help me earn royalties</strike>.
 
 ### Q. Language XXX is missing!
 

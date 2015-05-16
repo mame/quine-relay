@@ -133,7 +133,13 @@ A. [Take your pick](https://github.com/mame/quine-relay/issues/11).
 
 ### Q. How?
 
-A. *TBD*
+A. Good news: I'm now writing "a book" about obfuscated programming.
+It will include a detailed explanation of how to write a quine,
+an ascii-art quine, and a uroboros quine like this quine-relay.
+It will be published in this year (if successful).
+
+Bad news: It will be written in Japanese.
+I hope you could translate it to English <strike>and help me earn royalties</strike>.
 
 ### Q. Language XXX is missing!
 
