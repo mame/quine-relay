@@ -122,8 +122,7 @@ class PHP_Piet < CodeGen
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
-        <?php function f($n){return str_repeat("\\\\",$n);};
-          $f="f";
+        <?php $f=function($n){return str_repeat("\\\\",$n);};
           $z=3+$w=strlen($s=#{V[Q[E[PREV]],"{$f(",")}"]})*3;
           echo"\\x89PNG\\r\\n\\x1a\\n";
           $m="";

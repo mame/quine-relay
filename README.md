@@ -247,7 +247,7 @@ I used the following Ubuntu deb packages to test this program.
     |                   |iconx              |9.4.3-4.2ubuntu1
 65  |INTERCAL           |intercal           |29:0.29-3
 66  |Jasmin             |jasmin-sable       |2.4.0-5
-67  |Java               |openjdk-6-jdk      |6b35-1.13.7-1ubuntu1
+67  |Java               |openjdk-6-jdk      |6b36-1.13.8-0ubuntu1~15.04.1
 68  |JavaScript         |rhino              |1.7R4-3
 69  |Julia              |julia              |0.3.2-1ubuntu1
 70  |Kaya               |kaya               |0.4.4-6.2
@@ -271,10 +271,10 @@ I used the following Ubuntu deb packages to test this program.
 88  |Parrot asm         |parrot             |6.6.0-1
 89  |Pascal             |fp-compiler        |2.6.4+dfsg-4
 90  |Perl               |perl               |5.20.2-2
-91  |PHP                |php5-cli           |5.6.4+dfsg-4ubuntu6
+91  |PHP                |php5-cli           |5.6.4+dfsg-4ubuntu6.2
 92  |Piet               |*N/A*              |-
 93  |Pike               |pike7.8            |7.8.866-3
-94  |PostScript         |ghostscript        |9.15+dfsg-0ubuntu2
+94  |PostScript         |ghostscript        |9.15+dfsg-0ubuntu2.1
 95  |PPT (Punched tape) |bsdgames           |2.17-22
 96  |Prolog             |swi-prolog         |6.6.6-5
 97  |Python             |python             |2.7.9-1
