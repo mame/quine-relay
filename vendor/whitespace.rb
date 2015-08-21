@@ -1,9 +1,9 @@
 require "scanf"
 
-RE = /\G(?<n>[01]+){0}
-  ( 00  (?<push> )\g<n>2
-  | 010 (?<copy> )\g<n>2
-  | 012 (?<slide>)\g<n>2
+RE = /\G(?<num>[01]+){0}(?<label>[01]+){0}
+  ( 00  (?<push> )\g<num>2
+  | 010 (?<copy> )\g<num>2
+  | 012 (?<slide>)\g<num>2
   | 020 (?<dup>)
   | 021 (?<swap>)
   | 022 (?<pop>)
@@ -18,36 +18,36 @@ RE = /\G(?<n>[01]+){0}
   | 1201(?<outn>)
   | 1210(?<readc>)
   | 1211(?<readn>)
-  | 200 (?<mark>)\g<n>2
-  | 201 (?<call>)\g<n>2
-  | 202 (?<jump>)\g<n>2
-  | 210 (?<jz>)\g<n>2
-  | 211 (?<jn>)\g<n>2
+  | 200 (?<mark>)\g<label>2
+  | 201 (?<call>)\g<label>2
+  | 202 (?<jump>)\g<label>2
+  | 210 (?<jz>)\g<label>2
+  | 211 (?<jn>)\g<label>2
   | 212 (?<ret>)
   | 222 (?<end>)
   |     (?<eof>)\z
   |     (?<error>)
   )/x
 
-names = RE.names.map {|n| n.to_sym } - [:n]
+names = RE.names.map {|n| n.to_sym } - [:num, :label]
 code, labels = [], {}
 File.read($*[0]).gsub(/[^ \t\n]/m, "").tr(" \t\n", "012").scan(RE) do
   insn = names.find {|n| $~[n] }
-  num = $~[:n]
-  num = num[1..-1].to_i(2) * (num[0] == ?0 ? 1 : -1) if num
+  arg = $~[:num] || $~[:label]
+  arg = arg[1..-1].to_i(2) * (arg[0] == ?0 ? 1 : -1) if arg
   raise "Unrecognised input" if insn == :error
-  insn == :mark ? labels[num] = code.size : code << [insn, num]
+  insn == :mark ? labels[arg] = code.size : code << [insn, arg]
 end
 
 pc, call, stack, heap = 0, [], [], {}
 loop do
-  insn, num = code[pc]
+  insn, arg = code[pc]
   pc += 1
   case insn
-  when :push  then stack << num
+  when :push  then stack << arg
   when :dup   then stack << stack.last
-  when :copy  then stack << stack[-num - 1]
-  when :slide then n = stack.pop; stack.pop(num); stack << n
+  when :copy  then stack << stack[-arg - 1]
+  when :slide then n = stack.pop; stack.pop(arg); stack << n
   when :swap  then n = stack.pop; m = stack.pop; stack << n << m
   when :pop   then stack.pop
   when :add   then n = stack.pop; stack << stack.pop + n
@@ -61,10 +61,10 @@ loop do
   when :readc then heap[stack.pop] = $stdin.getc.ord
   when :outn  then print stack.pop
   when :readn then heap[stack.pop] = $stdin.scanf("%d")[0] || raise("Integer expected")
-  when :call  then call << pc; pc = labels[num]
-  when :jump  then pc = labels[num]
-  when :jz    then pc = labels[num] if stack.pop == 0
-  when :jn    then pc = labels[num] if stack.pop <  0
+  when :call  then call << pc; pc = labels[arg]
+  when :jump  then pc = labels[arg]
+  when :jz    then pc = labels[arg] if stack.pop == 0
+  when :jn    then pc = labels[arg] if stack.pop <  0
   when :ret   then pc = call.pop
   when :end   then break
   when :eof   then raise("Reached EOF")
