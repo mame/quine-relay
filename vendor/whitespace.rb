@@ -1,6 +1,6 @@
 require "scanf"
 
-RE = /\G(?<num>[01]+){0}(?<label>[01]+){0}
+RE = /\G(?<num>[01]+){0}(?<label>[01]*){0}
   ( 00  (?<push> )\g<num>2
   | 010 (?<copy> )\g<num>2
   | 012 (?<slide>)\g<num>2
@@ -33,8 +33,9 @@ names = RE.names.map {|n| n.to_sym } - [:num, :label]
 code, labels = [], {}
 File.read($*[0]).gsub(/[^ \t\n]/m, "").tr(" \t\n", "012").scan(RE) do
   insn = names.find {|n| $~[n] }
-  arg = $~[:num] || $~[:label]
+  arg = $~[:num]
   arg = arg[1..-1].to_i(2) * (arg[0] == ?0 ? 1 : -1) if arg
+  arg = $~[:label] if $~[:label]
   raise "Unrecognised input" if insn == :error
   insn == :mark ? labels[arg] = code.size : code << [insn, arg]
 end
