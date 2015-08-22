@@ -40,7 +40,7 @@ File.read($*[0]).gsub(/[^ \t\n]/m, "").tr(" \t\n", "012").scan(RE) do
   insn == :mark ? labels[arg] = code.size : code << [insn, arg]
 end
 
-pc, call, stack, heap = 0, [], [], {}
+pc, call, stack, heap = 0, [], [], Hash.new(0)
 loop do
   insn, arg = code[pc]
   pc += 1
