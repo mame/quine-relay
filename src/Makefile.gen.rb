@@ -35,6 +35,9 @@ END
 OUT << "all: QR2.rb"
 banner("CHECK")
 OUT << "\tdiff QR.rb QR2.rb"
+OUT << ""
+OUT << "check: all"
+OUT << "\tsha1sum --quiet -c SHA1SUMS"
 
 [*RunSteps, RunStep["Ruby", "QR2.rb"]].each_cons(2).with_index do |(s1, s2), i|
   cmd = s1.cmd_make.gsub("OUTFILE", s2.src)

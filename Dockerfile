@@ -5,4 +5,4 @@ RUN apt-get install -y afnix algol68g aplus-fsf asymptote ats-lang-anairiats bas
 ADD . /usr/local/share/quine-relay
 WORKDIR /usr/local/share/quine-relay
 RUN make -C vendor
-CMD make CC=tcc
+CMD make CC=tcc check

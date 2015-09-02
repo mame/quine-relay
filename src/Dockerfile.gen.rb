@@ -15,6 +15,6 @@ dockerfile << "RUN apt-get install -y #{ apts.join(" ") }"
 dockerfile << "ADD . /usr/local/share/quine-relay"
 dockerfile << "WORKDIR /usr/local/share/quine-relay"
 dockerfile << "RUN make -C vendor"
-dockerfile << 'CMD make CC=tcc'
+dockerfile << "CMD make CC=tcc check"
 
 File.write("../Dockerfile", dockerfile.join("\n") + "\n")

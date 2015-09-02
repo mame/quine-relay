@@ -26,6 +26,9 @@ all: QR2.rb
 	@echo
 	diff QR.rb QR2.rb
 
+check: all
+	sha1sum --quiet -c SHA1SUMS
+
 QR.scala: QR.rb
 	@echo
 	@echo "########################"
