@@ -95,7 +95,7 @@ class PostScript_PPT < CodeGen
   Apt = ["ghostscript", "bsdgames"]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
-      %(
+      "
         (___________)dup =
         /s(|     .   |)def
         (#{Q[PREV,B]}){
@@ -103,7 +103,7 @@ class PostScript_PPT < CodeGen
             exch dup 1 and 79 mul 32 add exch 2 idiv 3 1 roll s exch 2 index exch put 1 sub dup 6 eq{1 sub}if
           }repeat s = pop pop
         }forall = quit
-      )
+      "
     END
   end
 end
@@ -201,19 +201,19 @@ class Octave_Ook < CodeGen
   Apt = ["octave", nil]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
-      %(
+      "
         s=toascii#{E[PREV]};
         t=num2cell(b=11-ceil(s/13));
         for n=1:9
             m={};
             for i=1:141
-              f=@(x,y,n)repmat(["Ook" x " Ook" y 32],[1 abs(n)]);
+              f=@(x,y,n)repmat(['Ook' x ' Ook' y 32],[1 abs(n)]);
               m(i)=[f(z=46,63,n) f(q=z-(i<13)*13,q,i-13) f(33,z,1) f(63,z,n)];
             end;
             t(x)=m(diff([0 s(x=b==n)])+13);
         end;
-        printf("%%s",t{:})
-      )
+        printf('%%s',t{:})
+      "
     END
     # NOTE: %% is a hack for Nickle printf escaping.
   end
@@ -238,7 +238,7 @@ class Nickle < CodeGen
   File = "QR.5c"
   Cmd = "nickle QR.5c > OUTFILE"
   Apt = "nickle"
-  Code = %q(%(printf#{E[PREV]}))
+  Code = %q("printf#{E[PREV]}")
 end
 
 class Neko < CodeGen
@@ -254,7 +254,7 @@ class NASM < CodeGen
   Apt = "nasm"
   def code
     <<-'END'.lines.map {|l| l.strip }.join("\\n")
-      %(m:db\x60#{e[s=PREV+N]}\x60
+      "m:db\x60#{e[s=PREV+N]}\x60
       global _start
       _start:mov edx,#{s.size}
       mov ecx,m
@@ -263,7 +263,7 @@ class NASM < CodeGen
       int 128
       mov ebx,0
       mov eax,1
-      int 128)
+      int 128"
     END
   end
 end
@@ -298,7 +298,7 @@ class Makefile < CodeGen
   File = "QR.mk"
   Cmd = "make -f QR.mk > OUTFILE"
   Apt = "make"
-  Code = %q(%(all:\n\t@echo '#{d[PREV,?$].gsub(?'){"'\\\\''"}}'))
+  Code = %q("all:\n\t@echo '#{d[PREV,?$].gsub(?'){"'\\\\''"}}'")
 end
 
 class Lua < CodeGen
@@ -528,7 +528,7 @@ class Haskell < CodeGen
   File = "QR.hs"
   Cmd = "ghc QR.hs && ./QR > OUTFILE"
   Apt = "ghc"
-  Code = %q(("main=putStr"+E[PREV]))
+  Code = %q("main=putStr"+E[PREV])
 end
 
 class Gri_Groovy < CodeGen
@@ -653,7 +653,7 @@ class Erlang < CodeGen
   File = "QR.erl"
   Cmd = "escript QR.erl > OUTFILE"
   Apt = "erlang"
-  Code = %q(%(\nmain(_)->\nio:fwrite#{E[PREV]}.))
+  Code = %q("\nmain(_)->\nio:fwrite#{E[PREV]}.")
 end
 
 class EmacsLisp < CodeGen
@@ -702,10 +702,10 @@ class CoffeeScript < CodeGen
   Apt = "coffeescript"
   def code
     <<-'END'.lines.map {|l| l.strip }.join
-      %(
-        (f=(n)->Array(n+1).join "\\\\");
-        console.log("%s",#{V[E[PREV],'#{f(',')}']})
-      )
+      "
+        (f=(n)->Array(n+1).join '\\\\');
+        console.log('%s',#{V[E[PREV],'#{f(',')}']})
+      "
     END
   end
 end
@@ -771,13 +771,13 @@ class CSharp < CodeGen
   Apt = "mono-mcs"
   def code
     <<-'END'.lines.map {|l| l.strip }.join
-      %(
+      "
         class Program{
           public static void Main(){
             System.#{C+E[(PREV)]};
           }
         }
-      )
+      "
     END
   end
 end
@@ -832,8 +832,8 @@ class Boo_Brainfuck < CodeGen
           ):b<<c;
         t[c]+=[i+=1]
       };
-      %(
-        d=#{Q[E[L]]};s="";while 0<len(d):\n
+      "
+        d=#{Q[E[L]]};s='';while 0<len(d):\n
         _x as int,y as int=d;i=3;if(n=(x-5)%92+(y-5)%92*87)>3999:\n
         __for _ in range(((d[2]cast int-5)%92+6)):s+=s[len(s)+4000-n]\n
         _else:s+=d[2:i=n+2]\n
@@ -844,7 +844,7 @@ class Boo_Brainfuck < CodeGen
           a-=b;
           print(('+'*-a if 0>a else'-'*a)+'.');
           a=b
-      )
+      "
     )
     END
   end
@@ -902,14 +902,14 @@ class ATS < CodeGen
   File = "QR.dats"
   Cmd = "atscc -o QR QR.dats && ./QR > OUTFILE"
   Apt = "ats-lang-anairiats"
-  Code = %q(%(implement main()=print)+E[PREV])
+  Code = %q("implement main()=print"+E[PREV])
 end
 
 class Asymptote < CodeGen
   File = "QR.asy"
   Cmd = "asy QR.asy > OUTFILE"
   Apt = "asymptote"
-  Code = %q(%(write('#{Q[e[PREV],?']}');))
+  Code = %q("write('#{Q[e[PREV],?']}');")
 end
 
 class ALGOL68_Ante < CodeGen
@@ -1033,7 +1033,7 @@ class Vala < CodeGen
   File = "QR.vala"
   Cmd = "valac QR.vala && ./QR > OUTFILE"
   Apt = "valac"
-  Code = %q(%(int main(){print#{d[E[PREV],?%]};return 0;}))
+  Code = %q("int main(){print#{d[E[PREV],?%]};return 0;}")
 end
 
 class Tcl_Thue_Unlambda < CodeGen
@@ -1072,7 +1072,7 @@ class SPL < CodeGen
   File = "QR.spl"
   Cmd = "splrun QR.spl > OUTFILE"
   Apt = "spl-core"
-  Code = %q(%(write#{Q[E[PREV]]};))
+  Code = %q("write#{Q[E[PREV]]};")
 end
 
 class Smalltalk < CodeGen
@@ -1114,11 +1114,11 @@ class Scala < CodeGen
   Apt = "scala"
   def code
     <<-'END'.lines.map {|l| l.strip }.join
-      %(
+      "
         object QR extends App{
           #{f(PREV,196){%(print#$S;)}}
         }
-      )
+      "
     END
   end
 end
