@@ -53,7 +53,8 @@ GenPrologue = <<-'END'.lines.map {|l| l.strip }.join
   d=->s,t=?"{s.gsub(t){t+t}};
   def f(s,n)s.gsub(/.{1,#{n*255}}/m){yield$S=E[$s=$&]}end;
   Q=->s,t=?${s.gsub(t){B+$&}};
-  M=->s{"<stdio.h>#{N}int main(){puts#{E[s]};return 0;}"};
+  R=";return 0;";
+  M=->s{"<stdio.h>#{N}int main(){puts#{E[s]+R}}"};
   V=->s,a,z{s.gsub(/(#{B*4})+/){a+"#{$&.size/2}"+z}};
   C="Console.Write";
   $D="program QR";
@@ -112,7 +113,7 @@ class Pike < CodeGen
   File = "QR.pike"
   Cmd = "pike QR.pike > OUTFILE"
   Apt = "pike7.8"
-  Code = %q("int main(){write#{E[PREV]};return 0;}")
+  Code = %q("int main(){write#{E[PREV]+R}}")
 end
 
 class PHP_Piet < CodeGen
@@ -1033,7 +1034,7 @@ class Vala < CodeGen
   File = "QR.vala"
   Cmd = "valac QR.vala && ./QR > OUTFILE"
   Apt = "valac"
-  Code = %q("int main(){print#{d[E[PREV],?%]};return 0;}")
+  Code = %q("int main(){print#{d[E[PREV],?%]+R}}")
 end
 
 class Tcl_Thue_Unlambda < CodeGen
