@@ -60,6 +60,7 @@ GenPrologue = <<-'END'.lines.map {|l| l.strip }.join
   $C=C*?.;
   $D="program QR";
   $G=" contents of"+$F=" the mixing bowl";
+  $L="public static";
 END
 
 
@@ -278,7 +279,7 @@ class MSIL < CodeGen
     <<-'END'.lines.map {|l| l.strip }.join
       %(
         .assembly t{}
-        .method static void Main()
+        .method #$L void Main()
         {
           .entrypoint ldstr"#{e[PREV]}"
           call void [mscorlib]#{C*"::"}(string)
@@ -437,7 +438,7 @@ class Java_ < CodeGen
     <<-'END'.lines.map {|l| l.strip }.join
       %(
         class QR{
-          public static void main(String[]v){
+          #$L void main(String[]v){
             String c[]=new String[99999],y="",z=y,s="#{
               z=t=(0..r=q=126).map{|n|[n,[]]};
               a="";
@@ -477,7 +478,7 @@ class Jasmin < CodeGen
       %(
         .class public QR\n
         .super #{$T="java/io/PrintStream"}\n
-        .method public static main([L#{S="java/lang/"}String;)V ;]\n
+        .method #$L main([L#{S="java/lang/"}String;)V ;]\n
         .limit stack 2\n
         getstatic #{S}System/out L#$T;\n
         ldc "#{e[PREV]}"\n
@@ -523,7 +524,7 @@ class Haxe < CodeGen
   File = "QR.hx"
   Cmd = "haxe -main QR -neko QR.n && neko QR.n > OUTFILE"
   Apt = "haxe"
-  Code = %q("class QR{static function main(){neko.Lib.print#{E[PREV]};}}")
+  Code = %q("class QR{#$L function main(){neko.Lib.print#{E[PREV]};}}")
 end
 
 class Haskell < CodeGen
@@ -775,7 +776,7 @@ class CSharp < CodeGen
     <<-'END'.lines.map {|l| l.strip }.join
       "
         class Program{
-          public static void Main(){
+          #$L void Main(){
             #{$C+E[(PREV)]};
           }
         }
