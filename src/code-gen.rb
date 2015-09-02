@@ -56,7 +56,8 @@ GenPrologue = <<-'END'.lines.map {|l| l.strip }.join
   R=";return 0;";
   M=->s{"<stdio.h>#{N}int main(){puts#{E[s]+R}}"};
   V=->s,a,z{s.gsub(/(#{B*4})+/){a+"#{$&.size/2}"+z}};
-  C="Console.Write";
+  C=%w(System.Console Write);
+  $C=C*?.;
   $D="program QR";
   $G=" contents of"+$F=" the mixing bowl";
 END
@@ -280,7 +281,7 @@ class MSIL < CodeGen
         .method static void Main()
         {
           .entrypoint ldstr"#{e[PREV]}"
-          call void [mscorlib]System.Console::Write(string)
+          call void [mscorlib]#{C*"::"}(string)
           ret
         }
       )
@@ -775,7 +776,7 @@ class CSharp < CodeGen
       "
         class Program{
           public static void Main(){
-            System.#{C+E[(PREV)]};
+            #{$C+E[(PREV)]};
           }
         }
       "
@@ -1014,9 +1015,9 @@ class VisualBasic_Whitespace < CodeGen
             For i=0To 7
                 s &=Chr(32-(Asc(c)>>7-i And 1)*23)
             Next
-            #{C}(s &n &Chr(9)&n &"  ")
+            #$C(s &n &Chr(9)&n &"  ")
           Next
-          #{C}(n &n &n)
+          #$C(n &n &n)
         End Sub
       End Module)
     END
