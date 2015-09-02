@@ -99,7 +99,7 @@ class PostScript_PPT < CodeGen
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       "
-        (___________)dup =
+        (#{?_*11})dup =
         /s(|     .   |)def
         (#{Q[PREV,B]}){
           9 7{
@@ -453,7 +453,7 @@ class Java_ < CodeGen
             }";
             int i=0,n=0,q=0;
             for(;++n<126;)c[n]=""+(char)n;
-            for(;i<s.length();){
+            for(;i<#{a.size};){
               q=q*78+(s.charAt(i)-13)%84;
               if(i++%2>0){
                 y=q<n?c[q]:y;
@@ -478,11 +478,11 @@ class Jasmin < CodeGen
       %(
         .class public QR\n
         .super #{$T="java/io/PrintStream"}\n
-        .method #$L main([L#{S="java/lang/"}String;)V ;]\n
+        .method #$L main([L#{S="java/lang/S"}tring;)V ;]\n
         .limit stack 2\n
-        getstatic #{S}System/out L#$T;\n
+        getstatic #{S}ystem/out L#$T;\n
         ldc "#{e[PREV]}"\n
-        invokevirtual #$T/println(L#{S}String;)V\n
+        invokevirtual #$T/println(L#{S}tring;)V\n
         return\n
         .end method
       )
