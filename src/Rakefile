@@ -47,7 +47,6 @@ task :default => %w(
   ../QR.rb
   ../README.md
   ../langs.png
-  ../thumbnail.png
   ../Makefile
   ../.travis.yml
   ../Dockerfile
