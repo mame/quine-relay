@@ -133,12 +133,16 @@ A. [Take your pick](https://github.com/mame/quine-relay/issues/11).
 
 ### Q. How?
 
-A. Good news: I'm now writing "a book" about obfuscated programming.
-It will include a detailed explanation of how to write a quine,
-an ascii-art quine, and a uroboros quine like this quine-relay.
-It will be published in this year (if successful).
+A. Good news: I published a book, ["The world of obfuscated, esoteric, artistic programming"](http://gihyo.jp/book/2015/978-4-7741-7643-7).
+It explains how to write a quine, an ascii-art quine, and a uroboros quine like this quine-relay.
+You can buy my book on [amazon.co.jp](http://www.amazon.co.jp/dp/4774176435).
 
-Bad news: It will be written in Japanese.
+(It also contains my almost all (about forty) works, including
+[alphabet-only Ruby program](http://www.slideshare.net/mametter/ruby-esoteric-obfuscated-ruby-programming-5088683),
+[radiation-hardened quine](https://github.com/mame/radiation-hardened-quine),
+etc., and explains many techniques to write such programs.)
+
+Bad news: It is written in Japanese.
 I hope you could translate it to English <strike>and help me earn royalties</strike>.
 
 ### Q. Language XXX is missing!
