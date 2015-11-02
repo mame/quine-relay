@@ -259,6 +259,13 @@ class ObjC < CodeGen
   Code = %q("#import<stdio.h>#{N}int main(){puts#{E[PREV]+R}}")
 end
 
+class Nim < CodeGen
+  File = "QR.nim"
+  Cmd = "nim c QR.nim && ./QR > OUTFILE"
+  Apt = "nim"
+  Code = %q("echo"+E[PREV])
+end
+
 class Nickle < CodeGen
   File = "QR.5c"
   Cmd = "nickle QR.5c > OUTFILE"
@@ -326,12 +333,13 @@ class Makefile < CodeGen
   Code = %q("all:\n\t@echo '#{d[PREV,?$].gsub(?'){"'\\\\''"}}'")
 end
 
-class M4 < CodeGen
-  File = "QR.m4"
-  Cmd = "m4 QR.m4 > OUTFILE"
-  Apt = "make"
-  Code = %q("changequote(<@,@>)\ndefine(p,<@#{PREV}@>)\np")
-end
+# pool
+#class M4 < CodeGen
+#  File = "QR.m4"
+#  Cmd = "m4 QR.m4 > OUTFILE"
+#  Apt = "make"
+#  Code = %q("changequote(<@,@>)\ndefine(p,<@#{PREV}@>)\np")
+#end
 
 class Lua < CodeGen
   File = "QR.lua"
@@ -662,6 +670,13 @@ class EmacsLisp < CodeGen
   Cmd = "emacs -Q --script QR.el > OUTFILE"
   Apt = "emacs24"
   Code = %q(%((princ "#{e[PREV]}")))
+end
+
+class Elixir < CodeGen
+  File = "QR.exs"
+  Cmd = "elixir QR.exs > OUTFILE"
+  Apt = "elixir"
+  Code = %q("IO.puts"+E[PREV])
 end
 
 class EC < CodeGen
