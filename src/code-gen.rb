@@ -123,10 +123,10 @@ class PHP_Piet < CodeGen
   Cmd = ["php QR.php > OUTFILE", "npiet QR.png > OUTFILE"]
   Apt = ["php5-cli", nil]
   def code
+    # PHP code contains binary, but the next Perl encodes them as a text.
     <<-'END'.lines.map {|l| l.strip }.join
       %(
-        <?php $f=function($n,$s="\\\\"){return str_repeat($s,$n);};
-          $z=3+$w=strlen($s=#{V[Q[E[PREV]],"{$f(",")}"].gsub(/ {10,}/){"{$f(#{$&.size},' ')}"}})*3;
+        <?php $z=3+$w=strlen($s=#{Q[E[PREV]]})*3;
           echo"\\x89PNG\\r\\n\\x1a\\n";
           $m="";
           $t="\\xc0\\0\\xff";
@@ -153,17 +153,41 @@ class Perl < CodeGen
   Cmd = "perl QR.pl > OUTFILE"
   Apt = "perl"
   def code
+    # BPE: Byte pair encoding
     <<-'END'.lines.map {|l| l.strip }.join
       (
         p="eval";
         %(
           $_="#{
             s=PREV;
+            v="";
+            127.upto(287){|j|
+              o={};
+              m=n=0;
+              s.size.times{|i|
+                o[f=s[i,2]]||=0;
+                c=o[f]+=1;
+                m<c&&(m=c;n=f)
+              };
+              v=n+v;
+              s=s.gsub(n,(j%256).chr)
+            };
+            s="
+              $_='#{Q[s,c=/['\\\\]/]}';
+              $n=32;
+              $s='#{Q[v,c]}';
+              $s=~s{..}{
+                $a=$&;
+                $b=chr(--$n&255);
+                ~s/$b/$a/g;
+              }eg;
+              print
+            ";
             (s+N*(-s.size%6)).unpack("B*")[0].
               gsub(/.{6}/){n=$&.to_i 2;((n+14)/26*6+n+47).chr}
           }";
           s|.|$n=ord$&;substr unpack(B8,chr$n-int($n/32)*6-41),2|eg;
-          print pack"B*",$_
+          eval pack'B*',$_
         ).scan(/[ ,-:A-z]+|(.)/){p="s++#{$1?"chr #{$1.ord}+e":$&+?+};"+p};
         p
       )
@@ -413,6 +437,7 @@ class Java_ < CodeGen
   Cmd = "javac QR.java && java QR > OUTFILE"
   Apt = "openjdk-6-jdk"
   def code
+    # LZ78-like compression
     <<-'END'.lines.map {|l| l.strip }.join
       %(
         class QR{
@@ -792,6 +817,7 @@ class Boo_Brainfuck < CodeGen
   Cmd = ["booi QR.boo > OUTFILE", "$(BF) QR.bf > OUTFILE"]
   Apt = ["boo", "bf"]
   def code
+    # LZ77-like compression
     <<-'END'.lines.map {|l| l.strip.gsub(/^_+/) { " " * $&.size } }.join
     (
       s=PREV;
