@@ -344,8 +344,8 @@ end
 class Lua < CodeGen
   File = "QR.lua"
   Cmd = "lua QR.lua > OUTFILE"
-  Apt = "lua5.2"
-  Code = %q("print"+E[PREV])
+  Apt = "lua5.3"
+  Code = %q("x=string.gsub(#{V[E[PREV],?&,?&]},'&(%d+)&',function(s)return string.rep('\\\\\\\\',tonumber(s))end);print(x)")
 end
 
 class Logo_LOLCODE < CodeGen

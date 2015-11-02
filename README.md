@@ -33,7 +33,7 @@ First, you have to type the following apt-get command to install all of them.
       g++ gambas3-script gap gauche gawk gcc gdc genius gforth gfortran ghc \
       ghostscript gnat gnu-smalltalk gnuplot gobjc golang gpt gri groff \
       groovy haxe icont iconx intercal iverilog jasmin-sable jq julia \
-      libgd-dev libpng12-dev lisaac llvm lua5.2 make maxima mlton mono-devel \
+      libgd-dev libpng12-dev lisaac llvm lua5.3 make maxima mlton mono-devel \
       mono-mcs mono-vbnc nasm neko nickle nim ocaml octave open-cobol \
       openjdk-6-jdk pari-gp parrot perl php5-cli pike8.0 python r-base \
       ratfor regina-rexx rhino ruby2.1 scala scilab slsh spl-core swi-prolog \
@@ -255,7 +255,7 @@ I used the following Ubuntu deb packages to test this program.
 72  |LLVM asm           |llvm               |1:3.6-26ubuntu1
 73  |Logo               |ucblogo            |5.5-2.1
 74  |LOLCODE            |*N/A*              |-
-75  |Lua                |lua5.2             |5.2.4-1
+75  |Lua                |lua5.3             |-
 76  |Makefile           |make               |4.0-8.2
 77  |Maxima             |maxima             |5.36.1-1
 78  |MSIL               |mono-devel         |3.2.8+dfsg-4ubuntu4
