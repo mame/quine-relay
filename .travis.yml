@@ -90,6 +90,7 @@ dummy: |
   sudo docker cp qr:/usr/local/share/quine-relay/QR.logo spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.lol spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.lua spoiler/
+  sudo docker cp qr:/usr/local/share/quine-relay/QR.m4 spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.mk spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.mac spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.il spoiler/

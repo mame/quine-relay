@@ -326,6 +326,13 @@ class Makefile < CodeGen
   Code = %q("all:\n\t@echo '#{d[PREV,?$].gsub(?'){"'\\\\''"}}'")
 end
 
+class M4 < CodeGen
+  File = "QR.m4"
+  Cmd = "m4 QR.m4 > OUTFILE"
+  Apt = "make"
+  Code = %q("changequote(<@,@>)\ndefine(p,<@#{PREV}@>)\np")
+end
+
 class Lua < CodeGen
   File = "QR.lua"
   Cmd = "lua QR.lua > OUTFILE"
