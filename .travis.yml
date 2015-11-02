@@ -46,6 +46,7 @@ dummy: |
   sudo docker cp qr:/usr/local/share/quine-relay/QR.bc spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.bef spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.Blc spoiler/
+  sudo docker cp qr:/usr/local/share/quine-relay/QR.bf spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.c spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.cpp spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.cs spoiler/

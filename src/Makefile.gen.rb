@@ -29,6 +29,9 @@ GBS        := $(call find_any,Gambas script,gbs3 gbs2)
 ifeq ($(SCHEME),csi)
   SCHEME := csi -s
 endif
+ifeq ($(BF),bf)
+  BF := bf -c500000
+endif
 
 .DELETE_ON_ERROR:
 END

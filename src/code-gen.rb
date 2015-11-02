@@ -850,26 +850,20 @@ class C < CodeGen
   end
 end
 
-class Awk_Bc_Befunge_BLC8 < CodeGen
-  Name = ["Awk", "bc", "Befunge", "BLC8"]
-  File = ["QR.awk", "QR.bc", "QR.bef", "QR.Blc"]
+class Awk_Bc_Befunge_BLC8_Brainfuck < CodeGen
+  Name = ["Awk", "bc", "Befunge", "BLC8", "Brainfuck"]
+  File = ["QR.awk", "QR.bc", "QR.bef", "QR.Blc", "QR.bf"]
   Cmd = [
     "awk -f QR.awk > OUTFILE",
     "BC_LINE_LENGTH=4000000 bc -q QR.bc > OUTFILE",
     "cfunge QR.bef > OUTFILE",
-    "ruby vendor/blc.rb < QR.Blc > OUTFILE"
+    "ruby vendor/blc.rb < QR.Blc > OUTFILE",
+    "$(BF) QR.bf > OUTFILE",
   ]
-  Apt = ["gawk", "bc", nil, nil]
+  Apt = ["gawk", "bc", nil, nil, "bf"]
   def code
-    # 389**6+ = 22
-    # 29*     = 18
-    # 44*6+   = 22
-    #
-    # 18 x   = 00010010 x = \a (\b b) x = \a x = K x
-    # 22 x y = 00010110 x y = \a a x y = cons x y
-    # 4 222  = 00000100 11011110 = \a \b (\c b) (????) = \a \b b = false
-    # 4 226  = 00000100 11100010 = \a \b (\c a) (\c c) = \a \b a = true
-    <<-'END'.lines.map {|l| l.strip }.join
+    blc = ::File.read(::File.join(__dir__, "blc-boot.dat"))
+    <<-'END'.lines.map {|l| l.strip }.join.sub("BLC", [blc].pack("m0"))
       %(
         BEGIN{
           s=#{E[PREV.tr B,?!]};
@@ -878,20 +872,27 @@ class Awk_Bc_Befunge_BLC8 < CodeGen
             print"
               define void f(n){
                 \\"00g,\\";
-                for(m=128;m;m/=2){
+                for(m=1;m<256;m*=2){
                   \\"00g,4,:\\";
-                  if(n/m%2<1)\\"4+\\";
+                  if(n/m%2)\\"4+\\";
                   \\",\\";
                 };
                 \\"4,:,\\"
               }
-              \\"389**6+44*6+00p29*,\\";
+              \\"389**6+44*6+00p45*,\\";
             ";
             ++j<=length(s);
             print"f("n");"
           )
             for(n=9;substr(s,j,1)!=sprintf("%c",++n););
-          print"\\"4,:,@\\"\\nquit"
+          s="\\"4,:,";
+          split("#{ "BLC".unpack(?m)[0].bytes * g }",a);
+          for(i in a){
+            s=s 0;
+            for(c=a[i]+0;c;c--)s=s"1+";
+            s=s",";
+          }
+          print s"@\\"\\nquit"
         }
       )
     END
