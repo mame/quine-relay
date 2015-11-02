@@ -14,7 +14,7 @@ yaml["language"] = "ruby"
 yaml["before_install"] = ["sudo docker build -t quine-relay ."]
 yaml["script"] = ["sudo docker run --privileged --name qr -t quine-relay"]
 yaml["after_success"] = [
-  "sh .travis.yml"
+  'test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && sh .travis.yml'
 ]
 yaml["env"] = {
   "global" => {
