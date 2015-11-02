@@ -1,5 +1,4 @@
 require "rake/clean"
-require_relative "code-gen"
 
 CLEAN.include("../QR.*")
 CLEAN.include("../qr.*")
@@ -53,8 +52,6 @@ task :default => %w(
   ../Dockerfile
 )
 
-task "../SHA1SUMS" => ["code-gen.rb"] do |t|
-  chdir ".." do
-    sh "sha1sum -b #{ RunSteps.map {|s| s.src }.join(" ") } > SHA1SUMS"
-  end
+task "../SHA1SUMS" => ["SHA1SUMS.gen.rb", *LIBS] do
+  ruby "SHA1SUMS.gen.rb"
 end
