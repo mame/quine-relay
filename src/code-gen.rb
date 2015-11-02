@@ -232,7 +232,7 @@ class Octave_Ook < CodeGen
         for n=1:9
             m={};
             for i=1:141
-              f=@(x,y,n)repmat(['Ook' x ' Ook' y 32],[1 abs(n)]);
+              f=@(x,y,n)repmat(['Ook' char(x) ' Ook' char(y) ' '],[1 abs(n)]);
               m(i)=[f(z=46,63,n) f(q=z-(i<13)*13,q,i-13) f(33,z,1) f(63,z,n)];
             end;
             t(x)=m(diff([0 s(x=b==n)])+13);
