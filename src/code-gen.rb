@@ -54,7 +54,6 @@ GenPrologue = <<-'END'.lines.map {|l| l.strip }.join
   def f(s,n)s.gsub(/.{1,#{n*255}}/m){yield$S=E[$s=$&]}end;
   Q=->s,t=?${s.gsub(t){B+$&}};
   R=";return 0;";
-  M=->s{"<stdio.h>#{N}int main(){puts#{E[s]+R}}"};
   V=->s,a,z{s.gsub(/(#{B*4})+/){a+"#{$&.size/2}"+z}};
   C=%w(System.Console Write);
   $C=C*?.;
@@ -257,7 +256,7 @@ class ObjC < CodeGen
   File = "QR.m"
   Cmd = "gcc -o QR QR.m && ./QR > OUTFILE"
   Apt = "gobjc"
-  Code = %q("#import"+M[PREV])
+  Code = %q("#import<stdio.h>#{N}int main(){puts#{E[PREV]+R}}")
 end
 
 class Nickle < CodeGen
@@ -798,7 +797,7 @@ class Cplusplus < CodeGen
         #include<iostream>\n
         int main(){
           std::cout<<#{E[PREV]};
-        }
+        }/****//****/
       "
     END
   end
@@ -808,13 +807,6 @@ class C < CodeGen
   File = "QR.c"
   Cmd = "$(CC) -o QR QR.c && ./QR > OUTFILE"
   Apt = "gcc"
-  Code = %q("#include#{M[PREV]}/****//****/")
-end
-
-class Boo_Brainfuck < CodeGen
-  File = ["QR.boo", "QR.bf"]
-  Cmd = ["booi QR.boo > OUTFILE", "$(BF) QR.bf > OUTFILE"]
-  Apt = ["boo", "bf"]
   def code
     # LZ77-like compression
     <<-'END'.lines.map {|l| l.strip.gsub(/^_+/) { " " * $&.size } }.join
@@ -839,17 +831,19 @@ class Boo_Brainfuck < CodeGen
         t[c]+=[i+=1]
       };
       "
-        d=#{Q[E[L]]};s='';while 0<len(d):\n
-        _x as int,y as int=d;i=3;if(n=(x-5)%92+(y-5)%92*87)>3999:\n
-        __for _ in range(((d[2]cast int-5)%92+6)):s+=s[len(s)+4000-n]\n
-        _else:s+=d[2:i=n+2]\n
-        _d=d[i:]\n
-        a=0;
-        for i in range(len(s)):
-          b as int=s[i];
-          a-=b;
-          print(('+'*-a if 0>a else'-'*a)+'.');
-          a=b
+        #include<stdio.h>\n
+        char*p=#{E[L]},s[99999],*q=s;
+        int main(){
+          int n,m;
+          for(;*p;){
+            n=(*p-5)%92+(p[1]-5)%92*87;
+            p+=2;
+            if(n>3999)
+              for(m=(*p++-5)%92+6;m--;q++)*q=q[4000-n];
+            else for(;n--;)*q++=*p++;
+          }
+          puts(s)#{R}
+        }
       "
     )
     END
