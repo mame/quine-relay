@@ -641,13 +641,6 @@ class FALSELang < CodeGen
   Code = %q(?"+PREV.gsub(?"){'"34,"'}+?")
 end
 
-class Falcon < CodeGen
-  File = "QR.fal"
-  Cmd = "falcon QR.fal > OUTFILE"
-  Apt = "falconpl"
-  Code = %q(?>+E[PREV])
-end
-
 class FSharp < CodeGen
   Name = "F#"
   File = "QR.fsx"
