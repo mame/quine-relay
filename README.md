@@ -33,8 +33,8 @@ First, you have to type the following apt-get command to install all of them.
       gambas3-script gap gauche gawk gcc gdc genius gforth gfortran ghc \
       ghostscript gnat gnu-smalltalk gnuplot gobjc golang gpt gri groff \
       groovy haxe icont iconx intercal iverilog jasmin-sable jq julia \
-      libgd2-xpm-dev libpng12-dev lisaac llvm lua5.2 make maxima mlton \
-      mono-devel mono-mcs mono-vbnc nasm neko nickle ocaml octave open-cobol \
+      libgd-dev libpng12-dev lisaac llvm lua5.2 make maxima mlton mono-devel \
+      mono-mcs mono-vbnc nasm neko nickle ocaml octave open-cobol \
       openjdk-6-jdk pari-gp parrot perl php5-cli pike7.8 python r-base \
       ratfor regina-rexx rhino ruby2.1 scala scilab slsh spl-core swi-prolog \
       tcl ucblogo valac xsltproc yorick zoem

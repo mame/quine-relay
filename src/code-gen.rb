@@ -113,7 +113,7 @@ end
 class Pike < CodeGen
   File = "QR.pike"
   Cmd = "pike QR.pike > OUTFILE"
-  Apt = "pike7.8"
+  Apt = "pike8.0"
   Code = %q("int main(){write#{E[PREV]+R}}")
 end
 

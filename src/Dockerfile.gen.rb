@@ -1,12 +1,12 @@
 require_relative "code-gen"
 
 apts = RunSteps.flat_map {|s| s.apt }
-other_packages = %w(cmake libpng12-dev libgd2-xpm-dev groff tcc)
+other_packages = %w(cmake libpng12-dev libgd-dev groff tcc)
 
 apts = [*apts.flatten.compact.uniq, *other_packages].sort
 
 dockerfile = []
-dockerfile << "FROM ubuntu:15.04"
+dockerfile << "FROM ubuntu:15.10"
 dockerfile << "ENV PATH /usr/games:$PATH"
 dockerfile << "RUN apt-get update && apt-get upgrade -y"
 
