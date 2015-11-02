@@ -11,7 +11,7 @@ Dir.mkdir(dir) unless File.directory?(dir)
 Dir.chdir(dir)
 File.symlink("../vendor", "vendor") unless File.symlink?("vendor")
 
-gens = ARGV[0] ? [eval(ARGV[0])] : GenSteps[0..-2]
+gens = ARGV[0] ? [eval(ARGV[0]).gen_step] : GenSteps[0..-2]
 text = ARGV[1] || "Hello"
 
 all_check = true
