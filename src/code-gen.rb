@@ -123,7 +123,6 @@ class PHP_Piet < CodeGen
   Cmd = ["php QR.php > OUTFILE", "npiet QR.png > OUTFILE"]
   Apt = ["php5-cli", nil]
   def code
-    # PHP code contains binary, but the next Perl encodes them as a text.
     <<-'END'.lines.map {|l| l.strip }.join
       %(
         <?php $z=3+$w=strlen($s=#{Q[E[PREV]]})*3;
