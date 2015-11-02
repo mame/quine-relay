@@ -3,3 +3,5 @@
 /tmp
 !QR.rb
 gst.im
+/src/lazyk-boot.dat
+*.sw*

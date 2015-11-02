@@ -357,29 +357,7 @@ class Kaya_LazyK_Lisaac < CodeGen
   ]
   Apt = ["kaya", nil, "lisaac"]
   def code
-    lazyk = <<-END.split.join
-      `k`k```sii```sii``s``s`kski
-      `````sii``s``s`ks``s`k`s`ks``s`k`s`k`s`ks``s`k`s``s`ks``s`kk``s`ks``s`kk`
-      `s``s`ks``s`k`s`ks``s`k`s`kk``s``s`ks``s`kk``si`k``s`k`sik`kk`k`k``s`k```
-      s``s`kski```s``s`ksk``s``s`kski``s`k`sikk``s``s`ks``s`k`s`ks``s`k`s`kk``s
-      `k`s`ks``s`k`s`kk``s``s`ks``s`kk``sii`k`s``s`ksk`k`k``s`k`s``s``si`ki`k`s
-      ``s`ksk``s`kk`s`k``s``s`kski`k`k``s``s`ks``s`kk``s`ks``s`k`sik`kk`ki`ki
-    END
-    # (load "../lazier.scm")
-    # (load "../prelude.scm")
-    # (load "../prelude-numbers.scm")
-    #
-    # (lazy-def '(main)
-    #  '((lambda (x) (x x 0 0))
-    #     (lambda (self count num code)
-    #       (if<= count 6
-    #         (self self (1+ count) (code i 1+ (* 2 num))) ; assuming that code is k or i
-    #           (cons num code))))) ; assuming that code is the rest output string
-    #
-    # (print-as-unlambda (laze '(main)))
-    # ;(print-as-unlambda (laze '(lambda (input) ((s (s (s i (k i)) (k k)) (k i) main) k i k i k))))
-    # ;(print-as-unlambda (laze '(lambda (input)
-    #   ((s(s(s(s(s(s(s(s i(k i))(k i))(k i))(k i))(k i))(k i))(k i)) (k(k 256)) main)))))
+    lazyk = ::File.read(::File.join(__dir__, "lazyk-boot.dat"))
     lazyk = lazyk.tr("ski`","0123").scan(/.{1,3}/).map do |n|
       n = n.reverse.to_i(4)
       [*93..124,*42..73][n]
