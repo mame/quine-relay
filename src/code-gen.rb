@@ -422,6 +422,13 @@ class Julia < CodeGen
   Code = %q("print"+Q[E[PREV]])
 end
 
+class Jq < CodeGen
+  File = "QR.jq"
+  Cmd = "jq -r -n -f QR.jq > OUTFILE"
+  Apt = "jq"
+  Code = %q(E[PREV])
+end
+
 class JavaScript < CodeGen
   File = "QR.js"
   Cmd = "$(JAVASCRIPT) QR.js > OUTFILE"
