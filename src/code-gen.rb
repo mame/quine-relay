@@ -369,57 +369,46 @@ class LLVMAsm < CodeGen
   end
 end
 
-class Kaya_LazyK_Lisaac < CodeGen
-  Name = ["Kaya", "Lazy K", "Lisaac"]
-  File = ["QR.k", "QR.lazy", "qr.li"]
+class Julia_LazyK_Lisaac < CodeGen
+  Name = ["Julia", "Lazy K", "Lisaac"]
+  File = ["QR.jl", "QR.lazy", "qr.li"]
   Cmd = [
-    "kayac QR.k && ./QR > OUTFILE",
+    "julia QR.jl > OUTFILE",
     "lazyk QR.lazy > OUTFILE",
     "lisaac qr.li && ./qr > OUTFILE",
   ]
-  Apt = ["kaya", nil, "lisaac"]
+  Apt = ["julia", nil, "lisaac"]
   def code
     lazyk = ::File.read(::File.join(__dir__, "lazyk-boot.dat"))
     lazyk = lazyk.tr("ski`","0123").scan(/.{1,3}/).map do |n|
       n = n.reverse.to_i(4)
       [*93..124,*42..73][n]
     end.pack("C*")
-    size = lazyk.size
     lazyk = lazyk.gsub(/[ZHJK\^`~X]/) {|c| "\\x%02x" % c.ord }
     <<-'END'.lines.map {|l| l.strip }.join.sub("LAZYK"){lazyk}
       %(
-        #$D;
-        import Regex;
-        Void main(){
-          b="`";
-          t="SectionHeader+name:=QR;SectionPublic-main<-(\\n";
-          for i in[0..#{s=PREV;s.size/99}]{
-            s=substr(#{E[s]},i*99,99);
-            g=[Global()];
-            replace("\\\\\\\\","\\\\\\\\",s,g);
-            replace("\\"","\\\\\\"",s,g);
-            t+="\\""+s+"\\".print;\\n";
-          }
-          putStr("k"+b);
-          for c in array(t+");"){
-            d=rep(b+b+"s",8)+"i";
-            for j in[0..6]d+=b+substr("kki",c>>(6-j)&1,2);
-            putStr(d);
-          }
-          for c in array("LAZYK"){
-            for i in[0..2]putStr(substr("ski"+b,c%83-10>>i*2&3,1));
-          }
-        }
+        A=print;
+        A("k`");
+        for c in join([
+            "SectionHeader+name:=QR;SectionPublic-main<-(",
+            ["\\"$(replace(replace(s,"\\\\","\\\\\\\\"),"\\"","\\\\\\""))\\".print;"for s=matchall(r".{1,99}",#{Q[E[PREV]]})],
+            ");"
+        ],"\\n");
+          A("``s"^8*"i");
+          for j=6:-1:0;
+            x=(c>>j)%2+1;
+            A("`"*"kki"[x:x+1])
+          end;
+        end;
+        for c in"LAZYK";
+          for i=0:2:4;
+            x=((c%83-10)>>i)%4+1;
+            A("ski`"[x:x])
+          end;
+        end
       )
     END
   end
-end
-
-class Julia < CodeGen
-  File = "QR.jl"
-  Cmd = "julia QR.jl > OUTFILE"
-  Apt = "julia"
-  Code = %q("print"+Q[E[PREV]])
 end
 
 class Jq < CodeGen

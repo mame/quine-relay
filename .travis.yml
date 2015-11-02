@@ -84,7 +84,6 @@ dummy: |
   sudo docker cp qr:/usr/local/share/quine-relay/QR.js spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.jq spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.jl spoiler/
-  sudo docker cp qr:/usr/local/share/quine-relay/QR.k spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.lazy spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/qr.li spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.ll spoiler/
