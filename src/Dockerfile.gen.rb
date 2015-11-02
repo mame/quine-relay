@@ -11,7 +11,9 @@ dockerfile << "ENV PATH /usr/games:$PATH"
 dockerfile << "RUN apt-get update && apt-get upgrade -y"
 
 apt_width = apts.map {|apt| apt.size}.max
-dockerfile << "RUN apt-get install -y #{ apts.join(" ") }"
+dockerfile << "RUN " + apts.map do |apt|
+  "apt-get install -y #{apt}#{" " * (apt_width - apt.size)} && apt-get clean"
+end.join(" && \\\n    ")
 dockerfile << "ADD . /usr/local/share/quine-relay"
 dockerfile << "WORKDIR /usr/local/share/quine-relay"
 dockerfile << "RUN make -C vendor"
