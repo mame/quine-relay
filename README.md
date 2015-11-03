@@ -13,7 +13,7 @@ the original Ruby code again.
 
 ![Language Uroboros][langs]
 
-[langs]: https://raw.github.com/mame/quine-relay/master/langs.png
+[langs]: langs.png
 
 (If you want to see the old 50-language version, see [50](https://github.com/mame/quine-relay/tree/50) branch.)
 
@@ -327,7 +327,7 @@ A. [Do you try to cross the world line?](https://github.com/mame/quine-relay/iss
 
 A. [Here you go][thumbnail].
 
-[thumbnail]: https://raw.github.com/mame/quine-relay/master/thumbnail.png
+[thumbnail]: thumbnail.png
 
 ### Q. How was the code generated?
 
