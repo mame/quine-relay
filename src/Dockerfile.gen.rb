@@ -1,7 +1,7 @@
 require_relative "code-gen"
 
 apts = RunSteps.flat_map {|s| s.apt }
-other_packages = %w(cmake libpng12-dev libgd-dev groff tcc)
+other_packages = %w(cmake libpng12-dev libgd-dev groff)
 
 apts = [*apts.flatten.compact.uniq, *other_packages].sort
 
@@ -16,6 +16,6 @@ apts.each do |apt|
   dockerfile << "RUN apt-get -qq install -y #{ apt } && apt-get clean"
 end
 dockerfile << "RUN make -C vendor"
-dockerfile << "CMD make CC=tcc check"
+dockerfile << "CMD make check"
 
 File.write("../Dockerfile", dockerfile.join("\n") + "\n")

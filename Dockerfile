@@ -89,7 +89,6 @@ RUN apt-get -qq install -y scilab && apt-get clean
 RUN apt-get -qq install -y slsh && apt-get clean
 RUN apt-get -qq install -y spl-core && apt-get clean
 RUN apt-get -qq install -y swi-prolog && apt-get clean
-RUN apt-get -qq install -y tcc && apt-get clean
 RUN apt-get -qq install -y tcl && apt-get clean
 RUN apt-get -qq install -y ucblogo && apt-get clean
 RUN apt-get -qq install -y valac && apt-get clean
@@ -97,4 +96,4 @@ RUN apt-get -qq install -y xsltproc && apt-get clean
 RUN apt-get -qq install -y yorick && apt-get clean
 RUN apt-get -qq install -y zoem && apt-get clean
 RUN make -C vendor
-CMD make CC=tcc check
+CMD make check
