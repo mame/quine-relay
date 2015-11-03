@@ -654,7 +654,7 @@ class FSharp < CodeGen
   File = "QR.fsx"
   Cmd = "fsharpc QR.fsx -o QR.exe && mono QR.exe > OUTFILE"
   Apt = "fsharp"
-  Code = %q("printfn"+d[E[PREV],?%])
+  Code = %q('printfn("""'+d[PREV,?%]+' """)')
 end
 
 class Erlang < CodeGen
@@ -700,7 +700,7 @@ class D < CodeGen
   File = "QR.d"
   Cmd = "gdc -o QR QR.d && ./QR > OUTFILE"
   Apt = "gdc"
-  Code = %q("import std.stdio;void main(){write#{E[PREV]};}")
+  Code = %q("import std.stdio;void main(){write(`#{PREV}`);}")
 end
 
 class CommonLisp < CodeGen
@@ -719,7 +719,7 @@ class CoffeeScript < CodeGen
     <<-'END'.lines.map {|l| l.strip }.join
       "
         (f=(n)->Array(n+1).join '\\\\');
-        console.log('%s',#{V[E[PREV],'#{f(',')}']})
+        console.log('%s',#{V[E[PREV].gsub(?`,"\\\\x60"),'#{f(',')}']})
       "
     END
   end
