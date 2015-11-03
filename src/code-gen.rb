@@ -627,7 +627,9 @@ class Forth_FORTRAN77_Fortran90 < CodeGen
         : D
           S" #$D" C
           S\\" print \\"(&" C
-          S\\" #{e[PREV]}" DUP FOR S" &A,&" C NEXT
+          S\\" #{e[PREV]}" DUP A ." DO 10 I=1," . CR
+          S" &A,&" C
+          ." 10      CONTINUE" CR
           S\\" &A)\\",&" C
           0 DO B ." &char(" COUNT . ." ),&'" CR LOOP
           S\\" &\\"\\"" C
