@@ -13,7 +13,7 @@ the original Ruby code again.
 
 ![Language Uroboros][langs]
 
-[langs]: https://raw.github.com/mame/quine-relay/master/langs.png
+[langs]: langs.png
 
 (If you want to see the old 50-language version, see [50](https://github.com/mame/quine-relay/tree/50) branch.)
 
@@ -21,29 +21,27 @@ the original Ruby code again.
 
 ### Ubuntu
 
-#### 1. Install all interpreters/compilers.
+If you are using Ubuntu 15.10 "Wily Werewolf", you can perform the following steps.
 
-If you are using Ubuntu 15.04 "Vivid Vervet", you can perform the following steps:
+#### 1. Install all interpreters/compilers.
 
 First, you have to type the following apt-get command to install all of them.
 
     $ sudo apt-get install afnix algol68g aplus-fsf asymptote \
-      ats-lang-anairiats bash bc bf boo bsdgames cduce clisp clojure1.6 \
-      cmake coffeescript dc ecere-sdk emacs24 erlang f2c falconpl \
-      fp-compiler fsharp g++ gambas3-script gap gauche gawk gcc gdc genius \
-      gforth gfortran ghc ghostscript gnat gnu-smalltalk gnuplot gobjc \
-      golang gpt gri groff groovy haxe icont iconx intercal iverilog \
-      jasmin-sable julia kaya libgd2-xpm-dev libpng12-dev lisaac llvm lua5.2 \
-      make maxima mlton mono-devel mono-mcs mono-vbnc nasm neko nickle ocaml \
-      octave open-cobol openjdk-6-jdk pari-gp parrot perl php5-cli pike7.8 \
-      python r-base ratfor regina-rexx rhino ruby2.1 scala scilab slsh \
-      spl-core swi-prolog tcl ucblogo valac xsltproc yorick zoem
+      ats-lang-anairiats bash bc bf bsdgames cduce clisp clojure1.6 cmake \
+      coffeescript dc ecere-sdk elixir emacs24 erlang f2c fp-compiler fsharp \
+      g++ gambas3-script gap gauche gawk gcc gdc genius gforth gfortran ghc \
+      ghostscript gnat gnu-smalltalk gnuplot gobjc golang gpt gri groff \
+      groovy haxe icont iconx intercal iverilog jasmin-sable jq julia \
+      libgd-dev libpng12-dev lisaac llvm lua5.3 make maxima mlton mono-devel \
+      mono-mcs mono-vbnc nasm neko nickle nim ocaml octave open-cobol \
+      openjdk-6-jdk pari-gp parrot perl php5-cli pike8.0 python r-base \
+      ratfor regina-rexx rhino ruby2.1 scala scilab slsh spl-core swi-prolog \
+      tcl ucblogo valac xsltproc yorick zoem
 
-Then, you have to build the bundled interpreters.
+Then, build the bundled interpreters.
 
     $ make -C vendor
-
-To run it on Ubuntu 12.04 LTS, you might want to refer to `.travis.yml`.
 
 #### 2. Run each program on each interpreter/compiler.
 
@@ -77,8 +75,7 @@ To run it on Ubuntu 12.04 LTS, you might want to refer to `.travis.yml`.
     $ awk -f QR.awk > QR.bc
     $ BC_LINE_LENGTH=4000000 bc -q QR.bc > QR.bef
     $ cfunge QR.bef > QR.Blc
-    $ ruby vendor/blc.rb < QR.Blc > QR.boo
-    $ booi QR.boo > QR.bf
+    $ ruby vendor/blc.rb < QR.Blc > QR.bf
     $ bf QR.bf > QR.c
     $ gcc -o QR QR.c && ./QR > QR.cpp
     $ g++ -o QR QR.cpp && ./QR > QR.cs
@@ -94,11 +91,11 @@ To run it on Ubuntu 12.04 LTS, you might want to refer to `.travis.yml`.
     $ dc QR.dc > QR.ec
     $ ecp -c QR.ec -o QR.sym && ecc -c QR.ec -o QR.c && ecs -console QR.sym QR.imp -o QR.main.ec &&
       ecp -c QR.main.ec -o QR.main.sym && ecc -c QR.main.ec -o QR.main.c &&
-      gcc -o QR QR.c QR.main.c -lecereCOM && ./QR > QR.el
+      gcc -o QR QR.c QR.main.c -lecereCOM && ./QR > QR.exs
+    $ elixir QR.exs > QR.el
     $ emacs -Q --script QR.el > QR.erl
     $ escript QR.erl > QR.fsx
-    $ fsharpc QR.fsx -o QR.exe && mono QR.exe > QR.fal
-    $ falcon QR.fal > QR.false
+    $ fsharpc QR.fsx -o QR.exe && mono QR.exe > QR.false
     $ ruby vendor/false.rb QR.false > QR.fs
     $ gforth QR.fs > QR.f
     $ f2c QR.f && gcc -o QR QR.c -L/usr/lib -lf2c -lm && ./QR > QR.f90
@@ -117,21 +114,22 @@ To run it on Ubuntu 12.04 LTS, you might want to refer to `.travis.yml`.
     $ ick -bfO QR.i && ./QR > QR.j
     $ jasmin QR.j && java QR > QR.java
     $ javac QR.java && java QR > QR.js
-    $ rhino QR.js > QR.jl
-    $ julia QR.jl > QR.k
-    $ kayac QR.k && ./QR > QR.lazy
+    $ rhino QR.js > QR.jq
+    $ jq -r -n -f QR.jq > QR.jl
+    $ julia QR.jl > QR.lazy
     $ lazyk QR.lazy > qr.li
     $ lisaac qr.li && ./qr > QR.ll
     $ llvm-as QR.ll && lli QR.bc > QR.logo
     $ logo QR.logo > QR.lol
     $ lci QR.lol > QR.lua
-    $ lua QR.lua > QR.mk
+    $ lua5.3 QR.lua > QR.mk
     $ make -f QR.mk > QR.mac
     $ maxima -q --init-mac=QR.mac > QR.il
     $ ilasm QR.il && mono QR.exe > QR.asm
     $ nasm -felf QR.asm && ld -m elf_i386 -o QR QR.o && ./QR > QR.neko
     $ nekoc QR.neko && neko QR.n > QR.5c
-    $ nickle QR.5c > QR.m
+    $ nickle QR.5c > QR.nim
+    $ nim c QR.nim && ./QR > QR.m
     $ gcc -o QR QR.m && ./QR > QR.ml
     $ ocaml QR.ml > QR.octave
     $ octave -qf QR.octave > QR.ook
@@ -180,11 +178,11 @@ I used the following Ubuntu deb packages to test this program.
 
 \#  |language           |ubuntu package     |version
 ----|-------------------|-------------------|-----------------------------------
-1   |Ruby               |ruby2.1            |2.1.2-2ubuntu3
-2   |Scala              |scala              |2.9.2+dfsg-2
+1   |Ruby               |ruby2.1            |2.1.5-4ubuntu1
+2   |Scala              |scala              |2.11.6-1
 3   |Scheme             |gauche             |0.9.4-5
-4   |Scilab             |scilab             |5.5.1-7
-5   |Shell (bash)       |bash               |4.3-11ubuntu2
+4   |Scilab             |scilab             |5.5.2-1ubuntu1
+5   |Shell (bash)       |bash               |4.3-14ubuntu1
 6   |S-Lang             |slsh               |2.3.0-2ubuntu1
 7   |Smalltalk          |gnu-smalltalk      |3.2.4-2.1
 8   |SPL                |spl-core           |1.0~pre6-4ubuntu1
@@ -193,92 +191,92 @@ I used the following Ubuntu deb packages to test this program.
 11  |Tcl                |tcl                |8.6.0+6ubuntu3
 12  |Thue               |*N/A*              |-
 13  |Unlambda           |*N/A*              |-
-14  |Vala               |valac              |0.26.2-1
+14  |Vala               |valac              |0.28.1-1
 15  |Verilog            |iverilog           |0.9.7-1
 16  |Visual Basic       |mono-vbnc          |3.8-1
 17  |Whitespace         |*N/A*              |-
 18  |XSLT               |xsltproc           |1.1.28-2build2
-19  |Yorick             |yorick             |2.2.03+dfsg-3ubuntu1
+19  |Yorick             |yorick             |2.2.04+dfsg1-3
 20  |Zoem               |zoem               |11-166-1ubuntu1
 21  |A+                 |aplus-fsf          |4.22.1-6
 22  |Ada                |gnat               |4.9ubuntu1
-23  |AFNIX              |afnix              |2.2.0-2ubuntu1
+23  |AFNIX              |afnix              |2.5.1-1
 24  |ALGOL68            |algol68g           |2.8-2
 25  |Ante               |*N/A*              |-
-26  |Asymptote          |asymptote          |2.31-2
+26  |Asymptote          |asymptote          |2.35-2
 27  |ATS                |ats-lang-anairiats |0.2.11-1
 28  |Awk                |gawk               |1:4.1.1+dfsg-1
 29  |bc                 |bc                 |1.06.95-9build1
 30  |Befunge            |*N/A*              |-
 31  |BLC8               |*N/A*              |-
-32  |Boo                |boo                |0.9.5~git20110729.r1.202a430-2
-33  |Brainfuck          |bf                 |20041219ubuntu5
-34  |C                  |gcc                |4:4.9.2-2ubuntu2
-35  |C++                |g++                |4:4.9.2-2ubuntu2
-36  |C#                 |mono-mcs           |3.2.8+dfsg-4ubuntu4
-37  |CDuce              |cduce              |0.6.0-1
-38  |Chef               |*N/A*              |-
-39  |Clojure            |clojure1.6         |1.6.0+dfsg-1
-40  |Cobol              |open-cobol         |1.1-1build1
-41  |CoffeeScript       |coffeescript       |1.4.0-1.1
-42  |Common Lisp        |clisp              |1:2.49-9ubuntu1
-43  |D                  |gdc                |4.9.2-2ubuntu2
-44  |dc                 |dc                 |1.06.95-9build1
-45  |eC                 |ecere-sdk          |0.44.11-0ubuntu1
-46  |Emacs Lisp         |emacs24            |24.4+1-4ubuntu5
-47  |Erlang             |erlang             |1:17.3-dfsg-3ubuntu1
+32  |Brainfuck          |bf                 |20041219ubuntu5
+33  |C                  |gcc                |4:5.2.1-3ubuntu1
+34  |C++                |g++                |4:5.2.1-3ubuntu1
+35  |C#                 |mono-mcs           |3.2.8+dfsg-4ubuntu4
+36  |CDuce              |cduce              |0.6.0-1build1
+37  |Chef               |*N/A*              |-
+38  |Clojure            |clojure1.6         |1.6.0+dfsg-1
+39  |Cobol              |open-cobol         |1.1-1build1
+40  |CoffeeScript       |coffeescript       |1.9.3~dfsg-1
+41  |Common Lisp        |clisp              |1:2.49-9ubuntu1
+42  |D                  |gdc                |4:5.2.1-3ubuntu1
+43  |dc                 |dc                 |1.06.95-9build1
+44  |eC                 |ecere-sdk          |0.44.11-0ubuntu1
+45  |Elixir             |elixir             |1.1.0~0.20150708-1
+46  |Emacs Lisp         |emacs24            |24.5+1-1ubuntu2
+47  |Erlang             |erlang             |1:18.0-dfsg-1ubuntu1
 48  |F#                 |fsharp             |3.1.1.26+dfsg2-2
-49  |Falcon             |falconpl           |0.9.6.9-git20120606-2.1
-50  |FALSE              |*N/A*              |-
-51  |Forth              |gforth             |0.7.2+dfsg1-1.1
-52  |FORTRAN77          |f2c                |20100827-1
-53  |Fortran90          |gfortran           |4:4.9.2-2ubuntu2
-54  |Gambas script      |gambas3-script     |3.5.4-2ubuntu3
-55  |GAP                |gap                |4r7p5-2
-56  |GEL (Genius)       |genius             |1.0.19-1
-57  |Gnuplot            |gnuplot            |4.6.6-2
-58  |Go                 |golang             |2:1.3.3-1ubuntu4
-59  |G-Portugol         |gpt                |1.1-2ubuntu1
-60  |Gri                |gri                |2.12.23-8
-61  |Groovy             |groovy             |2.0.0~beta2+isreally1.8.6-4ubuntu1
-62  |Haskell            |ghc                |7.6.3-20
-63  |Haxe               |haxe               |1:3.0.0~svn6707-4
-64  |Icon               |icont              |9.4.3-4.2ubuntu1
+49  |FALSE              |*N/A*              |-
+50  |Forth              |gforth             |0.7.2+dfsg1-1.1
+51  |FORTRAN77          |f2c                |20100827-1
+52  |Fortran90          |gfortran           |4:5.2.1-3ubuntu1
+53  |Gambas script      |gambas3-script     |3.5.4-2ubuntu5
+54  |GAP                |gap                |4r7p8-1
+55  |GEL (Genius)       |genius             |1.0.20-2
+56  |Gnuplot            |gnuplot            |4.6.6-2
+57  |Go                 |golang             |2:1.5.1-0ubuntu2
+58  |G-Portugol         |gpt                |1.1-2ubuntu2
+59  |Gri                |gri                |2.12.23-9build1
+60  |Groovy             |groovy             |2.0.0~beta2+isreally1.8.6-4ubuntu1
+61  |Haskell            |ghc                |7.8.4-9
+62  |Haxe               |haxe               |1:3.0.0~svn6707+dfsg-1
+63  |Icon               |icont              |9.4.3-4.2ubuntu1
     |                   |iconx              |9.4.3-4.2ubuntu1
-65  |INTERCAL           |intercal           |29:0.29-3
-66  |Jasmin             |jasmin-sable       |2.4.0-5
-67  |Java               |openjdk-6-jdk      |6b35-1.13.7-1ubuntu1
-68  |JavaScript         |rhino              |1.7R4-3
-69  |Julia              |julia              |0.3.2-1ubuntu1
-70  |Kaya               |kaya               |0.4.4-6.2
-71  |Lazy K             |*N/A*              |-
-72  |Lisaac             |lisaac             |1:0.39~rc1-3
-73  |LLVM asm           |llvm               |1:3.6-26ubuntu1
-74  |Logo               |ucblogo            |5.5-2.1
-75  |LOLCODE            |*N/A*              |-
-76  |Lua                |lua5.2             |5.2.3-1.1
-77  |Makefile           |make               |4.0-8.1
-78  |Maxima             |maxima             |5.35.1-1
-79  |MSIL               |mono-devel         |3.2.8+dfsg-4ubuntu4
-80  |NASM               |nasm               |2.11.06-1really2.11.05-1
-81  |Neko               |neko               |2.0.0-3
-82  |Nickle             |nickle             |2.77-1
-83  |Objective-C        |gobjc              |4:4.9.2-2ubuntu2
+64  |INTERCAL           |intercal           |30:0.30-1
+65  |Jasmin             |jasmin-sable       |2.4.0-5
+66  |Java               |openjdk-6-jdk      |6b36-1.13.8-0ubuntu1
+67  |JavaScript         |rhino              |1.7R4-3
+68  |Jq                 |jq                 |1.4-2.1
+69  |Julia              |julia              |0.3.11-1ubuntu3
+70  |Lazy K             |*N/A*              |-
+71  |Lisaac             |lisaac             |1:0.39~rc1-3
+72  |LLVM asm           |llvm               |1:3.6-26ubuntu1
+73  |Logo               |ucblogo            |5.5-2.1
+74  |LOLCODE            |*N/A*              |-
+75  |Lua                |lua5.3             |5.3.1-1
+76  |Makefile           |make               |4.0-8.2
+77  |Maxima             |maxima             |5.36.1-1
+78  |MSIL               |mono-devel         |3.2.8+dfsg-4ubuntu4
+79  |NASM               |nasm               |2.11.06-1really2.11.05-1
+80  |Neko               |neko               |2.0.0-3
+81  |Nickle             |nickle             |2.77-1
+82  |Nim                |nim                |0.11.2+dfsg1-4
+83  |Objective-C        |gobjc              |4:5.2.1-3ubuntu1
 84  |OCaml              |ocaml              |4.01.0-4ubuntu1
-85  |Octave             |octave             |3.8.2-4
+85  |Octave             |octave             |4.0.0-3ubuntu5
 86  |Ook!               |*N/A*              |-
-87  |PARI/GP            |pari-gp            |2.7.2-1
-88  |Parrot asm         |parrot             |6.6.0-1
-89  |Pascal             |fp-compiler        |2.6.4+dfsg-4
-90  |Perl               |perl               |5.20.2-2
-91  |PHP                |php5-cli           |5.6.4+dfsg-4ubuntu6
+87  |PARI/GP            |pari-gp            |2.7.4-2
+88  |Parrot asm         |parrot             |6.6.0-1build1
+89  |Pascal             |fp-compiler        |2.6.4+dfsg-8
+90  |Perl               |perl               |5.20.2-6
+91  |PHP                |php5-cli           |5.6.11+dfsg-1ubuntu3.1
 92  |Piet               |*N/A*              |-
-93  |Pike               |pike7.8            |7.8.866-3
-94  |PostScript         |ghostscript        |9.15+dfsg-0ubuntu2
+93  |Pike               |pike8.0            |8.0.28-3
+94  |PostScript         |ghostscript        |9.16~dfsg~0-0ubuntu3
 95  |PPT (Punched tape) |bsdgames           |2.17-22
-96  |Prolog             |swi-prolog         |6.6.6-5
+96  |Prolog             |swi-prolog         |7.2.0-2
 97  |Python             |python             |2.7.9-1
-98  |R                  |r-base             |3.1.2-2
+98  |R                  |r-base             |3.2.2-1
 99  |Ratfor             |ratfor             |1.0-15
 100 |REXX               |regina-rexx        |3.6-2
 
@@ -309,9 +307,7 @@ I hope you could translate it to English <strike>and help me earn royalties</str
 
 ### Q. Language XXX is missing!
 
-A. See [the criteria for language inclusion][criteria] in detail.
-
-In short: please create a deb package and contribute it to Ubuntu.
+A. See [the criteria for language inclusion][criteria] in detail.  (In short: please create a deb package and contribute it to Ubuntu.)
 
 [criteria]: https://github.com/mame/quine-relay/wiki/Criteria-for-language-inclusion
 
@@ -327,7 +323,7 @@ A. [Do you try to cross the world line?](https://github.com/mame/quine-relay/iss
 
 A. [Here you go][thumbnail].
 
-[thumbnail]: https://raw.github.com/mame/quine-relay/master/thumbnail.png
+[thumbnail]: thumbnail.png
 
 ### Q. How was the code generated?
 
@@ -352,7 +348,7 @@ See `vendor/README` in detail.
 
 The MIT License (MIT)
 
-Copyright (c) 2013, 2014 Yusuke Endoh (@mametter), @hirekoke
+Copyright (c) 2013, 2014, 2015 Yusuke Endoh (@mametter), @hirekoke
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

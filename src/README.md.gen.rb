@@ -2,7 +2,7 @@ require_relative "code-gen"
 require "erb"
 require "cairo"
 
-other_packages = %w(cmake libpng12-dev libgd2-xpm-dev groff)
+other_packages = %w(cmake libpng12-dev libgd-dev groff)
 other_packages.each do |package|
   `dpkg -s #{ package }` # just check the packages
 end
@@ -62,7 +62,7 @@ the original <%= RunSteps[0].name %> code again.
 
 ![Language Uroboros][langs]
 
-[langs]: https://raw.github.com/mame/quine-relay/master/langs.png
+[langs]: langs.png
 
 (If you want to see the old 50-language version, see [50](https://github.com/mame/quine-relay/tree/50) branch.)
 
@@ -70,19 +70,17 @@ the original <%= RunSteps[0].name %> code again.
 
 ### Ubuntu
 
-#### 1. Install all interpreters/compilers.
+If you are using Ubuntu 15.10 "Wily Werewolf", you can perform the following steps.
 
-If you are using Ubuntu 15.04 "Vivid Vervet", you can perform the following steps:
+#### 1. Install all interpreters/compilers.
 
 First, you have to type the following apt-get command to install all of them.
 
     $ <%= apt_get %>
 
-Then, you have to build the bundled interpreters.
+Then, build the bundled interpreters.
 
     $ make -C vendor
-
-To run it on Ubuntu 12.04 LTS, you might want to refer to `.travis.yml`.
 
 #### 2. Run each program on each interpreter/compiler.
 
@@ -147,9 +145,7 @@ I hope you could translate it to English <strike>and help me earn royalties</str
 
 ### Q. Language XXX is missing!
 
-A. See [the criteria for language inclusion][criteria] in detail.
-
-In short: please create a deb package and contribute it to Ubuntu.
+A. See [the criteria for language inclusion][criteria] in detail.  (In short: please create a deb package and contribute it to Ubuntu.)
 
 [criteria]: https://github.com/mame/quine-relay/wiki/Criteria-for-language-inclusion
 
@@ -165,7 +161,7 @@ A. [Do you try to cross the world line?](https://github.com/mame/quine-relay/iss
 
 A. [Here you go][thumbnail].
 
-[thumbnail]: https://raw.github.com/mame/quine-relay/master/thumbnail.png
+[thumbnail]: thumbnail.png
 
 ### Q. How was the code generated?
 
@@ -190,7 +186,7 @@ See `vendor/README` in detail.
 
 The MIT License (MIT)
 
-Copyright (c) 2013, 2014 Yusuke Endoh (@mametter), @hirekoke
+Copyright (c) 2013, 2014, 2015 Yusuke Endoh (@mametter), @hirekoke
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

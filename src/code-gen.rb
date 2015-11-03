@@ -54,7 +54,6 @@ GenPrologue = <<-'END'.lines.map {|l| l.strip }.join
   def f(s,n)s.gsub(/.{1,#{n*255}}/m){yield$S=E[$s=$&]}end;
   Q=->s,t=?${s.gsub(t){B+$&}};
   R=";return 0;";
-  M=->s{"<stdio.h>#{N}int main(){puts#{E[s]+R}}"};
   V=->s,a,z{s.gsub(/(#{B*4})+/){a+"#{$&.size/2}"+z}};
   C=%w(System.Console Write);
   $C=C*?.;
@@ -114,7 +113,7 @@ end
 class Pike < CodeGen
   File = "QR.pike"
   Cmd = "pike QR.pike > OUTFILE"
-  Apt = "pike7.8"
+  Apt = "pike8.0"
   Code = %q("int main(){write#{E[PREV]+R}}")
 end
 
@@ -233,7 +232,7 @@ class Octave_Ook < CodeGen
         for n=1:9
             m={};
             for i=1:141
-              f=@(x,y,n)repmat(['Ook' x ' Ook' y 32],[1 abs(n)]);
+              f=@(x,y,n)repmat(['Ook' char(x) ' Ook' char(y) ' '],[1 abs(n)]);
               m(i)=[f(z=46,63,n) f(q=z-(i<13)*13,q,i-13) f(33,z,1) f(63,z,n)];
             end;
             t(x)=m(diff([0 s(x=b==n)])+13);
@@ -257,7 +256,14 @@ class ObjC < CodeGen
   File = "QR.m"
   Cmd = "gcc -o QR QR.m && ./QR > OUTFILE"
   Apt = "gobjc"
-  Code = %q("#import"+M[PREV])
+  Code = %q("#import<stdio.h>#{N}int main(){puts#{E[PREV]+R}}")
+end
+
+class Nim < CodeGen
+  File = "QR.nim"
+  Cmd = "nim c QR.nim && ./QR > OUTFILE"
+  Apt = "nim"
+  Code = %q("echo"+E[PREV])
 end
 
 class Nickle < CodeGen
@@ -327,11 +333,19 @@ class Makefile < CodeGen
   Code = %q("all:\n\t@echo '#{d[PREV,?$].gsub(?'){"'\\\\''"}}'")
 end
 
+# pool
+#class M4 < CodeGen
+#  File = "QR.m4"
+#  Cmd = "m4 QR.m4 > OUTFILE"
+#  Apt = "make"
+#  Code = %q("changequote(<@,@>)\ndefine(p,<@#{PREV}@>)\np")
+#end
+
 class Lua < CodeGen
   File = "QR.lua"
-  Cmd = "lua QR.lua > OUTFILE"
-  Apt = "lua5.2"
-  Code = %q("print"+E[PREV])
+  Cmd = "lua5.3 QR.lua > OUTFILE"
+  Apt = "lua5.3"
+  Code = %q("x=string.gsub(#{V[E[PREV],?&,?&]},'&(%d+)&',function(s)return string.rep('\\\\\\\\',tonumber(s))end);print(x)")
 end
 
 class Logo_LOLCODE < CodeGen
@@ -370,57 +384,53 @@ class LLVMAsm < CodeGen
   end
 end
 
-class Kaya_LazyK_Lisaac < CodeGen
-  Name = ["Kaya", "Lazy K", "Lisaac"]
-  File = ["QR.k", "QR.lazy", "qr.li"]
+class Julia_LazyK_Lisaac < CodeGen
+  Name = ["Julia", "Lazy K", "Lisaac"]
+  File = ["QR.jl", "QR.lazy", "qr.li"]
   Cmd = [
-    "kayac QR.k && ./QR > OUTFILE",
+    "julia QR.jl > OUTFILE",
     "lazyk QR.lazy > OUTFILE",
     "lisaac qr.li && ./qr > OUTFILE",
   ]
-  Apt = ["kaya", nil, "lisaac"]
+  Apt = ["julia", nil, "lisaac"]
   def code
     lazyk = ::File.read(::File.join(__dir__, "lazyk-boot.dat"))
     lazyk = lazyk.tr("ski`","0123").scan(/.{1,3}/).map do |n|
       n = n.reverse.to_i(4)
       [*93..124,*42..73][n]
     end.pack("C*")
-    size = lazyk.size
     lazyk = lazyk.gsub(/[ZHJK\^`~X]/) {|c| "\\x%02x" % c.ord }
     <<-'END'.lines.map {|l| l.strip }.join.sub("LAZYK"){lazyk}
       %(
-        #$D;
-        import Regex;
-        Void main(){
-          b="`";
-          t="SectionHeader+name:=QR;SectionPublic-main<-(\\n";
-          for i in[0..#{s=PREV;s.size/99}]{
-            s=substr(#{E[s]},i*99,99);
-            g=[Global()];
-            replace("\\\\\\\\","\\\\\\\\",s,g);
-            replace("\\"","\\\\\\"",s,g);
-            t+="\\""+s+"\\".print;\\n";
-          }
-          putStr("k"+b);
-          for c in array(t+");"){
-            d=rep(b+b+"s",8)+"i";
-            for j in[0..6]d+=b+substr("kki",c>>(6-j)&1,2);
-            putStr(d);
-          }
-          for c in array("LAZYK"){
-            for i in[0..2]putStr(substr("ski"+b,c%83-10>>i*2&3,1));
-          }
-        }
+        A=print;
+        A("k`");
+        for c in join([
+            "SectionHeader+name:=QR;SectionPublic-main<-(",
+            ["\\"$(replace(replace(s,"\\\\","\\\\\\\\"),"\\"","\\\\\\""))\\".print;"for s=matchall(r".{1,99}",#{Q[E[PREV]]})],
+            ");"
+        ],"\\n");
+          A("``s"^8*"i");
+          for j=6:-1:0;
+            x=(c>>j)%2+1;
+            A("`"*"kki"[x:x+1])
+          end;
+        end;
+        for c in"LAZYK";
+          for i=0:2:4;
+            x=((c%83-10)>>i)%4+1;
+            A("ski`"[x:x])
+          end;
+        end
       )
     END
   end
 end
 
-class Julia < CodeGen
-  File = "QR.jl"
-  Cmd = "julia QR.jl > OUTFILE"
-  Apt = "julia"
-  Code = %q("print"+Q[E[PREV]])
+class Jq < CodeGen
+  File = "QR.jq"
+  Cmd = "jq -r -n -f QR.jq > OUTFILE"
+  Apt = "jq"
+  Code = %q(E[PREV])
 end
 
 class JavaScript < CodeGen
@@ -617,7 +627,9 @@ class Forth_FORTRAN77_Fortran90 < CodeGen
         : D
           S" #$D" C
           S\\" print \\"(&" C
-          S\\" #{e[PREV]}" DUP FOR S" &A,&" C NEXT
+          S\\" #{e[PREV]}" DUP A ." DO 10 I=1," . CR
+          S" &A,&" C
+          ." 10      CONTINUE" CR
           S\\" &A)\\",&" C
           0 DO B ." &char(" COUNT . ." ),&'" CR LOOP
           S\\" &\\"\\"" C
@@ -639,19 +651,12 @@ class FALSELang < CodeGen
   Code = %q(?"+PREV.gsub(?"){'"34,"'}+?")
 end
 
-class Falcon < CodeGen
-  File = "QR.fal"
-  Cmd = "falcon QR.fal > OUTFILE"
-  Apt = "falconpl"
-  Code = %q(?>+E[PREV])
-end
-
 class FSharp < CodeGen
   Name = "F#"
   File = "QR.fsx"
   Cmd = "fsharpc QR.fsx -o QR.exe && mono QR.exe > OUTFILE"
   Apt = "fsharp"
-  Code = %q("printfn"+d[E[PREV],?%])
+  Code = %q('printfn("""'+d[PREV,?%]+' """)')
 end
 
 class Erlang < CodeGen
@@ -667,6 +672,13 @@ class EmacsLisp < CodeGen
   Cmd = "emacs -Q --script QR.el > OUTFILE"
   Apt = "emacs24"
   Code = %q(%((princ "#{e[PREV]}")))
+end
+
+class Elixir < CodeGen
+  File = "QR.exs"
+  Cmd = "elixir QR.exs > OUTFILE"
+  Apt = "elixir"
+  Code = %q("IO.puts"+E[PREV])
 end
 
 class EC < CodeGen
@@ -690,7 +702,7 @@ class D < CodeGen
   File = "QR.d"
   Cmd = "gdc -o QR QR.d && ./QR > OUTFILE"
   Apt = "gdc"
-  Code = %q("import std.stdio;void main(){write#{E[PREV]};}")
+  Code = %q("import std.stdio;void main(){write(`#{PREV}`);}")
 end
 
 class CommonLisp < CodeGen
@@ -709,7 +721,7 @@ class CoffeeScript < CodeGen
     <<-'END'.lines.map {|l| l.strip }.join
       "
         (f=(n)->Array(n+1).join '\\\\');
-        console.log('%s',#{V[E[PREV],'#{f(',')}']})
+        console.log('%s',#{V[E[PREV].gsub(?`,"\\\\x60"),'#{f(',')}']})
       "
     END
   end
@@ -798,7 +810,7 @@ class Cplusplus < CodeGen
         #include<iostream>\n
         int main(){
           std::cout<<#{E[PREV]};
-        }
+        }/****//****/
       "
     END
   end
@@ -808,13 +820,6 @@ class C < CodeGen
   File = "QR.c"
   Cmd = "$(CC) -o QR QR.c && ./QR > OUTFILE"
   Apt = "gcc"
-  Code = %q("#include#{M[PREV]}/****//****/")
-end
-
-class Boo_Brainfuck < CodeGen
-  File = ["QR.boo", "QR.bf"]
-  Cmd = ["booi QR.boo > OUTFILE", "$(BF) QR.bf > OUTFILE"]
-  Apt = ["boo", "bf"]
   def code
     # LZ77-like compression
     <<-'END'.lines.map {|l| l.strip.gsub(/^_+/) { " " * $&.size } }.join
@@ -839,43 +844,39 @@ class Boo_Brainfuck < CodeGen
         t[c]+=[i+=1]
       };
       "
-        d=#{Q[E[L]]};s='';while 0<len(d):\n
-        _x as int,y as int=d;i=3;if(n=(x-5)%92+(y-5)%92*87)>3999:\n
-        __for _ in range(((d[2]cast int-5)%92+6)):s+=s[len(s)+4000-n]\n
-        _else:s+=d[2:i=n+2]\n
-        _d=d[i:]\n
-        a=0;
-        for i in range(len(s)):
-          b as int=s[i];
-          a-=b;
-          print(('+'*-a if 0>a else'-'*a)+'.');
-          a=b
+        #include<stdio.h>\n
+        char*p=#{E[L]},s[99999],*q=s;
+        int main(){
+          int n,m;
+          for(;*p;){
+            n=(*p-5)%92+(p[1]-5)%92*87;
+            p+=2;
+            if(n>3999)
+              for(m=(*p++-5)%92+6;m--;q++)*q=q[4000-n];
+            else for(;n--;)*q++=*p++;
+          }
+          puts(s)#{R}
+        }
       "
     )
     END
   end
 end
 
-class Awk_Bc_Befunge_BLC8 < CodeGen
-  Name = ["Awk", "bc", "Befunge", "BLC8"]
-  File = ["QR.awk", "QR.bc", "QR.bef", "QR.Blc"]
+class Awk_Bc_Befunge_BLC8_Brainfuck < CodeGen
+  Name = ["Awk", "bc", "Befunge", "BLC8", "Brainfuck"]
+  File = ["QR.awk", "QR.bc", "QR.bef", "QR.Blc", "QR.bf"]
   Cmd = [
     "awk -f QR.awk > OUTFILE",
     "BC_LINE_LENGTH=4000000 bc -q QR.bc > OUTFILE",
     "cfunge QR.bef > OUTFILE",
-    "ruby vendor/blc.rb < QR.Blc > OUTFILE"
+    "ruby vendor/blc.rb < QR.Blc > OUTFILE",
+    "$(BF) QR.bf > OUTFILE",
   ]
-  Apt = ["gawk", "bc", nil, nil]
+  Apt = ["gawk", "bc", nil, nil, "bf"]
   def code
-    # 389**6+ = 22
-    # 29*     = 18
-    # 44*6+   = 22
-    #
-    # 18 x   = 00010010 x = \a (\b b) x = \a x = K x
-    # 22 x y = 00010110 x y = \a a x y = cons x y
-    # 4 222  = 00000100 11011110 = \a \b (\c b) (????) = \a \b b = false
-    # 4 226  = 00000100 11100010 = \a \b (\c a) (\c c) = \a \b a = true
-    <<-'END'.lines.map {|l| l.strip }.join
+    blc = ::File.read(::File.join(__dir__, "blc-boot.dat"))
+    <<-'END'.lines.map {|l| l.strip }.join.sub("BLC", [blc].pack("m0"))
       %(
         BEGIN{
           s=#{E[PREV.tr B,?!]};
@@ -884,20 +885,27 @@ class Awk_Bc_Befunge_BLC8 < CodeGen
             print"
               define void f(n){
                 \\"00g,\\";
-                for(m=128;m;m/=2){
+                for(m=1;m<256;m*=2){
                   \\"00g,4,:\\";
-                  if(n/m%2<1)\\"4+\\";
+                  if(n/m%2)\\"4+\\";
                   \\",\\";
                 };
                 \\"4,:,\\"
               }
-              \\"389**6+44*6+00p29*,\\";
+              \\"389**6+44*6+00p45*,\\";
             ";
             ++j<=length(s);
             print"f("n");"
           )
             for(n=9;substr(s,j,1)!=sprintf("%c",++n););
-          print"\\"4,:,@\\"\\nquit"
+          s="\\"4,:,";
+          split("#{ "BLC".unpack(?m)[0].bytes * g }",a);
+          for(i in a){
+            s=s 0;
+            for(c=a[i]+0;c;c--)s=s"1+";
+            s=s",";
+          }
+          print s"@\\"\\nquit"
         }
       )
     END
