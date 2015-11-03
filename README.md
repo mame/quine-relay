@@ -124,7 +124,7 @@ To run it on Ubuntu 12.04 LTS, you might want to refer to `.travis.yml`.
     $ llvm-as QR.ll && lli QR.bc > QR.logo
     $ logo QR.logo > QR.lol
     $ lci QR.lol > QR.lua
-    $ lua QR.lua > QR.mk
+    $ lua5.3 QR.lua > QR.mk
     $ make -f QR.mk > QR.mac
     $ maxima -q --init-mac=QR.mac > QR.il
     $ ilasm QR.il && mono QR.exe > QR.asm
@@ -255,7 +255,7 @@ I used the following Ubuntu deb packages to test this program.
 72  |LLVM asm           |llvm               |1:3.6-26ubuntu1
 73  |Logo               |ucblogo            |5.5-2.1
 74  |LOLCODE            |*N/A*              |-
-75  |Lua                |lua5.3             |-
+75  |Lua                |lua5.3             |5.3.1-1
 76  |Makefile           |make               |4.0-8.2
 77  |Maxima             |maxima             |5.36.1-1
 78  |MSIL               |mono-devel         |3.2.8+dfsg-4ubuntu4

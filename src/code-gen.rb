@@ -343,7 +343,7 @@ end
 
 class Lua < CodeGen
   File = "QR.lua"
-  Cmd = "lua QR.lua > OUTFILE"
+  Cmd = "lua5.3 QR.lua > OUTFILE"
   Apt = "lua5.3"
   Code = %q("x=string.gsub(#{V[E[PREV],?&,?&]},'&(%d+)&',function(s)return string.rep('\\\\\\\\',tonumber(s))end);print(x)")
 end

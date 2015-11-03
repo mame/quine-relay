@@ -670,7 +670,7 @@ QR.mk: QR.lua
 	@echo "##  75: Lua -> Makefile  ##"
 	@echo "###########################"
 	@echo
-	lua QR.lua > QR.mk
+	lua5.3 QR.lua > QR.mk
 
 QR.mac: QR.mk
 	@echo
