@@ -140,7 +140,6 @@ class PHP_Piet < CodeGen
             "IEND"
           )as$d)
             echo pack("NA*N",strlen($d)-4,$d,crc32($d));
-        ?>
       )
     END
   end
