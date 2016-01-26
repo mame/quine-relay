@@ -685,7 +685,7 @@ class EC < CodeGen
   File = "QR.ec"
   Cmd = "ecp -c QR.ec -o QR.sym && ecc -c QR.ec -o QR.c && ecs -console QR.sym QR.imp -o QR.main.ec && ecp -c QR.main.ec -o QR.main.sym && ecc -c QR.main.ec -o QR.main.c && gcc -o QR QR.c QR.main.c -lecereCOM && ./QR > OUTFILE"
   Backup = "QR.c"
-  Apt = "ecere-sdk"
+  Apt = "ecere-dev"
   Code = %q("class QR:Application{void Main(){#{f(PREV,15){"Print#$S;"}}}}")
 end
 

@@ -18,7 +18,7 @@ RUN apt-get -qq install -y clojure1.6 && apt-get clean
 RUN apt-get -qq install -y cmake && apt-get clean
 RUN apt-get -qq install -y coffeescript && apt-get clean
 RUN apt-get -qq install -y dc && apt-get clean
-RUN apt-get -qq install -y ecere-sdk && apt-get clean
+RUN apt-get -qq install -y ecere-dev && apt-get clean
 RUN apt-get -qq install -y elixir && apt-get clean
 RUN apt-get -qq install -y emacs24 && apt-get clean
 RUN apt-get -qq install -y erlang && apt-get clean
