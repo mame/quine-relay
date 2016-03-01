@@ -244,7 +244,7 @@ I used the following Ubuntu deb packages to test this program.
     |                   |iconx              |9.4.3-4.2ubuntu1
 64  |INTERCAL           |intercal           |30:0.30-1
 65  |Jasmin             |jasmin-sable       |2.4.0-5
-66  |Java               |openjdk-6-jdk      |6b37-1.13.9-1ubuntu0.15.10.1
+66  |Java               |openjdk-6-jdk      |6b38-1.13.10-0ubuntu0.15.10.1
 67  |JavaScript         |rhino              |1.7R4-3
 68  |Jq                 |jq                 |1.4-2.1
 69  |Julia              |julia              |0.3.11-1ubuntu3

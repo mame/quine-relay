@@ -13,6 +13,7 @@
 #include <ctype.h>
 #include <time.h>
 #include <assert.h>
+#include <stdint.h>
 
 #define INITIAL_HEAP_SIZE 128*1024
 #define RDSTACK_SIZE	100000
@@ -33,7 +34,7 @@
 struct tagPair;
 typedef struct tagPair *Cell;
 #define CELL(x)	((Cell)(x))
-#define TAG(c)	((int)(c) & 0x03)
+#define TAG(c)	((intptr_t)(c) & 0x03)
 
 /* pair */
 typedef struct tagPair {
@@ -48,12 +49,12 @@ typedef struct tagPair {
 /* integer */
 #define isint(c)	(TAG(c) == 1)
 #define mkint(n)	CELL(((n) << 2) + 1)
-#define intof(c)	((signed int)(c) >> 2)
+#define intof(c)	((intptr_t)(c) >> 2)
 
 /* combinator */
 #define iscomb(c)	(TAG(c) == 2)
 #define mkcomb(n)	CELL(((n) << 2) + 2)
-#define combof(c)	((int)(c) >> 2)
+#define combof(c)	((intptr_t)(c) >> 2)
 #define COMB_S		mkcomb(0)
 #define COMB_K		mkcomb(1)
 #define COMB_I		mkcomb(2)
@@ -65,12 +66,12 @@ typedef struct tagPair {
 #define COMB_CONS	mkcomb(8)
 
 /* character */
-#define ischar(c)	(((int)(c) & 0x07) == 0x03)
+#define ischar(c)	(((intptr_t)(c) & 0x07) == 0x03)
 #define mkchar(n)	CELL(((n) << 3) + 0x03)
-#define charof(c)	((int)(c) >> 3)
+#define charof(c)	((intptr_t)(c) >> 3)
 
 /* immediate objects */
-#define isimm(c)	(((int)(c) & 0x07) == 0x07)
+#define isimm(c)	(((intptr_t)(c) & 0x07) == 0x07)
 #define mkimm(n)	CELL(((n) << 3) + 0x07)
 #define NIL		mkimm(0)
 #define COPIED		mkimm(1)
@@ -102,7 +103,7 @@ void storage_init(int size)
     heap_area = malloc(sizeof(Pair) * heap_size);
     if (heap_area == NULL)
 	errexit("Cannot allocate heap storage (%d cells)\n", heap_size);
-    assert(((int)heap_area & 3) == 0 && (sizeof(Pair) & 3) == 0);
+    assert(((intptr_t)heap_area & 3) == 0 && (sizeof(Pair) & 3) == 0);
     
     free_ptr = heap_area;
     heap_area += heap_size;
@@ -413,7 +414,7 @@ void eval(Cell root)
 	}
 	else if (TOP == COMB_READ && APPLICABLE(2))
 	{ /* READ NIL f -> CONS CHAR(c) (READ NIL) f */
-	    int c = getchar();
+	    intptr_t c = getchar();
 	    Cell a = alloc(2);
 	    SET(a+0, COMB_CONS, mkchar(c == EOF ? 256 : c));
 	    SET(a+1, COMB_READ, NIL);
@@ -451,7 +452,7 @@ void eval(Cell root)
 	    SET(TOP, COMB_I, mkint(intof(c) + 1));
 	}
 	else if (ischar(TOP) && APPLICABLE(2)) {
-	    int c = charof(TOP);
+	    intptr_t c = charof(TOP);
 	    if (c <= 0) {  /* CHAR(0) f z -> z */
 		Cell z = ARG(2);
 		DROP(2);
