@@ -120,7 +120,7 @@ end
 class PHP_Piet < CodeGen
   File = ["QR.php", "QR.png"]
   Cmd = ["php QR.php > OUTFILE", "npiet QR.png > OUTFILE"]
-  Apt = ["php5-cli", nil]
+  Apt = ["php-cli", nil]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
@@ -443,7 +443,7 @@ class Java_ < CodeGen
   Name = "Java"
   File = "QR.java"
   Cmd = "javac QR.java && java QR > OUTFILE"
-  Apt = "openjdk-6-jdk"
+  Apt = "openjdk-8-jdk"
   def code
     # LZ78-like compression
     <<-'END'.lines.map {|l| l.strip }.join
@@ -913,9 +913,9 @@ end
 
 class ATS < CodeGen
   File = "QR.dats"
-  Cmd = "atscc -o QR QR.dats && ./QR > OUTFILE"
-  Apt = "ats-lang-anairiats"
-  Code = %q("implement main()=print"+E[PREV])
+  Cmd = "patscc -o QR QR.dats && ./QR > OUTFILE"
+  Apt = "ats2-lang"
+  Code = %q("implement main0()=print"+E[PREV])
 end
 
 class Asymptote < CodeGen
@@ -1081,13 +1081,6 @@ class StandardML_Subleq < CodeGen
   end
 end
 
-class SPL < CodeGen
-  File = "QR.spl"
-  Cmd = "splrun QR.spl > OUTFILE"
-  Apt = "spl-core"
-  Code = %q("write#{Q[E[PREV]]};")
-end
-
 class Smalltalk < CodeGen
   File = "QR.st"
   Cmd = "gst QR.st > OUTFILE"
@@ -1139,7 +1132,7 @@ end
 class Ruby < CodeGen
   File = "QR.rb"
   Cmd = "ruby QR.rb > OUTFILE"
-  Apt = "ruby2.1"
+  Apt = "ruby"
   Code = nil
 end
 

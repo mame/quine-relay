@@ -22,7 +22,6 @@ dummy: |
   sudo docker cp qr:/usr/local/share/quine-relay/QR.bash spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.sl spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.st spoiler/
-  sudo docker cp qr:/usr/local/share/quine-relay/QR.spl spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.sml spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.sq spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.tcl spoiler/
