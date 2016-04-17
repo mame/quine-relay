@@ -375,7 +375,7 @@ class LLVMAsm < CodeGen
           c"#{s.gsub(/[\\"]/){"\\%X"%$&.ord}}\\00"
         declare i32@puts(i8*)
         define i32@main(){
-          %1=call i32@puts(i8*getelementptr([#{i}x i8]*@s,i32 0,i32 0))
+          %1=call i32@puts(i8*getelementptr([#{i}x i8],[#{i}x i8]*@s,i32 0,i32 0))
           ret i32 0
         }
       )
@@ -403,23 +403,25 @@ class Julia_LazyK_Lisaac < CodeGen
       %(
         A=print;
         A("k`");
-        for c in join([
-            "SectionHeader+name:=QR;SectionPublic-main<-(",
-            ["\\"$(replace(replace(s,"\\\\","\\\\\\\\"),"\\"","\\\\\\""))\\".print;"for s=matchall(r".{1,99}",#{Q[E[PREV]]})],
+        [
+          (
+            A("``s"^8*"i");
+            for j=6:-1:0;
+              x=(Int(c)>>j)%2+1;
+              A("`"*"kki"[x:x+1])
+            end
+          )for c in join([
+            "SectionHeader+name:=QR;SectionPublic-main<-(";
+            ["\\"$(replace(replace(s,"\\\\","\\\\\\\\"),"\\"","\\\\\\""))\\".print;"for s=matchall(r".{1,99}",#{Q[E[PREV]]})];
             ");"
-        ],"\\n");
-          A("``s"^8*"i");
-          for j=6:-1:0;
-            x=(c>>j)%2+1;
-            A("`"*"kki"[x:x+1])
-          end;
-        end;
-        for c in"LAZYK";
+          ],"\\n")
+        ];
+        [
           for i=0:2:4;
-            x=((c%83-10)>>i)%4+1;
+            x=((Int(c)%83-10)>>i)%4+1;
             A("ski`"[x:x])
-          end;
-        end
+          end for c in"LAZYK"
+        ]
       )
     END
   end
