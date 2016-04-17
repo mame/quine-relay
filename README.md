@@ -234,7 +234,7 @@ I used the following Ubuntu deb packages to test this program.
 54  |GAP                |gap                |4r7p8-1
 55  |GEL (Genius)       |genius             |1.0.20-2
 56  |Gnuplot            |gnuplot            |4.6.6-2
-57  |Go                 |golang             |2:1.5.1-0ubuntu2
+57  |Go                 |golang             |2:1.5.1-0ubuntu2.1
 58  |G-Portugol         |gpt                |1.1-2ubuntu2
 59  |Gri                |gri                |2.12.23-9build1
 60  |Groovy             |groovy             |2.0.0~beta2+isreally1.8.6-4ubuntu1
@@ -268,7 +268,7 @@ I used the following Ubuntu deb packages to test this program.
 87  |PARI/GP            |pari-gp            |2.7.4-2
 88  |Parrot asm         |parrot             |6.6.0-1build1
 89  |Pascal             |fp-compiler        |2.6.4+dfsg-8
-90  |Perl               |perl               |5.20.2-6ubuntu0.1
+90  |Perl               |perl               |5.20.2-6ubuntu0.2
 91  |PHP                |php5-cli           |5.6.11+dfsg-1ubuntu3.1
 92  |Piet               |*N/A*              |-
 93  |Pike               |pike8.0            |8.0.28-3

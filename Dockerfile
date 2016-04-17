@@ -1,7 +1,4 @@
 FROM ubuntu:15.10
-ENV PATH /usr/games:$PATH
-ADD . /usr/local/share/quine-relay
-WORKDIR /usr/local/share/quine-relay
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get -qq install -y afnix && apt-get clean
 RUN apt-get -qq install -y algol68g && apt-get clean
@@ -95,5 +92,8 @@ RUN apt-get -qq install -y valac && apt-get clean
 RUN apt-get -qq install -y xsltproc && apt-get clean
 RUN apt-get -qq install -y yorick && apt-get clean
 RUN apt-get -qq install -y zoem && apt-get clean
+ENV PATH /usr/games:$PATH
+ADD . /usr/local/share/quine-relay
+WORKDIR /usr/local/share/quine-relay
 RUN make -C vendor
 CMD make check
