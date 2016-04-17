@@ -318,6 +318,13 @@ class MSIL < CodeGen
   end
 end
 
+class MiniZinc < CodeGen
+  File = "QR.mzn"
+  Cmd = "mzn2fzn QR.mzn && fzn-gecode QR.fzn | solns2out --soln-sep '' QR.ozn > OUTFILE"
+  Apt = "minizinc"
+  Code = %q("solve satisfy;output [#{E[PREV]}];")
+end
+
 class Maxima < CodeGen
   File = "QR.mac"
   Cmd = "maxima -q --init-mac=QR.mac > OUTFILE"

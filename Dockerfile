@@ -58,6 +58,7 @@ RUN apt-get -qq install -y llvm && apt-get clean
 RUN apt-get -qq install -y lua5.3 && apt-get clean
 RUN apt-get -qq install -y make && apt-get clean
 RUN apt-get -qq install -y maxima && apt-get clean
+RUN apt-get -qq install -y minizinc && apt-get clean
 RUN apt-get -qq install -y mlton && apt-get clean
 RUN apt-get -qq install -y mono-devel && apt-get clean
 RUN apt-get -qq install -y mono-mcs && apt-get clean
