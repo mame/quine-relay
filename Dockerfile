@@ -1,4 +1,4 @@
-FROM ubuntu:15.10
+FROM ubuntu:16.04
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get -qq install -y afnix && apt-get clean
 RUN apt-get -qq install -y algol68g && apt-get clean

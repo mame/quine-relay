@@ -70,7 +70,7 @@ the original <%= RunSteps[0].name %> code again.
 
 ### Ubuntu
 
-If you are using Ubuntu 15.10 "Wily Werewolf", you can perform the following steps.
+If you are using Ubuntu 16.04 "Xenial Xerus", you can perform the following steps.
 
 #### 1. Install all interpreters/compilers.
 
