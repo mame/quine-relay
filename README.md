@@ -222,7 +222,7 @@ I used the following Ubuntu deb packages to test this program.
 42  |dc                 |dc             |1.06.95-9build1
 43  |eC                 |ecere-dev      |0.44.14-1
 44  |Elixir             |elixir         |1.1.0~0.20150708-1
-45  |Emacs Lisp         |emacs24        |24.5+1-1ubuntu7
+45  |Emacs Lisp         |emacs24        |24.5+1-6ubuntu1
 46  |Erlang             |erlang         |1:18.3-dfsg-1ubuntu3
 47  |F#                 |fsharp         |4.0.0.4+dfsg2-2
 48  |FALSE              |*N/A*          |-
@@ -246,7 +246,7 @@ I used the following Ubuntu deb packages to test this program.
 65  |Java               |openjdk-8-jdk  |8u77-b03-3ubuntu3
 66  |JavaScript         |rhino          |1.7R4-3
 67  |Jq                 |jq             |1.5+dfsg-1
-68  |Julia              |julia          |0.4.5-2
+68  |Julia              |julia          |0.4.5-3
 69  |Lazy K             |*N/A*          |-
 70  |Lisaac             |lisaac         |1:0.39~rc1-3
 71  |LLVM asm           |llvm           |1:3.8-33ubuntu3

@@ -15,6 +15,6 @@ dockerfile << "ENV PATH /usr/games:$PATH"
 dockerfile << "ADD . /usr/local/share/quine-relay"
 dockerfile << "WORKDIR /usr/local/share/quine-relay"
 dockerfile << "RUN make -C vendor"
-dockerfile << "CMD make check"
+dockerfile << "CMD make check -j 10000"
 
 File.write("../Dockerfile", dockerfile.join("\n") + "\n")
