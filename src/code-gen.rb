@@ -146,6 +146,7 @@ class PHP_Piet < CodeGen
 end
 
 class Perl < CodeGen
+  #Name = "Perl 5"
   File = "QR.pl"
   Cmd = "perl QR.pl > OUTFILE"
   Apt = "perl"
@@ -191,6 +192,15 @@ class Perl < CodeGen
     END
   end
 end
+
+# pool
+#class Perl6 < CodeGen
+#  Name = "Perl 6"
+#  File = "QR.pl6"
+#  Cmd = "perl6 QR.pl6 > OUTFILE"
+#  Apt = "rakudo"
+#  Code = %q("print"+E[PREV])
+#end
 
 class Pascal < CodeGen
   File = "QR.pas"
