@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:16.10
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get -qq install -y afnix && apt-get clean
 RUN apt-get -qq install -y algol68g && apt-get clean
@@ -52,7 +52,7 @@ RUN apt-get -qq install -y jasmin-sable && apt-get clean
 RUN apt-get -qq install -y jq && apt-get clean
 RUN apt-get -qq install -y julia && apt-get clean
 RUN apt-get -qq install -y libgd-dev && apt-get clean
-RUN apt-get -qq install -y libpng12-dev && apt-get clean
+RUN apt-get -qq install -y libpng-dev && apt-get clean
 RUN apt-get -qq install -y lisaac && apt-get clean
 RUN apt-get -qq install -y llvm && apt-get clean
 RUN apt-get -qq install -y lua5.3 && apt-get clean
@@ -72,7 +72,6 @@ RUN apt-get -qq install -y octave && apt-get clean
 RUN apt-get -qq install -y open-cobol && apt-get clean
 RUN apt-get -qq install -y openjdk-8-jdk && apt-get clean
 RUN apt-get -qq install -y pari-gp && apt-get clean
-RUN apt-get -qq install -y parrot && apt-get clean
 RUN apt-get -qq install -y perl && apt-get clean
 RUN apt-get -qq install -y php-cli && apt-get clean
 RUN apt-get -qq install -y pike8.0 && apt-get clean
@@ -87,7 +86,6 @@ RUN apt-get -qq install -y scilab && apt-get clean
 RUN apt-get -qq install -y slsh && apt-get clean
 RUN apt-get -qq install -y swi-prolog && apt-get clean
 RUN apt-get -qq install -y tcl && apt-get clean
-RUN apt-get -qq install -y ucblogo && apt-get clean
 RUN apt-get -qq install -y valac && apt-get clean
 RUN apt-get -qq install -y xsltproc && apt-get clean
 RUN apt-get -qq install -y yorick && apt-get clean

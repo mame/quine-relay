@@ -2,7 +2,7 @@ require_relative "code-gen"
 require "erb"
 require "cairo"
 
-other_packages = %w(cmake libpng12-dev libgd-dev groff)
+other_packages = %w(cmake libpng-dev libgd-dev groff)
 other_packages.each do |package|
   `dpkg -s #{ package }` # just check the packages
 end

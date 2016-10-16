@@ -209,14 +209,6 @@ class Pascal < CodeGen
   Code = %q("#$D(output);begin write(#{f(PREV,1){"'#$s',"}}'')end.")
 end
 
-class ParrotAsm < CodeGen
-  Name = "Parrot asm"
-  File = "QR.pasm"
-  Cmd = "parrot QR.pasm > OUTFILE"
-  Apt = "parrot"
-  Code = %q(%(say"#{e[PREV]}"\nend))
-end
-
 class PARIGP < CodeGen
   Name = "PARI/GP"
   File = "QR.gp"
@@ -364,16 +356,18 @@ class Lua < CodeGen
   Code = %q("x=string.gsub(#{V[E[PREV],?&,?&]},'&(%d+)&',function(s)return string.rep('\\\\\\\\',tonumber(s))end);print(x)")
 end
 
-class Logo_LOLCODE < CodeGen
-  File = ["QR.logo", "QR.lol"]
-  Cmd = ["logo QR.logo > OUTFILE", "lci QR.lol > OUTFILE"]
-  Apt = ["ucblogo", nil]
+class LOLCODE < CodeGen
+  File = "QR.lol"
+  Cmd = "lci QR.lol > OUTFILE"
+  Apt = [nil]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
-        PR "HAI\\ 1.2 PR "VISIBLE\\ "#{
-          Q[PREV.gsub(/[:"]/,":\\0"),/[ \\\\\t;"(){}\[\]]/]
-        }" PR "KTHXBYE BYE
+        HAI 1.2\n
+        VISIBLE "#{
+          PREV.gsub(/[:"]/,":\\0")
+        }"\n
+        KTHXBYE BYE
       )
     END
   end
@@ -389,7 +383,7 @@ class LLVMAsm < CodeGen
     <<-'END'.lines.map {|l| l.strip }.join
       %(
         @s=global[#{i=(s=PREV).size+1}x i8]
-          c"#{s.gsub(/[\\"]/){"\\%X"%$&.ord}}\\00"
+          c"#{s.gsub(/[\\"\n]/){"\\%02X"%$&.ord}}\\00"
         declare i32@puts(i8*)
         define i32@main(){
           %1=call i32@puts(i8*getelementptr([#{i}x i8],[#{i}x i8]*@s,i32 0,i32 0))
@@ -524,7 +518,7 @@ class Icon_INTERCAL < CodeGen
   File = ["QR.icn", "QR.i"]
   Cmd = [
     "icont -s QR.icn && ./QR > OUTFILE",
-    "ick -bfO QR.i && ./QR > OUTFILE"
+    "ick -bfOc QR.i && gcc -static QR.c -I /usr/include/ick-* -o QR -lick && ./QR > OUTFILE"
   ]
   Backup = [nil, "QR.c"]
   Apt = [["icont", "iconx"], "intercal"]
@@ -630,7 +624,7 @@ class Forth_FORTRAN77_Fortran90 < CodeGen
   File = ["QR.fs", "QR.f", "QR.f90"]
   Cmd = [
     "gforth QR.fs > OUTFILE",
-    "f2c QR.f && $(CC) -o QR QR.c -L/usr/lib -lf2c -lm && ./QR > OUTFILE",
+    "gfortran -o QR QR.f && ./QR > OUTFILE",
     "gfortran -o QR QR.f90 && ./QR > OUTFILE"
   ]
   Backup = [nil, "QR.c", nil]
