@@ -14,6 +14,7 @@ RUN apt-get -qq install -y clisp && apt-get clean
 RUN apt-get -qq install -y clojure1.6 && apt-get clean
 RUN apt-get -qq install -y cmake && apt-get clean
 RUN apt-get -qq install -y coffeescript && apt-get clean
+RUN apt-get -qq install -y dafny && apt-get clean
 RUN apt-get -qq install -y dc && apt-get clean
 RUN apt-get -qq install -y ecere-dev && apt-get clean
 RUN apt-get -qq install -y elixir && apt-get clean
@@ -84,6 +85,7 @@ RUN apt-get -qq install -y ruby && apt-get clean
 RUN apt-get -qq install -y scala && apt-get clean
 RUN apt-get -qq install -y scilab && apt-get clean
 RUN apt-get -qq install -y slsh && apt-get clean
+RUN apt-get -qq install -y squirrel3 && apt-get clean
 RUN apt-get -qq install -y swi-prolog && apt-get clean
 RUN apt-get -qq install -y tcl && apt-get clean
 RUN apt-get -qq install -y valac && apt-get clean

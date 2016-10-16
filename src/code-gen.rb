@@ -710,6 +710,13 @@ class Dc < CodeGen
   Code = %q("[#{PREV}]pq")
 end
 
+class Dafny < CodeGen
+  File = "QR.dfy"
+  Cmd = "dafny QR.dfy && ./QR.exe > OUTFILE"
+  Apt = "dafny"
+  Code = %q("method Main(){print#{E[PREV]};}")
+end
+
 class D < CodeGen
   File = "QR.d"
   Cmd = "gdc -o QR QR.d && ./QR > OUTFILE"
