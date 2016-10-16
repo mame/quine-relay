@@ -388,7 +388,7 @@ QR.dc: QR.dfy
 	@echo "#######################"
 	@echo
 	dafny QR.dfy
-	./QR.exe > QR.dc
+	mono QR.exe > QR.dc
 
 QR.ec: QR.dc
 	@echo

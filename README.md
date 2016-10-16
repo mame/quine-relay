@@ -88,7 +88,7 @@ Then, build the bundled interpreters.
     $ coffee QR.coffee > QR.lisp
     $ clisp QR.lisp > QR.d
     $ gdc -o QR QR.d && ./QR > QR.dfy
-    $ dafny QR.dfy && ./QR.exe > QR.dc
+    $ dafny QR.dfy && mono QR.exe > QR.dc
     $ dc QR.dc > QR.ec
     $ ecp -c QR.ec -o QR.sym && ecc -c QR.ec -o QR.c && ecs -console QR.sym QR.imp -o QR.main.ec &&
       ecp -c QR.main.ec -o QR.main.sym && ecc -c QR.main.ec -o QR.main.c &&
