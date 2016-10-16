@@ -1094,6 +1094,13 @@ class StandardML_Subleq < CodeGen
   end
 end
 
+class Squirrel3 < CodeGen
+  File = "QR.nut"
+  Cmd = "squirrel3 QR.nut > OUTFILE"
+  Apt = "squirrel3"
+  Code = %q("print"+E[PREV])
+end
+
 class Smalltalk < CodeGen
   File = "QR.st"
   Cmd = "gst QR.st > OUTFILE"
