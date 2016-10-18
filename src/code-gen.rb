@@ -1156,6 +1156,14 @@ class Scala < CodeGen
   end
 end
 
+# pool
+#class Rust < CodeGen
+#  File = "QR.rs"
+#  Cmd = "rustc QR.rs && ./QR > OUTFILE"
+#  Apt = "rustc"
+#  Code = %q(%(fn main(){print!("{}",#{E[PREV]});}))
+#end
+
 class Ruby < CodeGen
   File = "QR.rb"
   Cmd = "ruby QR.rb > OUTFILE"
