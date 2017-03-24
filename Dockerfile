@@ -41,7 +41,6 @@ RUN apt-get -qq install -y gnuplot && apt-get clean
 RUN apt-get -qq install -y gobjc && apt-get clean
 RUN apt-get -qq install -y golang && apt-get clean
 RUN apt-get -qq install -y gpt && apt-get clean
-RUN apt-get -qq install -y gri && apt-get clean
 RUN apt-get -qq install -y groff && apt-get clean
 RUN apt-get -qq install -y groovy && apt-get clean
 RUN apt-get -qq install -y haxe && apt-get clean

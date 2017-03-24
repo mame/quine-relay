@@ -523,22 +523,22 @@ QR.gpt: QR.go
 	@echo
 	go run QR.go > QR.gpt
 
-QR.gri: QR.gpt
+QR.grass: QR.gpt
 	@echo
-	@echo "#############################"
-	@echo "##  59: G-Portugol -> Gri  ##"
-	@echo "#############################"
+	@echo "###############################"
+	@echo "##  59: G-Portugol -> Grass  ##"
+	@echo "###############################"
 	@echo
 	gpt -o QR QR.gpt
-	./QR > QR.gri
+	./QR > QR.grass
 
-QR.groovy: QR.gri
+QR.groovy: QR.grass
 	@echo
-	@echo "#########################"
-	@echo "##  60: Gri -> Groovy  ##"
-	@echo "#########################"
+	@echo "###########################"
+	@echo "##  60: Grass -> Groovy  ##"
+	@echo "###########################"
 	@echo
-	gri QR.gri > QR.groovy
+	ruby vendor/grass.rb QR.grass > QR.groovy
 
 QR.hs: QR.groovy
 	@echo

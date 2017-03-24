@@ -558,35 +558,55 @@ class Haskell < CodeGen
   Code = %q("main=putStr"+E[PREV])
 end
 
-class Gri_Groovy < CodeGen
-  File = ["QR.gri", "QR.groovy"]
-  Cmd = ["gri QR.gri > OUTFILE", "groovy QR.groovy > OUTFILE"]
-  Apt = ["gri", "groovy"]
+class Groovy < CodeGen
+  File = "QR.groovy"
+  Cmd = "groovy QR.groovy > OUTFILE"
+  Apt = "groovy"
   def code
     <<-'END'.lines.map {|l| l.strip }.join
-      %(\\q="\\""\n)+
-      f(PREV.tr(B,?&),51){
-        %(show "print'#{e[$s].gsub B+?",%(" "\\q" ")}'.tr('&','\\\\\\\\');"\n)
-      }
+      "print#{E[PREV]}"
     END
   end
 end
 
-class Go_GPortugol < CodeGen
-  Name = ["Go", "G-Portugol"]
-  File = ["QR.go", "QR.gpt"]
-  Cmd = ["go run QR.go > OUTFILE", "gpt -o QR QR.gpt && ./QR > OUTFILE"]
-  Apt = ["golang", "gpt"]
+class Go_GPortugol_Grass < CodeGen
+  Name = ["Go", "G-Portugol", "Grass"]
+  File = ["QR.go", "QR.gpt", "QR.grass"]
+  Cmd = ["go run QR.go > OUTFILE", "gpt -o QR QR.gpt && ./QR > OUTFILE", "ruby vendor/grass.rb QR.grass > OUTFILE"]
+  Apt = ["golang", "gpt", nil]
   def code
-    <<-'END'.lines.map {|l| l.strip }.join
+    r = <<-'END'.lines.map {|l| l.strip }.join
       %(
         package main;
-        import"fmt";
+        import(F"fmt";S"strings");
+        func t(s string)string{
+          r:="";
+          for i,n:=range s{
+            if n<48{
+              r+="v"
+            }else{
+              r+=S.Repeat("Ww"[i%2:i%2+1],int(n)-48)
+            }
+          };
+          return r
+        };
         func main(){
-          fmt.Print("algoritmo QR;in\\xC3\\xADcio imprima(\\\"#{e[e[PREV]]}\\\");fim")
+          s:=@@PROLOGUE@@;
+          for i,n:=range#{E[PREV]}{
+            s+="W"+S.Repeat("w",(@@BASE@@+i-int(n))%@@MOD@@+1)
+          };
+          F.Print("algoritmo QR;in\\xC3\\xADcio imprima(\\\""+s+@@EPILOGUE@@+"\\\");fim");
         }
       )
     END
+    mod, prologue, epilogue = ::File.read(::File.join(__dir__, "grass-boot.dat")).lines
+    mod = mod.to_i
+    r.gsub(/@@\w+@@/, {
+      "@@PROLOGUE@@" => prologue.chomp,
+      "@@EPILOGUE@@" => epilogue.chomp,
+      "@@BASE@@" => 119 + mod,
+      "@@MOD@@" => mod,
+    })
   end
 end
 
@@ -602,7 +622,7 @@ class GEL < CodeGen
   File = "QR.gel"
   Cmd = "genius QR.gel > OUTFILE"
   Apt = "genius"
-  Code = %q(f(PREV,62){"printn#$S\n"})
+  Code = %q(f(PREV,61){"printn#$S\n"})
 end
 
 class GAP < CodeGen

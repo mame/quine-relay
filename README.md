@@ -31,13 +31,13 @@ First, you have to type the following apt-get command to install all of them.
       bc bf bsdgames cduce clisp clojure1.6 cmake coffeescript dafny dc \
       ecere-dev elixir emacs24 erlang f2c fp-compiler fsharp g++ \
       gambas3-script gap gauche gawk gcc gdc genius gforth gfortran ghc \
-      ghostscript gnat gnu-smalltalk gnuplot gobjc golang gpt gri groff \
-      groovy haxe icont iconx intercal iverilog jasmin-sable jq julia \
-      libgd-dev libpng-dev lisaac llvm lua5.3 make maxima minizinc mlton \
-      mono-devel mono-mcs mono-vbnc nasm neko nickle nim ocaml octave \
-      open-cobol openjdk-8-jdk pari-gp perl php-cli pike8.0 python r-base \
-      ratfor regina-rexx rhino ruby scala scilab slsh squirrel3 swi-prolog \
-      tcl valac xsltproc yorick zoem
+      ghostscript gnat gnu-smalltalk gnuplot gobjc golang gpt groff groovy \
+      haxe icont iconx intercal iverilog jasmin-sable jq julia libgd-dev \
+      libpng-dev lisaac llvm lua5.3 make maxima minizinc mlton mono-devel \
+      mono-mcs mono-vbnc nasm neko nickle nim ocaml octave open-cobol \
+      openjdk-8-jdk pari-gp perl php-cli pike8.0 python r-base ratfor \
+      regina-rexx rhino ruby scala scilab slsh squirrel3 swi-prolog tcl \
+      valac xsltproc yorick zoem
 
 Then, build the bundled interpreters.
 
@@ -106,8 +106,8 @@ Then, build the bundled interpreters.
     $ genius QR.gel > QR.plt
     $ gnuplot QR.plt > QR.go
     $ go run QR.go > QR.gpt
-    $ gpt -o QR QR.gpt && ./QR > QR.gri
-    $ gri QR.gri > QR.groovy
+    $ gpt -o QR QR.gpt && ./QR > QR.grass
+    $ ruby vendor/grass.rb QR.grass > QR.groovy
     $ groovy QR.groovy > QR.hs
     $ ghc QR.hs && ./QR > QR.hx
     $ haxe -main QR -neko QR.n && neko QR.n > QR.icn
@@ -178,7 +178,7 @@ If you could do it, please let me know.  Good luck.
 I used the following Ubuntu deb packages to test this program.
 
 \#  |language           |ubuntu package |version
-----|-------------------|---------------|-------------------------
+----|-------------------|---------------|---------------------------
 1   |Ruby               |ruby           |1:2.3.0+4
 2   |Scala              |scala          |2.11.8-1
 3   |Scheme             |gauche         |0.9.4-6
@@ -238,7 +238,7 @@ I used the following Ubuntu deb packages to test this program.
 57  |Gnuplot            |gnuplot        |5.0.4+dfsg1-3
 58  |Go                 |golang         |2:1.6.1+1ubuntu2
 59  |G-Portugol         |gpt            |1.1-2ubuntu2
-60  |Gri                |gri            |2.12.23-10
+60  |Grass              |*N/A*          |-
 61  |Groovy             |groovy         |2.4.7-2
 62  |Haskell            |ghc            |7.10.3-9ubuntu1
 63  |Haxe               |haxe           |1:3.2.1+dfsg-1build3
@@ -246,7 +246,7 @@ I used the following Ubuntu deb packages to test this program.
     |                   |iconx          |9.4.3-4.2ubuntu1
 65  |INTERCAL           |intercal       |30:0.30-1
 66  |Jasmin             |jasmin-sable   |2.5.0-1
-67  |Java               |openjdk-8-jdk  |8u102-b14.1-2
+67  |Java               |openjdk-8-jdk  |8u121-b13-0ubuntu1.16.10.2
 68  |JavaScript         |rhino          |1.7R4-3
 69  |Jq                 |jq             |1.5+dfsg-1
 70  |Julia              |julia          |0.4.7-1
@@ -273,7 +273,7 @@ I used the following Ubuntu deb packages to test this program.
 91  |PHP                |php-cli        |1:7.0+44
 92  |Piet               |*N/A*          |-
 93  |Pike               |pike8.0        |8.0.276-1
-94  |PostScript         |ghostscript    |9.19~dfsg+1-0ubuntu6
+94  |PostScript         |ghostscript    |9.19~dfsg+1-0ubuntu6.3
 95  |PPT (Punched tape) |bsdgames       |2.17-24
 96  |Prolog             |swi-prolog     |7.2.3+dfsg-1build2
 97  |Python             |python         |2.7.11-2

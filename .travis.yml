@@ -74,7 +74,7 @@ dummy: |
   sudo docker cp qr:/usr/local/share/quine-relay/QR.plt spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.go spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.gpt spoiler/
-  sudo docker cp qr:/usr/local/share/quine-relay/QR.gri spoiler/
+  sudo docker cp qr:/usr/local/share/quine-relay/QR.grass spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.groovy spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.hs spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.hx spoiler/
