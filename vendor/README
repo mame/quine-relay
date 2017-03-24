@@ -34,6 +34,11 @@ Befunge: cfunge-0.9.0.tar.bz2
   * http://sourceforge.net/projects/cfunge/
   * License: GPL3
 
+Grass: grass.rb
+  * http://www.blue.sky.or.jp/grass/
+  * License: BSD 2-Clause
+  * slightly modified for Ruby 2+
+
 LOLCODE: lci-0.10.5.zip
   * http://lolcode.org/
   * License: GPL3+
