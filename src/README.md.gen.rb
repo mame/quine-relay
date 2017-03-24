@@ -16,10 +16,17 @@ apts = RunSteps.map {|s| s.apt }
 end
 
 rows = [["\\#", "language", "ubuntu package", "version"]]
-rows += RunSteps.flat_map.with_index do |s, idx|
-  (s.apt.is_a?(Array) ? s.apt : [s.apt]).map.with_index do |apt, i|
-    [i == 0 ? (idx + 1).to_s : "", i == 0 ? s.name : "", apt || "*N/A*", pkg_versions[apt] || '-']
+rows += RunSteps.map.with_index do |s, idx|
+  if s.apt.is_a?(Array)
+    apt = s.apt.join(", ")
+    ver = pkg_versions.values_at(*s.apt)
+    raise if ver.uniq.size > 1
+    ver = ver.first
+  else
+    apt = s.apt || "*N/A*"
+    ver = pkg_versions[apt]
   end
+  [(idx + 1).to_s, s.name, apt, ver || "-"]
 end
 
 ws = rows.transpose.map {|row| row.map {|s| s.size }.max + 1 }

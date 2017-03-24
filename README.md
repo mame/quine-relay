@@ -242,8 +242,7 @@ I used the following Ubuntu deb packages to test this program.
 61  |Groovy             |groovy         |2.4.7-2
 62  |Haskell            |ghc            |7.10.3-9ubuntu1
 63  |Haxe               |haxe           |1:3.2.1+dfsg-1build3
-64  |Icon               |icont          |9.4.3-4.2ubuntu1
-    |                   |iconx          |9.4.3-4.2ubuntu1
+64  |Icon               |icont, iconx   |9.4.3-4.2ubuntu1
 65  |INTERCAL           |intercal       |30:0.30-1
 66  |Jasmin             |jasmin-sable   |2.5.0-1
 67  |Java               |openjdk-8-jdk  |8u121-b13-0ubuntu1.16.10.2
