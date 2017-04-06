@@ -394,6 +394,15 @@ class LLVMAsm < CodeGen
   end
 end
 
+class LiveScript < CodeGen
+  Disabled = true
+  Name = "LiveScript"
+  File = "QR.ls"
+  Cmd = "lsc QR.ls > OUTFILE"
+  Apt = "livescript"
+  Code = %q("console.log"+Q[E[PREV],?#])
+end
+
 class Julia_LazyK_Lisaac < CodeGen
   Name = ["Julia", "Lazy K", "Lisaac"]
   File = ["QR.jl", "QR.lazy", "qr.li"]
@@ -744,6 +753,14 @@ class D < CodeGen
   Code = %q("import std.stdio;void main(){write(`#{PREV}`);}")
 end
 
+class Curry < CodeGen
+  Disabled = true
+  File = "QR.curry"
+  Cmd = "runcurry QR.curry > OUTFILE"
+  Apt = "pakcs"
+  Code = %q("main=putStr"+E[PREV])
+end
+
 class CommonLisp < CodeGen
   Name = "Common Lisp"
   File = "QR.lisp"
@@ -1027,6 +1044,14 @@ class Yorick < CodeGen
   Code = %q(%(write,format="#{y="";f(PREV,35){y<<",\\n"+$S;"%s"}}")+y)
 end
 
+class Yabasic < CodeGen
+  Disabled = true
+  File = "QR.yab"
+  Cmd = "yabasic QR.yab > OUTFILE"
+  Apt = "yabasic"
+  Code = %q(f(PREV,50){"print#$S;:"})
+end
+
 class XSLT < CodeGen
   File = "QR.xslt"
   Cmd = "xsltproc QR.xslt > OUTFILE"
@@ -1073,6 +1098,15 @@ class VisualBasic_Whitespace < CodeGen
       End Module)
     END
   end
+end
+
+class VimScript < CodeGen
+  Disabled = true
+  Name = ["Vimscript"]
+  Apt = "vim"
+  File = "QR.vim"
+  Cmd = "vim -EsS QR.vim > OUTFILE"
+  Code = %q("let s=#{E[PREV]}\nput=s\nprint\nqa!")
 end
 
 class Verilog < CodeGen
