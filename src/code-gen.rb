@@ -1176,7 +1176,7 @@ class Shell_SLang < CodeGen
   Apt = ["bash", "slsh"]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
-      %[echo -En "#{Q[e[e[PREV]]]}"|sed -E -e 's/([^\\\\]|\\\\.){1,120}/printf("%s","\\0");\\n/g']
+      %[echo -En "#{Q[e[e[PREV]]]}"|sed -E -e 's/([^\\\\]|\\\\.){1,118}/()=printf("%s","\\0");\\n/g']
     END
   end
 end

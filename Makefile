@@ -63,7 +63,7 @@ QR.bash: QR.sci
 	@echo "##  4: Scilab -> Shell (bash)  ##"
 	@echo "#################################"
 	@echo
-	scilab -nw -nb -f QR.sci > QR.bash
+	scilab -nwni -nb -f QR.sci > QR.bash
 
 QR.sl: QR.bash
 	@echo

@@ -48,7 +48,7 @@ Then, build the bundled interpreters.
     $ ruby QR.rb > QR.scala
     $ scalac QR.scala && scala QR > QR.scm
     $ gosh QR.scm > QR.sci
-    $ scilab -nw -nb -f QR.sci > QR.bash
+    $ scilab -nwni -nb -f QR.sci > QR.bash
     $ bash QR.bash > QR.sl
     $ slsh QR.sl > QR.st
     $ gst QR.st > QR.nut
