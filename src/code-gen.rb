@@ -193,14 +193,14 @@ class Perl < CodeGen
   end
 end
 
-# pool
-#class Perl6 < CodeGen
-#  Name = "Perl 6"
-#  File = "QR.pl6"
-#  Cmd = "perl6 QR.pl6 > OUTFILE"
-#  Apt = "rakudo"
-#  Code = %q("print"+E[PREV])
-#end
+class Perl6 < CodeGen
+  Disabled = true
+  Name = "Perl 6"
+  File = "QR.pl6"
+  Cmd = "perl6 QR.pl6 > OUTFILE"
+  Apt = "rakudo"
+  Code = %q("print"+E[PREV])
+end
 
 class Pascal < CodeGen
   File = "QR.pas"
@@ -341,13 +341,13 @@ class Makefile < CodeGen
   Code = %q("all:\n\t@echo '#{d[PREV,?$].gsub(?'){"'\\\\''"}}'")
 end
 
-# pool
-#class M4 < CodeGen
-#  File = "QR.m4"
-#  Cmd = "m4 QR.m4 > OUTFILE"
-#  Apt = "make"
-#  Code = %q("changequote(<@,@>)\ndefine(p,<@#{PREV}@>)\np")
-#end
+class M4 < CodeGen
+  Disabled = true
+  File = "QR.m4"
+  Cmd = "m4 QR.m4 > OUTFILE"
+  Apt = "make"
+  Code = %q("changequote(<@,@>)\ndefine(p,<@#{PREV}@>)\np")
+end
 
 class Lua < CodeGen
   File = "QR.lua"
@@ -1176,13 +1176,13 @@ class Scala < CodeGen
   end
 end
 
-# pool
-#class Rust < CodeGen
-#  File = "QR.rs"
-#  Cmd = "rustc QR.rs && ./QR > OUTFILE"
-#  Apt = "rustc"
-#  Code = %q(%(fn main(){print!("{}",#{E[PREV]});}))
-#end
+class Rust < CodeGen
+  Disabled = true
+  File = "QR.rs"
+  Cmd = "rustc QR.rs && ./QR > OUTFILE"
+  Apt = "rustc"
+  Code = %q(%(fn main(){print!("{}",#{E[PREV]});}))
+end
 
 class Ruby < CodeGen
   File = "QR.rb"
@@ -1191,5 +1191,6 @@ class Ruby < CodeGen
   Code = nil
 end
 
+CodeGen::List.reject! {|s| defined?(s::Disabled) }
 GenSteps = CodeGen::List.map {|s| s.gen_step }
 RunSteps = CodeGen::List.reverse.flat_map {|s| s.run_steps }
