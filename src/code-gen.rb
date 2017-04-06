@@ -1183,7 +1183,7 @@ end
 
 class Scilab < CodeGen
   File = "QR.sci"
-  Cmd = "scilab -nw -nb -f QR.sci > OUTFILE"
+  Cmd = "scilab -nwni -nb -f QR.sci > OUTFILE"
   Apt = "scilab"
   Code = %q(%(#{f(PREV,7){%(printf("%s","#{d[d[$s],?']}")\n)}}quit))
 end
