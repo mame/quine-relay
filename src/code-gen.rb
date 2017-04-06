@@ -32,7 +32,7 @@ class CodeGen
     a.transpose.map do |name, src, cmd_make, backup, apt|
       cmd_raw = cmd_make
       cmd_raw = cmd_raw.gsub("$(SCHEME)", "gosh")
-      cmd_raw = cmd_raw.gsub("$(JAVASCRIPT)", "rhino")
+      cmd_raw = cmd_raw.gsub("$(JAVASCRIPT)", "nodejs")
       cmd_raw = cmd_raw.gsub("$(BF)", "bf")
       cmd_raw = cmd_raw.gsub("$(CC)", "gcc")
       cmd_raw = cmd_raw.gsub("$(CXX)", "g++")
@@ -448,8 +448,8 @@ end
 class JavaScript < CodeGen
   File = "QR.js"
   Cmd = "$(JAVASCRIPT) QR.js > OUTFILE"
-  Apt = "rhino"
-  Code = %q("s=#{E[PREV]};typeof print=='function'?print(s):console.log('%s',s)")
+  Apt = "nodejs"
+  Code = %q("console.log('%s',#{E[PREV]})")
 end
 
 class Java_ < CodeGen

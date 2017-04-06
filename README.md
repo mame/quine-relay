@@ -34,10 +34,10 @@ First, you have to type the following apt-get command to install all of them.
       ghostscript gnat gnu-smalltalk gnuplot gobjc golang gpt groff groovy \
       haxe icont iconx intercal iverilog jasmin-sable jq julia libgd-dev \
       libpng-dev lisaac llvm lua5.3 make maxima minizinc mlton mono-devel \
-      mono-mcs mono-vbnc nasm neko nickle nim ocaml octave open-cobol \
+      mono-mcs mono-vbnc nasm neko nickle nim nodejs ocaml octave open-cobol \
       openjdk-8-jdk pari-gp perl php-cli pike8.0 python r-base ratfor \
-      regina-rexx rhino ruby scala scilab slsh squirrel3 swi-prolog tcl \
-      valac xsltproc yorick zoem
+      regina-rexx ruby scala scilab slsh squirrel3 swi-prolog tcl valac \
+      xsltproc yorick zoem
 
 Then, build the bundled interpreters.
 
@@ -116,7 +116,7 @@ Then, build the bundled interpreters.
       ./QR > QR.j
     $ jasmin QR.j && java QR > QR.java
     $ javac QR.java && java QR > QR.js
-    $ rhino QR.js > QR.jq
+    $ nodejs QR.js > QR.jq
     $ jq -r -n -f QR.jq > QR.jl
     $ julia QR.jl > QR.lazy
     $ lazyk QR.lazy > qr.li
@@ -246,7 +246,7 @@ I used the following Ubuntu deb packages to test this program.
 65  |INTERCAL           |intercal       |30:0.30-1
 66  |Jasmin             |jasmin-sable   |2.5.0-1
 67  |Java               |openjdk-8-jdk  |8u121-b13-0ubuntu1.16.10.2
-68  |JavaScript         |rhino          |1.7R4-3
+68  |JavaScript         |nodejs         |4.2.6~dfsg-1ubuntu5
 69  |Jq                 |jq             |1.5+dfsg-1
 70  |Julia              |julia          |0.4.7-1
 71  |Lazy K             |*N/A*          |-

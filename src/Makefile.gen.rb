@@ -21,7 +21,7 @@ find_any0 = $(firstword $(foreach x,$(1),$(if $(shell which $(x) 2>/dev/null),$(
 check = $(if $(2),$(2),$(error $(1) interpreter not found!))
 find_any = $(call check,$(1),$(call find_any0,$(2)))
 
-JAVASCRIPT := $(call find_any,JavaScript,rhino nodejs node js)
+JAVASCRIPT := $(call find_any,JavaScript,nodejs node js)
 SCHEME     := $(call find_any,Scheme,guile csi gosh)
 BF         := $(call find_any,Brainfuck,bf beef)
 GBS        := $(call find_any,Gambas script,gbs3 gbs2)
