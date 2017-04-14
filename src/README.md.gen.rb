@@ -78,7 +78,7 @@ the original <%= RunSteps[0].name %> code again.
 
 ### Ubuntu
 
-If you are using Ubuntu 16.04 "Xenial Xerus", you can perform the following steps.
+If you are using Ubuntu 17.04 "Zesty Zapus", you can perform the following steps.
 
 #### 1. Install all interpreters/compilers.
 
@@ -195,7 +195,7 @@ See `vendor/README` in detail.
 
 The MIT License (MIT)
 
-Copyright (c) 2013, 2014, 2015, 2016 Yusuke Endoh (@mametter), @hirekoke
+Copyright (c) 2013, 2014, 2015, 2016, 2017 Yusuke Endoh (@mametter), @hirekoke
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
