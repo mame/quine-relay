@@ -31,7 +31,7 @@ class CodeGen
     a << [*self::Apt]
     a.transpose.map do |name, src, cmd_make, backup, apt|
       cmd_raw = cmd_make
-      cmd_raw = cmd_raw.gsub("$(SCHEME)", "gosh")
+      cmd_raw = cmd_raw.gsub("$(SCHEME)", "guile")
       cmd_raw = cmd_raw.gsub("$(JAVASCRIPT)", "nodejs")
       cmd_raw = cmd_raw.gsub("$(BF)", "bf")
       cmd_raw = cmd_raw.gsub("$(CC)", "gcc")
@@ -786,7 +786,7 @@ end
 class Clojure_Cobol < CodeGen
   File = ["QR.clj", "QR.cob"]
   Cmd = ["clojure QR.clj > OUTFILE", "cobc -O2 -x QR.cob && ./QR > OUTFILE"]
-  Apt = ["clojure1.6", "open-cobol"]
+  Apt = ["clojure", "open-cobol"]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
@@ -1191,7 +1191,7 @@ end
 class Scheme < CodeGen
   File = "QR.scm"
   Cmd = "$(SCHEME) QR.scm > OUTFILE"
-  Apt = "gauche"
+  Apt = "guile-2.0"
   Code = %q(%((display "#{e[PREV]}")))
 end
 

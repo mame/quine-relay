@@ -6,7 +6,7 @@ other_packages = %w(cmake libpng-dev libgd-dev groff)
 apts = [*apts.flatten.compact.uniq, *other_packages].sort
 
 dockerfile = []
-dockerfile << "FROM ubuntu:16.10"
+dockerfile << "FROM ubuntu:17.04"
 dockerfile << "RUN apt-get update && apt-get upgrade -y"
 apts.each do |apt|
   dockerfile << "RUN apt-get -qq install -y #{ apt } && apt-get clean"

@@ -1,4 +1,4 @@
-FROM ubuntu:16.10
+FROM ubuntu:17.04
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get -qq install -y afnix && apt-get clean
 RUN apt-get -qq install -y algol68g && apt-get clean
@@ -11,7 +11,7 @@ RUN apt-get -qq install -y bf && apt-get clean
 RUN apt-get -qq install -y bsdgames && apt-get clean
 RUN apt-get -qq install -y cduce && apt-get clean
 RUN apt-get -qq install -y clisp && apt-get clean
-RUN apt-get -qq install -y clojure1.6 && apt-get clean
+RUN apt-get -qq install -y clojure && apt-get clean
 RUN apt-get -qq install -y cmake && apt-get clean
 RUN apt-get -qq install -y coffeescript && apt-get clean
 RUN apt-get -qq install -y dafny && apt-get clean
@@ -26,7 +26,6 @@ RUN apt-get -qq install -y fsharp && apt-get clean
 RUN apt-get -qq install -y g++ && apt-get clean
 RUN apt-get -qq install -y gambas3-script && apt-get clean
 RUN apt-get -qq install -y gap && apt-get clean
-RUN apt-get -qq install -y gauche && apt-get clean
 RUN apt-get -qq install -y gawk && apt-get clean
 RUN apt-get -qq install -y gcc && apt-get clean
 RUN apt-get -qq install -y gdc && apt-get clean
@@ -43,6 +42,7 @@ RUN apt-get -qq install -y golang && apt-get clean
 RUN apt-get -qq install -y gpt && apt-get clean
 RUN apt-get -qq install -y groff && apt-get clean
 RUN apt-get -qq install -y groovy && apt-get clean
+RUN apt-get -qq install -y guile-2.0 && apt-get clean
 RUN apt-get -qq install -y haxe && apt-get clean
 RUN apt-get -qq install -y icont && apt-get clean
 RUN apt-get -qq install -y iconx && apt-get clean
