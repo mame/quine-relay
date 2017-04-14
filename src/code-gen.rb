@@ -128,12 +128,12 @@ class PHP_Piet < CodeGen
           echo"\\x89PNG\\r\\n\\x1a\\n";
           $m="";
           $t="\\xc0\\0\\xff";
-          for($i=-1;$i<128*$z;
+          for($i=-1;++$i<128*$z;
               $m.=$c--?
                 ($w-$c||$i>$z)&&$i/$z<($c<$w?ord($s[(int)($c/3)]):$c--%3+2)?
                   $t[2].$t[$c%3%2].$t[$c%3]:"\\0\\0\\0":"\\0"
           )
-            $c=++$i%$z;
+            $c=$i%$z;
           foreach(array(
             "IHDR".pack("NNCV",$w+2,128,8,2),
             "IDAT".gzcompress($m),
