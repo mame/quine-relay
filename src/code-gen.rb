@@ -209,6 +209,15 @@ class Pascal < CodeGen
   Code = %q("#$D(output);begin write(#{f(PREV,1){"'#$s',"}}'')end.")
 end
 
+class Parser3 < CodeGen
+  Disabled = true
+  Name = "Parser 3"
+  File = "QR.p"
+  Cmd = "parser3 QR.p > OUTFILE"
+  Apt = "parser3-cgi"
+  Code = %q("$console:line[#{PREV.gsub(/[:;()]/){?^+$&}}]")
+end
+
 class PARIGP < CodeGen
   Name = "PARI/GP"
   File = "QR.gp"
@@ -272,6 +281,27 @@ class Nickle < CodeGen
   Cmd = "nickle QR.5c > OUTFILE"
   Apt = "nickle"
   Code = %q("printf#{E[PREV]}")
+end
+
+class NesC < CodeGen
+  Disabled = true
+  Name = "nesC"
+  File = "QR.nc"
+  Cmd = "nescc -o QR QR.nc && ./QR > OUTFILE"
+  Apt = "nescc"
+  def code
+    <<-'END'.lines.map {|l| l.strip }.join
+      %(
+        #include<stdio.h>\n
+        module QR{}implementation{
+          int main()__attribute__((C,spontaneous)){
+            puts#{E[PREV+N]};
+            return 0;
+          }
+        }
+      )
+    END
+  end
 end
 
 class Neko < CodeGen
