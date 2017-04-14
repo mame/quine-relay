@@ -145,6 +145,15 @@ class PHP_Piet < CodeGen
   end
 end
 
+class Perl6 < CodeGen
+  Disabled = true
+  Name = "Perl 6"
+  File = "QR.pl6"
+  Cmd = "perl6 QR.pl6 > OUTFILE"
+  Apt = "rakudo"
+  Code = %q("print"+E[PREV])
+end
+
 class Perl < CodeGen
   #Name = "Perl 5"
   File = "QR.pl"
@@ -191,15 +200,6 @@ class Perl < CodeGen
       )
     END
   end
-end
-
-class Perl6 < CodeGen
-  Disabled = true
-  Name = "Perl 6"
-  File = "QR.pl6"
-  Cmd = "perl6 QR.pl6 > OUTFILE"
-  Apt = "rakudo"
-  Code = %q("print"+E[PREV])
 end
 
 class Pascal < CodeGen
@@ -345,7 +345,7 @@ class M4 < CodeGen
   Disabled = true
   File = "QR.m4"
   Cmd = "m4 QR.m4 > OUTFILE"
-  Apt = "make"
+  Apt = "m4"
   Code = %q("changequote(<@,@>)\ndefine(p,<@#{PREV}@>)\np")
 end
 
@@ -756,7 +756,7 @@ end
 class Curry < CodeGen
   Disabled = true
   File = "QR.curry"
-  Cmd = "runcurry QR.curry > OUTFILE"
+  Cmd = "touch ~/.pakcsrc && runcurry QR.curry > OUTFILE"
   Apt = "pakcs"
   Code = %q("main=putStr"+E[PREV])
 end
