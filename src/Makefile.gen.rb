@@ -49,7 +49,7 @@ OUT << "\t@sha1sum --quiet -c SHA1SUMS"
   OUT << "#{ s2.src }: #{ s1.src }"
   banner(s1.name, s2.name, i)
   OUT << "\t@mv #{ s1.backup } #{ s1.backup }.bak" if s1.backup
-  cmd.split("&&").each {|c| OUT << "\t" + c.strip }
+  cmd.split("&&").each {|c| OUT << "\t" + c.strip.gsub(/^!/, "ulimit -s unlimited && ") }
   OUT << "\t@mv #{ s1.backup }.bak #{ s1.backup }" if s1.backup
 end
 

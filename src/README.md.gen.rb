@@ -45,6 +45,7 @@ cmds = [*RunSteps, RunStep["Ruby", "QR2.rb"]].each_cons(2).map do |s1, s2|
   src = s2.src
   cmd = cmd.gsub("OUTFILE", src)
 
+  cmd = cmd.gsub(/^!/, "")
   cmd = cmd.gsub(/.{60,}?&&/, "\\0\n     ")
 
   cmd
@@ -91,6 +92,7 @@ Then, build the bundled interpreters.
 
 #### 2. Run each program on each interpreter/compiler.
 
+    $ ulimit -s unlimited
 % cmds.each do |cmd|
     $ <%= cmd %>
 % end

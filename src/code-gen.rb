@@ -758,7 +758,16 @@ class EC < CodeGen
   Cmd = "ecp -c QR.ec -o QR.sym && ecc -c QR.ec -o QR.c && ecs -console QR.sym QR.imp -o QR.main.ec && ecp -c QR.main.ec -o QR.main.sym && ecc -c QR.main.ec -o QR.main.c && gcc -o QR QR.c QR.main.c -lecereCOM && ./QR > OUTFILE"
   Backup = "QR.c"
   Apt = "ecere-dev"
-  Code = %q("class QR:Application{void Main(){#{f(PREV,15){"Print#$S;"}}}}")
+  def code
+    <<-'END'.lines.map {|l| l.strip }.join
+      %(
+        class QR:Application{
+          void f(String const s,int n){for(Print(s);n;n--)Print("\\\\");}
+          void Main(){#{f(PREV,15){"f(#{V[$S[1..-2],'",',');f("']},0);"}}}
+        }
+      )
+    END
+  end
 end
 
 class Dc < CodeGen
@@ -843,7 +852,7 @@ end
 class CDuce_Chef < CodeGen
   File = ["QR.cd", "QR.chef"]
   Cmd = [
-    "cduce QR.cd > OUTFILE",
+    "!cduce QR.cd > OUTFILE",
     "PERL5LIB=vendor/local/lib/perl5 compilechef QR.chef QR.chef.pl && perl QR.chef.pl > OUTFILE"
   ]
   Apt = ["cduce", nil]

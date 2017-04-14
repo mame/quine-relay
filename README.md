@@ -45,6 +45,7 @@ Then, build the bundled interpreters.
 
 #### 2. Run each program on each interpreter/compiler.
 
+    $ ulimit -s unlimited
     $ ruby QR.rb > QR.scala
     $ scalac QR.scala && scala QR > QR.scm
     $ guile QR.scm > QR.sci

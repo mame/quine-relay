@@ -328,7 +328,7 @@ QR.chef: QR.cd
 	@echo "##  36: CDuce -> Chef  ##"
 	@echo "#########################"
 	@echo
-	cduce QR.cd > QR.chef
+	ulimit -s unlimited && cduce QR.cd > QR.chef
 
 QR.clj: QR.chef
 	@echo
