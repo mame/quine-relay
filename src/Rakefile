@@ -69,3 +69,9 @@ task :default => %w(
 task "../SHA1SUMS" => ["SHA1SUMS.gen.rb", *LIBS] do
   ruby "SHA1SUMS.gen.rb"
 end
+
+task :run => :default do
+  sh "make -C .."
+end
+
+task :gen => [:run, "../SHA1SUMS"]
