@@ -782,7 +782,7 @@ class Dafny < CodeGen
   File = "QR.dfy"
   Cmd = "dafny QR.dfy && mono QR.exe > OUTFILE"
   Apt = "dafny"
-  Code = %q("method Main(){print#{E[PREV]};}")
+  Code = %q(%(method Main(){print(@"#{d[PREV]}");}))
 end
 
 class D < CodeGen
