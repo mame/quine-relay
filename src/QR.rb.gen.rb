@@ -99,6 +99,11 @@ COPYRIGHT =
   center(width, "#")[0..-2]
 
 code.chop!
+size = code.size + COPYRIGHT.size + 10
+if TEMPLATE.count("#") < size
+  warn "overflow!"
+  TEMPLATE << "#" * (size - TEMPLATE.count("#"))
+end
 code = TEMPLATE.gsub(/#+/) { w = $&.size; code.slice!(0, w).ljust(w, PADDING) }.chomp
 code[-1] = ")"
 

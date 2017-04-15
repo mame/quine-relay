@@ -145,17 +145,7 @@ class PHP_Piet < CodeGen
   end
 end
 
-class Perl6 < CodeGen
-  Disabled = true
-  Name = "Perl 6"
-  File = "QR.pl6"
-  Cmd = "perl6 QR.pl6 > OUTFILE"
-  Apt = "rakudo"
-  Code = %q("print"+E[PREV])
-end
-
 class Perl < CodeGen
-  #Name = "Perl 5"
   File = "QR.pl"
   Cmd = "perl QR.pl > OUTFILE"
   Apt = "perl"
@@ -207,15 +197,6 @@ class Pascal < CodeGen
   Cmd = "fpc QR.pas && ./QR > OUTFILE"
   Apt = "fp-compiler"
   Code = %q("#$D(output);begin write(#{f(PREV,1){"'#$s',"}}'')end.")
-end
-
-class Parser3 < CodeGen
-  Disabled = true
-  Name = "Parser 3"
-  File = "QR.p"
-  Cmd = "parser3 QR.p > OUTFILE"
-  Apt = "parser3-cgi"
-  Code = %q("$console:line[#{PREV.gsub(/[:;()]/){?^+$&}}]")
 end
 
 class PARIGP < CodeGen
@@ -281,27 +262,6 @@ class Nickle < CodeGen
   Cmd = "nickle QR.5c > OUTFILE"
   Apt = "nickle"
   Code = %q("printf#{E[PREV]}")
-end
-
-class NesC < CodeGen
-  Disabled = true
-  Name = "nesC"
-  File = "QR.nc"
-  Cmd = "nescc -o QR QR.nc && ./QR > OUTFILE"
-  Apt = "nescc"
-  def code
-    <<-'END'.lines.map {|l| l.strip }.join
-      %(
-        #include<stdio.h>\n
-        module QR{}implementation{
-          int main()__attribute__((C,spontaneous)){
-            puts#{E[PREV+N]};
-            return 0;
-          }
-        }
-      )
-    END
-  end
 end
 
 class Neko < CodeGen
@@ -371,14 +331,6 @@ class Makefile < CodeGen
   Code = %q("all:\n\t@echo '#{d[PREV,?$].gsub(?'){"'\\\\''"}}'")
 end
 
-class M4 < CodeGen
-  Disabled = true
-  File = "QR.m4"
-  Cmd = "m4 QR.m4 > OUTFILE"
-  Apt = "m4"
-  Code = %q("changequote(<@,@>)\ndefine(p,<@#{PREV}@>)\np")
-end
-
 class Lua < CodeGen
   File = "QR.lua"
   Cmd = "lua5.3 QR.lua > OUTFILE"
@@ -422,15 +374,6 @@ class LLVMAsm < CodeGen
       )
     END
   end
-end
-
-class LiveScript < CodeGen
-  Disabled = true
-  Name = "LiveScript"
-  File = "QR.ls"
-  Cmd = "lsc QR.ls > OUTFILE"
-  Apt = "livescript"
-  Code = %q("console.log"+Q[E[PREV],?#])
 end
 
 class Julia_LazyK_Lisaac < CodeGen
@@ -638,7 +581,10 @@ class Go_GPortugol_Grass < CodeGen
         }
       )
     END
-    mod, prologue, epilogue = ::File.read(::File.join(__dir__, "grass-boot.dat")).lines
+    mod, prologue, epilogue = ::File.read(::File.join(__dir__, "grass-boot.dat")).lines[3..-1]
+    prologue = "t(#{ prologue })"
+    epilogue = "t(#{ epilogue })"
+    prologue = prologue.gsub(/(\/12131)+/) { "\")+S.Repeat(t(\"/12131\"),#{ $&.size / 6 })+t(\"" }
     mod = mod.to_i
     r.gsub(/@@\w+@@/, {
       "@@PROLOGUE@@" => prologue.chomp,
@@ -790,14 +736,6 @@ class D < CodeGen
   Cmd = "gdc -o QR QR.d && ./QR > OUTFILE"
   Apt = "gdc"
   Code = %q("import std.stdio;void main(){write(`#{PREV}`);}")
-end
-
-class Curry < CodeGen
-  Disabled = true
-  File = "QR.curry"
-  Cmd = "touch ~/.pakcsrc && runcurry QR.curry > OUTFILE"
-  Apt = "pakcs"
-  Code = %q("main=putStr"+E[PREV])
 end
 
 class CommonLisp < CodeGen
@@ -1083,14 +1021,6 @@ class Yorick < CodeGen
   Code = %q(%(write,format="#{y="";f(PREV,35){y<<",\\n"+$S;"%s"}}")+y)
 end
 
-class Yabasic < CodeGen
-  Disabled = true
-  File = "QR.yab"
-  Cmd = "yabasic QR.yab > OUTFILE"
-  Apt = "yabasic"
-  Code = %q(f(PREV,50){"print#$S;:"})
-end
-
 class XSLT < CodeGen
   File = "QR.xslt"
   Cmd = "xsltproc QR.xslt > OUTFILE"
@@ -1137,15 +1067,6 @@ class VisualBasic_Whitespace < CodeGen
       End Module)
     END
   end
-end
-
-class VimScript < CodeGen
-  Disabled = true
-  Name = ["Vimscript"]
-  Apt = "vim"
-  File = "QR.vim"
-  Cmd = "vim -EsS QR.vim > OUTFILE"
-  Code = %q("let s=#{E[PREV]}\nput=s\nprint\nqa!")
 end
 
 class Verilog < CodeGen
@@ -1249,14 +1170,6 @@ class Scala < CodeGen
   end
 end
 
-class Rust < CodeGen
-  Disabled = true
-  File = "QR.rs"
-  Cmd = "rustc QR.rs && ./QR > OUTFILE"
-  Apt = "rustc"
-  Code = %q(%(fn main(){print!("{}",#{E[PREV]});}))
-end
-
 class Ruby < CodeGen
   File = "QR.rb"
   Cmd = "ruby QR.rb > OUTFILE"
@@ -1264,6 +1177,7 @@ class Ruby < CodeGen
   Code = nil
 end
 
-CodeGen::List.reject! {|s| defined?(s::Disabled) }
+load "code-gen-pool.rb" if ENV["ALL"]
+
 GenSteps = CodeGen::List.map {|s| s.gen_step }
 RunSteps = CodeGen::List.reverse.flat_map {|s| s.run_steps }

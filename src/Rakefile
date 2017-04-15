@@ -10,7 +10,7 @@ CLEAN.include("../README.md")
 CLEAN.include("../langs.png")
 CLEAN.include("../Makefile")
 
-LIBS = %w(code-gen.rb lazyk-boot.dat blc-boot.dat grass-boot.dat)
+LIBS = %w(code-gen.rb code-gen-pool.rb lazyk-boot.dat blc-boot.dat grass-boot.dat)
 
 file "lazyk-boot.dat" => "lazyk-boot.dat.gen.rb" do
   ruby "lazyk-boot.dat.gen.rb"
