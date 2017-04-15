@@ -187,7 +187,7 @@ I used the following Ubuntu deb packages to test this program.
 5   |Shell (bash)       |bash           |4.4-2ubuntu1
 6   |S-Lang             |slsh           |2.3.1-5ubuntu1
 7   |Smalltalk          |gnu-smalltalk  |3.2.5-1build3
-8   |Squirrel3          |squirrel3      |3.1-4
+8   |Squirrel           |squirrel3      |3.1-4
 9   |Standard ML        |mlton          |20100608-5.1ubuntu1
 10  |Subleq             |*N/A*          |-
 11  |Tcl                |tcl            |8.6.0+9

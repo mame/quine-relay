@@ -36,9 +36,38 @@ class NesC < CodeGen
           int main()__attribute__((C,spontaneous)){
             puts#{E[PREV]};
             return 0;
-          }
-        }
+        } }
       )
+    END
+    # avoid "}}" because of Mustache
+  end
+end
+
+class Mustache_NASM < CodeGen
+  After = MSIL
+  Obsoletes = NASM
+  File = ["QR.mustache", "QR.asm"]
+  Cmd = [
+    "mustache QR.mustache QR.mustache > OUTFILE",
+    "nasm -felf QR.asm && ld -m elf_i386 -o QR QR.o && ./QR > OUTFILE",
+  ]
+  Apt = ["ruby-mustache", "nasm"]
+  def code
+    <<-'END'.lines.map {|l| l.strip.gsub("^^^", " ") }.join("\\n")
+      "m{{!: x
+      qr: |-
+      ^^^:db\x60#{e[s=PREV]}\x60
+      ^^^global _start
+      ^^^_start:mov edx,#{s.size}
+      ^^^mov ecx,m
+      ^^^mov ebx,1
+      ^^^mov eax,4
+      ^^^int 128
+      ^^^mov ebx,0
+      ^^^mov eax,1
+      ^^^int 128
+      x: |
+      ^^^}}{{{qr}}}"
     END
   end
 end
