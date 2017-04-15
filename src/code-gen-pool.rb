@@ -34,17 +34,13 @@ class NesC < CodeGen
         #include<stdio.h>\n
         module QR{}implementation{
           int main()__attribute__((C,spontaneous)){
-            puts#{E[PREV+N]};
+            puts#{E[PREV]};
             return 0;
           }
         }
       )
     END
   end
-end
-
-class Neko
-  Code.replace %q("$print#{E[PREV]};")
 end
 
 class M4 < CodeGen

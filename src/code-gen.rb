@@ -261,14 +261,14 @@ class Nickle < CodeGen
   File = "QR.5c"
   Cmd = "nickle QR.5c > OUTFILE"
   Apt = "nickle"
-  Code = %q("printf#{E[PREV]}")
+  Code = %q("printf#{E[PREV]}\\n")
 end
 
 class Neko < CodeGen
   File = "QR.neko"
   Cmd = "nekoc QR.neko && neko QR.n > OUTFILE"
   Apt = "neko"
-  Code = %q("$print#{E[PREV+N]};")
+  Code = %q("$print#{E[PREV]};")
 end
 
 class NASM < CodeGen
