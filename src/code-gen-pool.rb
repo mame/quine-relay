@@ -1,12 +1,36 @@
 original_list_size = CodeGen::List.size
 
+class Python_R_Ratfor_Rc_REXX < CodeGen
+  After = Python_R_Ratfor_REXX
+  Obsoletes = Python_R_Ratfor_REXX
+  Name = ["Python", "R", "Ratfor", "rc", "REXX"]
+  File = ["QR.py", "QR.R", "QR.ratfor", "QR.rc", "QR.rexx"]
+  Cmd = [
+    "python QR.py > OUTFILE",
+    "R --slave -f QR.R > OUTFILE",
+    "ratfor -o QR.ratfor.f QR.ratfor && gfortran -o QR QR.ratfor.f && ./QR > OUTFILE",
+    "rc QR.rc > OUTFILE",
+    "rexx ./QR.rexx > OUTFILE"
+  ]
+  Apt = ["python", "r-base", "ratfor", "rc", "regina-rexx"]
+  def code
+    <<-'END'.lines.map {|l| l.strip }.join
+      %(
+        for c in"".join(["echo 'say ''%s'''\\n"%l for l in#{E[d[d[PREV,?'],?']]}.split("\\n")]):
+          print('cat("r=fput(char(%d))\\n")'%ord(c))\n
+        print('cat("end\\n")')
+      )
+    END
+  end
+end
+
 class Perl6 < CodeGen
   After = Perl
   Name = "Perl 6"
   File = "QR.pl6"
   Cmd = "perl6 QR.pl6 > OUTFILE"
   Apt = "rakudo"
-  Code = %q("print('#{Q[Q[PREV,B],?']}')")
+  Code = %q("$_='#{Q[Q[PREV.gsub(B,"\x7f"),B],?']}';s:g/\\\\x7f/\\\\\\\\/;print $_")
 end
 
 class Perl
@@ -280,6 +304,42 @@ class CoffeeScript < CodeGen
   Cmd.replace "coffee --nodejs --stack_size=100000 QR.coffee > OUTFILE"
 end
 
+class Clojure_CMake_Cobol < CodeGen
+  After = Clojure_Cobol
+  Obsoletes = Clojure_Cobol
+  File = ["QR.clj", "QR.cmake", "QR.cob"]
+  Cmd = [
+    "clojure QR.clj > OUTFILE",
+    "cmake -P QR.cmake > OUTFILE",
+    "cobc -O2 -x QR.cob && ./QR > OUTFILE",
+  ]
+  Apt = ["clojure", "cmake", "open-cobol"]
+  def code
+    <<-'END'.lines.map {|l| l.strip }.join
+      %(
+        (doseq[s
+          (lazy-cat
+            ["IDENTIFICATION DIVISION."
+             "PROGRAM-ID. QR."
+             "PROCEDURE DIVISION."
+             'DISPLAY]
+             (map #(str
+                  "    \\""
+                  (.replace %1"\\"""\\"\\"")
+                  "\\"&")
+               (re-seq #".{1,45}"
+                  "#{e[PREV]}"))
+             ["    \\" \\"."
+              "STOP RUN."])]
+          (println(str
+            "message(STATUS \\"     "
+            (.replace(.replace(str s)"\\\\""\\\\\\\\")"\\"""\\\\\\"")
+            "\\")")))
+        )
+    END
+  end
+end
+
 class C < CodeGen
   c = C.new.code.gsub("99999", "999999")
   define_method(:code) { c }
@@ -460,20 +520,16 @@ class Tcl < CodeGen
   end
 end
 
-class Scilab_SLang < CodeGen
+class Sed_SLang < CodeGen
   After = Scilab
-  Obsoletes = [Scilab, Shell_SLang]
-  Name = ["Scilab", "S-Lang"]
-  File = ["QR.sci", "QR.sl"]
-  Cmd = ["scilab -nwni -nb -f QR.sci > OUTFILE", "slsh QR.sl > OUTFILE"]
-  Apt = ["scilab", "slsh"]
+  Obsoletes = Shell_SLang
+  Name = ["sed", "S-Lang"]
+  File = ["QR.sed", "QR.sl"]
+  Cmd = ["sed -E -f QR.sed QR.sed > OUTFILE", "slsh QR.sl > OUTFILE"]
+  Apt = ["sed", "slsh"]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
-      %(
-        function []=f(s);printf("()=printf(""%%s"",""%s"");\\n",s)endfunction\n
-        #{PREV.gsub(/.{1,120}/m){%(f("#{d[d[e[$&]],?']}")\n)}}\n
-        quit
-      )
+      %[s/.{58}//;s/([^\\\\]|\\\\.){1,118}/()=printf("%s","\\0");\\n/g;#]+e[PREV]
     END
   end
 end

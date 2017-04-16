@@ -158,7 +158,7 @@ class Perl < CodeGen
           $_="#{
             s=PREV;
             v="";
-            127.upto(287){|j|
+            128.upto(287){|j|
               o={};
               m=n=0;
               s.size.times{|i|
