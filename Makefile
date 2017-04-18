@@ -95,7 +95,7 @@ QR.sml: QR.nut
 	@echo "##  8: Squirrel -> Standard ML  ##"
 	@echo "##################################"
 	@echo
-	squirrel3 QR.nut > QR.sml
+	squirrel QR.nut > QR.sml
 
 QR.sq: QR.sml
 	@echo

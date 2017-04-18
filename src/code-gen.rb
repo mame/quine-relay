@@ -60,7 +60,22 @@ GenPrologue = <<-'END'.lines.map {|l| l.strip }.join
   $D="program QR";
   $G=" contents of"+$F=" the mixing bowl";
   $L="public static";
+  rp=->s,r{
+    v="";
+    [r.inject(s){|s,j|
+      o={};
+      m=n=0;
+      s.size.times{|i|
+        o[f=s[i,2]]||=0;
+        c=o[f]+=1;
+        m<c&&(m=c;n=f)
+      };
+      v=n+v;
+      s.gsub(n,(j%256).chr)
+    },v]
+  };
 END
+# rp: Re-Pair (Naive byte pair encoding)
 
 
 class Python_R_Ratfor_REXX < CodeGen
@@ -150,25 +165,12 @@ class Perl < CodeGen
   Cmd = "perl QR.pl > OUTFILE"
   Apt = "perl"
   def code
-    # BPE: Byte pair encoding
     <<-'END'.lines.map {|l| l.strip }.join
       (
         p="eval";
         %(
           $_="#{
-            s=PREV;
-            v="";
-            128.upto(287){|j|
-              o={};
-              m=n=0;
-              s.size.times{|i|
-                o[f=s[i,2]]||=0;
-                c=o[f]+=1;
-                m<c&&(m=c;n=f)
-              };
-              v=n+v;
-              s=s.gsub(n,(j%256).chr)
-            };
+            s,v=rp[PREV,128..287];
             s="
               $_='#{Q[s,c=/['\\\\]/]}';
               $n=32;
@@ -665,7 +667,7 @@ class FALSELang < CodeGen
   File = "QR.false"
   Cmd = "ruby vendor/false.rb QR.false > OUTFILE"
   Apt = [nil]
-  Code = %q(?"+PREV.gsub(?"){'"34,"'}+?")
+  Code = %q(?"+PREV.gsub(?"){'"34,"'}.gsub(N){'"10,"'}+?")
 end
 
 class FSharp < CodeGen
@@ -1117,7 +1119,7 @@ end
 
 class Squirrel < CodeGen
   File = "QR.nut"
-  Cmd = "squirrel3 QR.nut > OUTFILE"
+  Cmd = "squirrel QR.nut > OUTFILE"
   Apt = "squirrel3"
   Code = %q("print"+E[PREV])
 end

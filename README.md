@@ -53,7 +53,7 @@ Then, build the bundled interpreters.
     $ bash QR.bash > QR.sl
     $ slsh QR.sl > QR.st
     $ gst QR.st > QR.nut
-    $ squirrel3 QR.nut > QR.sml
+    $ squirrel QR.nut > QR.sml
     $ mlton @MLton fixed-heap 200M -- QR.sml && ./QR > QR.sq
     $ ruby vendor/subleq.rb QR.sq > QR.tcl
     $ tclsh QR.tcl > QR.t

@@ -24,6 +24,15 @@ class Python_R_Ratfor_Rc_REXX < CodeGen
   end
 end
 
+class Promela < CodeGen
+  After = Prolog
+  Name = "Promela (Spin)"
+  File = "QR.pr"
+  Cmd = "spin -T QR.pr > OUTFILE"
+  Apt = "spin"
+  Code = %q("init{#{f(PREV+?#,7){%(printf#{d[$S,?%]};)}}}")
+end
+
 class Perl6 < CodeGen
   After = Perl
   Name = "Perl 6"
@@ -45,6 +54,15 @@ class Parser3 < CodeGen
   Apt = "parser3-cgi"
   Code = %q("$console:line[#{PREV.gsub(/[:;()]/){?^+$&}}]")
 end
+
+#class Nim_NVSPL2 < CodeGen
+#  After = Nim
+#  Obsoletes = Nim
+#  File = ["QR.nim", "QR.nvspl2"]
+#  Cmd = ["nim c QR.nim && ./QR > OUTFILE", "ruby vendor/nvspl2.rb QR.nvspl2 > OUTFILE"]
+#  Apt = ["nim", nil]
+#  Code = %q(%((for i, c in#{E[PREV]}:echo ",",int(c),"CO");echo "Q"))
+#end
 
 class NesC < CodeGen
   After = Neko
@@ -292,6 +310,22 @@ class Go < CodeGen
   end
 end
 
+class GDB < CodeGen
+  After = GAP
+  File = "QR.gdb"
+  Cmd = "gdb -q -x QR.gdb > OUTFILE"
+  Apt = "gdb"
+  Code = %q(%(printf"#{e[d[PREV,?%]]}"\nquit))
+end
+
+class Flex < CodeGen
+  After = FALSELang
+  File = "QR.fl"
+  Cmd = "flex -o QR.fl.c QR.fl && gcc -o QR QR.fl.c && ./QR > OUTFILE"
+  Apt = "flex"
+  Code = %q("%option noyywrap\n%%\n%%\nint main(){printf#{E[d[PREV,?%]]};}")
+end
+
 class Curry < CodeGen
   After = CommonLisp
   File = "QR.curry"
@@ -396,6 +430,56 @@ class Awk < CodeGen
   Code = %q("BEGIN{print#{E[PREV]}}")
 end
 
+class AspectJ < CodeGen
+  After = ALGOL68_Ante
+  File = "QR.aj"
+  Cmd = "ajc QR.aj && java QR > OUTFILE"
+  Apt = "aspectj"
+  def code
+    <<-'END'.lines.map {|l| l.strip }.join
+      %(
+        class QR{
+          #$L void main(String[]v){
+            System.out.print(#{E[PREV.tr(B,?^)]}.replace("^","\\\\"));
+          }
+        }
+      )
+    END
+  end
+end
+
+class AspectCpp < CodeGen
+  Name = "AspectC++"
+  After = ALGOL68_Ante
+  File = "QR.cc"
+  Cmd = "ag++ -o QR QR.cc && ./QR > OUTFILE"
+  Apt = "aspectc++"
+  def code
+    <<-'END'.lines.map {|l| l.strip }.join
+      "
+        #include<iostream>\n
+        int main(){
+          std::cout<<#{E[PREV]};
+        }
+      "
+    END
+  end
+end
+
+class ALGOL68_Ante
+  def code
+    <<-'end'.lines.map {|l| l.strip }.join
+      %W[
+        STRINGz:= 226+ 153,a:=z+ 166,b:=a+"2"+z+ 160,c:=b+"8"+z+ 165,t:="#{d[PREV]}";
+        FORiTO\ UPBtDO\ INTn:=ABSt[i];
+          IFn<32THENn:=10FI;
+          print( (50+n%64)+c+ (50+n%8MOD8)+c+ (50+nMOD8)+b+"J"+a)
+        OD
+      ]*"REPR"
+    end
+  end
+end
+
 class AFNIX_Aheui < CodeGen
   After = AFNIX
   Obsoletes = AFNIX
@@ -418,10 +502,15 @@ class AFNIX_Aheui < CodeGen
         f 45796}{D(/ n 2)\n
         f 48149\n
         f 46384}}}\n
-        trans S"#{e[PREV]}"\n
-        trans c 0\n
-        do{D(Integer(S:get c))\n
-        f 47587}(<(c:++)(S:length))\n
+        trans E(n){if(< n 32)26 n}\n
+        #{(PREV).gsub(/.{1,25000}/m){
+          %(
+            trans S"#{e[$&]}"\n
+            trans c 0\n
+            do{D(E(Integer(S:get c)))\n
+            f 47587}(<(c:++)(S:length))\n
+          )
+        }}
         f 54616
       )
     END
@@ -510,26 +599,64 @@ class Tcl < CodeGen
   File = "QR.tcl"
   Cmd = "tclsh QR.tcl > OUTFILE"
   Apt = "tcl"
+  Code = %q(%(puts "#{Q[e[PREV],/[\[\]$]/]}"))
+end
+
+class Scilab_Sed_Shakespeare_SLang < CodeGen
+  After = Scheme
+  Obsoletes = [Scilab, Shell_SLang]
+  Name = ["Scilab", "sed", "Shakespeare", "S-Lang"]
+  File = ["QR.sci", "QR.sed", "QR.spl", "QR.sl"]
+  Cmd = [
+    "scilab -nwni -nb -f QR.sci > OUTFILE",
+    "sed -E -f QR.sed QR.sed > OUTFILE",
+    "./vendor/local/bin/spl2c < QR.spl > QR.spl.c && gcc -o QR -I ./vendor/local/include -L ./vendor/local/lib QR.spl.c -lspl -lm && ./QR > OUTFILE",
+    "slsh QR.sl > OUTFILE",
+  ]
+  Apt = ["scilab", "sed", nil, "slsh"]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
-        proc f {n} {string repeat "\\\\" $n};
-        puts "#{V[Q[e[PREV],/[\[\]$]/],"[f ",?]]}"
+        printf("
+          1d;
+          s/^#//;
+          9s/0/ twice/g;
+          9s/1/ the sum of a son and twice/g;
+          9s/2/You are as bad as/g;
+          9s/3/ a son!/g;
+          9s/4/Speak your mind!/g\\n
+          #The Relay of Quine.\\n
+          #Ajax, a man.\\n
+          #Ford, a man.\\n
+          #Act i: Quine.\\n
+          #Scene i: Relay.\\n
+          #[Enter Ajax and Ford]\\n
+          #Ajax:\\n
+          #");
+        function[]=f(s);
+          for i=1:2:length(s),
+            printf("2%s34",part(dec2bin(hex2dec(part(s,i:i+1))),$:-1:2)),
+          end;
+        endfunction\n
+        #{
+          s,v=rp[PREV,127..255];
+          f(
+            %(
+              variable s=`#{s.gsub(/.{1,234}/){$&.gsub("`",%(`+"`"+`))+"`+\n`"}}`,i;
+              for(i=0;i<129;i++)
+                s=strreplace(
+                  s,
+                  pack("C",255-i),
+                  substrbytes(`#{v[0,100]}`+\n`#{v[100..-1]}`,i*2+1,2));
+              printf("%s",s)
+            ),7
+          ){
+            "f('%s')\n"%$s.unpack("H*")
+          }
+        }
+        printf("\\n#[Exeunt]");
+        quit
       )
-    END
-  end
-end
-
-class Sed_SLang < CodeGen
-  After = Scilab
-  Obsoletes = Shell_SLang
-  Name = ["sed", "S-Lang"]
-  File = ["QR.sed", "QR.sl"]
-  Cmd = ["sed -E -f QR.sed QR.sed > OUTFILE", "slsh QR.sl > OUTFILE"]
-  Apt = ["sed", "slsh"]
-  def code
-    <<-'END'.lines.map {|l| l.strip }.join
-      %[s/.{58}//;s/([^\\\\]|\\\\.){1,118}/()=printf("%s","\\0");\\n/g;#]+e[PREV]
     END
   end
 end
