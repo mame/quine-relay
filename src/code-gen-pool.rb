@@ -16,9 +16,10 @@ class Python_R_Ratfor_Rc_REXX < CodeGen
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
+        print('cat("')\n
         for c in"".join(["echo 'say ''%s'''\\n"%l for l in#{E[d[d[PREV,?'],?']]}.split("\\n")]):
-          print('cat("r=fput(char(%d))\\n")'%ord(c))\n
-        print('cat("end\\n")')
+          print('r=fput(char(%d))'%ord(c))\n
+        print('end\\n")')#
       )
     END
   end
@@ -30,7 +31,7 @@ class Promela < CodeGen
   File = "QR.pr"
   Cmd = "spin -T QR.pr > OUTFILE"
   Apt = "spin"
-  Code = %q("init{#{f(PREV+?#,7){%(printf#{d[$S,?%]};)}}}")
+  Code = %q("init{#{f(PREV,7){"printf#{d[$S,?%]};"}}}")
 end
 
 class Perl6 < CodeGen
@@ -39,7 +40,7 @@ class Perl6 < CodeGen
   File = "QR.pl6"
   Cmd = "perl6 QR.pl6 > OUTFILE"
   Apt = "rakudo"
-  Code = %q("$_='#{Q[Q[PREV.gsub(B,"\x7f"),B],?']}';s:g/\\\\x7f/\\\\\\\\/;print $_")
+  Code = %q("$_='#{Q[PREV.gsub(B,"\x7f"),?']}';s:g/\\\\x7f/\\\\\\\\/;print $_")
 end
 
 class Perl
@@ -208,23 +209,34 @@ class JavaScript_Jq_JSFuck < CodeGen
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
-        m={0:"[+[]]",m:"((+[])"+(C="['constructor']")+"+[])['11']"};
-        for(j in a=("![]/!![]/[][[]]/"+(F="[]['fill']")+"/([]+[])['fontcolor']([])/(+('11e20')+[])['split']([])/"+F+C+"('return escape')()("+F+")").split("/"))
-          for(i in k=eval(s="("+a[j]+"+[])"))
-            m[t=k[i]]=m[t]||s+"['"+i+"']";
-        s="[";
-        for(c=1;c<36;c++)
-          m[k=c.toString(36)]=c<10?(s+="+!+[]")+"]":m[k]||"(+('"+c+"'))['to'+([]+[])"+C+"['name']]('36')";
-        s=#{E[PREV]};
-        o=F+C+"('console.log(unescape(\\"";
-        for(i in s)o+="'+![]+'"+s.charCodeAt(i).toString(16);
-        o+="\\".replace(/'+![]+'/g,\\"%\\")))')()";
-        for(j=0;j<99;j++)o=o.replace(/'.*?'/g,function(c){
-          t=[];
-          for(i=1;c[i+1];)t.push(m[c[i++]]);
-          return t.join("+")
-        });
-        console.log('"'+o+'"')
+        P={0:'[+[]]',m:'((+[])'+(C="['constructor']")+"+[])['11']"};
+        for(R in B=
+          (
+            '![]@!![]@[][[]]@'+
+            (A="[]['fill']")+
+            "@([]+[])['fontcolor']([])@(+('11e20')+[])['split']([])@"+
+            A+C+"('return escape')()("+A+')'
+          ).split('@')
+        )
+          for(E in D=eval(G='('+B[R]+'+[])'))
+            P[T=D[E]]=P[T]||G+"['"+E+"']";
+        for(G='[',B=0;++B<36;)
+          P[D=B.toString(36)]=
+            B<10?
+              (G+='+!+[]')+']'
+            :
+              P[D]||"(+('"+B+"'))['to'+([]+[])"+C+"['name']]('36')";
+        A+=C+"('console.log(unescape(\\"";
+        for(E in G=#{E[PREV]})
+          A+="'+![]+'"+G.charCodeAt(E).toString(16);
+        for(A+="\\".replace(/'+![]+'/g,\\"%\\")))')()",R=0;R<9;R++)
+          A=A.replace(/'.*?'/g,function(B){
+            T=[];
+            for(E=1;B[E+1];)
+              T.push(P[B[E++]]);
+            return T.join('+')
+          });
+        console.log('"'+A+'"')
       )
     END
   end
@@ -239,13 +251,12 @@ class Gri_Groovy_Gzip < CodeGen
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
-        \\q="\\""\n
         show "
-          def z=new java.util.zip.GZIPOutputStream(System.out);
-          z.write('#{PREV.tr(B,?!).gsub(?",%(" "\\q" "))}'.tr('!','\\\\\\\\').getBytes());
+          z=new java.util.zip.GZIPOutputStream(System.out);
+          z.write('#{PREV.tr(?"+B,"!~")}'.tr('~!','\\\\\\\\\\u0022')as byte[]);
           z.close()
-        "
-      )+N
+        "\n
+      )
     END
   end
 end
@@ -323,7 +334,7 @@ class Flex < CodeGen
   File = "QR.fl"
   Cmd = "flex -o QR.fl.c QR.fl && gcc -o QR QR.fl.c && ./QR > OUTFILE"
   Apt = "flex"
-  Code = %q("%option noyywrap\n%%\n%%\nint main(){printf#{E[d[PREV,?%]]};}")
+  Code = %q("%option noyywrap\n%%\n%%\nint main(){puts#{E[PREV]};}")
 end
 
 class Curry < CodeGen
@@ -396,26 +407,22 @@ class Bash_Bc_Befunge_BLC8_Brainfuck < CodeGen
     blc = ::File.read(::File.join(__dir__, "blc-boot.dat"))
     <<-'END'.lines.map {|l| l.strip }.join.sub("BLC", [blc].pack("m0"))
       %(
-        echo "
+        echo '
           define void f(n){
-            \\"00g,\\";
+            "00g,";
             for(m=1;m<256;m*=2){
-              \\"00g,4,:\\";
-              if(n/m%2)\\"4+\\";
-              \\",\\";
+              "00g,4,:";
+              if(n/m%2)"4+";
+              ",";
             };
-            \\"4,:,\\"
+            "4,:,"
           }
-          \\"389**6+44*6+00p45*,\\";
-        ";
-        for n in \x60echo '#{d[PREV,B].gsub(?',%('"'"'))}'|od -An -tuC\x60;do echo "f($n);";done;
-        s="\\"4,:,";
-        for n in \x60echo BLC|base64 -d|od -An -tuC\x60;do s=$s"0";
-          for ((k=0;k<n;k++));do s=$s"1+";done;
-          s=$s",";
-        done;
-        echo $s"@\\"";
-        echo quit
+          "389**6+44*6+00p45*,";
+        ';
+        printf "f(%d);\n" `echo '#{d[PREV,B].gsub(?',%('"'"'))}'|od -An -tuC`;
+        printf '"4,:,';
+        printf '%s\\\\8*+\\\\88**+,' `echo BLC|base64 -d|od -An -toC`;
+        printf "@\\"\nquit"
       )
     END
   end
@@ -440,7 +447,7 @@ class AspectJ < CodeGen
       %(
         class QR{
           #$L void main(String[]v){
-            System.out.print(#{E[PREV.tr(B,?^)]}.replace("^","\\\\"));
+            System.out.print(#{E[PREV.gsub(B,?^)]}.replace("^","\\\\"));
           }
         }
       )
@@ -448,31 +455,22 @@ class AspectJ < CodeGen
   end
 end
 
-class AspectCpp < CodeGen
-  Name = "AspectC++"
+class ALGOL68_Ante_AspectCpp < CodeGen
   After = ALGOL68_Ante
-  File = "QR.cc"
-  Cmd = "ag++ -o QR QR.cc && ./QR > OUTFILE"
-  Apt = "aspectc++"
-  def code
-    <<-'END'.lines.map {|l| l.strip }.join
-      "
-        #include<iostream>\n
-        int main(){
-          std::cout<<#{E[PREV]};
-        }
-      "
-    END
-  end
-end
-
-class ALGOL68_Ante
+  Obsoletes = ALGOL68_Ante
+  Name = ["ALGOL 68", "Ante", "AspectC++"]
+  File = ["QR.a68", "QR.ante", "QR.cc"]
+  Cmd = [
+    "a68g QR.a68 > OUTFILE",
+    "ruby vendor/ante.rb QR.ante > OUTFILE",
+    "ag++ -o QR QR.cc && ./QR > OUTFILE",
+  ]
+  Apt = ["algol68g", nil, "aspectc++"]
   def code
     <<-'end'.lines.map {|l| l.strip }.join
       %W[
-        STRINGz:= 226+ 153,a:=z+ 166,b:=a+"2"+z+ 160,c:=b+"8"+z+ 165,t:="#{d[PREV]}";
+        STRINGz:= 226+ 153,a:=z+ 166,b:=a+"2"+z+ 160,c:=b+"8"+z+ 165,t:="#include<iostream>"+ (10)+"int"+ (32)+"main(){puts#{d[E[PREV]]};}";
         FORiTO\ UPBtDO\ INTn:=ABSt[i];
-          IFn<32THENn:=10FI;
           print( (50+n%64)+c+ (50+n%8MOD8)+c+ (50+nMOD8)+b+"J"+a)
         OD
       ]*"REPR"
@@ -487,31 +485,40 @@ class AFNIX_Aheui < CodeGen
   Cmd = ["axi QR.als > OUTFILE", "go run vendor/goaheui/main.go QR.aheui > OUTFILE"]
   Apt = ["afnix", nil]
   def code
-    <<-'END'.lines.map {|l| l.strip }.join.gsub("$$$", " ")
+    <<-'END'.lines.map {|l| l.strip }.join
       %(
         interp:library"afnix-sio"\n
-        trans o(afnix:sio:OutputTerm)\n
-        trans O(n){o:write(Byte(+ 128 n))}\n
-        trans f(n){\n
-        trans t(/ n 64)\n
-        O(+(/ n 4096)96)\n
-        O(t:mod 64)\n
-        O(n:mod 64)}\n
-        trans D(n){if(< n 4){f(+(* 6 n)48137)}{if(n:odd-p){D(- n 3)\n
-        f 48155\n
-        f 45796}{D(/ n 2)\n
-        f 48149\n
-        f 46384}}}\n
-        trans E(n){if(< n 32)26 n}\n
-        #{(PREV).gsub(/.{1,25000}/m){
-          %(
-            trans S"#{e[$&]}"\n
-            trans c 0\n
-            do{D(E(Integer(S:get c)))\n
-            f 47587}(<(c:++)(S:length))\n
-          )
-        }}
-        f 54616
+        trans O(n){
+          trans o(afnix:sio:OutputTerm)\n
+          o:write(Byte(+ 128 n))
+        }\n
+        trans f(v n){\n
+          O(+(/ n 64)107)\n
+          O(n:mod 64)\n
+          O v
+        }\n
+        trans D(n){
+          if(< n 4){
+            f(+(* 6 n)9)48
+          }{
+            if(n:odd-p){
+              D(- n 3)\n
+              f 27 48\n
+              f 36 11
+            }{
+              D(/ n 2)\n
+              f 21 48\n
+              f 48 20
+            }
+          }
+        }\n
+        trans S"#{e[PREV]}"\n
+        trans c 0\n
+        do{
+          D(Integer(S:get c))\n
+          f 35 39
+        }(<(c:++)(S:length))\n
+        f 24 149
       )
     END
   end
@@ -524,7 +531,7 @@ class Ada < CodeGen
         with Ada.Text_Io;
         procedure qr is$$$
         begin$$$
-          #{PREV.gsub(/(.{1,25000})(\n)?/){%(Ada.Text_Io.Put#{$2?:_Line:""}("#{d[$1]}");\n)}}
+          Ada.Text_Io.Put("#{d[PREV].gsub(N,'"&Character'+?'+'Val(10)&"')}");
         end;
       )
     END
@@ -538,10 +545,6 @@ class Zsh < CodeGen
   Cmd = "zsh QR.zsh > OUTFILE"
   Apt = "zsh"
   Code = %q("echo -E $'#{Q[Q[PREV,B],?']}'")
-end
-
-class Yorick
-  Code.replace %q(%(write,format="#{y="";f(PREV,30){y<<",\\n"+$S;"%s"}}")+y)
 end
 
 class Yabasic < CodeGen
@@ -579,7 +582,7 @@ class TypeScript_Unlambda < CodeGen
   Apt = ["node-typescript", nil]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
-      "let s=#{E[PREV]},i=s.length,t='';while(i--){t+='\\x60.'+s[i]};console.log(t+'k')"
+      "let s=#{E[PREV]},i=0,t='k';while(s[i])t='\\x60.'+s[i++]+t;console.log(t)"
     END
   end
 end
@@ -590,7 +593,7 @@ class Tcsh_Thue < CodeGen
   File = ["QR.tcsh", "QR.t"]
   Cmd = ["tcsh QR.tcsh > OUTFILE", "ruby vendor/thue.rb QR.t > OUTFILE"]
   Apt = ["tcsh", nil]
-  Code = %q("echo 'a::=~#{Q[Q[PREV,B],?!].gsub(?',%('"'"'))}';echo ::=;echo a")
+  Code = %q(%(echo 'a::=~#{Q[Q[PREV,B],?!].gsub(?',%('"'"'))}'"\\\\n::=\\\\na"))
 end
 
 class Tcl < CodeGen
@@ -619,12 +622,11 @@ class Scilab_Sed_Shakespeare_SLang < CodeGen
       %(
         printf("
           1d;
-          s/^#//;
-          9s/0/ twice/g;
-          9s/1/ the sum of a son and twice/g;
-          9s/2/You are as bad as/g;
-          9s/3/ a son!/g;
-          9s/4/Speak your mind!/g\\n
+          s/.//;
+          s/1/ the sum of a son and0/g;
+          s/0/ twice/g;
+          s/2/You are as bad as/g;
+          s/3/ a son!Speak your mind!/g\\n
           #The Relay of Quine.\\n
           #Ajax, a man.\\n
           #Ford, a man.\\n
@@ -635,7 +637,7 @@ class Scilab_Sed_Shakespeare_SLang < CodeGen
           #");
         function[]=f(s);
           for i=1:2:length(s),
-            printf("2%s34",part(dec2bin(hex2dec(part(s,i:i+1))),$:-1:2)),
+            printf("2%s3",part(dec2bin(hex2dec(part(s,i:i+1))),$:-1:2)),
           end;
         endfunction\n
         #{
@@ -647,7 +649,7 @@ class Scilab_Sed_Shakespeare_SLang < CodeGen
                 s=strreplace(
                   s,
                   pack("C",255-i),
-                  substrbytes(`#{v[0,100]}`+\n`#{v[100..-1]}`,i*2+1,2));
+                  substrbytes(`#{v[0,99]}`+\n`#{v[99..-1]}`,i*2+1,2));
               printf("%s",s)
             ),7
           ){

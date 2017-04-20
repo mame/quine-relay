@@ -688,7 +688,7 @@ class Erlang < CodeGen
   File = "QR.erl"
   Cmd = "escript QR.erl > OUTFILE"
   Apt = "erlang"
-  Code = %q("\nmain(_)->\nio:fwrite#{E[PREV]}.")
+  Code = %q("\nmain(_)->\nio:fwrite#{d[E[PREV],?~]}.")
 end
 
 class EmacsLisp < CodeGen
