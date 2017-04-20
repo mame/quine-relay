@@ -34,7 +34,7 @@ goaheui/main.go:
 	git clone https://github.com/aheui/goaheui.git
 
 golfscript.rb:
-	wget http://www.golfscript.com/golfscript/golfscript.rb
+	curl -O http://www.golfscript.com/golfscript/golfscript.rb
 
 clean:
 	rm -rf $(LOCAL)/ $(LCI)/ $(NPIET)/ $(CFUNGE)/ $(ACME_CHEF)/ $(SPL)/
