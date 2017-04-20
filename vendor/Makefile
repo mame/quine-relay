@@ -5,8 +5,7 @@ ACME_CHEF := Acme-Chef-1.01
 SPL	  := spl-1.2.1
 LOCAL     := $(CURDIR)/local
 
-all: $(LOCAL)/bin/lci $(LOCAL)/bin/npiet $(LOCAL)/bin/cfunge $(LOCAL)/bin/compilechef $(LOCAL)/bin/lazyk
-true-all: all $(LOCAL)/bin/spl2c goaheui/main.go golfscript.rb
+all: $(LOCAL)/bin/lci $(LOCAL)/bin/npiet $(LOCAL)/bin/cfunge $(LOCAL)/bin/compilechef $(LOCAL)/bin/lazyk $(LOCAL)/bin/spl2c goaheui/main.go golfscript.rb
 
 $(LOCAL)/bin/lci:
 	unzip -q $(LCI).zip

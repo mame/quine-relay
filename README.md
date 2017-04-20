@@ -1,5 +1,7 @@
 # Quine Relay
 
+**Warning: this is a branch for experiment.**
+
 [![Build Status](https://travis-ci.org/mame/quine-relay.svg?branch=laboratory)](https://travis-ci.org/mame/quine-relay)
 
 ## What this is
@@ -314,7 +316,7 @@ A. See [the criteria for language inclusion][criteria] in detail.  (In short: pl
 
 ### Q. Does it really work?
 
-A. [![Build Status](https://travis-ci.org/mame/quine-relay.svg?branch=master)](https://travis-ci.org/mame/quine-relay)
+A. [![Build Status](https://travis-ci.org/mame/quine-relay.svg?branch=laboratory)](https://travis-ci.org/mame/quine-relay)
 
 ### Q. How long did it take you?
 

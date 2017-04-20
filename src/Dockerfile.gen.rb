@@ -8,6 +8,7 @@ apts = [*apts.flatten.compact.uniq, *other_packages].sort
 dockerfile = []
 dockerfile << "FROM ubuntu:17.04"
 dockerfile << "RUN apt-get update && apt-get upgrade -y"
+dockerfile << "RUN apt-get -qq install -y apt-utils > /dev/null"
 dockerfile << "RUN apt-get -qq install -y #{ apts.join(" ") } && apt-get clean"
 dockerfile << "ENV PATH /usr/games:$PATH"
 dockerfile << "ADD . /usr/local/share/quine-relay"
