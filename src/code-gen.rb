@@ -33,7 +33,7 @@ class CodeGen
       cmd_raw = cmd_make
       cmd_raw = cmd_raw.gsub("$(SCHEME)", "guile")
       cmd_raw = cmd_raw.gsub("$(JAVASCRIPT)", "nodejs")
-      cmd_raw = cmd_raw.gsub("$(BF)", "bf")
+      cmd_raw = cmd_raw.gsub("$(BF)", "bf -c500000")
       cmd_raw = cmd_raw.gsub("$(CC)", "gcc")
       cmd_raw = cmd_raw.gsub("$(CXX)", "g++")
       cmd_raw = cmd_raw.gsub("$(GBS)", "gbs3")

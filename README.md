@@ -77,7 +77,7 @@ Then, build the bundled interpreters.
     $ BC_LINE_LENGTH=4000000 bc -q QR.bc > QR.bef
     $ cfunge QR.bef > QR.Blc
     $ ruby vendor/blc.rb < QR.Blc > QR.bf
-    $ bf QR.bf > QR.c
+    $ bf -c500000 QR.bf > QR.c
     $ gcc -o QR QR.c && ./QR > QR.cpp
     $ g++ -o QR QR.cpp && ./QR > QR.cs
     $ mcs QR.cs && mono QR.exe > QR.cd
@@ -136,7 +136,7 @@ Then, build the bundled interpreters.
     $ gcc -o QR QR.m && ./QR > QR.ml
     $ ocaml QR.ml > QR.octave
     $ octave -qf QR.octave > QR.ook
-    $ ruby vendor/ook-to-bf.rb QR.ook QR.ook.bf && bf QR.ook.bf > QR.gp
+    $ ruby vendor/ook-to-bf.rb QR.ook QR.ook.bf && bf -c500000 QR.ook.bf > QR.gp
     $ gp -f -q QR.gp > QR.pas
     $ fpc QR.pas && ./QR > QR.pl
     $ perl QR.pl > QR.php
@@ -179,12 +179,12 @@ If you could do it, please let me know.  Good luck.
 I used the following Ubuntu deb packages to test this program.
 
 \#  |language           |ubuntu package |version
-----|-------------------|---------------|-----------------------
+----|-------------------|---------------|---------------------------
 1   |Ruby               |ruby           |1:2.3.3
 2   |Scala              |scala          |2.11.8-1
 3   |Scheme             |guile-2.0      |2.0.13+1-4
 4   |Scilab             |scilab         |5.5.2-4build1
-5   |Shell (bash)       |bash           |4.4-2ubuntu1
+5   |Shell (bash)       |bash           |4.4-2ubuntu1.1
 6   |S-Lang             |slsh           |2.3.1-5ubuntu1
 7   |Smalltalk          |gnu-smalltalk  |3.2.5-1build3
 8   |Squirrel           |squirrel3      |3.1-4
@@ -197,7 +197,7 @@ I used the following Ubuntu deb packages to test this program.
 15  |Verilog            |iverilog       |10.1-0.1build1
 16  |Visual Basic       |mono-vbnc      |4.0.1-1
 17  |Whitespace         |*N/A*          |-
-18  |XSLT               |xsltproc       |1.1.29-2
+18  |XSLT               |xsltproc       |1.1.29-2ubuntu0.1
 19  |Yorick             |yorick         |2.2.04+dfsg1-6build1
 20  |Zoem               |zoem           |11-166-1.2
 21  |A+                 |aplus-fsf      |4.22.1-9
@@ -246,7 +246,7 @@ I used the following Ubuntu deb packages to test this program.
 64  |Icon               |icont, iconx   |9.4.3-4.2ubuntu1
 65  |INTERCAL           |intercal       |30:0.30-1
 66  |Jasmin             |jasmin-sable   |2.5.0-1
-67  |Java               |openjdk-8-jdk  |8u121-b13-4
+67  |Java               |openjdk-8-jdk  |8u131-b11-0ubuntu1.17.04.1
 68  |JavaScript         |nodejs         |4.7.2~dfsg-1ubuntu3
 69  |Jq                 |jq             |1.5+dfsg-2
 70  |Julia              |julia          |0.4.7-6ubuntu1
@@ -273,7 +273,7 @@ I used the following Ubuntu deb packages to test this program.
 91  |PHP                |php-cli        |1:7.0+49
 92  |Piet               |*N/A*          |-
 93  |Pike               |pike8.0        |8.0.388-2
-94  |PostScript         |ghostscript    |9.19~dfsg+1-0ubuntu7.1
+94  |PostScript         |ghostscript    |9.19~dfsg+1-0ubuntu7.4
 95  |PPT (Punched tape) |bsdgames       |2.17-25
 96  |Prolog             |swi-prolog     |7.2.3+dfsg-6
 97  |Python             |python         |2.7.13-2
