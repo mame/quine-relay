@@ -50,7 +50,6 @@ dummy: |
   sudo docker cp qr:/usr/local/share/quine-relay/QR.c spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.cpp spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.cs spoiler/
-  sudo docker cp qr:/usr/local/share/quine-relay/QR.cd spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.chef spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.clj spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.cob spoiler/
@@ -115,6 +114,7 @@ dummy: |
   sudo docker cp qr:/usr/local/share/quine-relay/QR.R spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.ratfor spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.rexx spoiler/
+  sudo docker cp qr:/usr/local/share/quine-relay/QR.rs spoiler/
   cd spoiler
   git init --quiet
   git config user.name 'Yusuke Endoh'

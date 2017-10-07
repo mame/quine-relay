@@ -661,14 +661,6 @@ class Scilab_Sed_Shakespeare_SLang < CodeGen
   end
 end
 
-class Rust < CodeGen
-  After = Ruby
-  File = "QR.rs"
-  Cmd = "rustc QR.rs && ./QR > OUTFILE"
-  Apt = "rustc"
-  Code = %q(%(fn main(){print!("{}",#{E[PREV]});}))
-end
-
 CodeGen::List.slice!(original_list_size..-1).each do |s|
   i = CodeGen::List.find_index(s::After)
   CodeGen::List.insert(i, s)

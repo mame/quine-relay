@@ -77,6 +77,12 @@ GenPrologue = <<-'END'.lines.map {|l| l.strip }.join
 END
 # rp: Re-Pair (Naive byte pair encoding)
 
+class Rust < CodeGen
+  File = "QR.rs"
+  Cmd = "rustc QR.rs && ./QR > OUTFILE"
+  Apt = "rustc"
+  Code = %q(%(fn main(){println!("{}",#{E[PREV]});}))
+end
 
 class Python_R_Ratfor_REXX < CodeGen
   File = ["QR.py", "QR.R", "QR.ratfor", "QR.rexx"]
@@ -789,47 +795,27 @@ class Clojure_Cobol < CodeGen
   end
 end
 
-class CDuce_Chef < CodeGen
-  File = ["QR.cd", "QR.chef"]
+class CSharp_Chef < CodeGen
+  Name = ["C#", "Chef"]
+  File = ["QR.cs", "QR.chef"]
   Cmd = [
-    "!cduce QR.cd > OUTFILE",
+    "mcs QR.cs && mono QR.exe > OUTFILE",
     "PERL5LIB=vendor/local/lib/perl5 compilechef QR.chef QR.chef.pl && perl QR.chef.pl > OUTFILE"
   ]
-  Apt = ["cduce", nil]
-  def code
-    <<-'END'.lines.map {|l| l.strip }.join("\\n")
-%(let f(c :Int):Latin1=if c=127then""else(string_of c@" g caffeine "@string_of c@"
-")@f(c+1)in print("Quine Relay Coffee.
-
-Ingredients.
-"@f 10@"
-Method.
-");let g(String ->[])
-[c;t]->print("Put caffeine "@string_of(int_of_char c)@" into#$F.
-");g t
-|_ ->print("Liquify#$G.
-Pour#$G into the baking dish.
-
-Serves 1.
-")in g#{E[PREV.reverse]})
-    END
-  end
-end
-
-class CSharp < CodeGen
-  Name = "C#"
-  File = "QR.cs"
-  Cmd = "mcs QR.cs && mono QR.exe > OUTFILE"
-  Apt = "mono-mcs"
+  Apt = ["mono-mcs", nil]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
-      "
+      %(
         class Program{
           #$L void Main(){
-            #{$C+E[(PREV)]};
+            #$C("Quine Relay Coffee.\\n\\nIngredients.\\n");
+            for(int i=9;i++<126;)#$C($"{i} g caffeine {i}\\n");
+            #$C("\\nMethod.\\n");
+            foreach(char c in#{E[PREV.reverse]})#$C($"Put caffeine {(int)c} into#$F.\\n");
+            #$C("Liquify#$G.\\nPour#$G into the baking dish.\\n\\nServes 1.\\n");
           }
         }
-      "
+      )
     END
   end
 end
