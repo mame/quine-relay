@@ -336,6 +336,7 @@ class Fish < CodeGen
   Apt = "fish"
   Code = %q("echo '#{Q[Q[PREV,B],?!].gsub(?',%('"'"'))}'")
 end
+
 #class Flex < CodeGen
 #  After = FALSELang
 #  File = "QR.fl"
@@ -397,40 +398,55 @@ class C < CodeGen
   define_method(:code) { c }
 end
 
-class Bash_Bc_Befunge_BLC8_Brainfuck < CodeGen
+class BeanShell_Befunge_BLC8_Brainfuck < CodeGen
   After = Awk_Bc_Befunge_BLC8_Brainfuck
   Obsoletes = Awk_Bc_Befunge_BLC8_Brainfuck
-  Name = ["bash", "bc", "Befunge", "BLC8", "Brainfuck"]
-  File = ["QR.bash", "QR.bc", "QR.bef", "QR.Blc", "QR.bf"]
+  Name = ["bsh", "Befunge", "BLC8", "Brainfuck"]
+  File = ["QR.bsh", "QR.bef", "QR.Blc", "QR.bf"]
   Cmd = [
-    "bash QR.bash > OUTFILE",
-    "BC_LINE_LENGTH=4000000 bc -q QR.bc > OUTFILE",
+    "bsh QR.bsh > OUTFILE",
     "cfunge QR.bef > OUTFILE",
     "ruby vendor/blc.rb < QR.Blc > OUTFILE",
     "$(BF) QR.bf > OUTFILE",
   ]
-  Apt = ["bash", "bc", nil, nil, "bf"]
+  Apt = ["bsh", nil, nil, "bf"]
   def code
     blc = ::File.read(::File.join(__dir__, "blc-boot.dat"))
     <<-'END'.lines.map {|l| l.strip }.join.sub("BLC", [blc].pack("m0"))
       %(
-        echo '
-          define void f(n){
-            "00g,";
-            for(m=1;m<256;m*=2){
-              "00g,4,:";
-              if(n/m%2)"4+";
-              ",";
-            };
-            "4,:,"
-          }
-          "389**6+44*6+00p45*,";
-        ';
-        printf "f(%d);\n" `echo '#{d[PREV,B].gsub(?',%('"'"'))}'|od -An -tuC`;
-        printf '"4,:,';
-        printf '%s\\\\8*+\\\\88**+,' `echo BLC|base64 -d|od -An -toC`;
-        printf "@\\"\nquit"
+        f(s){System.out.print(s);}
+        s="389**6+44*6+00p45*,";
+        for(c:#{E[PREV]}){
+          s+="00g,";
+          for(m=1;m<256;m*=2)
+            s+="00g,4,:"+(c/m%2>0?"4+":"")+",";
+          f(s);
+          s="4,:,";
+        }
+        f(s+s);
+        for(c:Base64.getDecoder().decode("BLC")){
+          c=c<0?256+c:c;
+          for(i=0;i++<3;c/=8)f(c%8);
+          f("8*+8*+,");
+        }
+        f("@");
       )
+    END
+  end
+end
+
+class Bash_Bc < CodeGen
+  After = ATS
+  Name = ["bash", "bc"]
+  File = ["QR.bash", "QR.bc"]
+  Cmd = [
+    "bash QR.bash > OUTFILE",
+    "BC_LINE_LENGTH=4000000 bc -q QR.bc > OUTFILE",
+  ]
+  Apt = ["bash", "bc"]
+  def code
+    <<-'END'.lines.map {|l| l.strip }.join
+      %(echo '#{PREV.gsub(?',%('"'"'))}'|sed -e's/\\\\/\\\\\\\\/g' -e's/"/\\\\q/g' -e's/.*/print "&"\\nquit/')
     END
   end
 end
@@ -533,12 +549,24 @@ end
 
 class Ada < CodeGen
   def code
-    <<-'END'.lines.map {|l| l.strip }.join.gsub("$$$", " ")
+    return <<-'END'.lines.map {|l| l.strip }.join.gsub("$$$", " ")
       %(
         with Ada.Text_Io;
         procedure qr is$$$
         begin$$$
           Ada.Text_Io.Put("#{d[PREV].gsub(N,'"&Character'+?'+'Val(10)&"')}");
+        end;
+      )
+    END
+    <<-'END'.lines.map {|l| l.strip }.join.gsub("$$$", " ")
+      %(
+        with Ada.Text_Io;
+        procedure qr is$$$
+        begin$$$
+          #{f(PREV,120){
+            %(Ada.Text_Io.Put("#{d[$s].gsub(N,'"&Character'+?'+'Val(10)&"')}");\n)
+          }}
+          Ada.Text_Io.Put_Line("");
         end;
       )
     END
