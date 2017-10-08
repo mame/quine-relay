@@ -77,13 +77,6 @@ GenPrologue = <<-'END'.lines.map {|l| l.strip }.join
 END
 # rp: Re-Pair (Naive byte pair encoding)
 
-class Rust < CodeGen
-  File = "QR.rs"
-  Cmd = "rustc QR.rs && ./QR > OUTFILE"
-  Apt = "rustc"
-  Code = %q(%(fn main(){println!("{}",#{E[PREV]});}))
-end
-
 class Python_R_Ratfor_REXX < CodeGen
   File = ["QR.py", "QR.R", "QR.ratfor", "QR.rexx"]
   Cmd = [
@@ -920,7 +913,7 @@ class Awk_Bc_Befunge_BLC8_Brainfuck < CodeGen
           )
             for(n=9;substr(s,j,1)!=sprintf("%c",++n););
           s="\\"4,:,";
-          split("#{ "BLC".unpack(?m)[0].bytes * g }",a);
+          split("#{"BLC".unpack(?m)[0].bytes*g}",a);
           for(i in a){
             s=s 0;
             for(c=a[i]+0;c;c--)s=s"1+";
@@ -1156,6 +1149,13 @@ class Scala < CodeGen
       "
     END
   end
+end
+
+class Rust < CodeGen
+  File = "QR.rs"
+  Cmd = "rustc QR.rs && ./QR > OUTFILE"
+  Apt = "rustc"
+  Code = %q(%(fn main(){print!("{}",#{E[PREV]});}))
 end
 
 class Ruby < CodeGen
