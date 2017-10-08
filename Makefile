@@ -280,7 +280,7 @@ QR.aheui: QR.als
 	@echo "##  30: AFNIX -> Aheui  ##"
 	@echo "##########################"
 	@echo
-	axi QR.als > QR.aheui
+	LD_LIBRARY_PATH=/usr/lib/afnix axi QR.als > QR.aheui
 
 QR.a68: QR.aheui
 	@echo
@@ -466,27 +466,18 @@ QR.lisp: QR.coffee
 	@echo
 	coffee --nodejs --stack_size=100000 QR.coffee > QR.lisp
 
-QR.curry: QR.lisp
+QR.d: QR.lisp
 	@echo
-	@echo "################################"
-	@echo "##  53: Common Lisp -> Curry  ##"
-	@echo "################################"
+	@echo "############################"
+	@echo "##  53: Common Lisp -> D  ##"
+	@echo "############################"
 	@echo
-	clisp QR.lisp > QR.curry
-
-QR.d: QR.curry
-	@echo
-	@echo "######################"
-	@echo "##  54: Curry -> D  ##"
-	@echo "######################"
-	@echo
-	touch ~/.pakcsrc
-	runcurry QR.curry > QR.d
+	clisp QR.lisp > QR.d
 
 QR.dfy: QR.d
 	@echo
 	@echo "######################"
-	@echo "##  55: D -> Dafny  ##"
+	@echo "##  54: D -> Dafny  ##"
 	@echo "######################"
 	@echo
 	gdc -o QR QR.d
@@ -495,7 +486,7 @@ QR.dfy: QR.d
 QR.dc: QR.dfy
 	@echo
 	@echo "#######################"
-	@echo "##  56: Dafny -> dc  ##"
+	@echo "##  55: Dafny -> dc  ##"
 	@echo "#######################"
 	@echo
 	dafny QR.dfy
@@ -504,7 +495,7 @@ QR.dc: QR.dfy
 QR.ec: QR.dc
 	@echo
 	@echo "####################"
-	@echo "##  57: dc -> eC  ##"
+	@echo "##  56: dc -> eC  ##"
 	@echo "####################"
 	@echo
 	dc QR.dc > QR.ec
@@ -512,7 +503,7 @@ QR.ec: QR.dc
 QR.exs: QR.ec
 	@echo
 	@echo "########################"
-	@echo "##  58: eC -> Elixir  ##"
+	@echo "##  57: eC -> Elixir  ##"
 	@echo "########################"
 	@echo
 	@mv QR.c QR.c.bak
@@ -528,7 +519,7 @@ QR.exs: QR.ec
 QR.el: QR.exs
 	@echo
 	@echo "################################"
-	@echo "##  59: Elixir -> Emacs Lisp  ##"
+	@echo "##  58: Elixir -> Emacs Lisp  ##"
 	@echo "################################"
 	@echo
 	elixir QR.exs > QR.el
@@ -536,7 +527,7 @@ QR.el: QR.exs
 QR.erl: QR.el
 	@echo
 	@echo "################################"
-	@echo "##  60: Emacs Lisp -> Erlang  ##"
+	@echo "##  59: Emacs Lisp -> Erlang  ##"
 	@echo "################################"
 	@echo
 	emacs -Q --script QR.el > QR.erl
@@ -544,7 +535,7 @@ QR.erl: QR.el
 QR.fsx: QR.erl
 	@echo
 	@echo "########################"
-	@echo "##  61: Erlang -> F#  ##"
+	@echo "##  60: Erlang -> F#  ##"
 	@echo "########################"
 	@echo
 	escript QR.erl > QR.fsx
@@ -552,19 +543,29 @@ QR.fsx: QR.erl
 QR.false: QR.fsx
 	@echo
 	@echo "#######################"
-	@echo "##  62: F# -> FALSE  ##"
+	@echo "##  61: F# -> FALSE  ##"
 	@echo "#######################"
 	@echo
 	fsharpc QR.fsx -o QR.exe
 	mono QR.exe > QR.false
 
-QR.fish: QR.false
+QR.fl: QR.false
 	@echo
 	@echo "#########################"
-	@echo "##  63: FALSE -> Fish  ##"
+	@echo "##  62: FALSE -> Flex  ##"
 	@echo "#########################"
 	@echo
-	ruby vendor/false.rb QR.false > QR.fish
+	ruby vendor/false.rb QR.false > QR.fl
+
+QR.fish: QR.fl
+	@echo
+	@echo "########################"
+	@echo "##  63: Flex -> Fish  ##"
+	@echo "########################"
+	@echo
+	flex -o QR.fl.c QR.fl
+	gcc -o QR QR.fl.c
+	./QR > QR.fish
 
 QR.fs: QR.fish
 	@echo
@@ -966,7 +967,9 @@ QR.ook: QR.octave
 	@echo "##  110: Octave -> Ook!  ##"
 	@echo "###########################"
 	@echo
+	mv QR.m QR.m.bak
 	octave -qf QR.octave > QR.ook
+	mv QR.m.bak QR.m
 
 QR.gp: QR.ook
 	@echo

@@ -337,21 +337,21 @@ class Fish < CodeGen
   Code = %q("echo '#{Q[Q[PREV,B],?!].gsub(?',%('"'"'))}'")
 end
 
-#class Flex < CodeGen
-#  After = FALSELang
-#  File = "QR.fl"
-#  Cmd = "flex -o QR.fl.c QR.fl && gcc -o QR QR.fl.c && ./QR > OUTFILE"
-#  Apt = "flex"
-#  Code = %q("%option noyywrap\n%%\n%%\nint main(){puts#{E[PREV]};}")
-#end
-
-class Curry < CodeGen
-  After = CommonLisp
-  File = "QR.curry"
-  Cmd = "touch ~/.pakcsrc && runcurry QR.curry > OUTFILE"
-  Apt = "pakcs"
-  Code = %q("main=putStr"+E[PREV])
+class Flex < CodeGen
+  After = FALSELang
+  File = "QR.fl"
+  Cmd = "flex -o QR.fl.c QR.fl && gcc -o QR QR.fl.c && ./QR > OUTFILE"
+  Apt = "flex"
+  Code = %q("%option noyywrap\n%%\n%%\nint main(){puts#{E[PREV]};}")
 end
+
+#class Curry < CodeGen
+#  After = CommonLisp
+#  File = "QR.curry"
+#  Cmd = "touch ~/.pakcsrc && runcurry QR.curry > OUTFILE"
+#  Apt = "pakcs"
+#  Code = %q("main=putStr"+E[PREV])
+#end
 
 class CoffeeScript < CodeGen
   Cmd.replace "coffee --nodejs --stack_size=100000 QR.coffee > OUTFILE"
@@ -505,7 +505,7 @@ class AFNIX_Aheui < CodeGen
   After = AFNIX
   Obsoletes = AFNIX
   File = ["QR.als", "QR.aheui"]
-  Cmd = ["axi QR.als > OUTFILE", "go run vendor/goaheui/main.go QR.aheui > OUTFILE"]
+  Cmd = ["LD_LIBRARY_PATH=/usr/lib/afnix axi QR.als > OUTFILE", "go run vendor/goaheui/main.go QR.aheui > OUTFILE"]
   Apt = ["afnix", nil]
   def code
     <<-'END'.lines.map {|l| l.strip }.join

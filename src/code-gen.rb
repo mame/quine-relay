@@ -212,7 +212,7 @@ class Octave_Ook < CodeGen
   Name = ["Octave", "Ook!"]
   File = ["QR.octave", "QR.ook"]
   Cmd = [
-    "octave -qf QR.octave > OUTFILE",
+    "mv QR.m QR.m.bak && octave -qf QR.octave > OUTFILE && mv QR.m.bak QR.m",
     "ruby vendor/ook-to-bf.rb QR.ook QR.ook.bf && $(BF) QR.ook.bf > OUTFILE"
   ]
   Apt = ["octave", nil]
@@ -688,7 +688,7 @@ class EmacsLisp < CodeGen
   Name = "Emacs Lisp"
   File = "QR.el"
   Cmd = "emacs -Q --script QR.el > OUTFILE"
-  Apt = "emacs24"
+  Apt = "emacs24" # "emacs25" for artful
   Code = %q(%((princ "#{e[PREV]}")))
 end
 
@@ -958,7 +958,7 @@ end
 
 class AFNIX < CodeGen
   File = "QR.als"
-  Cmd = "axi QR.als > OUTFILE"
+  Cmd = "LD_LIBRARY_PATH=/usr/lib/afnix axi QR.als > OUTFILE"
   Apt = "afnix"
   Code = %q(%(print"#{e[PREV]}"))
 end

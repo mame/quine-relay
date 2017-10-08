@@ -31,20 +31,21 @@ First, you have to type the following apt-get command to install all of them.
 
     $ sudo apt-get install afnix algol68g aplus-fsf aspectc++ aspectj \
       asymptote ats2-lang bash bc bf bsdgames bsh clisp clojure cmake cmake \
-      coffeescript dafny dc ecere-dev elixir emacs24 erlang f2c fish \
+      coffeescript dafny dc ecere-dev elixir emacs24 erlang f2c fish flex \
       fp-compiler fsharp g++ gambas3-script gap gawk gcc gdb gdc genius \
       gforth gfortran ghc ghostscript gnat gnu-smalltalk gnuplot gobjc \
       golang gpt gri groff groovy guile-2.0 gzip haxe icont iconx intercal \
       iverilog jasmin-sable jq julia ksh libgd-dev libpng-dev lisaac \
       livescript llvm lua5.3 m4 make maxima minizinc mlton mono-devel \
       mono-mcs mono-vbnc nasm neko nescc nickle nim node-typescript nodejs \
-      ocaml octave open-cobol openjdk-8-jdk pakcs pari-gp parser3-cgi perl \
-      php-cli pike8.0 python r-base rakudo ratfor rc regina-rexx ruby \
-      ruby-mustache rustc scala scilab sed slsh spin squirrel3 swi-prolog \
-      tcl tcsh valac vim xsltproc yabasic yorick zoem zsh
+      ocaml octave open-cobol openjdk-8-jdk pari-gp parser3-cgi perl php-cli \
+      pike8.0 python r-base rakudo ratfor rc regina-rexx ruby ruby-mustache \
+      rustc scala scilab sed slsh spin squirrel3 swi-prolog tcl tcsh valac \
+      vim xsltproc yabasic yorick zoem zsh
 
 Then, build the bundled interpreters.
 
+    $ sudo apt-get install libpng-dev libgd-dev groff flex bison
     $ make -C vendor
 
 #### 2. Run each program on each interpreter/compiler.
@@ -80,7 +81,7 @@ Then, build the bundled interpreters.
     $ zsh QR.zsh > QR.+
     $ a+ QR.+ > qr.adb
     $ gnatmake qr.adb && ./qr > QR.als
-    $ axi QR.als > QR.aheui
+    $ LD_LIBRARY_PATH=/usr/lib/afnix axi QR.als > QR.aheui
     $ go run vendor/goaheui/main.go QR.aheui > QR.a68
     $ a68g QR.a68 > QR.ante
     $ ruby vendor/ante.rb QR.ante > QR.cc
@@ -104,8 +105,7 @@ Then, build the bundled interpreters.
     $ cmake -P QR.cmake > QR.cob
     $ cobc -O2 -x QR.cob && ./QR > QR.coffee
     $ coffee --nodejs --stack_size=100000 QR.coffee > QR.lisp
-    $ clisp QR.lisp > QR.curry
-    $ touch ~/.pakcsrc && runcurry QR.curry > QR.d
+    $ clisp QR.lisp > QR.d
     $ gdc -o QR QR.d && ./QR > QR.dfy
     $ dafny QR.dfy && mono QR.exe > QR.dc
     $ dc QR.dc > QR.ec
@@ -116,7 +116,8 @@ Then, build the bundled interpreters.
     $ emacs -Q --script QR.el > QR.erl
     $ escript QR.erl > QR.fsx
     $ fsharpc QR.fsx -o QR.exe && mono QR.exe > QR.false
-    $ ruby vendor/false.rb QR.false > QR.fish
+    $ ruby vendor/false.rb QR.false > QR.fl
+    $ flex -o QR.fl.c QR.fl && gcc -o QR QR.fl.c && ./QR > QR.fish
     $ fish QR.fish > QR.fs
     $ gforth QR.fs > QR.f
     $ gfortran -o QR QR.f && ./QR > QR.f90
@@ -164,7 +165,7 @@ Then, build the bundled interpreters.
     $ nim c QR.nim && ./QR > QR.m
     $ gcc -o QR QR.m && ./QR > QR.ml
     $ ocaml QR.ml > QR.octave
-    $ octave -qf QR.octave > QR.ook
+    $ mv QR.m QR.m.bak && octave -qf QR.octave > QR.ook && mv QR.m.bak QR.m
     $ ruby vendor/ook-to-bf.rb QR.ook QR.ook.bf && bf -c500000 QR.ook.bf > QR.gp
     $ gp -f -q QR.gp > QR.p
     $ parser3 QR.p > QR.pas
@@ -266,16 +267,16 @@ I used the following Ubuntu deb packages to test this program.
 51  |Cobol              |open-cobol      |1.1-2
 52  |CoffeeScript       |coffeescript    |1.10.0~dfsg-1
 53  |Common Lisp        |clisp           |1:2.49-9ubuntu1
-54  |Curry              |pakcs           |1.14.1-4
-55  |D                  |gdc             |4:6.3.0-2ubuntu1
-56  |Dafny              |dafny           |1.9.7-1
-57  |dc                 |dc              |1.06.95-9build2
-58  |eC                 |ecere-dev       |0.44.15-1
-59  |Elixir             |elixir          |1.3.3-2
-60  |Emacs Lisp         |emacs24         |24.5+1-8ubuntu2
-61  |Erlang             |erlang          |1:19.2.1+dfsg-2ubuntu1
-62  |F#                 |fsharp          |4.0.0.4+dfsg2-2
-63  |FALSE              |*N/A*           |-
+54  |D                  |gdc             |4:6.3.0-2ubuntu1
+55  |Dafny              |dafny           |1.9.7-1
+56  |dc                 |dc              |1.06.95-9build2
+57  |eC                 |ecere-dev       |0.44.15-1
+58  |Elixir             |elixir          |1.3.3-2
+59  |Emacs Lisp         |emacs24         |24.5+1-8ubuntu2
+60  |Erlang             |erlang          |1:19.2.1+dfsg-2ubuntu1
+61  |F#                 |fsharp          |4.0.0.4+dfsg2-2
+62  |FALSE              |*N/A*           |-
+63  |Flex               |flex            |2.6.1-1.3
 64  |Fish               |fish            |2.4.0-1
 65  |Forth              |gforth          |0.7.3+dfsg-4
 66  |FORTRAN77          |f2c             |20100827-3
