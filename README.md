@@ -254,7 +254,7 @@ I used the following Ubuntu deb packages to test this program.
 38  |Awk                |gawk            |1:4.1.4+dfsg-1
 39  |bash               |bash            |4.4-2ubuntu1.1
 40  |bc                 |bc              |1.06.95-9build2
-41  |bsh                |bsh             |2.0b4-18
+41  |BeanShell          |bsh             |2.0b4-18
 42  |Befunge            |*N/A*           |-
 43  |BLC8               |*N/A*           |-
 44  |Brainfuck          |bf              |20041219ubuntu5

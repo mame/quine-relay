@@ -359,17 +359,17 @@ QR.bc: QR.bash
 
 QR.bsh: QR.bc
 	@echo
-	@echo "#####################"
-	@echo "##  40: bc -> bsh  ##"
-	@echo "#####################"
+	@echo "###########################"
+	@echo "##  40: bc -> BeanShell  ##"
+	@echo "###########################"
 	@echo
 	BC_LINE_LENGTH=4000000 bc -q QR.bc > QR.bsh
 
 QR.bef: QR.bsh
 	@echo
-	@echo "##########################"
-	@echo "##  41: bsh -> Befunge  ##"
-	@echo "##########################"
+	@echo "################################"
+	@echo "##  41: BeanShell -> Befunge  ##"
+	@echo "################################"
 	@echo
 	bsh QR.bsh > QR.bef
 

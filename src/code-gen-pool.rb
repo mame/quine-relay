@@ -401,7 +401,7 @@ end
 class BeanShell_Befunge_BLC8_Brainfuck < CodeGen
   After = Awk_Bc_Befunge_BLC8_Brainfuck
   Obsoletes = Awk_Bc_Befunge_BLC8_Brainfuck
-  Name = ["bsh", "Befunge", "BLC8", "Brainfuck"]
+  Name = ["BeanShell", "Befunge", "BLC8", "Brainfuck"]
   File = ["QR.bsh", "QR.bef", "QR.Blc", "QR.bf"]
   Cmd = [
     "bsh QR.bsh > OUTFILE",
