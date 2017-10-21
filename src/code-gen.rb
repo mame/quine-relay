@@ -688,7 +688,7 @@ class EmacsLisp < CodeGen
   Name = "Emacs Lisp"
   File = "QR.el"
   Cmd = "emacs -Q --script QR.el > OUTFILE"
-  Apt = "emacs24" # "emacs25" for artful
+  Apt = "emacs25"
   Code = %q(%((princ "#{e[PREV]}")))
 end
 
