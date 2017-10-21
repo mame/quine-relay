@@ -80,7 +80,7 @@ the original <%= RunSteps[0].name %> code again.
 
 ### Ubuntu
 
-If you are using Ubuntu 17.04 "Zesty Zapus", you can perform the following steps.
+If you are using Ubuntu 17.10 "Artful Aardvark", you can perform the following steps.
 
 #### 1. Install all interpreters/compilers.
 
