@@ -90,23 +90,22 @@ code = <<-END.split.join
 END
 
 $stderr.puts "size: #{ code.b.size }"
+code.chop!
 
 TEMPLATE = File.read("uroboros.txt")
 width = TEMPLATE[/.*/].size
+while TEMPLATE.count("#") - width < code.size
+  s = TEMPLATE.count("#")
+  line = TEMPLATE[/^#*$/]
+  TEMPLATE.replace((line + "\n" + TEMPLATE + line).gsub!(/^|$/, "######") + "\n")
+  width = TEMPLATE[/.*/].size
+  warn "overflow!: #{ s - width }->#{ TEMPLATE.count("#") - width }"
+end
 PADDING = "".ljust(width, "#_buffer_for_future_bug_fixes_")
 COPYRIGHT =
   "  Quine Relay -- Copyright (c) 2013, 2014 Yusuke Endoh (@mametter), @hirekoke  ".
   center(width, "#")[0..-2]
 
-code.chop!
-size = code.size + COPYRIGHT.size + 10
-while TEMPLATE.count("#") < size
-  s = TEMPLATE.count("#")
-  line = TEMPLATE[/^#*$/] + "\n"
-  TEMPLATE.replace(line + TEMPLATE + line)
-  TEMPLATE.gsub!(/^|$/, "####")
-  warn "overflow!: #{ s }->#{ TEMPLATE.count("#") }"
-end
 code = TEMPLATE.gsub(/#+/) { w = $&.size; code.slice!(0, w).ljust(w, PADDING) }.chomp
 code[-1] = ")"
 

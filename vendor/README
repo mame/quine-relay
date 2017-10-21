@@ -50,3 +50,7 @@ Piet: npiet-1.3e.tar.gz
 Lazy K: lazyk.c
   * https://github.com/irori/lazyk
   * License: GPL2+
+
+Shakespeare: spl-1.2.1.tar.gz
+  * http://shakespearelang.sourceforge.net/
+  * License: GPL

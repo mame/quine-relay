@@ -1,14 +1,18 @@
 require_relative "code-gen"
 
 apts = RunSteps.flat_map {|s| s.apt }
-other_packages = %w(cmake libpng-dev libgd-dev groff)
+other_packages = %w(libpng-dev libgd-dev groff flex bison)
 
 apts = [*apts.flatten.compact.uniq, *other_packages].sort
 
 dockerfile = []
-dockerfile << "FROM ubuntu:17.04"
+dockerfile << "FROM ubuntu:17.10"
 dockerfile << "RUN apt-get update && apt-get upgrade -y"
-dockerfile << "RUN apt-get -qq install -y #{ apts.join(" ") } && apt-get clean"
+dockerfile << "RUN apt-get -qq install -y apt-utils > /dev/null"
+dockerfile << "RUN apt-get -qq install -y moreutils"
+apts.each_slice(4) do |apt|
+  dockerfile << "RUN chronic apt-get -qq install -y #{ apt.join(" ") } && chronic apt-get clean"
+end
 dockerfile << "ENV PATH /usr/games:$PATH"
 dockerfile << "ADD . /usr/local/share/quine-relay"
 dockerfile << "WORKDIR /usr/local/share/quine-relay"

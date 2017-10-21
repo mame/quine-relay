@@ -2,7 +2,7 @@ require_relative "code-gen"
 require "erb"
 require "cairo"
 
-other_packages = %w(cmake libpng-dev libgd-dev groff)
+other_packages = %w(cmake libpng-dev libgd-dev groff bison)
 other_packages.each do |package|
   `dpkg -s #{ package }` # just check the packages
 end
@@ -57,7 +57,7 @@ File.write("../README.md", ERB.new(DATA.read, nil, "%").result(binding))
 __END__
 # Quine Relay
 
-[![Build Status](https://travis-ci.org/mame/quine-relay.svg?branch=master)](https://travis-ci.org/mame/quine-relay)
+[![Build Status](https://travis-ci.org/mame/quine-relay.svg?branch=laboratory)](https://travis-ci.org/mame/quine-relay)
 
 ## What this is
 
@@ -78,7 +78,7 @@ the original <%= RunSteps[0].name %> code again.
 
 ### Ubuntu
 
-If you are using Ubuntu 17.04 "Zesty Zapus", you can perform the following steps.
+If you are using Ubuntu 17.10 "Artful Aardvark", you can perform the following steps.
 
 #### 1. Install all interpreters/compilers.
 
@@ -88,6 +88,7 @@ First, you have to type the following apt-get command to install all of them.
 
 Then, build the bundled interpreters.
 
+    $ sudo apt-get install libpng-dev libgd-dev groff flex bison
     $ make -C vendor
 
 #### 2. Run each program on each interpreter/compiler.
@@ -160,7 +161,7 @@ A. See [the criteria for language inclusion][criteria] in detail.  (In short: pl
 
 ### Q. Does it really work?
 
-A. [![Build Status](https://travis-ci.org/mame/quine-relay.svg?branch=master)](https://travis-ci.org/mame/quine-relay)
+A. [![Build Status](https://travis-ci.org/mame/quine-relay.svg?branch=laboratory)](https://travis-ci.org/mame/quine-relay)
 
 ### Q. How long did it take you?
 
