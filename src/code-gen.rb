@@ -77,24 +77,35 @@ GenPrologue = <<-'END'.lines.map {|l| l.strip }.join
 END
 # rp: Re-Pair (Naive byte pair encoding)
 
-class Python_R_Ratfor_REXX < CodeGen
-  File = ["QR.py", "QR.R", "QR.ratfor", "QR.rexx"]
+class Python_R_Ratfor_Rc_REXX < CodeGen
+  Name = ["Python", "R", "Ratfor", "rc", "REXX"]
+  File = ["QR.py", "QR.R", "QR.ratfor", "QR.rc", "QR.rexx"]
   Cmd = [
     "python QR.py > OUTFILE",
     "R --slave -f QR.R > OUTFILE",
     "ratfor -o QR.ratfor.f QR.ratfor && gfortran -o QR QR.ratfor.f && ./QR > OUTFILE",
+    "rc QR.rc > OUTFILE",
     "rexx ./QR.rexx > OUTFILE"
   ]
-  Apt = ["python", "r-base", "ratfor", "regina-rexx"]
+  Apt = ["python", "r-base", "ratfor", "rc", "regina-rexx"]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
-        for c in"".join(["say '%s'\\n"%l for l in#{E[d[PREV,?']]}.split("\\n")]):
-          print('cat("r=fput(char(%d))\\n")'%ord(c))\n
-        print('cat("end\\n")')
+        print('cat("')\n
+        for c in"".join(["echo 'say ''%s'''\\n"%l for l in#{E[d[d[PREV,?'],?']]}.split("\\n")]):
+          print('r=fput(char(%d))'%ord(c))\n
+        print('end\\n")')#
       )
     END
   end
+end
+
+class Promela < CodeGen
+  Name = "Promela (Spin)"
+  File = "QR.pr"
+  Cmd = "spin -T QR.pr > OUTFILE"
+  Apt = "spin"
+  Code = %q("init{#{f(PREV,6){"printf#{d[$S,?%]};"}}}")
 end
 
 class Prolog < CodeGen
@@ -159,7 +170,16 @@ class PHP_Piet < CodeGen
   end
 end
 
-class Perl < CodeGen
+class Perl6 < CodeGen
+  Name = "Perl 6"
+  File = "QR.pl6"
+  Cmd = "perl6 QR.pl6 > OUTFILE"
+  Apt = "rakudo"
+  Code = %q("$_='#{Q[PREV.gsub(B,"\x7f"),?']}';s:g/\\\\x7f/\\\\\\\\/;print $_")
+end
+
+class Perl5 < CodeGen
+  Name = "Perl 5"
   File = "QR.pl"
   Cmd = "perl QR.pl > OUTFILE"
   Apt = "perl"
@@ -198,6 +218,14 @@ class Pascal < CodeGen
   Cmd = "fpc QR.pas && ./QR > OUTFILE"
   Apt = "fp-compiler"
   Code = %q("#$D(output);begin write(#{f(PREV,1){"'#$s',"}}'')end.")
+end
+
+class Parser3 < CodeGen
+  Name = "Parser 3"
+  File = "QR.p"
+  Cmd = "parser3 QR.p > OUTFILE"
+  Apt = "parser3-cgi"
+  Code = %q("$console:line[#{PREV.gsub(/[:;()]/){?^+$&}}]")
 end
 
 class PARIGP < CodeGen
@@ -265,6 +293,26 @@ class Nickle < CodeGen
   Code = %q("printf#{E[PREV]}\\n")
 end
 
+class NesC < CodeGen
+  Name = "nesC"
+  File = "QR.nc"
+  Cmd = "nescc -o QR QR.nc && ./QR > OUTFILE"
+  Apt = "nescc"
+  def code
+    <<-'END'.lines.map {|l| l.strip }.join
+      %(
+        #include<stdio.h>\n
+        module QR{}implementation{
+          int main()__attribute__((C,spontaneous)){
+            puts#{E[PREV]};
+            return 0;
+        } }
+      )
+    END
+    # avoid "}}" because of Mustache
+  end
+end
+
 class Neko < CodeGen
   File = "QR.neko"
   Cmd = "nekoc QR.neko && neko QR.n > OUTFILE"
@@ -272,22 +320,29 @@ class Neko < CodeGen
   Code = %q("$print#{E[PREV]};")
 end
 
-class NASM < CodeGen
-  File = "QR.asm"
-  Cmd = "nasm -felf QR.asm && ld -m elf_i386 -o QR QR.o && ./QR > OUTFILE"
-  Apt = "nasm"
+class Mustache_NASM < CodeGen
+  File = ["QR.mustache", "QR.asm"]
+  Cmd = [
+    "mustache QR.mustache QR.mustache > OUTFILE",
+    "nasm -felf QR.asm && ld -m elf_i386 -o QR QR.o && ./QR > OUTFILE",
+  ]
+  Apt = ["ruby-mustache", "nasm"]
   def code
-    <<-'END'.lines.map {|l| l.strip }.join("\\n")
-      "m:db\x60#{e[s=PREV+N]}\x60
-      global _start
-      _start:mov edx,#{s.size}
-      mov ecx,m
-      mov ebx,1
-      mov eax,4
-      int 128
-      mov ebx,0
-      mov eax,1
-      int 128"
+    <<-'END'.lines.map {|l| l.strip.gsub("^^^", " ") }.join("\\n")
+      "m{{!: x
+      qr: |-
+      ^^^:db\x60#{e[s=PREV]}\x60
+      ^^^global _start
+      ^^^_start:mov edx,#{s.size}
+      ^^^mov ecx,m
+      ^^^mov ebx,1
+      ^^^mov eax,4
+      ^^^int 128
+      ^^^mov ebx,0
+      ^^^mov eax,1
+      ^^^int 128
+      x: |
+      ^^^}}{{{qr}}}"
     END
   end
 end
@@ -332,6 +387,13 @@ class Makefile < CodeGen
   Code = %q("all:\n\t@echo '#{d[PREV,?$].gsub(?'){"'\\\\''"}}'")
 end
 
+class M4 < CodeGen
+  File = "QR.m4"
+  Cmd = "m4 QR.m4 > OUTFILE"
+  Apt = "m4"
+  Code = %q("changequote(<@,@>)\ndefine(p,<@#{PREV}@>)\np")
+end
+
 class Lua < CodeGen
   File = "QR.lua"
   Cmd = "lua5.3 QR.lua > OUTFILE"
@@ -366,7 +428,7 @@ class LLVMAsm < CodeGen
     <<-'END'.lines.map {|l| l.strip }.join
       %(
         @s=global[#{i=(s=PREV).size+1}x i8]
-          c"#{s.gsub(/[\\"\n]/){"\\%02X"%$&.ord}}\\00"
+          c"#{s.gsub(/[\\"\n\t]/){"\\%02X"%$&.ord}}\\00"
         declare i32@puts(i8*)
         define i32@main(){
           %1=call i32@puts(i8*getelementptr([#{i}x i8],[#{i}x i8]*@s,i32 0,i32 0))
@@ -377,15 +439,24 @@ class LLVMAsm < CodeGen
   end
 end
 
-class Julia_LazyK_Lisaac < CodeGen
-  Name = ["Julia", "Lazy K", "Lisaac"]
-  File = ["QR.jl", "QR.lazy", "qr.li"]
+class LiveScript < CodeGen
+  Name = "LiveScript"
+  File = "QR.ls"
+  Cmd = "lsc QR.ls > OUTFILE"
+  Apt = "livescript"
+  Code = %q("console.log"+Q[E[PREV],?#])
+end
+
+class Julia_Ksh_LazyK_Lisaac < CodeGen
+  Name = ["Julia", "ksh", "Lazy K", "Lisaac"]
+  File = ["QR.jl", "QR.ksh", "QR.lazy", "qr.li"]
   Cmd = [
     "julia QR.jl > OUTFILE",
+    "ksh QR.ksh > OUTFILE",
     "lazyk QR.lazy > OUTFILE",
     "lisaac qr.li && ./qr > OUTFILE",
   ]
-  Apt = ["julia", nil, "lisaac"]
+  Apt = ["julia", "ksh", nil, "lisaac"]
   def code
     lazyk = ::File.read(::File.join(__dir__, "lazyk-boot.dat"))
     lazyk = lazyk.tr("ski`","0123").scan(/.{1,3}/).map do |n|
@@ -396,7 +467,7 @@ class Julia_LazyK_Lisaac < CodeGen
     <<-'END'.lines.map {|l| l.strip }.join.sub("LAZYK"){lazyk}
       %(
         A=print;
-        A("k`");
+        A("echo 'k`");
         [
           (
             A("``s"^8*"i");
@@ -415,24 +486,55 @@ class Julia_LazyK_Lisaac < CodeGen
             x=((Int(c)%83-10)>>i)%4+1;
             A("ski`"[x:x])
           end for c in"LAZYK"
-        ]
+        ];
+        A("'")
       )
     END
   end
 end
 
-class Jq < CodeGen
-  File = "QR.jq"
-  Cmd = "jq -r -n -f QR.jq > OUTFILE"
-  Apt = "jq"
-  Code = %q(E[PREV])
-end
-
-class JavaScript < CodeGen
-  File = "QR.js"
-  Cmd = "$(JAVASCRIPT) QR.js > OUTFILE"
-  Apt = "nodejs"
-  Code = %q("console.log('%s',#{E[PREV]})")
+class JavaScript_Jq_JSFuck < CodeGen
+  File = ["QR.js", "QR.jq", "QR.jsfuck"]
+  Cmd = [
+    "$(JAVASCRIPT) QR.js > OUTFILE",
+    "jq -r -n -f QR.jq > OUTFILE",
+    "!$(JAVASCRIPT) --stack_size=100000 QR.jsfuck > OUTFILE",
+  ]
+  Apt = ["nodejs", "jq", "nodejs"]
+  def code
+    <<-'END'.lines.map {|l| l.strip }.join
+      %(
+        P={0:'[+[]]',m:'((+[])'+(C="['constructor']")+"+[])['11']"};
+        for(R in B=
+          (
+            '![]@!![]@[][[]]@'+
+            (A="[]['fill']")+
+            "@([]+[])['fontcolor']([])@(+('11e20')+[])['split']([])@"+
+            A+C+"('return escape')()("+A+')'
+          ).split('@')
+        )
+          for(E in D=eval(G='('+B[R]+'+[])'))
+            P[T=D[E]]=P[T]||G+"['"+E+"']";
+        for(G='[',B=0;++B<36;)
+          P[D=B.toString(36)]=
+            B<10?
+              (G+='+!+[]')+']'
+            :
+              P[D]||"(+('"+B+"'))['to'+([]+[])"+C+"['name']]('36')";
+        A+=C+"('console.log(unescape(\\"";
+        for(E in G=#{E[PREV]})
+          A+="'+![]+'"+G.charCodeAt(E).toString(16);
+        for(A+="\\".replace(/'+![]+'/g,\\"%\\")))')()",R=0;R<9;R++)
+          A=A.replace(/'.*?'/g,function(B){
+            T=[];
+            for(E=1;B[E+1];)
+              T.push(P[B[E++]]);
+            return T.join('+')
+          });
+        console.log('"'+A+'"')
+      )
+    END
+  end
 end
 
 class Java_ < CodeGen
@@ -541,58 +643,77 @@ class Haskell < CodeGen
   Code = %q("main=putStr"+E[PREV])
 end
 
-class Groovy < CodeGen
-  File = "QR.groovy"
-  Cmd = "groovy QR.groovy > OUTFILE"
-  Apt = "groovy"
+class Gri_Groovy_Gzip < CodeGen
+  File = ["QR.gri", "QR.groovy", "QR.gz"]
+  Cmd = ["gri QR.gri > OUTFILE", "groovy QR.groovy > OUTFILE", "gzip -cd QR.gz > OUTFILE"]
+  Apt = ["gri", "groovy", "gzip"]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
-      "print#{E[PREV]}"
+      %(
+        show "
+          z=new java.util.zip.GZIPOutputStream(System.out);
+          z.write('#{PREV.tr(?"+B,"!~")}'.tr('~!','\\\\\\\\\\u0022')as byte[]);
+          z.close()
+        "\n
+      )
     END
   end
 end
 
-class Go_GPortugol_Grass < CodeGen
-  Name = ["Go", "G-Portugol", "Grass"]
-  File = ["QR.go", "QR.gpt", "QR.grass"]
-  Cmd = ["go run QR.go > OUTFILE", "gpt -o QR QR.gpt && ./QR > OUTFILE", "ruby vendor/grass.rb QR.grass > OUTFILE"]
-  Apt = ["golang", "gpt", nil]
+class GolfScript_GPortugol_Grass < CodeGen
+  Name = ["GolfScript", "G-Portugol", "Grass"]
+  File = ["QR.gs", "QR.gpt", "QR.grass"]
+  Cmd = ["ruby vendor/golfscript.rb QR.gs > OUTFILE", "gpt -o QR QR.gpt && ./QR > OUTFILE", "ruby vendor/grass.rb QR.grass > OUTFILE"]
+  Apt = [nil, "gpt", nil]
   def code
     r = <<-'END'.lines.map {|l| l.strip }.join
       %(
-        package main;
-        import(F"fmt";S"strings");
-        func t(s string)string{
-          r:="";
-          for i,n:=range s{
-            if n<48{
-              r+="v"
-            }else{
-              r+=S.Repeat("Ww"[i%2:i%2+1],int(n)-48)
-            }
-          };
-          return r
-        };
-        func main(){
-          s:=@@PROLOGUE@@;
-          for i,n:=range#{E[PREV]}{
-            s+="W"+S.Repeat("w",(@@BASE@@+i-int(n))%@@MOD@@+1)
-          };
-          F.Print("algoritmo QR;in\\xC3\\xADcio imprima(\\\""+s+@@EPILOGUE@@+"\\\");fim");
-        }
+        @@BASE@@:j;
+        {
+          119:i;
+          {
+            206i-:i;
+            .48<{71+}{[i]\\48-*}if
+          }%
+        }:t;
+        "algoritmo QR;in"[195][173]++'cio imprima("'
+        @@PROLOGUE@@
+        "#{e[PREV]}"
+        {
+          "W""w"@j 1+:j\\- @@MOD@@%1+*
+        }%
+        @@EPILOGUE@@
+        '");fim'
       )
     END
-    mod, prologue, epilogue = ::File.read(::File.join(__dir__, "grass-boot.dat")).lines[3..-1]
-    prologue = "t(#{ prologue })"
-    epilogue = "t(#{ epilogue })"
-    prologue = prologue.gsub(/(\/12131)+/) { "\")+S.Repeat(t(\"/12131\"),#{ $&.size / 6 })+t(\"" }
+    mod, prologue, epilogue = ::File.read(::File.join(__dir__, "grass-boot.dat")).lines
+    prologue += "t"
+    epilogue += "t"
+    prologue = prologue.gsub(/(\/12131)+/) { "\"t\"/12131\"t #{ $&.size / 6 }*\"" }
     mod = mod.to_i
     r.gsub(/@@\w+@@/, {
       "@@PROLOGUE@@" => prologue.chomp,
       "@@EPILOGUE@@" => epilogue.chomp,
-      "@@BASE@@" => 119 + mod,
+      "@@BASE@@" => 119 + mod - 1,
       "@@MOD@@" => mod,
     })
+  end
+end
+
+class Go < CodeGen
+  File = "QR.go"
+  Cmd = "go run QR.go > OUTFILE"
+  Apt = "golang"
+  def code
+    <<-'END'.lines.map {|l| l.strip }.join
+      %(
+        package main;
+        import"fmt";
+        func main(){
+          fmt.Print#{E[PREV]};
+        }
+      )
+    END
   end
 end
 
@@ -609,6 +730,13 @@ class GEL < CodeGen
   Cmd = "genius QR.gel > OUTFILE"
   Apt = "genius"
   Code = %q(f(PREV,61){"printn#$S\n"})
+end
+
+class GDB < CodeGen
+  File = "QR.gdb"
+  Cmd = "gdb -q -x QR.gdb > OUTFILE"
+  Apt = "gdb"
+  Code = %q(%(printf"#{e[d[PREV,?%]]}"\nquit))
 end
 
 class GAP < CodeGen
@@ -659,6 +787,20 @@ class Forth_FORTRAN77_Fortran90 < CodeGen
       )
     END
   end
+end
+
+class Fish < CodeGen
+  File = "QR.fish"
+  Cmd = "fish QR.fish > OUTFILE"
+  Apt = "fish"
+  Code = %q("echo '#{Q[Q[PREV,B],?!].gsub(?',%('"'"'))}'")
+end
+
+class Flex < CodeGen
+  File = "QR.fl"
+  Cmd = "flex -o QR.fl.c QR.fl && gcc -o QR QR.fl.c && ./QR > OUTFILE"
+  Apt = "flex"
+  Code = %q("%option noyywrap\n%%\n%%\nint main(){puts#{E[PREV]};}")
 end
 
 class FALSELang < CodeGen
@@ -749,7 +891,7 @@ end
 
 class CoffeeScript < CodeGen
   File = "QR.coffee"
-  Cmd = "coffee QR.coffee > OUTFILE"
+  Cmd = "coffee --nodejs --stack_size=100000 QR.coffee > OUTFILE"
   Apt = "coffeescript"
   def code
     <<-'END'.lines.map {|l| l.strip }.join
@@ -761,10 +903,14 @@ class CoffeeScript < CodeGen
   end
 end
 
-class Clojure_Cobol < CodeGen
-  File = ["QR.clj", "QR.cob"]
-  Cmd = ["clojure QR.clj > OUTFILE", "cobc -O2 -x QR.cob && ./QR > OUTFILE"]
-  Apt = ["clojure", "open-cobol"]
+class Clojure_CMake_Cobol < CodeGen
+  File = ["QR.clj", "QR.cmake", "QR.cob"]
+  Cmd = [
+    "clojure QR.clj > OUTFILE",
+    "cmake -P QR.cmake > OUTFILE",
+    "cobc -O2 -x QR.cob && ./QR > OUTFILE",
+  ]
+  Apt = ["clojure", "cmake", "open-cobol"]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
@@ -782,7 +928,10 @@ class Clojure_Cobol < CodeGen
                   "#{e[PREV]}"))
              ["    \\" \\"."
               "STOP RUN."])]
-          (println(str"#{g*8}"s)))
+          (println(str
+            "message(STATUS \\"     "
+            (.replace(.replace(str s)"\\\\""\\\\\\\\")"\\"""\\\\\\"")
+            "\\")")))
         )
     END
   end
@@ -859,7 +1008,7 @@ class C < CodeGen
       };
       "
         #include<stdio.h>\n
-        char*p=#{E[L]},s[99999],*q=s;
+        char*p=#{E[L]},s[999999],*q=s;
         int main(){
           int n,m;
           for(;*p;){
@@ -877,53 +1026,62 @@ class C < CodeGen
   end
 end
 
-class Awk_Bc_Befunge_BLC8_Brainfuck < CodeGen
-  Name = ["Awk", "bc", "Befunge", "BLC8", "Brainfuck"]
-  File = ["QR.awk", "QR.bc", "QR.bef", "QR.Blc", "QR.bf"]
+class BeanShell_Befunge_BLC8_Brainfuck < CodeGen
+  Name = ["BeanShell", "Befunge", "BLC8", "Brainfuck"]
+  File = ["QR.bsh", "QR.bef", "QR.Blc", "QR.bf"]
   Cmd = [
-    "awk -f QR.awk > OUTFILE",
-    "BC_LINE_LENGTH=4000000 bc -q QR.bc > OUTFILE",
+    "bsh QR.bsh > OUTFILE",
     "cfunge QR.bef > OUTFILE",
     "ruby vendor/blc.rb < QR.Blc > OUTFILE",
     "$(BF) QR.bf > OUTFILE",
   ]
-  Apt = ["gawk", "bc", nil, nil, "bf"]
+  Apt = ["bsh", nil, nil, "bf"]
   def code
     blc = ::File.read(::File.join(__dir__, "blc-boot.dat"))
     <<-'END'.lines.map {|l| l.strip }.join.sub("BLC", [blc].pack("m0"))
       %(
-        BEGIN{
-          s=#{E[PREV.tr B,?!]};
-          gsub(/!/,"\\\\",s);
-          for(
-            print"
-              define void f(n){
-                \\"00g,\\";
-                for(m=1;m<256;m*=2){
-                  \\"00g,4,:\\";
-                  if(n/m%2)\\"4+\\";
-                  \\",\\";
-                };
-                \\"4,:,\\"
-              }
-              \\"389**6+44*6+00p45*,\\";
-            ";
-            ++j<=length(s);
-            print"f("n");"
-          )
-            for(n=9;substr(s,j,1)!=sprintf("%c",++n););
-          s="\\"4,:,";
-          split("#{"BLC".unpack(?m)[0].bytes*g}",a);
-          for(i in a){
-            s=s 0;
-            for(c=a[i]+0;c;c--)s=s"1+";
-            s=s",";
-          }
-          print s"@\\"\\nquit"
+        f(s){System.out.print(s);}
+        s="389**6+44*6+00p45*,";
+        for(c:#{E[PREV]}){
+          s+="00g,";
+          for(m=1;m<256;m*=2)
+            s+="00g,4,:"+(c/m%2>0?"4+":"")+",";
+          f(s);
+          s="4,:,";
         }
+        f(s+s);
+        for(c:Base64.getDecoder().decode("BLC")){
+          c=c<0?256+c:c;
+          for(i=0;i++<3;c/=8)f(c%8);
+          f("8*+8*+,");
+        }
+        f("@");
       )
     END
   end
+end
+
+class Bash_Bc < CodeGen
+  Name = ["bash", "bc"]
+  File = ["QR.bash", "QR.bc"]
+  Cmd = [
+    "bash QR.bash > OUTFILE",
+    "BC_LINE_LENGTH=4000000 bc -q QR.bc > OUTFILE",
+  ]
+  Apt = ["bash", "bc"]
+  def code
+    <<-'END'.lines.map {|l| l.strip }.join
+      %(echo '#{PREV.gsub(?',%('"'"'))}'|sed -e's/\\\\/\\\\\\\\/g' -e's/"/\\\\q/g' -e's/.*/print "&"\\nquit/')
+    END
+  end
+end
+
+class Awk < CodeGen
+  Name = "Awk"
+  File = "QR.awk"
+  Cmd = "awk -f QR.awk > OUTFILE"
+  Apt = "gawk"
+  Code = %q("BEGIN{print#{E[PREV]}}")
 end
 
 class ATS < CodeGen
@@ -940,14 +1098,36 @@ class Asymptote < CodeGen
   Code = %q("write('#{Q[e[PREV],?']}');")
 end
 
-class ALGOL68_Ante < CodeGen
-  File = ["QR.a68", "QR.ante"]
-  Cmd = ["a68g QR.a68 > OUTFILE", "ruby vendor/ante.rb QR.ante > OUTFILE"]
-  Apt = ["algol68g", nil]
+class AspectJ < CodeGen
+  File = "QR.aj"
+  Cmd = "ajc QR.aj && java QR > OUTFILE"
+  Apt = "aspectj"
+  def code
+    <<-'END'.lines.map {|l| l.strip }.join
+      %(
+        class QR{
+          #$L void main(String[]v){
+            System.out.print(#{E[PREV.gsub(B,?^)]}.replace("^","\\\\"));
+          }
+        }
+      )
+    END
+  end
+end
+
+class ALGOL68_Ante_AspectCpp < CodeGen
+  Name = ["ALGOL 68", "Ante", "AspectC++"]
+  File = ["QR.a68", "QR.ante", "QR.cc"]
+  Cmd = [
+    "a68g QR.a68 > OUTFILE",
+    "ruby vendor/ante.rb QR.ante > OUTFILE",
+    "ag++ -o QR QR.cc && ./QR > OUTFILE",
+  ]
+  Apt = ["algol68g", nil, "aspectc++"]
   def code
     <<-'end'.lines.map {|l| l.strip }.join
       %W[
-        STRINGz:= 226+ 153,a:=z+ 166,b:=a+"2"+z+ 160,c:=b+"8"+z+ 165,t:="#{d[PREV]}";
+        STRINGz:= 226+ 153,a:=z+ 166,b:=a+"2"+z+ 160,c:=b+"8"+z+ 165,t:="#include<iostream>"+ (10)+"int"+ (32)+"main(){puts#{d[E[PREV]]};}";
         FORiTO\ UPBtDO\ INTn:=ABSt[i];
           print( (50+n%64)+c+ (50+n%8MOD8)+c+ (50+nMOD8)+b+"J"+a)
         OD
@@ -956,11 +1136,48 @@ class ALGOL68_Ante < CodeGen
   end
 end
 
-class AFNIX < CodeGen
-  File = "QR.als"
-  Cmd = "LD_LIBRARY_PATH=/usr/lib/afnix axi QR.als > OUTFILE"
-  Apt = "afnix"
-  Code = %q(%(print"#{e[PREV]}"))
+class AFNIX_Aheui < CodeGen
+  File = ["QR.als", "QR.aheui"]
+  Cmd = ["LD_LIBRARY_PATH=/usr/lib/afnix axi QR.als > OUTFILE", "go run vendor/goaheui/main.go QR.aheui > OUTFILE"]
+  Apt = ["afnix", nil]
+  def code
+    <<-'END'.lines.map {|l| l.strip }.join
+      %(
+        interp:library"afnix-sio"\n
+        trans O(n){
+          trans o(afnix:sio:OutputTerm)\n
+          o:write(Byte(+ 128 n))
+        }\n
+        trans f(v n){\n
+          O(+(/ n 64)107)\n
+          O(n:mod 64)\n
+          O v
+        }\n
+        trans D(n){
+          if(< n 4){
+            f(+(* 6 n)9)48
+          }{
+            if(n:odd-p){
+              D(- n 3)\n
+              f 27 48\n
+              f 36 11
+            }{
+              D(/ n 2)\n
+              f 21 48\n
+              f 48 20
+            }
+          }
+        }\n
+        trans S"#{e[PREV]}"\n
+        trans c 0\n
+        do{
+          D(Integer(S:get c))\n
+          f 35 39
+        }(<(c:++)(S:length))\n
+        f 24 149
+      )
+    END
+  end
 end
 
 class Ada < CodeGen
@@ -973,10 +1190,22 @@ class Ada < CodeGen
         with Ada.Text_Io;
         procedure qr is$$$
         begin$$$
-          Ada.Text_Io.Put_Line("#{d[PREV]}");
+          Ada.Text_Io.Put("#{d[PREV].gsub(N,'"&Character'+?'+'Val(10)&"')}");
         end;
       )
     END
+    #<<-'END'.lines.map {|l| l.strip }.join.gsub("$$$", " ")
+    #  %(
+    #    with Ada.Text_Io;
+    #    procedure qr is$$$
+    #    begin$$$
+    #      #{f(PREV,120){
+    #        %(Ada.Text_Io.Put("#{d[$s].gsub(N,'"&Character'+?'+'Val(10)&"')}");\n)
+    #      }}
+    #      Ada.Text_Io.Put_Line("");
+    #    end;
+    #  )
+    #END
   end
 end
 
@@ -986,6 +1215,14 @@ class Aplus < CodeGen
   Cmd = "a+ QR.+ > OUTFILE"
   Apt = "aplus-fsf"
   Code = %q(E[PREV]+"\nsys.exit 0")
+end
+
+class Zsh < CodeGen
+  Name = "zsh"
+  File = "QR.zsh"
+  Cmd = "zsh QR.zsh > OUTFILE"
+  Apt = "zsh"
+  Code = %q("echo -E $'#{Q[Q[PREV,B],?']}'")
 end
 
 class Zoem < CodeGen
@@ -1000,6 +1237,24 @@ class Yorick < CodeGen
   Cmd = "yorick -batch QR.yorick > OUTFILE"
   Apt = "yorick"
   Code = %q(%(write,format="#{y="";f(PREV,35){y<<",\\n"+$S;"%s"}}")+y)
+end
+
+class Yabasic < CodeGen
+  File = "QR.yab"
+  Cmd = "yabasic QR.yab > OUTFILE"
+  Apt = "yabasic"
+  def code
+    <<-'END'.lines.map {|l| l.strip }.join
+      %(
+        sub f(s$,n)
+          print(s$);:
+          for i=1to n print("\\\\");:
+          next:
+        end sub:
+        f("#{V[e[PREV],'",','):f("']}",0)
+      )
+    END
+  end
 end
 
 class XSLT < CodeGen
@@ -1050,6 +1305,14 @@ class VisualBasic_Whitespace < CodeGen
   end
 end
 
+class VimScript < CodeGen
+  Name = ["Vimscript"]
+  Apt = "vim"
+  File = "QR.vim"
+  Cmd = "vim -EsS QR.vim > OUTFILE"
+  Code = %q("let s=#{E[PREV]}\nput=s\nprint\nqa!")
+end
+
 class Verilog < CodeGen
   File = "QR.v"
   Cmd = "iverilog -o QR QR.v && ./QR -vcd-none > OUTFILE"
@@ -1064,18 +1327,30 @@ class Vala < CodeGen
   Code = %q("int main(){print#{d[E[PREV],?%]+R}}")
 end
 
-class Tcl_Thue_Unlambda < CodeGen
-  File = ["QR.tcl", "QR.t", "QR.unl"]
-  Cmd = ["tclsh QR.tcl > OUTFILE", "ruby vendor/thue.rb QR.t > OUTFILE", "ruby vendor/unlambda.rb QR.unl > OUTFILE"]
-  Apt = ["tcl", nil, nil]
+class TypeScript_Unlambda < CodeGen
+  File = ["QR.ts", "QR.unl"]
+  Cmd = ["tsc --outFile QR.ts.js QR.ts && $(JAVASCRIPT) QR.ts.js > OUTFILE", "ruby vendor/unlambda.rb QR.unl > OUTFILE"]
+  Apt = ["node-typescript", nil]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
-      %(
-        proc f {n} {string repeat "\\\\" $n};
-        puts a::=~[regsub -all {.} "#{V[Q[e[PREV.reverse],/[\[\]$]/],"[f ",?]]}" \\x60.&]k\\n::=\\na
-      )
+      "let s=#{E[PREV]},i=0,t='k';while(s[i])t='\\x60.'+s[i++]+t;console.log(t)"
     END
   end
+end
+
+class Tcsh_Thue < CodeGen
+  Name = ["tcsh", "Thue"]
+  File = ["QR.tcsh", "QR.t"]
+  Cmd = ["tcsh QR.tcsh > OUTFILE", "ruby vendor/thue.rb QR.t > OUTFILE"]
+  Apt = ["tcsh", nil]
+  Code = %q(%(echo 'a::=~#{Q[Q[PREV,B],?!].gsub(?',%('"'"'))}'"\\\\n::=\\\\na"))
+end
+
+class Tcl < CodeGen
+  File = "QR.tcl"
+  Cmd = "tclsh QR.tcl > OUTFILE"
+  Apt = "tcl"
+  Code = %q(%(puts "#{Q[e[PREV],/[\[\]$]/]}"))
 end
 
 class StandardML_Subleq < CodeGen
@@ -1110,23 +1385,60 @@ class Smalltalk < CodeGen
   Code = %q("Transcript show: '#{d[PREV,?']}';cr")
 end
 
-class Shell_SLang < CodeGen
-  Name = ["Shell (bash)", "S-Lang"]
-  File = ["QR.bash", "QR.sl"]
-  Cmd = ["bash QR.bash > OUTFILE", "slsh QR.sl > OUTFILE"]
-  Apt = ["bash", "slsh"]
+class Scilab_Sed_Shakespeare_SLang < CodeGen
+  Name = ["Scilab", "sed", "Shakespeare", "S-Lang"]
+  File = ["QR.sci", "QR.sed", "QR.spl", "QR.sl"]
+  Cmd = [
+    "scilab -nwni -nb -f QR.sci > OUTFILE",
+    "sed -E -f QR.sed QR.sed > OUTFILE",
+    "./vendor/local/bin/spl2c < QR.spl > QR.spl.c && gcc -o QR -I ./vendor/local/include -L ./vendor/local/lib QR.spl.c -lspl -lm && ./QR > OUTFILE",
+    "slsh QR.sl > OUTFILE",
+  ]
+  Apt = ["scilab", "sed", nil, "slsh"]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
-      %[echo -En "#{Q[e[e[PREV]]]}"|sed -E -e 's/([^\\\\]|\\\\.){1,118}/()=printf("%s","\\0");\\n/g']
+      %(
+        printf("
+          1d;
+          s/.//;
+          s/1/ the sum of a son and0/g;
+          s/0/ twice/g;
+          s/2/You are as bad as/g;
+          s/3/ a son!Speak your mind!/g\\n
+          #The Relay of Quine.\\n
+          #Ajax, a man.\\n
+          #Ford, a man.\\n
+          #Act i: Quine.\\n
+          #Scene i: Relay.\\n
+          #[Enter Ajax and Ford]\\n
+          #Ajax:\\n
+          #");
+        function[]=f(s);
+          for i=1:2:length(s),
+            printf("2%s3",part(dec2bin(hex2dec(part(s,i:i+1))),$:-1:2)),
+          end;
+        endfunction\n
+        #{
+          s,v=rp[PREV,127..255];
+          f(
+            %(
+              variable s=`#{s.gsub(/.{1,234}/){$&.gsub("`",%(`+"`"+`))+"`+\n`"}}`,i;
+              for(i=0;i<129;i++)
+                s=strreplace(
+                  s,
+                  pack("C",255-i),
+                  substrbytes(`#{v[0,99]}`+\n`#{v[99..-1]}`,i*2+1,2));
+              printf("%s",s)
+            ),7
+          ){
+            "f('%s')\n"%$s.unpack("H*")
+          }
+        }
+        printf("\\n#[Exeunt]");
+        quit
+      )
     END
   end
-end
-
-class Scilab < CodeGen
-  File = "QR.sci"
-  Cmd = "scilab -nwni -nb -f QR.sci > OUTFILE"
-  Apt = "scilab"
-  Code = %q(%(#{f(PREV,7){%(printf("%s","#{d[d[$s],?']}")\n)}}quit))
 end
 
 class Scheme < CodeGen
