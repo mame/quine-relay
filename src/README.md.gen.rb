@@ -57,8 +57,6 @@ File.write("../README.md", ERB.new(DATA.read, nil, "%").result(binding))
 __END__
 # Quine Relay
 
-**Warning: this is a branch for experiment.**
-
 [![Build Status](https://travis-ci.org/mame/quine-relay.svg?branch=laboratory)](https://travis-ci.org/mame/quine-relay)
 
 ## What this is

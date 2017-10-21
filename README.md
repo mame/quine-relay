@@ -1,7 +1,5 @@
 # Quine Relay
 
-**Warning: this is a branch for experiment.**
-
 [![Build Status](https://travis-ci.org/mame/quine-relay.svg?branch=laboratory)](https://travis-ci.org/mame/quine-relay)
 
 ## What this is
