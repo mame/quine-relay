@@ -61,7 +61,7 @@ end
 Uroboros = 350.0
 ctx.select_font_face("UnifrakturCook")
 ctx.font_size = 25
-Title = "100-Language Uroboros Quine"
+Title = "#{ RunSteps.size }-Language Uroboros Quine"
 e = ctx.text_extents(Title)
 height = Uroboros / 2 + e.height + 20
 ctx.move_to(-e.width / 2, height / 2)

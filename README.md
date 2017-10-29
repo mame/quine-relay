@@ -270,7 +270,7 @@ I used the following Ubuntu deb packages to test this program.
 56  |dc                 |dc              |1.06.95-9build2
 57  |eC                 |ecere-dev       |0.44.15-1
 58  |Elixir             |elixir          |1.3.3-2
-59  |Emacs Lisp         |emacs25         |25.2+1-6
+59  |Emacs Lisp         |emacs25         |-
 60  |Erlang             |erlang          |1:20.0.4+dfsg-1ubuntu1
 61  |F#                 |fsharp          |4.0.0.4+dfsg2-2
 62  |FALSE              |*N/A*           |-
