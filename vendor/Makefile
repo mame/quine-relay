@@ -5,7 +5,7 @@ ACME_CHEF := Acme-Chef-1.01
 SPL	  := spl-1.2.1
 LOCAL     := $(CURDIR)/local
 
-all: $(LOCAL)/bin/lci $(LOCAL)/bin/npiet $(LOCAL)/bin/cfunge $(LOCAL)/bin/compilechef $(LOCAL)/bin/lazyk $(LOCAL)/bin/spl2c goaheui/main.go golfscript.rb
+all: $(LOCAL)/bin/lci $(LOCAL)/bin/npiet $(LOCAL)/bin/cfunge $(LOCAL)/bin/compilechef $(LOCAL)/bin/lazyk $(LOCAL)/bin/spl2c $(LOCAL)/bin/Vlt.exe goaheui/main.go golfscript.rb
 
 $(LOCAL)/bin/lci:
 	unzip -q $(LCI).zip
@@ -29,6 +29,9 @@ $(LOCAL)/bin/lazyk:
 $(LOCAL)/bin/spl2c:
 	tar xzf $(SPL).tar.gz
 	(cd $(SPL) && ln -s ../local spl && make install)
+
+$(LOCAL)/bin/Vlt.exe:
+	unzip -d $(LOCAL)/bin -q Velato_0_1.zip
 
 goaheui/main.go:
 	git clone https://github.com/aheui/goaheui.git

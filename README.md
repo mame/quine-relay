@@ -30,16 +30,16 @@ First, you have to type the following apt-get command to install all of them.
     $ sudo apt-get install afnix algol68g aplus-fsf aspectc++ aspectj \
       asymptote ats2-lang bash bc bf bison bsdgames bsh clisp clojure cmake \
       cmake coffeescript dafny dc ecere-dev elixir emacs25 erlang f2c fish \
-      flex fp-compiler fsharp g++ gambas3-script gap gawk gcc gdb gdc genius \
-      gforth gfortran ghc ghostscript gnat gnu-smalltalk gnuplot gobjc \
-      golang gpt gri groff groovy guile-2.0 gzip haxe icont iconx intercal \
-      iverilog jasmin-sable jq julia ksh libgd-dev libpng-dev lisaac \
-      livescript llvm lua5.3 m4 make maxima minizinc mlton mono-devel \
-      mono-mcs mono-vbnc nasm neko nescc nickle nim node-typescript nodejs \
-      ocaml octave open-cobol openjdk-8-jdk pari-gp parser3-cgi perl php-cli \
-      pike8.0 python r-base rakudo ratfor rc regina-rexx ruby ruby-mustache \
-      rustc scala scilab sed slsh spin squirrel3 swi-prolog tcl tcsh valac \
-      vim xsltproc yabasic yorick zoem zsh
+      flex fp-compiler fsharp g++ gap gawk gcc gdb gdc genius gforth \
+      gfortran ghc ghostscript gnat gnu-smalltalk gnuplot gobjc golang gpt \
+      gri groff groovy guile-2.0 gzip haxe icont iconx intercal iverilog \
+      jasmin-sable jq julia ksh libgd-dev libpng-dev lisaac livescript llvm \
+      lua5.3 m4 make maxima minizinc mlton mono-devel mono-mcs mono-vbnc \
+      nasm neko nescc nickle nim node-typescript nodejs ocaml octave \
+      open-cobol openjdk-8-jdk pari-gp parser3-cgi perl php-cli pike8.0 \
+      python r-base rakudo ratfor rc regina-rexx ruby ruby-mustache rustc \
+      scala scilab sed slsh spin squirrel3 swi-prolog tcl tcsh valac vim \
+      xsltproc yabasic yorick zoem zsh
 
 Then, build the bundled interpreters.
 
@@ -67,7 +67,8 @@ Then, build the bundled interpreters.
     $ ruby vendor/thue.rb QR.t > QR.ts
     $ tsc --outFile QR.ts.js QR.ts && nodejs QR.ts.js > QR.unl
     $ ruby vendor/unlambda.rb QR.unl > QR.vala
-    $ valac QR.vala && ./QR > QR.v
+    $ valac QR.vala && ./QR > QR.mid
+    $ mono vendor/local/bin/Vlt.exe /s QR.mid && mono QR.exe > QR.v
     $ iverilog -o QR QR.v && ./QR -vcd-none > QR.vim
     $ vim -EsS QR.vim > QR.vb
     $ vbnc QR.vb && mono ./QR.exe > QR.ws
@@ -119,8 +120,7 @@ Then, build the bundled interpreters.
     $ fish QR.fish > QR.fs
     $ gforth QR.fs > QR.f
     $ gfortran -o QR QR.f && ./QR > QR.f90
-    $ gfortran -o QR QR.f90 && ./QR > QR.gbs
-    $ gbs3 QR.gbs > QR.g
+    $ gfortran -o QR QR.f90 && ./QR > QR.g
     $ gap -q QR.g > QR.gdb
     $ gdb -q -x QR.gdb > QR.gel
     $ genius QR.gel > QR.plt
@@ -211,9 +211,9 @@ If you could do it, please let me know.  Good luck.
 I used the following Ubuntu deb packages to test this program.
 
 \#  |language           |ubuntu package  |version
-----|-------------------|----------------|------------------------
+----|-------------------|----------------|-----------------------------------
 1   |Ruby               |ruby            |1:2.3.3
-2   |Rust               |rustc           |1.18.0+dfsg1-4ubuntu1
+2   |Rust               |rustc           |1.22.1+dfsg1+llvm-0ubuntu2~17.10.2
 3   |Scala              |scala           |2.11.8-2
 4   |Scheme             |guile-2.0       |2.0.13+1-4
 5   |Scilab             |scilab          |5.5.2-4ubuntu2
@@ -230,56 +230,56 @@ I used the following Ubuntu deb packages to test this program.
 16  |TypeScript         |node-typescript |2.5.2-1
 17  |Unlambda           |*N/A*           |-
 18  |Vala               |valac           |0.36.6-1
-19  |Verilog            |iverilog        |10.1-0.1build1
-20  |Vimscript          |vim             |2:8.0.0197-4ubuntu5
-21  |Visual Basic       |mono-vbnc       |4.0.1-1
-22  |Whitespace         |*N/A*           |-
-23  |XSLT               |xsltproc        |1.1.29-2.1ubuntu1
-24  |Yabasic            |yabasic         |1:2.78.2-2
-25  |Yorick             |yorick          |2.2.04+dfsg1-6build1
-26  |Zoem               |zoem            |11-166-1.2
-27  |zsh                |zsh             |5.2-5ubuntu1
-28  |A+                 |aplus-fsf       |4.22.1-9
-29  |Ada                |gnat            |7ubuntu1
-30  |AFNIX              |afnix           |2.8.0-3
-31  |Aheui              |*N/A*           |-
-32  |ALGOL 68           |algol68g        |2.8-2
-33  |Ante               |*N/A*           |-
-34  |AspectC++          |aspectc++       |1:2.2+git20170823-1
-35  |AspectJ            |aspectj         |1.8.9-2
-36  |Asymptote          |asymptote       |2.41-2build1
-37  |ATS                |ats2-lang       |0.2.9-1
-38  |Awk                |gawk            |1:4.1.4+dfsg-1
-39  |bash               |bash            |4.4-5ubuntu1
-40  |bc                 |bc              |1.06.95-9build2
-41  |BeanShell          |bsh             |2.0b4-18
-42  |Befunge            |*N/A*           |-
-43  |BLC8               |*N/A*           |-
-44  |Brainfuck          |bf              |20041219ubuntu5
-45  |C                  |gcc             |4:7.2.0-1ubuntu1
-46  |C++                |g++             |4:7.2.0-1ubuntu1
-47  |C#                 |mono-mcs        |4.6.2.7+dfsg-1ubuntu1
-48  |Chef               |*N/A*           |-
-49  |Clojure            |clojure         |1.8.0-3
-50  |CMake              |cmake           |3.9.1-1
-51  |Cobol              |open-cobol      |1.1-2
-52  |CoffeeScript       |coffeescript    |1.10.0~dfsg-1
-53  |Common Lisp        |clisp           |1:2.49-10build1
-54  |D                  |gdc             |4:7.2.0-1ubuntu1
-55  |Dafny              |dafny           |1.9.7-1
-56  |dc                 |dc              |1.06.95-9build2
-57  |eC                 |ecere-dev       |0.44.15-1
-58  |Elixir             |elixir          |1.3.3-2
-59  |Emacs Lisp         |emacs25         |-
-60  |Erlang             |erlang          |1:20.0.4+dfsg-1ubuntu1
-61  |F#                 |fsharp          |4.0.0.4+dfsg2-2
-62  |FALSE              |*N/A*           |-
-63  |Flex               |flex            |2.6.1-1.3
-64  |Fish               |fish            |2.6.0-1
-65  |Forth              |gforth          |0.7.3+dfsg-4
-66  |FORTRAN77          |f2c             |20100827-3
-67  |Fortran90          |gfortran        |4:7.2.0-1ubuntu1
-68  |Gambas script      |gambas3-script  |3.9.2-2build4
+19  |Velato             |*N/A*           |-
+20  |Verilog            |iverilog        |10.1-0.1build1
+21  |Vimscript          |vim             |2:8.0.0197-4ubuntu5
+22  |Visual Basic       |mono-vbnc       |4.0.1-1
+23  |Whitespace         |*N/A*           |-
+24  |XSLT               |xsltproc        |1.1.29-2.1ubuntu1
+25  |Yabasic            |yabasic         |1:2.78.2-2
+26  |Yorick             |yorick          |2.2.04+dfsg1-6build1
+27  |Zoem               |zoem            |11-166-1.2
+28  |zsh                |zsh             |5.2-5ubuntu1.2
+29  |A+                 |aplus-fsf       |4.22.1-9
+30  |Ada                |gnat            |7ubuntu1
+31  |AFNIX              |afnix           |2.8.0-3
+32  |Aheui              |*N/A*           |-
+33  |ALGOL 68           |algol68g        |2.8-2
+34  |Ante               |*N/A*           |-
+35  |AspectC++          |aspectc++       |1:2.2+git20170823-1
+36  |AspectJ            |aspectj         |1.8.9-2
+37  |Asymptote          |asymptote       |2.41-2build1
+38  |ATS                |ats2-lang       |0.2.9-1
+39  |Awk                |gawk            |1:4.1.4+dfsg-1
+40  |bash               |bash            |4.4-5ubuntu1
+41  |bc                 |bc              |1.06.95-9build2
+42  |BeanShell          |bsh             |2.0b4-18
+43  |Befunge            |*N/A*           |-
+44  |BLC8               |*N/A*           |-
+45  |Brainfuck          |bf              |20041219ubuntu5
+46  |C                  |gcc             |4:7.2.0-1ubuntu1
+47  |C++                |g++             |4:7.2.0-1ubuntu1
+48  |C#                 |mono-mcs        |4.6.2.7+dfsg-1ubuntu1
+49  |Chef               |*N/A*           |-
+50  |Clojure            |clojure         |1.8.0-3
+51  |CMake              |cmake           |3.9.1-1
+52  |Cobol              |open-cobol      |1.1-2
+53  |CoffeeScript       |coffeescript    |1.10.0~dfsg-1
+54  |Common Lisp        |clisp           |1:2.49-10build1
+55  |D                  |gdc             |4:7.2.0-1ubuntu1
+56  |Dafny              |dafny           |1.9.7-1
+57  |dc                 |dc              |1.06.95-9build2
+58  |eC                 |ecere-dev       |0.44.15-1
+59  |Elixir             |elixir          |1.3.3-2
+60  |Emacs Lisp         |emacs25         |25.2+1-6
+61  |Erlang             |erlang          |1:20.0.4+dfsg-1ubuntu1.1
+62  |F#                 |fsharp          |4.0.0.4+dfsg2-2
+63  |FALSE              |*N/A*           |-
+64  |Flex               |flex            |2.6.1-1.3
+65  |Fish               |fish            |2.6.0-1
+66  |Forth              |gforth          |0.7.3+dfsg-4
+67  |FORTRAN77          |f2c             |20100827-3
+68  |Fortran90          |gfortran        |4:7.2.0-1ubuntu1
 69  |GAP                |gap             |4r8p7-1
 70  |GDB                |gdb             |8.0.1-0ubuntu1
 71  |GEL (Genius)       |genius          |1.0.23-2
@@ -296,7 +296,7 @@ I used the following Ubuntu deb packages to test this program.
 82  |Icon               |icont, iconx    |9.4.3-6ubuntu1
 83  |INTERCAL           |intercal        |30:0.30-1
 84  |Jasmin             |jasmin-sable    |2.5.0-1
-85  |Java               |openjdk-8-jdk   |8u144-b01-2
+85  |Java               |openjdk-8-jdk   |8u162-b12-0ubuntu0.17.10.2
 86  |JavaScript         |nodejs          |6.11.4~dfsg-1ubuntu1
 87  |Jq                 |jq              |1.5+dfsg-2
 88  |JSFuck             |nodejs          |6.11.4~dfsg-1ubuntu1
@@ -326,7 +326,7 @@ I used the following Ubuntu deb packages to test this program.
 112 |PARI/GP            |pari-gp         |2.9.3-1
 113 |Parser 3           |parser3-cgi     |3.4.5-2
 114 |Pascal             |fp-compiler     |3.0.2+dfsg-5ubuntu1
-115 |Perl 5             |perl            |5.26.0-8ubuntu1
+115 |Perl 5             |perl            |5.26.0-8ubuntu1.1
 116 |Perl 6             |rakudo          |2017.06-1
 117 |PHP                |php-cli         |1:7.1+54ubuntu1
 118 |Piet               |*N/A*           |-

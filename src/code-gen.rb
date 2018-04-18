@@ -746,14 +746,6 @@ class GAP < CodeGen
   Code = %q("s:=OutputTextUser();WriteAll(s,#{E[PREV]});CloseStream(s);QUIT;")
 end
 
-class Gambas < CodeGen
-  Name = "Gambas script"
-  File = "QR.gbs"
-  Cmd = "$(GBS) QR.gbs > OUTFILE"
-  Apt = "gambas3-script"
-  Code = %q(%(print"#{e[PREV]}"))
-end
-
 class Forth_FORTRAN77_Fortran90 < CodeGen
   File = ["QR.fs", "QR.f", "QR.f90"]
   Cmd = [
@@ -1320,11 +1312,31 @@ class Verilog < CodeGen
   Code = %q(%(module QR;initial begin #{f(PREV,3){%($write("%s",#$S);)+N}}end endmodule))
 end
 
-class Vala < CodeGen
-  File = "QR.vala"
-  Cmd = "valac QR.vala && ./QR > OUTFILE"
-  Apt = "valac"
-  Code = %q("int main(){print#{d[E[PREV],?%]+R}}")
+class Vala_Velato < CodeGen
+  File = ["QR.vala", "QR.mid"]
+  Cmd = [
+    "valac QR.vala && ./QR > OUTFILE",
+    "mono vendor/local/bin/Vlt.exe /s QR.mid && mono QR.exe > OUTFILE",
+  ]
+  Apt = ["valac", nil]
+  def code
+    <<-'END'.lines.map {|l| l.strip }.join
+      %(
+        void p(int[]c){
+          foreach(int v in c)
+            stdout.printf("%c%c",v/256,v%256);
+        }
+        void main(){
+          int[]a;
+          p({19796,26724,0,6,0,1,480,19796,29291,#{s=PREV;W=s.size*72+4;"%d,%d"%[W/65536,W%65536]}});
+          foreach(int c in#{E[s]}.data)
+            foreach(int v in a={0,9,7,4,5,c/100*7/6+1,c%100/10*7/6+1,c%10*7/6+1,7})
+              p({144,v=15450+v*256,384,v});
+          p({255,12032});
+        }
+      )
+    END
+  end
 end
 
 class TypeScript_Unlambda < CodeGen
