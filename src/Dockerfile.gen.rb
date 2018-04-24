@@ -7,6 +7,7 @@ apts = [*apts.flatten.compact.uniq, *other_packages].sort
 
 dockerfile = []
 dockerfile << "FROM ubuntu:18.04"
+dockerfile << "ENV DEBIAN_FRONTEND noninteractive"
 dockerfile << "RUN apt-get update && apt-get upgrade -y"
 dockerfile << "RUN apt-get -qq install -y apt-utils > /dev/null"
 dockerfile << "RUN apt-get -qq install -y moreutils"

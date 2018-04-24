@@ -1,4 +1,5 @@
 FROM ubuntu:18.04
+ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get -qq install -y apt-utils > /dev/null
 RUN apt-get -qq install -y moreutils
