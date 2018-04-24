@@ -1,4 +1,4 @@
-FROM ubuntu:17.10
+FROM ubuntu:18.04
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get -qq install -y apt-utils > /dev/null
 RUN apt-get -qq install -y moreutils

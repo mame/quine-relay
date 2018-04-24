@@ -78,7 +78,7 @@ the original <%= RunSteps[0].name %> code again.
 
 ### Ubuntu
 
-If you are using Ubuntu 17.10 "Artful Aardvark", you can perform the following steps.
+If you are using Ubuntu 18.04 "Bionic Beaver", you can perform the following steps.
 
 #### 1. Install all interpreters/compilers.
 
