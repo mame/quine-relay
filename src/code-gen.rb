@@ -843,7 +843,7 @@ end
 class Dc < CodeGen
   Name = "dc"
   File = "QR.dc"
-  Cmd = "dc QR.dc > OUTFILE"
+  Cmd = "dc QR.dc > OUTFILE || true" # XXX
   Apt = "dc"
   Code = %q("[#{PREV}]pq")
 end
