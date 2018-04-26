@@ -705,6 +705,14 @@ class Gnuplot < CodeGen
   Code = %q('set print"-";print'+E[PREV])
 end
 
+class GeneratorScriptingLanguage < CodeGen
+  Name = "GeneratorScriptingLanguage"
+  File = "QR.gsl"
+  Cmd = "gsl -q QR.gsl > OUTFILE"
+  Apt = "generator-scripting-language"
+  Code = %q(".template 1\n#{d[PREV,B]}\n.endtemplate")
+end
+
 class GEL < CodeGen
   Name = "GEL (Genius)"
   File = "QR.gel"
