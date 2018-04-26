@@ -427,16 +427,15 @@ class LiveScript < CodeGen
   Code = %q("console.log"+Q[E[PREV],?#])
 end
 
-class Julia_Ksh_LazyK_Lisaac < CodeGen
-  Name = ["Julia", "ksh", "Lazy K", "Lisaac"]
-  File = ["QR.jl", "QR.ksh", "QR.lazy", "qr.li"]
+class Ksh_LazyK_Lisaac < CodeGen
+  Name = ["ksh", "Lazy K", "Lisaac"]
+  File = ["QR.ksh", "QR.lazy", "qr.li"]
   Cmd = [
-    "julia QR.jl > OUTFILE",
     "ksh QR.ksh > OUTFILE",
     "lazyk QR.lazy > OUTFILE",
     "lisaac qr.li && ./qr > OUTFILE",
   ]
-  Apt = ["julia", "ksh", nil, "lisaac"]
+  Apt = ["ksh", nil, "lisaac"]
   def code
     lazyk = ::File.read(::File.join(__dir__, "lazyk-boot.dat"))
     lazyk = lazyk.tr("ski`","0123").scan(/.{1,3}/).map do |n|
@@ -446,28 +445,30 @@ class Julia_Ksh_LazyK_Lisaac < CodeGen
     lazyk = lazyk.gsub(/[ZHJK\^`~X]/) {|c| "\\x%02x" % c.ord }
     <<-'END'.lines.map {|l| l.strip }.join.sub("LAZYK"){lazyk}
       %(
-        A=print;
-        A("echo 'k`");
-        [
-          (
-            A("``s"^8*"i");
-            for j=6:-1:0;
-              x=(Int(c)>>j)%2+1;
-              A("`"*"kki"[x:x+1])
-            end
-          )for c in join([
-            "SectionHeader+name:=QR;SectionPublic-main<-(";
-            ["\\"$(replace(replace(s,"\\\\","\\\\\\\\"),"\\"","\\\\\\""))\\".print;"for s=matchall(r".{1,99}",#{Q[E[PREV]]})];
-            ");"
-          ],"\\n")
-        ];
-        [
-          for i=0:2:4;
-            x=((Int(c)%83-10)>>i)%4+1;
-            A("ski`"[x:x])
-          end for c in"LAZYK"
-        ];
-        A("'")
+        s=();
+        a(){ s+=($(echo -n $1|od -An -tu1 -v) $2);};
+        a "SectionHeader+name:=QR;SectionPublic-main<-(" 10;
+        t='#{PREV.gsub(?',%('"'"'))}';
+        for((i=0;i<${#t};i+=99));do;
+          x=${t:$i:99};
+          a "\\"${x//[\\\\\\\"]/\\\\\\0}\\".print;" 10;
+        done;
+        a ");";
+        p(){ echo -n $1;};
+        f(){ for x in ${s[*]};do;
+            p $3;
+            for((j=$2;j--;));do;
+              h $1 $x $j;
+            done;
+          done;
+        };
+        p k\\`;
+        h(){ p \\`${1:$(($2>>$3&1)):2};};
+        f kki 7 '``s``s``s``s``s``s``s``si';
+        s=();
+        a 'LAZYK';
+        h(){ p ${1:$(((($2%83-10)>>((2-$3)*2))%4)):1};};
+        f ski\\` 3
       )
     END
   end
