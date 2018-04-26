@@ -29,14 +29,6 @@ original_list_size = CodeGen::List.size
 #  Code = %q(%((for i, c in#{E[PREV]}:echo ",",int(c),"CO");echo "Q"))
 #end
 
-#class Curry < CodeGen
-#  After = CommonLisp
-#  File = "QR.curry"
-#  Cmd = "touch ~/.pakcsrc && runcurry QR.curry > OUTFILE"
-#  Apt = "pakcs"
-#  Code = %q("main=putStr"+E[PREV])
-#end
-
 CodeGen::List.slice!(original_list_size..-1).each do |s|
   i = CodeGen::List.find_index(s::After)
   CodeGen::List.insert(i, s)

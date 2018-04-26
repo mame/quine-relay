@@ -862,6 +862,14 @@ class D < CodeGen
   Code = %q("import std.stdio;void main(){write(`#{PREV}`);}")
 end
 
+class Curry < CodeGen
+  Disabled = true
+  File = "QR.curry"
+  Cmd = "pakcs :load QR.curry :save :quit && ./QR > OUTFILE"
+  Apt = "pakcs"
+  Code = %q("main=putStr"+E[PREV])
+end
+
 class CommonLisp < CodeGen
   Name = "Common Lisp"
   File = "QR.lisp"
