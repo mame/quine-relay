@@ -1,5 +1,25 @@
 original_list_size = CodeGen::List.size
 
+#class NesC < CodeGen
+#  Name = "nesC"
+#  File = "QR.nc"
+#  Cmd = "nescc -o QR QR.nc && ./QR > OUTFILE"
+#  Apt = "nescc"
+#  def code
+#    <<-'END'.lines.map {|l| l.strip }.join
+#      %(
+#        #include<stdio.h>\n
+#        module QR{}implementation{
+#          int main()__attribute__((C,spontaneous)){
+#            puts#{E[PREV]};
+#            return 0;
+#        } }
+#      )
+#    END
+#    # avoid "}}" because of Mustache
+#  end
+#end
+
 #class Nim_NVSPL2 < CodeGen
 #  After = Nim
 #  Obsoletes = Nim
