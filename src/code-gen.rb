@@ -1089,7 +1089,7 @@ end
 
 class AspectJ < CodeGen
   File = "QR.aj"
-  Cmd = "ajc QR.aj && java QR > OUTFILE"
+  Cmd = "JAVACMD=/usr/lib/jvm/java-8-openjdk-amd64/bin/java ajc QR.aj && java QR > OUTFILE"
   Apt = "aspectj"
   def code
     <<-'END'.lines.map {|l| l.strip }.join
