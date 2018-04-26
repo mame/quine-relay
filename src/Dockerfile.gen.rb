@@ -3,7 +3,7 @@ require_relative "code-gen"
 apts = RunSteps.flat_map {|s| s.apt }
 other_packages = %w(libpng-dev libgd-dev groff flex bison)
 
-apts = [*apts.flatten.compact.uniq, *other_packages].sort
+apts = [*apts.flatten.compact.uniq, *other_packages].uniq.sort
 
 dockerfile = []
 dockerfile << "FROM ubuntu:18.04"
