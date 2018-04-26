@@ -8,31 +8,31 @@ RUN chronic apt-get -qq install -y afnix algol68g aplus-fsf aspectc++ && chronic
 RUN chronic apt-get -qq install -y aspectj asymptote ats2-lang bash && chronic apt-get clean
 RUN chronic apt-get -qq install -y bc bf bison bsdgames && chronic apt-get clean
 RUN chronic apt-get -qq install -y bsh clisp clojure cmake && chronic apt-get clean
-RUN chronic apt-get -qq install -y coffeescript dafny dc ecere-dev && chronic apt-get clean
-RUN chronic apt-get -qq install -y elixir emacs25 erlang f2c && chronic apt-get clean
-RUN chronic apt-get -qq install -y fish flex fp-compiler fsharp && chronic apt-get clean
-RUN chronic apt-get -qq install -y g++ gap gawk gcc && chronic apt-get clean
-RUN chronic apt-get -qq install -y gdb gdc generator-scripting-language genius && chronic apt-get clean
-RUN chronic apt-get -qq install -y gforth gfortran ghc ghostscript && chronic apt-get clean
-RUN chronic apt-get -qq install -y gnat gnu-smalltalk gnuplot gobjc && chronic apt-get clean
-RUN chronic apt-get -qq install -y golang gpt gri groff && chronic apt-get clean
-RUN chronic apt-get -qq install -y groovy guile-2.0 gzip haxe && chronic apt-get clean
-RUN chronic apt-get -qq install -y icont iconx intercal iverilog && chronic apt-get clean
-RUN chronic apt-get -qq install -y jasmin-sable jq ksh libgd-dev && chronic apt-get clean
-RUN chronic apt-get -qq install -y libpng-dev lisaac livescript llvm && chronic apt-get clean
-RUN chronic apt-get -qq install -y lua5.3 m4 make maxima && chronic apt-get clean
-RUN chronic apt-get -qq install -y minizinc mlton mono-devel mono-mcs && chronic apt-get clean
-RUN chronic apt-get -qq install -y mono-vbnc nasm neko nickle && chronic apt-get clean
-RUN chronic apt-get -qq install -y nim node-typescript nodejs ocaml && chronic apt-get clean
-RUN chronic apt-get -qq install -y octave open-cobol openjdk-8-jdk pakcs && chronic apt-get clean
-RUN chronic apt-get -qq install -y pari-gp parser3-cgi perl php-cli && chronic apt-get clean
-RUN chronic apt-get -qq install -y pike8.0 python r-base rakudo && chronic apt-get clean
-RUN chronic apt-get -qq install -y ratfor rc regina-rexx ruby && chronic apt-get clean
-RUN chronic apt-get -qq install -y ruby-mustache rustc scala scilab && chronic apt-get clean
-RUN chronic apt-get -qq install -y sed slsh spin squirrel3 && chronic apt-get clean
-RUN chronic apt-get -qq install -y swi-prolog tcl tcsh valac && chronic apt-get clean
-RUN chronic apt-get -qq install -y vim xsltproc yabasic yorick && chronic apt-get clean
-RUN chronic apt-get -qq install -y zoem zsh && chronic apt-get clean
+RUN chronic apt-get -qq install -y coffeescript curl dafny dc && chronic apt-get clean
+RUN chronic apt-get -qq install -y ecere-dev elixir emacs25 erlang && chronic apt-get clean
+RUN chronic apt-get -qq install -y f2c fish flex fp-compiler && chronic apt-get clean
+RUN chronic apt-get -qq install -y fsharp g++ gap gawk && chronic apt-get clean
+RUN chronic apt-get -qq install -y gcc gdb gdc generator-scripting-language && chronic apt-get clean
+RUN chronic apt-get -qq install -y genius gforth gfortran ghc && chronic apt-get clean
+RUN chronic apt-get -qq install -y ghostscript gnat gnu-smalltalk gnuplot && chronic apt-get clean
+RUN chronic apt-get -qq install -y gobjc golang gpt gri && chronic apt-get clean
+RUN chronic apt-get -qq install -y groff groovy guile-2.0 gzip && chronic apt-get clean
+RUN chronic apt-get -qq install -y haxe icont iconx intercal && chronic apt-get clean
+RUN chronic apt-get -qq install -y iverilog jasmin-sable jq ksh && chronic apt-get clean
+RUN chronic apt-get -qq install -y libgd-dev libpng-dev lisaac livescript && chronic apt-get clean
+RUN chronic apt-get -qq install -y llvm lua5.3 m4 make && chronic apt-get clean
+RUN chronic apt-get -qq install -y maxima minizinc mlton mono-devel && chronic apt-get clean
+RUN chronic apt-get -qq install -y mono-mcs mono-vbnc nasm neko && chronic apt-get clean
+RUN chronic apt-get -qq install -y nickle nim node-typescript nodejs && chronic apt-get clean
+RUN chronic apt-get -qq install -y ocaml octave open-cobol openjdk-8-jdk && chronic apt-get clean
+RUN chronic apt-get -qq install -y pakcs pari-gp parser3-cgi perl && chronic apt-get clean
+RUN chronic apt-get -qq install -y php-cli pike8.0 python r-base && chronic apt-get clean
+RUN chronic apt-get -qq install -y rakudo ratfor rc regina-rexx && chronic apt-get clean
+RUN chronic apt-get -qq install -y ruby ruby-mustache rustc scala && chronic apt-get clean
+RUN chronic apt-get -qq install -y scilab sed slsh spin && chronic apt-get clean
+RUN chronic apt-get -qq install -y squirrel3 swi-prolog tcl tcsh && chronic apt-get clean
+RUN chronic apt-get -qq install -y valac vim xsltproc yabasic && chronic apt-get clean
+RUN chronic apt-get -qq install -y yorick zoem zsh && chronic apt-get clean
 ENV PATH /usr/games:$PATH
 ADD . /usr/local/share/quine-relay
 WORKDIR /usr/local/share/quine-relay

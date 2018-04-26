@@ -1,7 +1,7 @@
 require_relative "code-gen"
 
 apts = RunSteps.flat_map {|s| s.apt }
-other_packages = %w(libpng-dev libgd-dev groff flex bison)
+other_packages = %w(libpng-dev libgd-dev groff flex bison curl)
 
 apts = [*apts.flatten.compact.uniq, *other_packages].uniq.sort
 
