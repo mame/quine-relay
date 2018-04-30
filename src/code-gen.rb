@@ -355,7 +355,7 @@ end
 
 class Maxima < CodeGen
   File = "QR.mac"
-  Cmd = "maxima -q --init-mac=QR.mac > OUTFILE"
+  Cmd = "mv /tmp /tmp.bak && ln -s /dev/shm /tmp && maxima -q --init-mac=QR.mac > OUTFILE && rm /tmp && mv /tmp.bak /tmp"
   Apt = "maxima"
   Code = %q("linel:99999;print#{E[PREV]};quit();")
 end

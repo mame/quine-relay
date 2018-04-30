@@ -154,7 +154,8 @@ Then, build the bundled interpreters.
     $ lua5.3 QR.lua > QR.m4
     $ m4 QR.m4 > QR.mk
     $ make -f QR.mk > QR.mac
-    $ maxima -q --init-mac=QR.mac > QR.mzn
+    $ mv /tmp /tmp.bak && ln -s /dev/shm /tmp && maxima -q --init-mac=QR.mac > QR.mzn &&
+      rm /tmp && mv /tmp.bak /tmp
     $ mzn2fzn QR.mzn && fzn-gecode QR.fzn | solns2out --soln-sep '' QR.ozn > QR.il
     $ ilasm QR.il && mono QR.exe > QR.mustache
     $ mustache QR.mustache QR.mustache > QR.asm

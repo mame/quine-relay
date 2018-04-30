@@ -880,7 +880,11 @@ QR.mzn: QR.mac
 	@echo "##  100: Maxima -> MiniZinc  ##"
 	@echo "###############################"
 	@echo
+	mv /tmp /tmp.bak
+	ln -s /dev/shm /tmp
 	maxima -q --init-mac=QR.mac > QR.mzn
+	rm /tmp
+	mv /tmp.bak /tmp
 
 QR.il: QR.mzn
 	@echo
