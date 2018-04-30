@@ -6,7 +6,7 @@ require "rsvg2"
 # * https://www.google.com/fonts/specimen/Raleway
 # * https://www.google.com/fonts/specimen/UnifrakturCook
 
-W = H = 610
+W = H = 750
 surface = Cairo::ImageSurface.new(W, H)
 ctx = Cairo::Context.new(surface)
 
