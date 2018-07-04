@@ -14,7 +14,7 @@ end
 OUT << <<-END
 MAKEFLAGS += --no-print-directory
 
-PATH := $(CURDIR)/vendor/local/bin:$(PATH)
+PATH := $(CURDIR)/vendor/local/bin:/usr/games:$(PATH)
 CLASSPATH := .
 
 find_any0 = $(firstword $(foreach x,$(1),$(if $(shell which $(x) 2>/dev/null),$(x),)))

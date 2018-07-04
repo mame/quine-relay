@@ -33,7 +33,6 @@ RUN chronic apt-get -qq install -y scilab sed slsh spin && chronic apt-get clean
 RUN chronic apt-get -qq install -y squirrel3 swi-prolog tcl tcsh && chronic apt-get clean
 RUN chronic apt-get -qq install -y valac vim xsltproc yabasic && chronic apt-get clean
 RUN chronic apt-get -qq install -y yorick zoem zsh && chronic apt-get clean
-ENV PATH /usr/games:$PATH
 ADD . /usr/local/share/quine-relay
 WORKDIR /usr/local/share/quine-relay
 RUN make -C vendor

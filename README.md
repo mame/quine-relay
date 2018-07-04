@@ -300,7 +300,7 @@ I used the following Ubuntu deb packages to test this program.
 84  |Icon                       |icont, iconx                 |9.4.3-6ubuntu1
 85  |INTERCAL                   |intercal                     |30:0.30-2
 86  |Jasmin                     |jasmin-sable                 |2.5.0-2
-87  |Java                       |openjdk-8-jdk                |8u162-b12-1
+87  |Java                       |openjdk-8-jdk                |8u171-b11-0ubuntu0.18.04.1
 88  |JavaScript                 |nodejs                       |8.10.0~dfsg-2
 89  |Jq                         |jq                           |1.5+dfsg-2
 90  |JSFuck                     |nodejs                       |8.10.0~dfsg-2
@@ -308,7 +308,7 @@ I used the following Ubuntu deb packages to test this program.
 92  |Lazy K                     |*N/A*                        |-
 93  |Lisaac                     |lisaac                       |1:0.39~rc1-3build1
 94  |LiveScript                 |livescript                   |1.5.0+dfsg-4
-95  |LLVM asm                   |llvm                         |1:6.0-41~exp4
+95  |LLVM asm                   |llvm                         |1:6.0-41~exp5~ubuntu1
 96  |LOLCODE                    |*N/A*                        |-
 97  |Lua                        |lua5.3                       |5.3.3-1
 98  |M4                         |m4                           |1.4.18-1
@@ -328,12 +328,12 @@ I used the following Ubuntu deb packages to test this program.
 112 |PARI/GP                    |pari-gp                      |2.9.4-1
 113 |Parser 3                   |parser3-cgi                  |3.4.5-2
 114 |Pascal                     |fp-compiler                  |3.0.4+dfsg-18
-115 |Perl 5                     |perl                         |5.26.1-6
+115 |Perl 5                     |perl                         |5.26.1-6ubuntu0.1
 116 |Perl 6                     |rakudo                       |2018.03-1
 117 |PHP                        |php-cli                      |1:7.2+60ubuntu1
 118 |Piet                       |*N/A*                        |-
 119 |Pike                       |pike8.0                      |8.0.498-1build1
-120 |PostScript                 |ghostscript                  |9.22~dfsg+1-0ubuntu1
+120 |PostScript                 |ghostscript                  |9.22~dfsg+1-0ubuntu1.1
 121 |PPT (Punched tape)         |bsdgames                     |2.17-26build1
 122 |Prolog                     |swi-prolog                   |7.6.4+dfsg-1build1
 123 |Promela (Spin)             |spin                         |6.4.6+dfsg-2

@@ -15,7 +15,6 @@ dockerfile << "RUN apt-get -qq install -y moreutils"
 apts.each_slice(4) do |apt|
   dockerfile << "RUN chronic apt-get -qq install -y #{ apt.join(" ") } && chronic apt-get clean"
 end
-dockerfile << "ENV PATH /usr/games:$PATH"
 dockerfile << "ADD . /usr/local/share/quine-relay"
 dockerfile << "WORKDIR /usr/local/share/quine-relay"
 dockerfile << "RUN make -C vendor"
