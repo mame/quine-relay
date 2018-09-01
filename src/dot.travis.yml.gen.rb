@@ -28,5 +28,17 @@ s = [
   *Psych.dump(yaml).lines.map {|l| l.chomp }.drop(1),
   'dummy: |',
   '  dummy" > /dev/null',
+  -  "  mkdir spoiler",
+  *srcs.map do |s|
+    "  sudo docker cp qr:/usr/local/share/quine-relay/#{ s } spoiler/"
+  end,
+  "  cd spoiler",
+  "  git init --quiet",
+  "  git config user.name 'Yusuke Endoh'",
+  "  git config user.email 'mame@ruby-lang.org'",
+  "  git add .",
+  "  git commit -m spoiler --quiet",
+  "  git push --force --quiet \"https://${GH_TOKEN}@github.com/mame/quine-relay\" master:spoiler",
+  "  echo The intermediate sources are available: https://github.com/mame/quine-relay/tree/spoiler"
 ]
 File.write("../.travis.yml", s.join("\n") + "\n")
