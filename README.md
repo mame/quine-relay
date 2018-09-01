@@ -154,8 +154,7 @@ Then, build the bundled interpreters.
     $ lua5.3 QR.lua > QR.m4
     $ m4 QR.m4 > QR.mk
     $ make -f QR.mk > QR.mac
-    $ mv /tmp /tmp.bak && ln -s /dev/shm /tmp && maxima -q --init-mac=QR.mac > QR.mzn &&
-      rm /tmp && mv /tmp.bak /tmp
+    $ maxima -q --init-mac=QR.mac > QR.mzn
     $ mzn2fzn QR.mzn && fzn-gecode QR.fzn | solns2out --soln-sep '' QR.ozn > QR.il
     $ ilasm QR.il && mono QR.exe > QR.mustache
     $ mustache QR.mustache QR.mustache > QR.asm
@@ -165,7 +164,7 @@ Then, build the bundled interpreters.
     $ nim c QR.nim && ./QR > QR.m
     $ gcc -o QR QR.m && ./QR > QR.ml
     $ ocaml QR.ml > QR.octave
-    $ mv QR.m QR.m.bak && octave -qf QR.octave > QR.ook && mv QR.m.bak QR.m
+    $ octave -qf QR.octave > QR.ook
     $ ruby vendor/ook-to-bf.rb QR.ook QR.ook.bf && bf -c500000 QR.ook.bf > QR.gp
     $ gp -f -q QR.gp > QR.p
     $ parser3 QR.p > QR.pas
@@ -215,9 +214,9 @@ I used the following Ubuntu deb packages to test this program.
 \#  |language                   |ubuntu package               |version
 ----|---------------------------|-----------------------------|---------------------------
 1   |Ruby                       |ruby                         |1:2.5.1
-2   |Rust                       |rustc                        |1.24.1+dfsg1+llvm-0ubuntu2
+2   |Rust                       |rustc                        |1.25.0+dfsg1+llvm-0ubuntu1
 3   |Scala                      |scala                        |2.11.12-2
-4   |Scheme                     |guile-2.0                    |2.0.13+1-5build2
+4   |Scheme                     |guile-2.0                    |2.0.13+1-5ubuntu0.1
 5   |Scilab                     |scilab                       |6.0.1-1ubuntu1
 6   |sed                        |sed                          |4.4-2
 7   |Shakespeare                |*N/A*                        |-
@@ -300,10 +299,10 @@ I used the following Ubuntu deb packages to test this program.
 84  |Icon                       |icont, iconx                 |9.4.3-6ubuntu1
 85  |INTERCAL                   |intercal                     |30:0.30-2
 86  |Jasmin                     |jasmin-sable                 |2.5.0-2
-87  |Java                       |openjdk-8-jdk                |8u171-b11-0ubuntu0.18.04.1
-88  |JavaScript                 |nodejs                       |8.10.0~dfsg-2
+87  |Java                       |openjdk-8-jdk                |8u181-b13-0ubuntu0.18.04.1
+88  |JavaScript                 |nodejs                       |8.10.0~dfsg-2ubuntu0.2
 89  |Jq                         |jq                           |1.5+dfsg-2
-90  |JSFuck                     |nodejs                       |8.10.0~dfsg-2
+90  |JSFuck                     |nodejs                       |8.10.0~dfsg-2ubuntu0.2
 91  |ksh                        |ksh                          |93u+20120801-3.1ubuntu1
 92  |Lazy K                     |*N/A*                        |-
 93  |Lisaac                     |lisaac                       |1:0.39~rc1-3build1
@@ -327,8 +326,8 @@ I used the following Ubuntu deb packages to test this program.
 111 |Ook!                       |*N/A*                        |-
 112 |PARI/GP                    |pari-gp                      |2.9.4-1
 113 |Parser 3                   |parser3-cgi                  |3.4.5-2
-114 |Pascal                     |fp-compiler                  |3.0.4+dfsg-18
-115 |Perl 5                     |perl                         |5.26.1-6ubuntu0.1
+114 |Pascal                     |fp-compiler                  |3.0.4+dfsg-18ubuntu1
+115 |Perl 5                     |perl                         |5.26.1-6ubuntu0.2
 116 |Perl 6                     |rakudo                       |2018.03-1
 117 |PHP                        |php-cli                      |1:7.2+60ubuntu1
 118 |Piet                       |*N/A*                        |-

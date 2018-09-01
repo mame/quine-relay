@@ -880,11 +880,9 @@ QR.mzn: QR.mac
 	@echo "##  100: Maxima -> MiniZinc  ##"
 	@echo "###############################"
 	@echo
-	mv /tmp /tmp.bak
-	ln -s /dev/shm /tmp
+	@if [ $TRAVIS = "true" ]; then mv /tmp /tmp.bak && ln -s /dev/shm /tmp; fi
 	maxima -q --init-mac=QR.mac > QR.mzn
-	rm /tmp
-	mv /tmp.bak /tmp
+	@if [ $TRAVIS = "true" ]; then rm /tmp && mv /tmp.bak /tmp; fi
 
 QR.il: QR.mzn
 	@echo
@@ -971,9 +969,9 @@ QR.ook: QR.octave
 	@echo "##  110: Octave -> Ook!  ##"
 	@echo "###########################"
 	@echo
-	mv QR.m QR.m.bak
+	@mv QR.m QR.m.bak
 	octave -qf QR.octave > QR.ook
-	mv QR.m.bak QR.m
+	@mv QR.m.bak QR.m
 
 QR.gp: QR.ook
 	@echo
