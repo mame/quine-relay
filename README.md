@@ -164,7 +164,7 @@ Then, build the bundled interpreters.
     $ nim c QR.nim && ./QR > QR.m
     $ gcc -o QR QR.m && ./QR > QR.ml
     $ ocaml QR.ml > QR.octave
-    $ octave -qf QR.octave > QR.ook
+    $ mv QR.m QR.m.bak && octave -qf QR.octave > QR.ook && mv QR.m.bak QR.m
     $ ruby vendor/ook-to-bf.rb QR.ook QR.ook.bf && bf -c500000 QR.ook.bf > QR.gp
     $ gp -f -q QR.gp > QR.p
     $ parser3 QR.p > QR.pas

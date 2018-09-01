@@ -969,9 +969,9 @@ QR.ook: QR.octave
 	@echo "##  110: Octave -> Ook!  ##"
 	@echo "###########################"
 	@echo
-	@mv QR.m QR.m.bak
+	mv QR.m QR.m.bak
 	octave -qf QR.octave > QR.ook
-	@mv QR.m.bak QR.m
+	mv QR.m.bak QR.m
 
 QR.gp: QR.ook
 	@echo
