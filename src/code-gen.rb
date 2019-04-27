@@ -1116,8 +1116,12 @@ class AspectJ < CodeGen
     <<-'END'.lines.map {|l| l.strip }.join
       %(
         class QR{
-          #$L void main(String[]v){
-            System.out.print(#{E[PREV.gsub(B,?^)]}.replace("^","\\\\"));
+          #$L void main(String[]a){
+            a=#{E[PREV.gsub(/\\+/){"^#{$&.size}^"}]}.split("\\\\^");
+            for(int i=1;i<a.length;a[0]+=a[i+1],i+=2){
+              a[0]+="\\\\".repeat(Integer.parseInt(a[i]));
+            }
+            System.out.print(a[0]);
           }
         }
       )
