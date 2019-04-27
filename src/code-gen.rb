@@ -920,7 +920,7 @@ class Clojure_CMake_Cobol < CodeGen
     "cmake -P QR.cmake > OUTFILE",
     "cobc -O2 -x QR.cob && ./QR > OUTFILE",
   ]
-  Apt = ["clojure", "cmake", "open-cobol"]
+  Apt = ["clojure", "cmake", "gnucobol"]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
@@ -933,7 +933,7 @@ class Clojure_CMake_Cobol < CodeGen
              (map #(str
                   "    \\""
                   (.replace %1"\\"""\\"\\"")
-                  "\\"&")
+                  "\\"")
                (re-seq #".{1,45}"
                   "#{e[PREV]}"))
              ["    \\" \\"."
