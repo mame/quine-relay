@@ -1430,6 +1430,13 @@ class Scheme_Sed_Shakespeare_SLang < CodeGen
   ]
   Apt = ["guile-2.0", "sed", nil, "slsh"]
   def code
+    # NOTE: This code does not work for a short or simple text.
+    # This assumes the input is so complex enough that
+    # the compressed result won't be one character.
+    #
+    # * The Scheme program generates the encoded Shakespeare code.
+    # * sed program decodes and completes Shakespeare code.
+    # * The S-Lang program includes 8-bit characters and decompress the compression.
     <<-'END'.lines.map {|l| l.strip }.join
       %(
         (display"
