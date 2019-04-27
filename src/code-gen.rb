@@ -526,7 +526,7 @@ class Java_ < CodeGen
   Name = "Java"
   File = "QR.java"
   Cmd = "javac QR.java && java QR > OUTFILE"
-  Apt = "openjdk-8-jdk"
+  Apt = "openjdk-13-jdk"
   def code
     # LZ78-like compression
     <<-'END'.lines.map {|l| l.strip }.join
@@ -1093,7 +1093,7 @@ end
 
 class AspectJ < CodeGen
   File = "QR.aj"
-  Cmd = "JAVACMD=/usr/lib/jvm/java-8-openjdk-amd64/bin/java ajc QR.aj && java QR > OUTFILE"
+  Cmd = "JAVACMD=/usr/lib/jvm/java-13-openjdk-amd64/bin/java ajc QR.aj && java QR > OUTFILE"
   Apt = "aspectj"
   def code
     <<-'END'.lines.map {|l| l.strip }.join
