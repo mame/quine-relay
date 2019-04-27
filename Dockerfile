@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:19.04
 ENV DEBIAN_FRONTEND noninteractive
 RUN rm /etc/dpkg/dpkg.cfg.d/excludes
 RUN apt-get update && apt-get upgrade -y
@@ -11,25 +11,25 @@ RUN chronic apt-get -qq install -y bsh clisp clojure cmake && chronic apt-get cl
 RUN chronic apt-get -qq install -y coffeescript curl dafny dc && chronic apt-get clean
 RUN chronic apt-get -qq install -y ecere-dev elixir emacs25 erlang && chronic apt-get clean
 RUN chronic apt-get -qq install -y f2c fish flex fp-compiler && chronic apt-get clean
-RUN chronic apt-get -qq install -y fsharp g++ gap gawk && chronic apt-get clean
-RUN chronic apt-get -qq install -y gcc gdb gdc generator-scripting-language && chronic apt-get clean
-RUN chronic apt-get -qq install -y genius gforth gfortran ghc && chronic apt-get clean
-RUN chronic apt-get -qq install -y ghostscript gnat gnu-smalltalk gnuplot && chronic apt-get clean
-RUN chronic apt-get -qq install -y gobjc golang gpt gri && chronic apt-get clean
-RUN chronic apt-get -qq install -y groff groovy guile-2.0 gzip && chronic apt-get clean
-RUN chronic apt-get -qq install -y haxe icont iconx intercal && chronic apt-get clean
-RUN chronic apt-get -qq install -y iverilog jasmin-sable jq ksh && chronic apt-get clean
-RUN chronic apt-get -qq install -y libgd-dev libpng-dev lisaac livescript && chronic apt-get clean
-RUN chronic apt-get -qq install -y llvm lua5.3 m4 make && chronic apt-get clean
-RUN chronic apt-get -qq install -y maxima minizinc mlton mono-devel && chronic apt-get clean
-RUN chronic apt-get -qq install -y mono-mcs mono-vbnc nasm neko && chronic apt-get clean
-RUN chronic apt-get -qq install -y nickle nim node-typescript nodejs && chronic apt-get clean
-RUN chronic apt-get -qq install -y ocaml octave open-cobol openjdk-8-jdk && chronic apt-get clean
-RUN chronic apt-get -qq install -y pakcs pari-gp parser3-cgi perl && chronic apt-get clean
-RUN chronic apt-get -qq install -y php-cli pike8.0 python r-base && chronic apt-get clean
-RUN chronic apt-get -qq install -y rakudo ratfor rc regina-rexx && chronic apt-get clean
-RUN chronic apt-get -qq install -y ruby ruby-mustache rustc scala && chronic apt-get clean
-RUN chronic apt-get -qq install -y scilab sed slsh spin && chronic apt-get clean
+RUN chronic apt-get -qq install -y fsharp g++ gambas3-script gap && chronic apt-get clean
+RUN chronic apt-get -qq install -y gawk gcc gdb gdc && chronic apt-get clean
+RUN chronic apt-get -qq install -y generator-scripting-language genius gforth gfortran && chronic apt-get clean
+RUN chronic apt-get -qq install -y ghc ghostscript gnat gnu-smalltalk && chronic apt-get clean
+RUN chronic apt-get -qq install -y gnucobol gnuplot gobjc golang && chronic apt-get clean
+RUN chronic apt-get -qq install -y gri groff groovy guile-2.0 && chronic apt-get clean
+RUN chronic apt-get -qq install -y gzip haxe icont iconx && chronic apt-get clean
+RUN chronic apt-get -qq install -y intercal iverilog jasmin-sable jq && chronic apt-get clean
+RUN chronic apt-get -qq install -y julia ksh libgd-dev libpng-dev && chronic apt-get clean
+RUN chronic apt-get -qq install -y lisaac livescript llvm lua5.3 && chronic apt-get clean
+RUN chronic apt-get -qq install -y m4 make maxima minizinc && chronic apt-get clean
+RUN chronic apt-get -qq install -y mlton mono-devel mono-mcs mono-vbnc && chronic apt-get clean
+RUN chronic apt-get -qq install -y nasm neko nickle nim && chronic apt-get clean
+RUN chronic apt-get -qq install -y node-typescript nodejs ocaml octave && chronic apt-get clean
+RUN chronic apt-get -qq install -y openjdk-13-jdk pakcs pari-gp parser3-cgi && chronic apt-get clean
+RUN chronic apt-get -qq install -y perl php-cli pike8.0 python && chronic apt-get clean
+RUN chronic apt-get -qq install -y r-base rakudo ratfor rc && chronic apt-get clean
+RUN chronic apt-get -qq install -y regina-rexx ruby ruby-mustache rustc && chronic apt-get clean
+RUN chronic apt-get -qq install -y scala sed slsh spin && chronic apt-get clean
 RUN chronic apt-get -qq install -y squirrel3 swi-prolog tcl tcsh && chronic apt-get clean
 RUN chronic apt-get -qq install -y valac vim xsltproc yabasic && chronic apt-get clean
 RUN chronic apt-get -qq install -y yorick zoem zsh && chronic apt-get clean
