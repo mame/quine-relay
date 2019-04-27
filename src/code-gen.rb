@@ -645,11 +645,11 @@ class Gri_Groovy_Gzip < CodeGen
   end
 end
 
-class GolfScript_GPortugol_Grass < CodeGen
-  Name = ["GolfScript", "G-Portugol", "Grass"]
-  File = ["QR.gs", "QR.gpt", "QR.grass"]
-  Cmd = ["ruby vendor/golfscript.rb QR.gs > OUTFILE", "gpt -o QR QR.gpt && ./QR > OUTFILE", "ruby vendor/grass.rb QR.grass > OUTFILE"]
-  Apt = [nil, "gpt", nil]
+class GolfScript_Grass < CodeGen
+  Name = ["GolfScript", "Grass"]
+  File = ["QR.gs", "QR.grass"]
+  Cmd = ["ruby vendor/golfscript.rb QR.gs > OUTFILE", "ruby vendor/grass.rb QR.grass > OUTFILE"]
+  Apt = [nil, nil]
   def code
     r = <<-'END'.lines.map {|l| l.strip }.join
       %(
@@ -661,14 +661,12 @@ class GolfScript_GPortugol_Grass < CodeGen
             .48<{71+}{[i]\\48-*}if
           }%
         }:t;
-        "algoritmo QR;in"[195][173]++'cio imprima("'
         @@PROLOGUE@@
         "#{e[PREV]}"
         {
           "W""w"@j 1+:j\\- @@MOD@@%1+*
         }%
         @@EPILOGUE@@
-        '");fim'
       )
     END
     mod, prologue, epilogue = ::File.read(::File.join(__dir__, "grass-boot.dat")).lines
