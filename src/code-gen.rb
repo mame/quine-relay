@@ -1404,20 +1404,20 @@ class Smalltalk < CodeGen
   Code = %q("Transcript show: '#{d[PREV,?']}';cr")
 end
 
-class Scilab_Sed_Shakespeare_SLang < CodeGen
-  Name = ["Scilab", "sed", "Shakespeare", "S-Lang"]
-  File = ["QR.sci", "QR.sed", "QR.spl", "QR.sl"]
+class Scheme_Sed_Shakespeare_SLang < CodeGen
+  Name = ["Scheme", "sed", "Shakespeare", "S-Lang"]
+  File = ["QR.scm", "QR.sed", "QR.spl", "QR.sls"]
   Cmd = [
-    "scilab -nwni -nb -f QR.sci > OUTFILE",
+    "$(SCHEME) QR.scm > OUTFILE",
     "sed -E -f QR.sed QR.sed > OUTFILE",
     "./vendor/local/bin/spl2c < QR.spl > QR.spl.c && gcc -o QR -I ./vendor/local/include -L ./vendor/local/lib QR.spl.c -lspl -lm && ./QR > OUTFILE",
-    "slsh QR.sl > OUTFILE",
+    "slsh QR.sls > OUTFILE",
   ]
-  Apt = ["scilab", "sed", nil, "slsh"]
+  Apt = ["guile-2.0", "sed", nil, "slsh"]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
-        printf("
+        (display"
           1d;
           s/.//;
           s/1/ the sum of a son and0/g;
@@ -1431,40 +1431,30 @@ class Scilab_Sed_Shakespeare_SLang < CodeGen
           #Scene i: Relay.\\n
           #[Enter Ajax and Ford]\\n
           #Ajax:\\n
-          #");
-        function[]=f(s);
-          for i=1:2:length(s),
-            printf("2%s3",part(dec2bin(hex2dec(part(s,i:i+1))),$:-1:2)),
-          end;
-        endfunction\n
-        #{
+          #")
+        (define(f n m)
+          (if(= n 1)
+             (display(+(* m 10)3))
+             (f(quotient n 2)(+(* m 10)(modulo n 2)))))
+        (define(g _ n)
+          (if(> n 0)
+             (g(f(modulo n 256)2)(quotient n 256))))
+        (g 0(string->number"#{
           s,v=rp[PREV,127..255];
-          f(
-            %(
-              variable s=`#{s.gsub(/.{1,234}/){$&.gsub("`",%(`+"`"+`))+"`+\n`"}}`,i;
-              for(i=0;i<129;i++)
-                s=strreplace(
-                  s,
-                  pack("C",255-i),
-                  substrbytes(`#{v[0,99]}`+\n`#{v[99..-1]}`,i*2+1,2));
-              printf("%s",s)
-            ),7
-          ){
-            "f('%s')\n"%$s.unpack("H*")
-          }
-        }
-        printf("\\n#[Exeunt]");
-        quit
+          %(
+            variable s=`#{s.gsub(/.{1,234}/){$&+"`+\n`"}}`,i;
+            for(i=0;i<129;i++)
+              s=strreplace(
+                s,
+                pack(`C`,255-i),
+                substrbytes(`#{v[0,99]}`+\n`#{v[99..-1]}`,i*2+1,2));
+            printf(`%s`,s)
+          ).reverse.unpack1("H*")
+        }"16))
+        (display"\\n#[Exeunt]")
       )
     END
   end
-end
-
-class Scheme < CodeGen
-  File = "QR.scm"
-  Cmd = "$(SCHEME) QR.scm > OUTFILE"
-  Apt = "guile-2.0"
-  Code = %q(%((display "#{e[PREV]}")))
 end
 
 class Scala < CodeGen
