@@ -21,7 +21,7 @@ the original Ruby code again.
 
 ### Ubuntu
 
-If you are using Ubuntu 18.04 "Bionic Beaver", you can perform the following steps.
+If you are using Ubuntu 19.04 (Disco Dingo), you can perform the following steps.
 
 #### 1. Install all interpreters/compilers.
 
@@ -251,7 +251,7 @@ I used the following Ubuntu deb packages to test this program.
 36  |Asymptote                  |asymptote                    |2.47-2
 37  |ATS                        |ats2-lang                    |0.3.11-2
 38  |Awk                        |gawk                         |1:4.2.1+dfsg-1build1
-39  |bash                       |bash                         |5.0-3ubuntu1
+39  |bash                       |bash                         |5.0-3ubuntu1.1
 40  |bc                         |bc                           |1.07.1-2build1
 41  |BeanShell                  |bsh                          |2.0b4-19
 42  |Befunge                    |*N/A*                        |-
@@ -332,7 +332,7 @@ I used the following Ubuntu deb packages to test this program.
 117 |PHP                        |php-cli                      |2:7.2+69ubuntu1
 118 |Piet                       |*N/A*                        |-
 119 |Pike                       |pike8.0                      |8.0.702-1
-120 |PostScript                 |ghostscript                  |9.26~dfsg+0-0ubuntu7
+120 |PostScript                 |ghostscript                  |9.26~dfsg+0-0ubuntu7.1
 121 |PPT (Punched tape)         |bsdgames                     |2.17-28
 122 |Prolog                     |swi-prolog                   |7.6.4+dfsg-2ubuntu1
 123 |Promela (Spin)             |spin                         |6.4.9+dfsg-1
