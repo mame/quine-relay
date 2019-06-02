@@ -108,11 +108,6 @@ Alternatively, just type `make`.
 
 Note: It may require huge memory to compile some files.
 
-### Arch Linux
-
-Just install [quine-relay-git](https://aur.archlinux.org/packages/quine-relay-git/) from AUR and run `quine-relay`.
-Report any problems as comments to the AUR package or to the respective packages, if one of the many compilers should have issues.
-
 ### Other platforms
 
 You may find [instructions for other platforms in the wiki](https://github.com/mame/quine-relay/wiki/Installation).
