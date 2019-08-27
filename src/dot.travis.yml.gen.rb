@@ -12,7 +12,7 @@ yaml["sudo"] = "required"
 yaml["services"] = ["docker"]
 yaml["language"] = "ruby"
 yaml["before_install"] = ["sudo docker build -t quine-relay ."]
-yaml["script"] = ["sudo docker run --privileged --name qr -e TRAVIS=$TRAVIS -t quine-relay"]
+yaml["script"] = ["sudo docker run --privileged --name qr -e CI=$TRAVIS -t quine-relay"]
 yaml["after_success"] = [
   'test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && sh .travis.yml'
 ]

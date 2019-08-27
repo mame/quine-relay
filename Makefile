@@ -880,9 +880,9 @@ QR.mzn: QR.mac
 	@echo "##  100: Maxima -> MiniZinc  ##"
 	@echo "###############################"
 	@echo
-	@if [ $(TRAVIS) = "true" ]; then mv /tmp /tmp.bak && ln -s /dev/shm /tmp; fi
+	@if [ $(CI) = "true" ]; then mv /tmp /tmp.bak && ln -s /dev/shm /tmp; fi
 	maxima -q --init-mac=QR.mac > QR.mzn
-	@if [ $(TRAVIS) = "true" ]; then rm /tmp && mv /tmp.bak /tmp; fi
+	@if [ $(CI) = "true" ]; then rm /tmp && mv /tmp.bak /tmp; fi
 
 QR.il: QR.mzn
 	@echo

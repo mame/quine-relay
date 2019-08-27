@@ -6,7 +6,7 @@ language: ruby
 before_install:
 - sudo docker build -t quine-relay .
 script:
-- sudo docker run --privileged --name qr -e TRAVIS=$TRAVIS -t quine-relay
+- sudo docker run --privileged --name qr -e CI=$TRAVIS -t quine-relay
 after_success:
 - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && sh .travis.yml
 env:
