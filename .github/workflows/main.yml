@@ -1,0 +1,13 @@
+name: CI
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: docker build
+        run: |
+          sudo docker build -t quine-relay .
+      - name: docker run
+        run: |
+          sudo docker run --privileged --name qr -e CI=true -t quine-relay
