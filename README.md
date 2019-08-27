@@ -209,7 +209,7 @@ I used the following Ubuntu deb packages to test this program.
 \#  |language                   |ubuntu package               |version
 ----|---------------------------|-----------------------------|--------------------------------------
 1   |Ruby                       |ruby                         |1:2.5.1
-2   |Rust                       |rustc                        |1.32.0+dfsg1+llvm-1ubuntu1
+2   |Rust                       |rustc                        |1.35.0+dfsg0.1+llvm-0ubuntu1~19.04.1
 3   |Scala                      |scala                        |2.11.12-4
 4   |Scheme                     |guile-2.0                    |2.0.13+1-5ubuntu4
 5   |sed                        |sed                          |4.7-1
@@ -227,7 +227,7 @@ I used the following Ubuntu deb packages to test this program.
 17  |Vala                       |valac                        |0.44.3-1
 18  |Velato                     |*N/A*                        |-
 19  |Verilog                    |iverilog                     |10.2-1.1build1
-20  |Vimscript                  |vim                          |2:8.1.0320-1ubuntu3
+20  |Vimscript                  |vim                          |2:8.1.0320-1ubuntu3.1
 21  |Visual Basic               |mono-vbnc                    |4.0.1-2
 22  |Whitespace                 |*N/A*                        |-
 23  |XSLT                       |xsltproc                     |1.1.32-2ubuntu0.1
@@ -327,7 +327,7 @@ I used the following Ubuntu deb packages to test this program.
 117 |PHP                        |php-cli                      |2:7.2+69ubuntu1
 118 |Piet                       |*N/A*                        |-
 119 |Pike                       |pike8.0                      |8.0.702-1
-120 |PostScript                 |ghostscript                  |9.26~dfsg+0-0ubuntu7.1
+120 |PostScript                 |ghostscript                  |9.26~dfsg+0-0ubuntu7.2
 121 |PPT (Punched tape)         |bsdgames                     |2.17-28
 122 |Prolog                     |swi-prolog                   |7.6.4+dfsg-2ubuntu1
 123 |Promela (Spin)             |spin                         |6.4.9+dfsg-1
