@@ -431,17 +431,6 @@ class LiveScript < CodeGen
   Code = %q("console.log"+Q[E[PREV],?#])
 end
 
-class Julia < CodeGen
-  File = "QR.jl"
-  Cmd = "julia QR.jl > OUTFILE"
-  Apt = "julia"
-  def code
-    <<-'END'.lines.map {|l| l.strip }.join
-      %(print("""#{Q[e[PREV]]}"""))
-    END
-  end
-end
-
 class Ksh_LazyK_Lisaac < CodeGen
   Name = ["ksh", "Lazy K", "Lisaac"]
   File = ["QR.ksh", "QR.lazy", "qr.li"]
@@ -485,6 +474,17 @@ class Ksh_LazyK_Lisaac < CodeGen
         h(){ p ${1:$(((($2%83-10)>>((2-$3)*2))%4)):1};};
         f ski\\` 3
       )
+    END
+  end
+end
+
+class Julia < CodeGen
+  File = "QR.jl"
+  Cmd = "julia QR.jl > OUTFILE"
+  Apt = "julia"
+  def code
+    <<-'END'.lines.map {|l| l.strip }.join
+      %(print("""#{Q[e[PREV]]}"""))
     END
   end
 end
