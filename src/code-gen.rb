@@ -830,7 +830,7 @@ class EmacsLisp < CodeGen
   Name = "Emacs Lisp"
   File = "QR.el"
   Cmd = "emacs -Q --script QR.el > OUTFILE"
-  Apt = "emacs25"
+  Apt = "emacs-nox"
   Code = %q(%((princ "#{e[PREV]}")))
 end
 
