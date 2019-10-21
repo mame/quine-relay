@@ -639,18 +639,16 @@ class Haskell < CodeGen
   Code = %q("main=putStr"+E[PREV])
 end
 
-class Gri_Groovy_Gzip < CodeGen
-  File = ["QR.gri", "QR.groovy", "QR.gz"]
-  Cmd = ["gri QR.gri > OUTFILE", "groovy QR.groovy > OUTFILE", "gzip -cd QR.gz > OUTFILE"]
-  Apt = ["gri", "groovy", "gzip"]
+class Groovy_Gzip < CodeGen
+  File = ["QR.groovy", "QR.gz"]
+  Cmd = ["groovy QR.groovy > OUTFILE", "gzip -cd QR.gz > OUTFILE"]
+  Apt = ["groovy", "gzip"]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
-        show "
-          z=new java.util.zip.GZIPOutputStream(System.out);
-          z.write('#{PREV.tr(?"+B,"!~")}'.tr('~!','\\\\\\\\\\u0022')as byte[]);
-          z.close()
-        "\n
+        z=new java.util.zip.GZIPOutputStream(System.out);
+        z.write('#{PREV.tr(?"+B,"!~")}'.tr('~!','\\\\\u0022')as byte[]);
+        z.close()
       )
     END
   end
