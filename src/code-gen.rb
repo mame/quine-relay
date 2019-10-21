@@ -1133,7 +1133,7 @@ class ALGOL68_Ante_AspectCpp < CodeGen
   Cmd = [
     "a68g QR.a68 > OUTFILE",
     "ruby vendor/ante.rb QR.ante > OUTFILE",
-    "ag++ -o QR QR.cc && ./QR > OUTFILE",
+    "ag++ -std=c++11 -o QR QR.cc && ./QR > OUTFILE",
   ]
   Apt = ["algol68g", nil, "aspectc++"]
   def code
