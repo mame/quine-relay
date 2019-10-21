@@ -19,9 +19,10 @@ dummy: |
   sudo docker cp qr:/usr/local/share/quine-relay/QR.rs spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.scala spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.scm spoiler/
+  sudo docker cp qr:/usr/local/share/quine-relay/QR.sci spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.sed spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.spl spoiler/
-  sudo docker cp qr:/usr/local/share/quine-relay/QR.sls spoiler/
+  sudo docker cp qr:/usr/local/share/quine-relay/QR.sl spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.st spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.nut spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.sml spoiler/
@@ -92,7 +93,6 @@ dummy: |
   sudo docker cp qr:/usr/local/share/quine-relay/QR.go spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.gs spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.grass spoiler/
-  sudo docker cp qr:/usr/local/share/quine-relay/QR.gri spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.groovy spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.gz spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.hs spoiler/
@@ -104,10 +104,10 @@ dummy: |
   sudo docker cp qr:/usr/local/share/quine-relay/QR.js spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.jq spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.jsfuck spoiler/
+  sudo docker cp qr:/usr/local/share/quine-relay/QR.jl spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.ksh spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.lazy spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/qr.li spoiler/
-  sudo docker cp qr:/usr/local/share/quine-relay/QR.jl spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.ls spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.ll spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.lol spoiler/
