@@ -58,6 +58,7 @@ __END__
 # Quine Relay
 
 [![Build Status](https://travis-ci.org/mame/quine-relay.svg?branch=laboratory)](https://travis-ci.org/mame/quine-relay)
+[:heart:](https://github.com/sponsors/mame)
 
 ## What this is
 
@@ -152,7 +153,11 @@ I hope you could translate it to English <strike>and help me earn royalties</str
 
 A. See [the criteria for language inclusion][criteria] in detail.  (In short: please create a deb package and contribute it to Ubuntu.)
 
+See also [:heart:][sponsors].
+
 [criteria]: https://github.com/mame/quine-relay/wiki/Criteria-for-language-inclusion
+[sponsors]: https://github.com/sponsors/mame
+
 
 ### Q. Does it really work?
 

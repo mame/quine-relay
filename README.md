@@ -1,6 +1,7 @@
 # Quine Relay
 
 [![Build Status](https://travis-ci.org/mame/quine-relay.svg?branch=laboratory)](https://travis-ci.org/mame/quine-relay)
+[:heart:](https://github.com/sponsors/mame)
 
 ## What this is
 
@@ -232,7 +233,7 @@ I used the following Ubuntu deb packages to test this program.
 21  |Vimscript                  |vim                          |2:8.1.0875-5ubuntu2
 22  |Visual Basic               |mono-vbnc                    |4.0.1-3
 23  |Whitespace                 |*N/A*                        |-
-24  |XSLT                       |xsltproc                     |1.1.33-0ubuntu1
+24  |XSLT                       |xsltproc                     |1.1.33-0ubuntu1.1
 25  |Yabasic                    |yabasic                      |1:2.84.2-1
 26  |Yorick                     |yorick                       |2.2.04+dfsg1-10
 27  |Zoem                       |zoem                         |11-166-1.2
@@ -367,7 +368,11 @@ I hope you could translate it to English <strike>and help me earn royalties</str
 
 A. See [the criteria for language inclusion][criteria] in detail.  (In short: please create a deb package and contribute it to Ubuntu.)
 
+See also [:heart:][sponsors].
+
 [criteria]: https://github.com/mame/quine-relay/wiki/Criteria-for-language-inclusion
+[sponsors]: https://github.com/sponsors/mame
+
 
 ### Q. Does it really work?
 
