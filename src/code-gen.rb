@@ -348,7 +348,7 @@ end
 
 class MiniZinc < CodeGen
   File = "QR.mzn"
-  Cmd = "mzn2fzn QR.mzn && fzn-gecode QR.fzn | solns2out --soln-sep '' QR.ozn > OUTFILE"
+  Cmd = "minizinc --solver Gecode --soln-sep '' t.mzn > OUTFILE"
   Apt = "minizinc"
   Code = %q("solve satisfy;output [#{E[PREV]}];")
 end
