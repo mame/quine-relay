@@ -81,13 +81,13 @@ class Python_R_Ratfor_Rc_REXX < CodeGen
   Name = ["Python", "R", "Ratfor", "rc", "REXX"]
   File = ["QR.py", "QR.R", "QR.ratfor", "QR.rc", "QR.rexx"]
   Cmd = [
-    "python QR.py > OUTFILE",
+    "python3 QR.py > OUTFILE",
     "R --slave -f QR.R > OUTFILE",
     "ratfor -o QR.ratfor.f QR.ratfor && gfortran -o QR QR.ratfor.f && ./QR > OUTFILE",
     "rc QR.rc > OUTFILE",
     "rexx ./QR.rexx > OUTFILE"
   ]
-  Apt = ["python", "r-base", "ratfor", "rc", "regina-rexx"]
+  Apt = ["python3", "r-base", "ratfor", "rc", "regina-rexx"]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
