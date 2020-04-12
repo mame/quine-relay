@@ -890,8 +890,7 @@ QR.il: QR.mzn
 	@echo "##  101: MiniZinc -> MSIL  ##"
 	@echo "#############################"
 	@echo
-	mzn2fzn QR.mzn
-	fzn-gecode QR.fzn | solns2out --soln-sep '' QR.ozn > QR.il
+	minizinc --solver Gecode --soln-sep '' t.mzn > QR.il
 
 QR.mustache: QR.il
 	@echo
