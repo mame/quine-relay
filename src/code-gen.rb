@@ -247,7 +247,7 @@ class Octave_Ook < CodeGen
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       "
-        s=toascii#{E[PREV]};
+        s=double#{E[PREV]};
         t=num2cell(b=11-ceil(s/13));
         for n=1:9
             m={};
@@ -255,7 +255,7 @@ class Octave_Ook < CodeGen
               f=@(x,y,n)repmat(['Ook' char(x) ' Ook' char(y) ' '],[1 abs(n)]);
               m(i)=[f(z=46,63,n) f(q=z-(i<13)*13,q,i-13) f(33,z,1) f(63,z,n)];
             end;
-            t(x)=m(diff([0 s(x=b==n)])+13);
+            t(x=b==n)=m(diff([0 s(x)])+13);
         end;
         printf('%%s',t{:})
       "
@@ -348,7 +348,7 @@ end
 
 class MiniZinc < CodeGen
   File = "QR.mzn"
-  Cmd = "minizinc --solver Gecode --soln-sep '' t.mzn > OUTFILE"
+  Cmd = "minizinc --solver Gecode --soln-sep '' QR.mzn > OUTFILE"
   Apt = "minizinc"
   Code = %q("solve satisfy;output [#{E[PREV]}];")
 end
