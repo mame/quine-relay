@@ -1085,7 +1085,7 @@ QR.R: QR.py
 	@echo "##  124: Python -> R  ##"
 	@echo "########################"
 	@echo
-	python QR.py > QR.R
+	python3 QR.py > QR.R
 
 QR.ratfor: QR.R
 	@echo

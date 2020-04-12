@@ -38,7 +38,7 @@ First, you have to type the following apt-get command to install all of them.
       julia ksh libgd-dev libpng-dev lisaac livescript llvm lua5.3 m4 make \
       maxima minizinc mlton mono-devel mono-mcs mono-vbnc nasm neko nickle \
       nim node-typescript nodejs ocaml octave openjdk-13-jdk pakcs pari-gp \
-      parser3-cgi perl php-cli pike8.0 python r-base rakudo ratfor rc \
+      parser3-cgi perl php-cli pike8.0 python3 r-base rakudo ratfor rc \
       regina-rexx ruby ruby-mustache rustc scala scilab-cli sed slsh spin \
       squirrel3 swi-prolog tcl tcsh valac vim xsltproc yabasic yorick zoem \
       zsh
@@ -180,7 +180,7 @@ Then, build the bundled interpreters.
     $ ppt -d < QR.ppt > QR.prolog
     $ swipl -q -t qr -f QR.prolog > QR.pr
     $ spin -T QR.pr > QR.py
-    $ python QR.py > QR.R
+    $ python3 QR.py > QR.R
     $ R --slave -f QR.R > QR.ratfor
     $ ratfor -o QR.ratfor.f QR.ratfor && gfortran -o QR QR.ratfor.f &&
       ./QR > QR.rc
@@ -333,7 +333,7 @@ I used the following Ubuntu deb packages to test this program.
 121 |PPT (Punched tape)         |bsdgames                     |2.17-28
 122 |Prolog                     |swi-prolog                   |7.6.4+dfsg-2ubuntu2
 123 |Promela (Spin)             |spin                         |6.4.9+dfsg-1
-124 |Python                     |python                       |2.7.17-1
+124 |Python                     |python3                      |3.7.5-1
 125 |R                          |r-base                       |3.6.1-4
 126 |Ratfor                     |ratfor                       |1.0-16
 127 |rc                         |rc                           |1.7.4+97.gceb59bb-2
