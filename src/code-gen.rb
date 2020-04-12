@@ -1155,10 +1155,9 @@ class AFNIX_Aheui < CodeGen
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
-        interp:library"afnix-sio"\n
-        trans O(n){
-          trans o(afnix:sio:OutputTerm)\n
-          o:write(Byte(+ 128 n))
+        trans B(Buffer)\n
+        trans O(n){\n
+          B:add(Byte(+ 128 n))
         }\n
         trans f(v n){\n
           O(+(/ n 64)107)\n
@@ -1180,13 +1179,16 @@ class AFNIX_Aheui < CodeGen
             }
           }
         }\n
-        trans S"#{e[PREV]}"\n
-        trans c 0\n
-        do{
-          D(Integer(S:get c))\n
+        trans S(Buffer"#{e[PREV]}")\n
+        while(!=(S:length)0){\n
+          trans c(S:read)\n
+          D(c:to-integer)\n
           f 35 39
-        }(<(c:++)(S:length))\n
-        f 24 149
+        }\n
+        f 24 149\n
+        interp:library"afnix-sio"\n
+        trans o(afnix:sio:OutputTerm)\n
+        o:write B
       )
     END
   end

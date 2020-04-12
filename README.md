@@ -211,7 +211,7 @@ I used the following Ubuntu deb packages to test this program.
 \#  |language                   |ubuntu package               |version
 ----|---------------------------|-----------------------------|--------------------------------------
 1   |Ruby                       |ruby                         |1:2.5.1
-2   |Rust                       |rustc                        |1.37.0+dfsg1+llvm-1ubuntu1
+2   |Rust                       |rustc                        |1.41.0+dfsg1+llvm-0ubuntu1~19.10.1
 3   |Scala                      |scala                        |2.11.12-4
 4   |Scheme                     |guile-2.0                    |2.0.13+1-5.3ubuntu1
 5   |Scilab                     |scilab-cli                   |6.0.2-0ubuntu2
@@ -230,7 +230,7 @@ I used the following Ubuntu deb packages to test this program.
 18  |Vala                       |valac                        |0.44.9-0ubuntu1
 19  |Velato                     |*N/A*                        |-
 20  |Verilog                    |iverilog                     |10.3-1
-21  |Vimscript                  |vim                          |2:8.1.0875-5ubuntu2
+21  |Vimscript                  |vim                          |2:8.1.0875-5ubuntu2.1
 22  |Visual Basic               |mono-vbnc                    |4.0.1-3
 23  |Whitespace                 |*N/A*                        |-
 24  |XSLT                       |xsltproc                     |1.1.33-0ubuntu1.1
@@ -289,7 +289,7 @@ I used the following Ubuntu deb packages to test this program.
 77  |GolfScript                 |*N/A*                        |-
 78  |Grass                      |*N/A*                        |-
 79  |Groovy                     |groovy                       |2.4.16-2ubuntu1
-80  |Gzip                       |gzip                         |1.10-0ubuntu3
+80  |Gzip                       |gzip                         |1.10-0ubuntu3.1
 81  |Haskell                    |ghc                          |8.6.5+dfsg1-4
 82  |Haxe                       |haxe                         |1:3.4.7-2
 83  |Icon                       |icont, iconx                 |9.4.3-7ubuntu1
@@ -329,7 +329,7 @@ I used the following Ubuntu deb packages to test this program.
 117 |PHP                        |php-cli                      |2:7.3+69ubuntu2
 118 |Piet                       |*N/A*                        |-
 119 |Pike                       |pike8.0                      |8.0.702-1build2
-120 |PostScript                 |ghostscript                  |9.27~dfsg+0-0ubuntu3
+120 |PostScript                 |ghostscript                  |9.27~dfsg+0-0ubuntu3.1
 121 |PPT (Punched tape)         |bsdgames                     |2.17-28
 122 |Prolog                     |swi-prolog                   |7.6.4+dfsg-2ubuntu2
 123 |Promela (Spin)             |spin                         |6.4.9+dfsg-1
