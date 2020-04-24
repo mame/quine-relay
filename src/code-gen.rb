@@ -81,13 +81,13 @@ class Python_R_Ratfor_Rc_REXX < CodeGen
   Name = ["Python", "R", "Ratfor", "rc", "REXX"]
   File = ["QR.py", "QR.R", "QR.ratfor", "QR.rc", "QR.rexx"]
   Cmd = [
-    "python QR.py > OUTFILE",
+    "python3 QR.py > OUTFILE",
     "R --slave -f QR.R > OUTFILE",
     "ratfor -o QR.ratfor.f QR.ratfor && gfortran -o QR QR.ratfor.f && ./QR > OUTFILE",
     "rc QR.rc > OUTFILE",
     "rexx ./QR.rexx > OUTFILE"
   ]
-  Apt = ["python", "r-base", "ratfor", "rc", "regina-rexx"]
+  Apt = ["python3", "r-base", "ratfor", "rc", "regina-rexx"]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
@@ -247,7 +247,7 @@ class Octave_Ook < CodeGen
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       "
-        s=toascii#{E[PREV]};
+        s=double#{E[PREV]};
         t=num2cell(b=11-ceil(s/13));
         for n=1:9
             m={};
@@ -255,7 +255,7 @@ class Octave_Ook < CodeGen
               f=@(x,y,n)repmat(['Ook' char(x) ' Ook' char(y) ' '],[1 abs(n)]);
               m(i)=[f(z=46,63,n) f(q=z-(i<13)*13,q,i-13) f(33,z,1) f(63,z,n)];
             end;
-            t(x)=m(diff([0 s(x=b==n)])+13);
+            t(x=b==n)=m(diff([0 s(x)])+13);
         end;
         printf('%%s',t{:})
       "
@@ -348,7 +348,7 @@ end
 
 class MiniZinc < CodeGen
   File = "QR.mzn"
-  Cmd = "mzn2fzn QR.mzn && fzn-gecode QR.fzn | solns2out --soln-sep '' QR.ozn > OUTFILE"
+  Cmd = "minizinc --solver Gecode --soln-sep '' QR.mzn > OUTFILE"
   Apt = "minizinc"
   Code = %q("solve satisfy;output [#{E[PREV]}];")
 end
@@ -537,7 +537,7 @@ class Java_ < CodeGen
   Name = "Java"
   File = "QR.java"
   Cmd = "javac QR.java && java QR > OUTFILE"
-  Apt = "openjdk-13-jdk"
+  Apt = "openjdk-11-jdk"
   def code
     # LZ78-like compression
     <<-'END'.lines.map {|l| l.strip }.join
@@ -1108,7 +1108,7 @@ end
 
 class AspectJ < CodeGen
   File = "QR.aj"
-  Cmd = "JAVACMD=/usr/lib/jvm/java-13-openjdk-amd64/bin/java ajc QR.aj && java QR > OUTFILE"
+  Cmd = "ajc QR.aj && java QR > OUTFILE"
   Apt = "aspectj"
   def code
     <<-'END'.lines.map {|l| l.strip }.join
@@ -1150,15 +1150,14 @@ end
 
 class AFNIX_Aheui < CodeGen
   File = ["QR.als", "QR.aheui"]
-  Cmd = ["LD_LIBRARY_PATH=/usr/lib/afnix axi QR.als > OUTFILE", "go run vendor/goaheui/main.go QR.aheui > OUTFILE"]
+  Cmd = ["LANG=C LD_LIBRARY_PATH=/usr/lib/afnix axi QR.als > OUTFILE", "go run vendor/goaheui/main.go QR.aheui > OUTFILE"]
   Apt = ["afnix", nil]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
-        interp:library"afnix-sio"\n
-        trans O(n){
-          trans o(afnix:sio:OutputTerm)\n
-          o:write(Byte(+ 128 n))
+        trans B(Buffer)\n
+        trans O(n){\n
+          B:add(Byte(+ 128 n))
         }\n
         trans f(v n){\n
           O(+(/ n 64)107)\n
@@ -1180,13 +1179,16 @@ class AFNIX_Aheui < CodeGen
             }
           }
         }\n
-        trans S"#{e[PREV]}"\n
-        trans c 0\n
-        do{
-          D(Integer(S:get c))\n
+        trans S(Buffer"#{e[PREV]}")\n
+        while(!=(S:length)0){\n
+          trans c(S:read)\n
+          D(c:to-integer)\n
           f 35 39
-        }(<(c:++)(S:length))\n
-        f 24 149
+        }\n
+        f 24 149\n
+        interp:library"afnix-sio"\n
+        trans o(afnix:sio:OutputTerm)\n
+        o:write B
       )
     END
   end

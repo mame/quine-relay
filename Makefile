@@ -289,7 +289,7 @@ QR.aheui: QR.als
 	@echo "##  31: AFNIX -> Aheui  ##"
 	@echo "##########################"
 	@echo
-	LD_LIBRARY_PATH=/usr/lib/afnix axi QR.als > QR.aheui
+	LANG=C LD_LIBRARY_PATH=/usr/lib/afnix axi QR.als > QR.aheui
 
 QR.a68: QR.aheui
 	@echo
@@ -330,7 +330,7 @@ QR.asy: QR.aj
 	@echo "##  36: AspectJ -> Asymptote  ##"
 	@echo "################################"
 	@echo
-	JAVACMD=/usr/lib/jvm/java-13-openjdk-amd64/bin/java ajc QR.aj
+	ajc QR.aj
 	java QR > QR.asy
 
 QR.dats: QR.asy
@@ -890,8 +890,7 @@ QR.il: QR.mzn
 	@echo "##  101: MiniZinc -> MSIL  ##"
 	@echo "#############################"
 	@echo
-	mzn2fzn QR.mzn
-	fzn-gecode QR.fzn | solns2out --soln-sep '' QR.ozn > QR.il
+	minizinc --solver Gecode --soln-sep '' QR.mzn > QR.il
 
 QR.mustache: QR.il
 	@echo
@@ -1085,7 +1084,7 @@ QR.R: QR.py
 	@echo "##  124: Python -> R  ##"
 	@echo "########################"
 	@echo
-	python QR.py > QR.R
+	python3 QR.py > QR.R
 
 QR.ratfor: QR.R
 	@echo

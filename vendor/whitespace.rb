@@ -1,5 +1,3 @@
-require "scanf"
-
 RE = /\G(?<num>[01]+){0}(?<label>[01]*){0}
   ( 00  (?<push> )\g<num>2
   | 010 (?<copy> )\g<num>2
@@ -40,6 +38,19 @@ File.read($*[0]).gsub(/[^ \t\n]/m, "").tr(" \t\n", "012").scan(RE) do
   insn == :mark ? labels[arg] = code.size : code << [insn, arg]
 end
 
+def read_int
+  s = ""
+  while true
+    ch = $stdin.getc
+    case ch
+    when /\d+/ then s << ch
+    when /\s+/ then break
+    else raise "Integer expected"
+    end
+  end
+  s.to_i
+end
+
 pc, call, stack, heap = 0, [], [], Hash.new(0)
 loop do
   insn, arg = code[pc]
@@ -61,7 +72,7 @@ loop do
   when :outc  then putc stack.pop
   when :readc then heap[stack.pop] = $stdin.getc.ord
   when :outn  then print stack.pop
-  when :readn then heap[stack.pop] = $stdin.scanf("%d")[0] || raise("Integer expected")
+  when :readn then heap[stack.pop] = read_int
   when :call  then call << pc; pc = labels[arg]
   when :jump  then pc = labels[arg]
   when :jz    then pc = labels[arg] if stack.pop == 0
