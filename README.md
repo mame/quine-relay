@@ -45,7 +45,7 @@ First, you have to type the following apt-get command to install all of them.
 
 Then, build the bundled interpreters.
 
-    $ sudo apt-get install libpng-dev libgd-dev groff flex bison
+    $ sudo apt-get install libpng-dev libgd-dev groff flex bison curl
     $ make -C vendor
 
 #### 2. Run each program on each interpreter/compiler.
