@@ -537,7 +537,7 @@ class Java_ < CodeGen
   Name = "Java"
   File = "QR.java"
   Cmd = "javac QR.java && java QR > OUTFILE"
-  Apt = "openjdk-13-jdk"
+  Apt = "openjdk-11-jdk"
   def code
     # LZ78-like compression
     <<-'END'.lines.map {|l| l.strip }.join
@@ -1108,7 +1108,7 @@ end
 
 class AspectJ < CodeGen
   File = "QR.aj"
-  Cmd = "JAVACMD=/usr/lib/jvm/java-13-openjdk-amd64/bin/java ajc QR.aj && java QR > OUTFILE"
+  Cmd = "ajc QR.aj && java QR > OUTFILE"
   Apt = "aspectj"
   def code
     <<-'END'.lines.map {|l| l.strip }.join
@@ -1150,7 +1150,7 @@ end
 
 class AFNIX_Aheui < CodeGen
   File = ["QR.als", "QR.aheui"]
-  Cmd = ["LD_LIBRARY_PATH=/usr/lib/afnix axi QR.als > OUTFILE", "go run vendor/goaheui/main.go QR.aheui > OUTFILE"]
+  Cmd = ["LANG=C LD_LIBRARY_PATH=/usr/lib/afnix axi QR.als > OUTFILE", "go run vendor/goaheui/main.go QR.aheui > OUTFILE"]
   Apt = ["afnix", nil]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
