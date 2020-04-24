@@ -29,23 +29,22 @@ If you are using Ubuntu 20.04 LTS (Focal Fossa), you can perform the following s
 First, you have to type the following apt-get command to install all of them.
 
     $ sudo apt-get install afnix algol68g aplus-fsf aspectc++ aspectj \
-      asymptote ats2-lang bash bc bf bison bsdgames bsh clisp clojure cmake \
-      cmake coffeescript dafny dc ecere-dev elixir emacs-nox erlang f2c fish \
-      flex fp-compiler fsharp g++ gambas3-script gap gawk gcc gdb gdc \
+      asymptote ats2-lang bash bc bf bsdgames bsh clisp clojure cmake \
+      coffeescript dafny dc ecere-dev elixir emacs-nox erlang f2c fish flex \
+      fp-compiler fsharp g++ gambas3-script gap gawk gcc gdb gdc \
       generator-scripting-language genius gforth gfortran ghc ghostscript \
-      gnat gnu-smalltalk gnucobol gnuplot gobjc golang groff groovy \
-      guile-2.0 gzip haxe icont iconx intercal iverilog jasmin-sable jq \
-      julia ksh libgd-dev libpng-dev lisaac livescript llvm lua5.3 m4 make \
-      maxima minizinc mlton mono-devel mono-mcs mono-vbnc nasm neko nickle \
-      nim node-typescript nodejs ocaml octave openjdk-11-jdk pakcs pari-gp \
-      parser3-cgi perl php-cli pike8.0 python3 r-base rakudo ratfor rc \
-      regina-rexx ruby ruby-mustache rustc scala scilab-cli sed slsh spin \
-      squirrel3 swi-prolog tcl tcsh valac vim xsltproc yabasic yorick zoem \
-      zsh
+      gnat gnu-smalltalk gnucobol gnuplot gobjc golang groovy guile-2.0 gzip \
+      haxe icont iconx intercal iverilog jasmin-sable jq julia ksh lisaac \
+      livescript llvm lua5.3 m4 make maxima minizinc mlton mono-devel \
+      mono-mcs mono-vbnc nasm neko nickle nim node-typescript nodejs ocaml \
+      octave openjdk-11-jdk pakcs pari-gp parser3-cgi perl php-cli pike8.0 \
+      python3 r-base rakudo ratfor rc regina-rexx ruby ruby-mustache rustc \
+      scala scilab-cli sed slsh spin squirrel3 swi-prolog tcl tcsh valac vim \
+      xsltproc yabasic yorick zoem zsh
 
 Then, build the bundled interpreters.
 
-    $ sudo apt-get install libpng-dev libgd-dev groff flex bison curl
+    $ sudo apt-get install cmake libpng-dev libgd-dev groff bison curl
     $ make -C vendor
 
 #### 2. Run each program on each interpreter/compiler.
