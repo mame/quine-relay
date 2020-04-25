@@ -39,6 +39,10 @@ Grass: grass.rb
   * License: BSD 2-Clause
   * slightly modified for Ruby 2+
 
+GolfScript: golfscript.rb
+  * http://www.golfscript.com/golfscript/
+  * License: MIT
+
 LOLCODE: lci-0.10.5.zip
   * http://lolcode.org/
   * License: GPL3+

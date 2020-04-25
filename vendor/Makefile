@@ -5,7 +5,7 @@ ACME_CHEF := Acme-Chef-1.03
 SPL	  := spl-1.2.1
 LOCAL     := $(CURDIR)/local
 
-all: $(LOCAL)/bin/lci $(LOCAL)/bin/npiet $(LOCAL)/bin/cfunge $(LOCAL)/bin/compilechef $(LOCAL)/bin/lazyk $(LOCAL)/bin/spl2c $(LOCAL)/bin/Vlt.exe goaheui/main.go golfscript.rb
+all: $(LOCAL)/bin/lci $(LOCAL)/bin/npiet $(LOCAL)/bin/cfunge $(LOCAL)/bin/compilechef $(LOCAL)/bin/lazyk $(LOCAL)/bin/spl2c $(LOCAL)/bin/Vlt.exe goaheui/main.go
 
 $(LOCAL)/bin/lci:
 	unzip -q $(LCI).zip
@@ -35,9 +35,6 @@ $(LOCAL)/bin/Vlt.exe:
 
 goaheui/main.go:
 	git clone https://github.com/aheui/goaheui.git
-
-golfscript.rb:
-	curl -O http://www.golfscript.com/golfscript/golfscript.rb
 
 clean:
 	rm -rf $(LOCAL)/ $(LCI)/ $(NPIET)/ $(CFUNGE)/ $(ACME_CHEF)/ $(SPL)/
