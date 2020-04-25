@@ -1,7 +1,7 @@
 LCI       := lci-0.10.5
 NPIET     := npiet-1.3e
 CFUNGE    := cfunge-0.9.0
-ACME_CHEF := Acme-Chef-1.01
+ACME_CHEF := Acme-Chef-1.03
 SPL	  := spl-1.2.1
 LOCAL     := $(CURDIR)/local
 
