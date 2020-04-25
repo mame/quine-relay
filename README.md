@@ -82,7 +82,7 @@ Then, build the bundled interpreters.
     $ a+ QR.+ > qr.adb
     $ gnatmake qr.adb && ./qr > QR.als
     $ LANG=C LD_LIBRARY_PATH=/usr/lib/afnix axi QR.als > QR.aheui
-    $ go run vendor/goaheui/main.go QR.aheui > QR.a68
+    $ ruby vendor/aheui.rb QR.aheui > QR.a68
     $ a68g QR.a68 > QR.ante
     $ ruby vendor/ante.rb QR.ante > QR.cc
     $ ag++ -std=c++11 -o QR QR.cc && ./QR > QR.aj

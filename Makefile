@@ -297,7 +297,7 @@ QR.a68: QR.aheui
 	@echo "##  32: Aheui -> ALGOL 68  ##"
 	@echo "#############################"
 	@echo
-	go run vendor/goaheui/main.go QR.aheui > QR.a68
+	ruby vendor/aheui.rb QR.aheui > QR.a68
 
 QR.ante: QR.a68
 	@echo

@@ -1150,7 +1150,7 @@ end
 
 class AFNIX_Aheui < CodeGen
   File = ["QR.als", "QR.aheui"]
-  Cmd = ["LANG=C LD_LIBRARY_PATH=/usr/lib/afnix axi QR.als > OUTFILE", "go run vendor/goaheui/main.go QR.aheui > OUTFILE"]
+  Cmd = ["LANG=C LD_LIBRARY_PATH=/usr/lib/afnix axi QR.als > OUTFILE", "ruby vendor/aheui.rb QR.aheui > OUTFILE"]
   Apt = ["afnix", nil]
   def code
     <<-'END'.lines.map {|l| l.strip }.join

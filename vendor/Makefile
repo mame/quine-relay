@@ -5,7 +5,7 @@ ACME_CHEF := Acme-Chef-1.03
 SPL	  := spl-1.2.1
 LOCAL     := $(CURDIR)/local
 
-all: $(LOCAL)/bin/lci $(LOCAL)/bin/npiet $(LOCAL)/bin/cfunge $(LOCAL)/bin/compilechef $(LOCAL)/bin/lazyk $(LOCAL)/bin/spl2c $(LOCAL)/bin/Vlt.exe goaheui/main.go
+all: $(LOCAL)/bin/lci $(LOCAL)/bin/npiet $(LOCAL)/bin/cfunge $(LOCAL)/bin/compilechef $(LOCAL)/bin/lazyk $(LOCAL)/bin/spl2c $(LOCAL)/bin/Vlt.exe
 
 $(LOCAL)/bin/lci:
 	unzip -q $(LCI).zip
@@ -32,9 +32,6 @@ $(LOCAL)/bin/spl2c:
 
 $(LOCAL)/bin/Vlt.exe:
 	unzip -d $(LOCAL)/bin -q Velato_0_1.zip
-
-goaheui/main.go:
-	git clone https://github.com/aheui/goaheui.git
 
 clean:
 	rm -rf $(LOCAL)/ $(LCI)/ $(NPIET)/ $(CFUNGE)/ $(ACME_CHEF)/ $(SPL)/
