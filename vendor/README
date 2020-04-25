@@ -34,6 +34,10 @@ Befunge: cfunge-0.9.0.tar.bz2
   * http://sourceforge.net/projects/cfunge/
   * License: GPL3
 
+Chef: Acme-Chef-1.03.tar.gz
+  * https://metacpan.org/pod/Acme::Chef
+  * License: the same terms as Perl (Artistic License)
+
 Grass: grass.rb
   * http://www.blue.sky.or.jp/grass/
   * License: BSD 2-Clause
