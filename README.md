@@ -206,7 +206,7 @@ Note: you need to run in privileged mode otherwise the `maxima` command will fai
 
 If you want to check generated files, you can mount the local directory in the Docker container (but keep using the `vendor` directory of the container), as follows:
 
-    $ docker run --privileged --rm -e CI=true -v /Users/antoinechoppin/dev/github/quine-relay:/usr/local/share/quine-relay -v /usr/local/share/quine-relay/vendor qr
+    $ docker run --privileged --rm -e CI=true -v $(pwd):/usr/local/share/quine-relay -v /usr/local/share/quine-relay/vendor qr
 
 ### Other platforms
 
