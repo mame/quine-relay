@@ -2,6 +2,7 @@
 /qr*
 /tmp
 /nimcache
+/.curry
 !QR.rb
 gst.im
 /src/lazyk-boot.dat
