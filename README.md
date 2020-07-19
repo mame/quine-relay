@@ -195,6 +195,19 @@ Alternatively, just type `make`.
 
 Note: It may require huge memory to compile some files.
 
+### Docker
+
+Simply build the image and run a container as follows:
+
+    $ docker build -t qr .
+    $ docker run --privileged --rm -e CI=true qr
+
+Note: you need to run in privileged mode otherwise the `maxima` command will fail.
+
+If you want to check generated files, you can mount the local directory in the Docker container (but keep using the `vendor` directory of the container), as follows:
+
+    $ docker run --privileged --rm -e CI=true -v $(pwd):/usr/local/share/quine-relay -v /usr/local/share/quine-relay/vendor qr
+
 ### Other platforms
 
 You may find [instructions for other platforms in the wiki](https://github.com/mame/quine-relay/wiki/Installation).

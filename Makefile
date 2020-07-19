@@ -820,8 +820,10 @@ QR.ls: qr.li
 	@echo "##  93: Lisaac -> LiveScript  ##"
 	@echo "################################"
 	@echo
+	@mv QR.c QR.c.bak
 	lisaac qr.li
 	./qr > QR.ls
+	@mv QR.c.bak QR.c
 
 QR.ll: QR.ls
 	@echo
@@ -880,9 +882,9 @@ QR.mzn: QR.mac
 	@echo "##  100: Maxima -> MiniZinc  ##"
 	@echo "###############################"
 	@echo
-	@if [ $(CI) = "true" ]; then mv /tmp /tmp.bak && ln -s /dev/shm /tmp; fi
+	@if [ "$(CI)" = "true" ]; then mv /tmp /tmp.bak && ln -s /dev/shm /tmp; fi
 	maxima -q --init-mac=QR.mac > QR.mzn
-	@if [ $(CI) = "true" ]; then rm /tmp && mv /tmp.bak /tmp; fi
+	@if [ "$(CI)" = "true" ]; then rm /tmp && mv /tmp.bak /tmp; fi
 
 QR.il: QR.mzn
 	@echo
