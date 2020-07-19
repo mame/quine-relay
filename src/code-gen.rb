@@ -358,8 +358,8 @@ class Maxima < CodeGen
   Cmd = "maxima -q --init-mac=QR.mac > OUTFILE"
   Apt = "maxima"
   Backup = [[
-    %(if [ $(CI) = "true" ]; then mv /tmp /tmp.bak && ln -s /dev/shm /tmp; fi),
-    %(if [ $(CI) = "true" ]; then rm /tmp && mv /tmp.bak /tmp; fi),
+    %(if [ "$(CI)" = "true" ]; then mv /tmp /tmp.bak && ln -s /dev/shm /tmp; fi),
+    %(if [ "$(CI)" = "true" ]; then rm /tmp && mv /tmp.bak /tmp; fi),
   ]]
   Code = %q("linel:99999;print#{E[PREV]};quit();")
 end
@@ -440,6 +440,7 @@ class Ksh_LazyK_Lisaac < CodeGen
     "lisaac qr.li && ./qr > OUTFILE",
   ]
   Apt = ["ksh", nil, "lisaac"]
+  Backup = [nil, nil, "QR.c"]
   def code
     lazyk = ::File.read(::File.join(__dir__, "lazyk-boot.dat"))
     lazyk = lazyk.tr("ski`","0123").scan(/.{1,3}/).map do |n|
