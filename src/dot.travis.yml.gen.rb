@@ -8,6 +8,7 @@ apts.delete("ruby2.1")
 srcs = RunSteps.flat_map {|s| s.src }
 
 yaml = {}
+yaml["dist"] = "bionic"
 yaml["sudo"] = "required"
 yaml["services"] = ["docker"]
 yaml["language"] = "ruby"
