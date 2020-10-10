@@ -1,5 +1,5 @@
 echo : dummy"
-dist: bionic
+dist: focal
 sudo: required
 services:
 - docker
