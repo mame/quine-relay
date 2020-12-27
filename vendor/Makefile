@@ -5,6 +5,7 @@ ACME_CHEF := Acme-Chef-1.03
 SPL	  := spl-1.2.1
 LOCAL     := $(CURDIR)/local
 
+.NOTPARALLEL:
 all: $(LOCAL)/bin/lci $(LOCAL)/bin/npiet $(LOCAL)/bin/cfunge $(LOCAL)/bin/compilechef $(LOCAL)/bin/lazyk $(LOCAL)/bin/spl2c $(LOCAL)/bin/Vlt.exe
 
 $(LOCAL)/bin/lci:
