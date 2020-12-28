@@ -56,7 +56,7 @@ Then, build the bundled interpreters.
     $ guile QR.scm > QR.sci
     $ scilab-cli -nb -f QR.sci > QR.sed
     $ sed -E -f QR.sed QR.sed > QR.spl
-    $ ./vendor/local/bin/spl2c < QR.spl > QR.spl.c && gcc -Wl,--allow-multiple-definition -o QR -I ./vendor/local/include -L ./vendor/local/lib QR.spl.c -lspl -lm &&
+    $ ./vendor/local/bin/spl2c < QR.spl > QR.spl.c && gcc -z muldefs -o QR -I ./vendor/local/include -L ./vendor/local/lib QR.spl.c -lspl -lm &&
       ./QR > QR.sl
     $ slsh QR.sl > QR.st
     $ gst QR.st > QR.nut

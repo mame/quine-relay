@@ -1442,7 +1442,7 @@ class Scilab_Sed_Shakespeare_SLang < CodeGen
   Cmd = [
     "scilab-cli -nb -f QR.sci > OUTFILE",
     "sed -E -f QR.sed QR.sed > OUTFILE",
-    "./vendor/local/bin/spl2c < QR.spl > QR.spl.c && gcc -Wl,--allow-multiple-definition -o QR -I ./vendor/local/include -L ./vendor/local/lib QR.spl.c -lspl -lm && ./QR > OUTFILE",
+    "./vendor/local/bin/spl2c < QR.spl > QR.spl.c && gcc -z muldefs -o QR -I ./vendor/local/include -L ./vendor/local/lib QR.spl.c -lspl -lm && ./QR > OUTFILE",
     "slsh QR.sl > OUTFILE",
   ]
   Apt = ["scilab-cli", "sed", nil, "slsh"]
