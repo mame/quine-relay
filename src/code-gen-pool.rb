@@ -74,18 +74,6 @@ class GolfScript_GPortugol_Grass < CodeGen
   end
 end
 
-class SurgeScript < CodeGen
-  After = StandardML_Subleq
-  File = "QR.ss"
-  Cmd = "surgescript QR.ss > OUTFILE"
-  Apt = "surgescript"
-  def code
-    <<-'END'
-      %(object"Application"{state"main"{foreach(s in[#{f(PREV,4){$S+?,}}])Console.write(s);Application.exit();}})
-    END
-  end
-end
-
 CodeGen::List.slice!(original_list_size..-1).each do |s|
   i = CodeGen::List.find_index(s::After)
   CodeGen::List.insert(i, s)

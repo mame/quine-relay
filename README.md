@@ -33,13 +33,13 @@ First, you have to type the following apt-get command to install all of them.
       dafny dc dhall elixir emacs-nox erlang f2c fish flex fp-compiler \
       fsharp g++ gambas3-scripter gap gawk gcc gdb gdc \
       generator-scripting-language genius gforth gfortran ghc ghostscript \
-      gnat gnu-smalltalk gnucobol gnuplot gobjc golang groovy guile-2.0 gzip \
-      haxe icont iconx intercal iverilog jasmin-sable jq julia ksh \
+      gnat gnu-smalltalk gnucobol gnuplot gobjc golang gpt groovy guile-2.0 \
+      gzip haxe icont iconx intercal iverilog jasmin-sable jq julia ksh \
       libpolyml-dev lisaac livescript llvm lua5.3 m4 make maxima minizinc \
       mono-devel mono-mcs mono-vbnc nasm neko nickle nim node-typescript \
-      nodejs ocaml octave openjdk-11-jdk pakcs pari-gp parser3-cgi perl \
-      php-cli pike8.0 polyml python3 r-base rakudo ratfor rc regina-rexx \
-      ruby ruby-mustache rustc scala scilab-cli sed slsh spin squirrel3 \
+      nodejs ocaml octave openjdk-11-jdk pari-gp parser3-cgi perl php-cli \
+      pike8.0 polyml python3 r-base rakudo ratfor rc regina-rexx ruby \
+      ruby-mustache rustc scala scilab-cli sed slsh spin squirrel3 \
       surgescript swi-prolog tcl tcsh valac vim xsltproc yabasic yorick zoem \
       zsh
 
@@ -57,7 +57,7 @@ Then, build the bundled interpreters.
     $ guile QR.scm > QR.sci
     $ scilab-cli -nb -f QR.sci > QR.sed
     $ sed -E -f QR.sed QR.sed > QR.spl
-    $ ./vendor/local/bin/spl2c < QR.spl > QR.spl.c && gcc -z muldefs -o QR -I ./vendor/local/include -L ./vendor/local/lib QR.spl.c -lspl -lm &&
+    $ ./vendor/local/bin/spl2c < QR.spl > QR.spl.c && gcc -Wl,--allow-multiple-definition -o QR -I ./vendor/local/include -L ./vendor/local/lib QR.spl.c -lspl -lm &&
       ./QR > QR.sl
     $ slsh QR.sl > QR.st
     $ gst QR.st > QR.nut
@@ -106,8 +106,7 @@ Then, build the bundled interpreters.
     $ cmake -P QR.cmake > QR.cob
     $ cobc -O2 -x QR.cob && ./QR > QR.coffee
     $ coffee --nodejs --stack_size=100000 QR.coffee > QR.lisp
-    $ clisp QR.lisp > QR.curry
-    $ pakcs --nocypm :load QR.curry :save :quit && ./QR > QR.d
+    $ clisp QR.lisp > QR.d
     $ gdc -o QR QR.d && ./QR > QR.dfy
     $ dafny QR.dfy && mono QR.exe > QR.dc
     $ dc QR.dc > QR.dhall || true
@@ -129,7 +128,9 @@ Then, build the bundled interpreters.
     $ gsl -q QR.gsl > QR.plt
     $ gnuplot QR.plt > QR.go
     $ go run QR.go > QR.gs
-    $ ruby vendor/golfscript.rb QR.gs > QR.grass
+    $ ruby vendor/golfscript.rb QR.gs > QR.gpt
+    $ mv QR.c QR.c.bak && gpt -t QR.c QR.gpt && gcc -o QR QR.c && ./QR > QR.grass &&
+      mv QR.c.bak QR.c
     $ ruby vendor/grass.rb QR.grass > QR.groovy
     $ groovy QR.groovy > QR.gz
     $ gzip -cd QR.gz > QR.hs
@@ -274,29 +275,29 @@ I used the following Ubuntu deb packages to test this program.
 52  |Cobol                      |gnucobol                     |4.0~early~20200606-3
 53  |CoffeeScript               |coffeescript                 |1.12.8~dfsg-4build1
 54  |Common Lisp                |clisp                        |1:2.49.20180218+really2.49.92-3build3
-55  |Curry                      |pakcs                        |2.2.0-1
-56  |D                          |gdc                          |4:10.2.0-1ubuntu1
-57  |Dafny                      |dafny                        |2.3.0+dfsg-0.1
-58  |dc                         |dc                           |1.07.1-2build2
-59  |Dhall                      |dhall                        |1.32.0-1
-60  |Elixir                     |elixir                       |1.10.3.dfsg-1.1
-61  |Emacs Lisp                 |emacs-nox                    |1:26.3+1-1ubuntu2
-62  |Erlang                     |erlang                       |1:23.0.3+dfsg-1ubuntu1
-63  |F#                         |fsharp                       |4.0.0.4+dfsg2-2
-64  |FALSE                      |*N/A*                        |-
-65  |Flex                       |flex                         |2.6.4-8
-66  |Fish                       |fish                         |3.1.2-1ubuntu1
-67  |Forth                      |gforth                       |0.7.3+dfsg-9build4
-68  |FORTRAN77                  |f2c                          |20191129-1
-69  |Fortran90                  |gfortran                     |4:10.2.0-1ubuntu1
-70  |Gambas script              |gambas3-scripter             |3.15.2-1
-71  |GAP                        |gap                          |4.11.0-4
-72  |GDB                        |gdb                          |9.2-0ubuntu2
-73  |GEL (Genius)               |genius                       |1.0.25-2
-74  |GeneratorScriptingLanguage |generator-scripting-language |4.1.5-3
-75  |Gnuplot                    |gnuplot                      |5.2.8+dfsg1-2
-76  |Go                         |golang                       |2:1.14~2
-77  |GolfScript                 |*N/A*                        |-
+55  |D                          |gdc                          |4:10.2.0-1ubuntu1
+56  |Dafny                      |dafny                        |2.3.0+dfsg-0.1
+57  |dc                         |dc                           |1.07.1-2build2
+58  |Dhall                      |dhall                        |1.32.0-1
+59  |Elixir                     |elixir                       |1.10.3.dfsg-1.1
+60  |Emacs Lisp                 |emacs-nox                    |1:26.3+1-1ubuntu2
+61  |Erlang                     |erlang                       |1:23.0.3+dfsg-1ubuntu1
+62  |F#                         |fsharp                       |4.0.0.4+dfsg2-2
+63  |FALSE                      |*N/A*                        |-
+64  |Flex                       |flex                         |2.6.4-8
+65  |Fish                       |fish                         |3.1.2-1ubuntu1
+66  |Forth                      |gforth                       |0.7.3+dfsg-9build4
+67  |FORTRAN77                  |f2c                          |20191129-1
+68  |Fortran90                  |gfortran                     |4:10.2.0-1ubuntu1
+69  |Gambas script              |gambas3-scripter             |3.15.2-1
+70  |GAP                        |gap                          |4.11.0-4
+71  |GDB                        |gdb                          |9.2-0ubuntu2
+72  |GEL (Genius)               |genius                       |1.0.25-2
+73  |GeneratorScriptingLanguage |generator-scripting-language |4.1.5-3
+74  |Gnuplot                    |gnuplot                      |5.2.8+dfsg1-2
+75  |Go                         |golang                       |2:1.14~2
+76  |GolfScript                 |*N/A*                        |-
+77  |G-Portugol                 |gpt                          |1.1-5build1
 78  |Grass                      |*N/A*                        |-
 79  |Groovy                     |groovy                       |2.4.20-1
 80  |Gzip                       |gzip                         |1.10-2ubuntu1
@@ -305,7 +306,7 @@ I used the following Ubuntu deb packages to test this program.
 83  |Icon                       |icont, iconx                 |9.4.3-7ubuntu1
 84  |INTERCAL                   |intercal                     |30:0.30-3
 85  |Jasmin                     |jasmin-sable                 |2.5.0-2
-86  |Java                       |openjdk-11-jdk               |11.0.8+10-0ubuntu1
+86  |Java                       |openjdk-11-jdk               |11.0.9+10-0ubuntu1
 87  |JavaScript                 |nodejs                       |12.18.2~dfsg-1ubuntu2
 88  |Jq                         |jq                           |1.6-1
 89  |JSFuck                     |nodejs                       |12.18.2~dfsg-1ubuntu2
@@ -341,9 +342,9 @@ I used the following Ubuntu deb packages to test this program.
 119 |Pike                       |pike8.0                      |8.0.702-1ubuntu3
 120 |PostScript                 |ghostscript                  |9.52~dfsg-1ubuntu2
 121 |PPT (Punched tape)         |bsdgames                     |2.17-28build1
-122 |Prolog                     |swi-prolog                   |7.6.4+dfsg-2ubuntu2
+122 |Prolog                     |swi-prolog                   |8.2.1+dfsg-2ubuntu1
 123 |Promela (Spin)             |spin                         |6.5.2+dfsg-1
-124 |Python                     |python3                      |3.8.2-0ubuntu2
+124 |Python                     |python3                      |3.8.6-0ubuntu1
 125 |R                          |r-base                       |4.0.2-1build1
 126 |Ratfor                     |ratfor                       |1.05-1
 127 |rc                         |rc                           |1.7.4+97.gceb59bb-2

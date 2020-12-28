@@ -655,11 +655,11 @@ class Groovy_Gzip < CodeGen
   end
 end
 
-class GolfScript_Grass < CodeGen
-  Name = ["GolfScript", "Grass"]
-  File = ["QR.gs", "QR.grass"]
-  Cmd = ["ruby vendor/golfscript.rb QR.gs > OUTFILE", "ruby vendor/grass.rb QR.grass > OUTFILE"]
-  Apt = [nil, nil]
+class GolfScript_GPortugol_Grass < CodeGen
+  Name = ["GolfScript", "G-Portugol", "Grass"]
+  File = ["QR.gs", "QR.gpt", "QR.grass"]
+  Cmd = ["ruby vendor/golfscript.rb QR.gs > OUTFILE", "mv QR.c QR.c.bak && gpt -t QR.c QR.gpt && gcc -o QR QR.c && ./QR > OUTFILE && mv QR.c.bak QR.c", "ruby vendor/grass.rb QR.grass > OUTFILE"]
+  Apt = [nil, "gpt", nil]
   def code
     r = <<-'END'.lines.map {|l| l.strip }.join
       %(
@@ -671,12 +671,14 @@ class GolfScript_Grass < CodeGen
             .48<{71+}{[i]\\48-*}if
           }%
         }:t;
+        "algoritmo QR;in"[195][173]++'cio imprima("'
         @@PROLOGUE@@
         "#{e[PREV]}"
         {
           "W""w"@j 1+:j\\- @@MOD@@%1+*
         }%
         @@EPILOGUE@@
+        '");fim'
       )
     END
     mod, prologue, epilogue = ::File.read(::File.join(__dir__, "grass-boot.dat")).lines
@@ -883,13 +885,14 @@ class D < CodeGen
   Code = %q("import std.stdio;void main(){write(`#{PREV}`);}")
 end
 
-class Curry < CodeGen
-  Disabled = true
-  File = "QR.curry"
-  Cmd = "pakcs --nocypm :load QR.curry :save :quit && ./QR > OUTFILE"
-  Apt = "pakcs"
-  Code = %q("main=putStr"+E[PREV])
-end
+# pakcs package is broken in Ubuntu 20.10; I guess it will be fixed in Ubuntu 21.04
+#class Curry < CodeGen
+#  Disabled = true
+#  File = "QR.curry"
+#  Cmd = "pakcs --nocypm :load QR.curry :save :quit && ./QR > OUTFILE"
+#  Apt = "pakcs"
+#  Code = %q("main=putStr"+E[PREV])
+#end
 
 class CommonLisp < CodeGen
   Name = "Common Lisp"

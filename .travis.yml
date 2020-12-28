@@ -70,7 +70,6 @@ dummy: |
   sudo docker cp qr:/usr/local/share/quine-relay/QR.cob spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.coffee spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.lisp spoiler/
-  sudo docker cp qr:/usr/local/share/quine-relay/QR.curry spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.d spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.dfy spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.dc spoiler/
@@ -93,6 +92,7 @@ dummy: |
   sudo docker cp qr:/usr/local/share/quine-relay/QR.plt spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.go spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.gs spoiler/
+  sudo docker cp qr:/usr/local/share/quine-relay/QR.gpt spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.grass spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.groovy spoiler/
   sudo docker cp qr:/usr/local/share/quine-relay/QR.gz spoiler/
