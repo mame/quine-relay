@@ -35,9 +35,9 @@ jobs:
           git config user.email 'mame@ruby-lang.org'
           git add .
           git commit -m spoiler --quiet
-          git push --quiet https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/mame/quine-relay.git master:spoiler-test
-          echo The intermediate sources are available: https://github.com/mame/quine-relay/tree/spoiler-test
-        if: github.event_name == 'push' && github.ref == 'refs/heads/good-bye-travis-ci'
+          git push --force --quiet https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/mame/quine-relay.git master:spoiler
+          echo The intermediate sources are available: https://github.com/mame/quine-relay/tree/spoiler
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 END
