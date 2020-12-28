@@ -20,7 +20,7 @@ rows += RunSteps.map.with_index do |s, idx|
   if s.apt.is_a?(Array)
     apt = s.apt.join(", ")
     ver = pkg_versions.values_at(*s.apt)
-    raise if ver.uniq.size > 1
+    #raise if ver.uniq.size > 1
     ver = ver.first
   else
     apt = s.apt || "*N/A*"

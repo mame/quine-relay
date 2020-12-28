@@ -655,11 +655,11 @@ class Groovy_Gzip < CodeGen
   end
 end
 
-class GolfScript_Grass < CodeGen
-  Name = ["GolfScript", "Grass"]
-  File = ["QR.gs", "QR.grass"]
-  Cmd = ["ruby vendor/golfscript.rb QR.gs > OUTFILE", "ruby vendor/grass.rb QR.grass > OUTFILE"]
-  Apt = [nil, nil]
+class GolfScript_GPortugol_Grass < CodeGen
+  Name = ["GolfScript", "G-Portugol", "Grass"]
+  File = ["QR.gs", "QR.gpt", "QR.grass"]
+  Cmd = ["ruby vendor/golfscript.rb QR.gs > OUTFILE", "mv QR.c QR.c.bak && gpt -t QR.c QR.gpt && gcc -o QR QR.c && ./QR > OUTFILE && mv QR.c.bak QR.c", "ruby vendor/grass.rb QR.grass > OUTFILE"]
+  Apt = [nil, "gpt", nil]
   def code
     r = <<-'END'.lines.map {|l| l.strip }.join
       %(
@@ -671,12 +671,14 @@ class GolfScript_Grass < CodeGen
             .48<{71+}{[i]\\48-*}if
           }%
         }:t;
+        "algoritmo QR;in"[195][173]++'cio imprima("'
         @@PROLOGUE@@
         "#{e[PREV]}"
         {
           "W""w"@j 1+:j\\- @@MOD@@%1+*
         }%
         @@EPILOGUE@@
+        '");fim'
       )
     END
     mod, prologue, epilogue = ::File.read(::File.join(__dir__, "grass-boot.dat")).lines
@@ -751,7 +753,7 @@ class Gambas < CodeGen
   Name = "Gambas script"
   File = "QR.gbs"
   Cmd = "$(GBS) QR.gbs > OUTFILE"
-  Apt = "gambas3-script"
+  Apt = "gambas3-scripter"
   Code = %q(%(print"#{e[PREV]}"))
 end
 
@@ -842,30 +844,31 @@ class Elixir < CodeGen
   Code = %q("IO.puts"+E[PREV])
 end
 
-class EC < CodeGen
-  Name = "eC"
-  File = "QR.ec"
-  Cmd = "ecp -c QR.ec -o QR.sym && ecc -c QR.ec -o QR.c && ecs -console QR.sym QR.imp -o QR.main.ec && ecp -c QR.main.ec -o QR.main.sym && ecc -c QR.main.ec -o QR.main.c && gcc -o QR QR.c QR.main.c -lecereCOM && ./QR > OUTFILE"
-  Backup = "QR.c"
-  Apt = "ecere-dev"
-  def code
-    <<-'END'.lines.map {|l| l.strip }.join
-      %(
-        class QR:Application{
-          void f(String const s,int n){for(Print(s);n;n--)Print("\\\\");}
-          void Main(){#{f(PREV,15){"f(#{V[$S[1..-2],'",',');f("']},0);"}}}
-        }
-      )
-    END
-  end
-end
+#class Dhall < CodeGen
+#  Name = "dhall"
+#  File = "QR.dhall"
+#  Cmd = "dhall text --file QR.dhall > OUTFILE"
+#  Apt = "dhall"
+#  Code = %q(E[PREV])
+#end
+#
+#class Dc < CodeGen
+#  Name = "dc"
+#  File = "QR.dc"
+#  Cmd = "dc QR.dc > OUTFILE || true" # XXX
+#  Apt = "dc"
+#  Code = %q("[#{PREV}]pq")
+#end
 
-class Dc < CodeGen
-  Name = "dc"
-  File = "QR.dc"
-  Cmd = "dc QR.dc > OUTFILE || true" # XXX
-  Apt = "dc"
-  Code = %q("[#{PREV}]pq")
+class Dc_Dhall < CodeGen
+  Name = ["dc", "Dhall"]
+  File = ["QR.dc", "QR.dhall"]
+  Cmd = [
+    "dc QR.dc > OUTFILE || true", # XXX
+    "dhall text --file QR.dhall > OUTFILE",
+  ]
+  Apt = ["dc", "dhall"]
+  Code = %q("['']p[#{PREV}]p['']pq")
 end
 
 class Dafny < CodeGen
@@ -882,13 +885,14 @@ class D < CodeGen
   Code = %q("import std.stdio;void main(){write(`#{PREV}`);}")
 end
 
-class Curry < CodeGen
-  Disabled = true
-  File = "QR.curry"
-  Cmd = "pakcs --nocypm :load QR.curry :save :quit && ./QR > OUTFILE"
-  Apt = "pakcs"
-  Code = %q("main=putStr"+E[PREV])
-end
+# pakcs package is broken in Ubuntu 20.10; I guess it will be fixed in Ubuntu 21.04
+#class Curry < CodeGen
+#  Disabled = true
+#  File = "QR.curry"
+#  Cmd = "pakcs --nocypm :load QR.curry :save :quit && ./QR > OUTFILE"
+#  Apt = "pakcs"
+#  Code = %q("main=putStr"+E[PREV])
+#end
 
 class CommonLisp < CodeGen
   Name = "Common Lisp"
@@ -1128,19 +1132,18 @@ class AspectJ < CodeGen
   end
 end
 
-class ALGOL68_Ante_AspectCpp < CodeGen
-  Name = ["ALGOL 68", "Ante", "AspectC++"]
-  File = ["QR.a68", "QR.ante", "QR.cc"]
+class ALGOL68_Ante < CodeGen
+  Name = ["ALGOL 68", "Ante"]
+  File = ["QR.a68", "QR.ante"]
   Cmd = [
     "a68g QR.a68 > OUTFILE",
     "ruby vendor/ante.rb QR.ante > OUTFILE",
-    "ag++ -std=c++11 -o QR QR.cc && ./QR > OUTFILE",
   ]
-  Apt = ["algol68g", nil, "aspectc++"]
+  Apt = ["algol68g", nil]
   def code
     <<-'end'.lines.map {|l| l.strip }.join
       %W[
-        STRINGz:= 226+ 153,a:=z+ 166,b:=a+"2"+z+ 160,c:=b+"8"+z+ 165,t:="#include<iostream>"+ (10)+"int"+ (32)+"main(){puts#{d[E[PREV]]};}";
+        STRINGz:= 226+ 153,a:=z+ 166,b:=a+"2"+z+ 160,c:=b+"8"+z+ 165,t:="#{d[PREV]}";
         FORiTO\ UPBtDO\ INTn:=ABSt[i];
           print( (50+n%64)+c+ (50+n%8MOD8)+c+ (50+nMOD8)+b+"J"+a)
         OD
@@ -1388,19 +1391,32 @@ class Tcl < CodeGen
   Code = %q(%(puts "#{Q[e[PREV],/[\[\]$]/]}"))
 end
 
+class SurgeScript < CodeGen
+  File = "QR.ss"
+  Cmd = "surgescript QR.ss > OUTFILE"
+  Apt = "surgescript"
+  def code
+    <<-'END'
+      %(object"Application"{state"main"{foreach(s in[#{f(PREV,4){$S+?,}}])Console.write(s);Application.exit();}})
+    END
+  end
+end
+
 class StandardML_Subleq < CodeGen
   Name = ["Standard ML", "Subleq"]
   File = ["QR.sml", "QR.sq"]
-  Cmd = ["mlton @MLton fixed-heap 200M -- QR.sml && ./QR > OUTFILE", "ruby vendor/subleq.rb QR.sq > OUTFILE"]
-  Apt = ["mlton", nil]
+  Cmd = ["polyc -o QR QR.sml && ./QR > OUTFILE", "ruby vendor/subleq.rb QR.sq > OUTFILE"]
+  Apt = [["polyml", "libpolyml-dev"], nil]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
         fun p n=print(Int.toString n^" ");
-        p 0;p 0;p 130;
-        List.tabulate(127,p);
-        String.map(fn c=>(p(3+ord c);print"-1 0 ";c))#{E[PREV]};
-        print"0 0 -1";
+        fun main()=(
+          p 0;p 0;p 130;
+          List.tabulate(127,p);
+          String.map(fn c=>(p(3+ord c);print"-1 0 ";c))#{E[PREV]};
+          print"0 0 -1"
+        );
       )
     END
   end
