@@ -44,8 +44,8 @@ file "../Makefile" => ["Makefile.gen.rb", *LIBS] do
   ruby "Makefile.gen.rb"
 end
 
-file "../.travis.yml" => ["dot.travis.yml.gen.rb", *LIBS] do
-  ruby "dot.travis.yml.gen.rb"
+file "../.github/workflows/main.yml" => ["dot.github.workflows.main.yml.gen.rb", *LIBS] do
+  ruby "dot.github.workflows.main.yml.gen.rb"
 end
 
 file "../Dockerfile" => ["Dockerfile.gen.rb", *LIBS] do
@@ -62,7 +62,7 @@ task :default => %w(
   ../langs.png
   ../thumbnail.png
   ../Makefile
-  ../.travis.yml
+  ../.github/workflows/main.yml
   ../Dockerfile
 )
 
