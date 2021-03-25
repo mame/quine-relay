@@ -13,7 +13,10 @@ end.join("\n")
 
 File.write(File.join(__dir__, "../.github/workflows/main.yml"), <<END)
 name: CI
-on: [push, pull_request]
+on:
+  - push
+  - pull_request
+  - workflow_dispatch
 jobs:
   build:
     runs-on: ubuntu-latest
