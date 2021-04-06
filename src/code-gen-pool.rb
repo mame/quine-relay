@@ -29,49 +29,12 @@ original_list_size = CodeGen::List.size
 #  Code = %q(%((for i, c in#{E[PREV]}:echo ",",int(c),"CO");echo "Q"))
 #end
 
-# dhall (need "dhall text" subcommand to show arbitrary text since dhall-1.25.0)
-
-# G-Portugol
-class GolfScript_GPortugol_Grass < CodeGen
-  After = Go
-  Obsoletes = GolfScript_Grass
-  Name = ["GolfScript", "G-Portugol", "Grass"]
-  File = ["QR.gs", "QR.gpt", "QR.grass"]
-  Cmd = ["ruby vendor/golfscript.rb QR.gs > OUTFILE", "gpt -o QR QR.gpt && ./QR > OUTFILE", "ruby vendor/grass.rb QR.grass > OUTFILE"]
-  Apt = [nil, "gpt", nil]
-  def code
-    r = <<-'END'.lines.map {|l| l.strip }.join
-      %(
-        @@BASE@@:j;
-        {
-          119:i;
-          {
-            206i-:i;
-            .48<{71+}{[i]\\48-*}if
-          }%
-        }:t;
-        "algoritmo QR;in"[195][173]++'cio imprima("'
-        @@PROLOGUE@@
-        "#{e[PREV]}"
-        {
-          "W""w"@j 1+:j\\- @@MOD@@%1+*
-        }%
-        @@EPILOGUE@@
-        '");fim'
-      )
-    END
-    mod, prologue, epilogue = ::File.read(::File.join(__dir__, "grass-boot.dat")).lines
-    prologue += "t"
-    epilogue += "t"
-    prologue = prologue.gsub(/(\/12131)+/) { "\"t\"/12131\"t #{ $&.size / 6 }*\"" }
-    mod = mod.to_i
-    r.gsub(/@@\w+@@/, {
-      "@@PROLOGUE@@" => prologue.chomp,
-      "@@EPILOGUE@@" => epilogue.chomp,
-      "@@BASE@@" => 119 + mod - 1,
-      "@@MOD@@" => mod,
-    })
-  end
+class Execline < CodeGen
+  After = Erlang
+  File = "QR.e"
+  Cmd = "execlineb QR.e > OUTFILE"
+  Apt = "execline"
+  Code = %q(%(echo "#{e[PREV]}"))
 end
 
 CodeGen::List.slice!(original_list_size..-1).each do |s|
