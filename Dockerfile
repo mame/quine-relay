@@ -16,7 +16,7 @@ RUN chronic apt-get -qq install -y gcc gdb gdc generator-scripting-language && c
 RUN chronic apt-get -qq install -y genius gforth gfortran ghc && chronic apt-get clean
 RUN chronic apt-get -qq install -y ghostscript gnat gnu-smalltalk gnucobol && chronic apt-get clean
 RUN chronic apt-get -qq install -y gnuplot gobjc golang gpt && chronic apt-get clean
-RUN chronic apt-get -qq install -y groff groovy guile-2.0 gzip && chronic apt-get clean
+RUN chronic apt-get -qq install -y groff groovy guile-3.0 gzip && chronic apt-get clean
 RUN chronic apt-get -qq install -y haxe icont iconx intercal && chronic apt-get clean
 RUN chronic apt-get -qq install -y iverilog jasmin-sable jq julia && chronic apt-get clean
 RUN chronic apt-get -qq install -y ksh libgd-dev libpng-dev libpolyml-dev && chronic apt-get clean

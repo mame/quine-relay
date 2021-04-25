@@ -1502,7 +1502,7 @@ end
 class Scheme < CodeGen
   File = "QR.scm"
   Cmd = "$(SCHEME) QR.scm > OUTFILE"
-  Apt = "guile-2.0"
+  Apt = "guile-3.0"
   Code = %q(%((display "#{e[PREV]}")))
 end
 
