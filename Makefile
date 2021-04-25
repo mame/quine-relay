@@ -89,7 +89,7 @@ QR.sl: QR.spl
 	@echo "################################"
 	@echo
 	./vendor/local/bin/spl2c < QR.spl > QR.spl.c
-	gcc -Wl,--allow-multiple-definition -o QR -I ./vendor/local/include -L ./vendor/local/lib QR.spl.c -lspl -lm
+	gcc -z muldefs -o QR -I ./vendor/local/include -L ./vendor/local/lib QR.spl.c -lspl -lm
 	./QR > QR.sl
 
 QR.st: QR.sl
