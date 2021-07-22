@@ -363,7 +363,7 @@ A. [Take your pick](https://github.com/mame/quine-relay/issues/11).
 ### Q. How?
 
 A. Good news: I published a book, ["The world of obfuscated, esoteric, artistic programming"](http://gihyo.jp/book/2015/978-4-7741-7643-7).
-It explains how to write a quine, an ascii-art quine, and a uroboros quine like this quine-relay.
+It explains how to write a quine, an ascii-art quine, and an uroboros quine like this quine-relay.
 You can buy my book on [amazon.co.jp](http://www.amazon.co.jp/dp/4774176435).
 
 (It also contains my almost all (about forty) works, including
@@ -372,7 +372,7 @@ You can buy my book on [amazon.co.jp](http://www.amazon.co.jp/dp/4774176435).
 etc., and explains many techniques to write such programs.)
 
 Bad news: It is written in Japanese.
-I hope you could translate it to English <strike>and help me earn royalties</strike>.
+I hope you could translate it into English <strike>and help me earn royalties</strike>.
 
 ### Q. Language XXX is missing!
 
