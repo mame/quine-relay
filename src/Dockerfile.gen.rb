@@ -6,7 +6,7 @@ other_packages = %w(libpng-dev libgd-dev groff flex bison curl)
 apts = [*apts.flatten.compact.uniq, *other_packages].uniq.sort
 
 dockerfile = []
-dockerfile << "FROM ubuntu:20.10"
+dockerfile << "FROM ubuntu:21.10"
 dockerfile << "ENV DEBIAN_FRONTEND noninteractive"
 dockerfile << "RUN rm /etc/dpkg/dpkg.cfg.d/excludes" # maxima requires /usr/share/doc/maxima/...
 dockerfile << "RUN apt-get update && apt-get upgrade -y"
