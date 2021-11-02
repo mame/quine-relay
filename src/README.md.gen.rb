@@ -51,7 +51,7 @@ cmds = [*RunSteps, RunStep["Ruby", "QR2.rb"]].each_cons(2).map do |s1, s2|
   cmd
 end
 
-File.write("../README.md", ERB.new(DATA.read, nil, "%").result(binding))
+File.write("../README.md", ERB.new(DATA.read, trim_mode: "%").result(binding))
 
 
 __END__

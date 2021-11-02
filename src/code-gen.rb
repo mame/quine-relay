@@ -753,7 +753,7 @@ class Gambas < CodeGen
   Name = "Gambas script"
   File = "QR.gbs"
   Cmd = "$(GBS) QR.gbs > OUTFILE"
-  Apt = "gambas3-scripter"
+  Apt = [["gambas3-scripter", "gambas3-gb-pcre"]]
   Code = %q(%(print"#{e[PREV]}"))
 end
 
@@ -923,7 +923,7 @@ class Clojure_CMake_Cobol < CodeGen
     "cmake -P QR.cmake > OUTFILE",
     "cobc -O2 -x QR.cob && ./QR > OUTFILE",
   ]
-  Apt = ["clojure", "cmake", "gnucobol"]
+  Apt = ["clojure", "cmake", "gnucobol4"]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
