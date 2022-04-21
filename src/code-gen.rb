@@ -60,6 +60,7 @@ GenPrologue = <<-'END'.lines.map {|l| l.strip }.join
   $D="program QR";
   $G=" contents of"+$F=" the mixing bowl";
   $L="public static";
+  $W="s.WriteByte";
   rp=->s,r{
     v="";
     [r.inject(s){|s,j|
@@ -133,13 +134,6 @@ class PostScript_PPT < CodeGen
       "
     END
   end
-end
-
-class Pike < CodeGen
-  File = "QR.pike"
-  Cmd = "pike QR.pike > OUTFILE"
-  Apt = "pike8.0"
-  Code = %q("int main(){write#{E[PREV]+R}}")
 end
 
 class PHP_Piet < CodeGen
@@ -277,13 +271,6 @@ class ObjC < CodeGen
   Cmd = "gcc -o QR QR.m && ./QR > OUTFILE"
   Apt = "gobjc"
   Code = %q("#import<stdio.h>#{N}int main(){puts#{E[PREV]+R}}")
-end
-
-class Nim < CodeGen
-  File = "QR.nim"
-  Cmd = "nim c QR.nim && ./QR > OUTFILE"
-  Apt = "nim"
-  Code = %q("echo"+E[PREV])
 end
 
 class Nickle < CodeGen
@@ -479,15 +466,11 @@ class Ksh_LazyK_Lisaac < CodeGen
   end
 end
 
-class Julia < CodeGen
-  File = "QR.jl"
-  Cmd = "julia QR.jl > OUTFILE"
-  Apt = "julia"
-  def code
-    <<-'END'.lines.map {|l| l.strip }.join
-      %(print("""#{Q[e[PREV]]}"""))
-    END
-  end
+class Kotlin < CodeGen
+  File = "QR.kt"
+  Cmd = "kotlinc QR.kt -include-runtime -d QR.jar && kotlin QR.jar > OUTFILE"
+  Apt = "kotlin"
+  Code = %q("fun main(a:Array<String>){print#{Q[E[PREV]]} }")
 end
 
 class JavaScript_Jq_JSFuck < CodeGen
@@ -822,6 +805,13 @@ class FSharp < CodeGen
   Code = %q('printfn("""'+d[PREV,?%]+' """)')
 end
 
+#class Execline < CodeGen
+#  File = "QR.e"
+#  Cmd = "execlineb QR.e > OUTFILE"
+#  Apt = "execline"
+#  Code = %q(%(echo "#{e[PREV]}"))
+#end
+
 class Erlang < CodeGen
   File = "QR.erl"
   Cmd = "escript QR.erl > OUTFILE"
@@ -886,6 +876,7 @@ class D < CodeGen
 end
 
 # pakcs package is broken in Ubuntu 20.10; I guess it will be fixed in Ubuntu 21.04
+# it was fixed since 21.04, but it is broken again in Ubuntu 22.04
 #class Curry < CodeGen
 #  Disabled = true
 #  File = "QR.curry"
@@ -1295,31 +1286,57 @@ class XSLT < CodeGen
   end
 end
 
-class VisualBasic_Whitespace < CodeGen
-  Name = ["Visual Basic", "Whitespace"]
-  File = ["QR.vb", "QR.ws"]
+class VisualBasic_WebAssemblyBinary_WebAssemblyText_Whitespace < CodeGen
+  Name = ["Visual Basic", "WebAssembly (Binary format)", "WebAssembly (Text format)", "Whitespace"]
+  File = ["QR.vb", "QR.wasm", "QR.wat", "QR.ws"]
   Cmd = [
     "vbnc QR.vb && mono ./QR.exe > OUTFILE",
+    "$(WASI_RUNTIME) QR.wasm > OUTFILE",
+    "wat2wasm QR.wat -o QR.wat.wasm && $(WASI_RUNTIME) QR.wat.wasm > OUTFILE",
     "ruby vendor/whitespace.rb QR.ws > OUTFILE"
   ]
-  Apt = ["mono-vbnc", nil]
+  Apt = ["mono-vbnc", "wabt", "wabt", nil]
   def code
-    <<-'END'.lines.map {|l| l.strip }.join(?:)
+    r = <<-'END'.lines.map {|l| l.strip }.join(?:)
       %(Module QR
         Sub Main()
-          Dim s,n,i,c As Object
-          n=Chr(10)
-          For Each c in"#{d[PREV].gsub N,'"& VbLf &"'}"
-            s="   "
-            For i=0To 7
-                s &=Chr(32-(Asc(c)>>7-i And 1)*23)
-            Next
-            #$C(s &n &Chr(9)&n &"  ")
+          Dim c,n,s As Object=#{C[0]}.OpenStandardOutput(),t()As Short={@@TBL@@}
+          For Each c in"@@DATA1@@}@@DATA2@@~@@DATA3@@$@@DATA4@@"
+            c=Asc(c)
+            If c=36
+              For c=0To 11
+                #$W(If(c Mod 3,Asc(#{s=PREV;s.size*16+3}.ToString("x8")(1Xor 7-c*2\\3)),92))
+              Next
+            Else
+              n=(c>124)*(@@CONST1@@*c-#{s.size+@@CONST2@@})
+              Do While n>127
+                #$W(128+(127And n))
+                n\\=128
+              Loop
+              #$W(If(c<125,If((c-1)\\7-8,c+66*(c>65And c<91),t(c-57)),n))
+            End If
           Next
-          #$C(n &n &n)
+          For Each c in"#{d[s].gsub N,'"& VbLf &"'}"
+            #$W(Asc(c))
+          Next
         End Sub
       End Module)
     END
+    tbl, data1, data2, data3, data4 = ::File.read(::File.join(__dir__, "wasm-tmpl.dat")).lines.map {|s| s.chomp }
+    raise unless data3[0] == '('
+    r.gsub(/@@\w+@@/, {
+      "@@TBL@@" => tbl,
+      "@@DATA1@@" => data1.gsub("\\"){"\\\\"},
+      "@@DATA2@@" => data2.gsub("\\"){"\\\\"},
+      "@@DATA3@@" => '#{40.chr}'+data3[1..].gsub("\\"){"\\\\"},
+      "@@DATA4@@" => data4.gsub("\\"){"\\\\"},
+
+      # precompute some expressions by assuming that 2**14 <= (287+s.size) < 2**21
+    # "@@CONST1@@" => '#{6+((287+s.size).bit_length-1)/7}',
+      "@@CONST1@@" => "8",
+    # "@@CONST2@@" => '287+125*6+126*(((287+s.size).bit_length-1)/7)',
+      "@@CONST2@@" => "1289"
+    })
   end
 end
 

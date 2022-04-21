@@ -1,4 +1,4 @@
-FROM ubuntu:21.10
+FROM ubuntu:22.04
 ENV DEBIAN_FRONTEND noninteractive
 RUN rm /etc/dpkg/dpkg.cfg.d/excludes
 RUN apt-get update && apt-get upgrade -y
@@ -19,21 +19,20 @@ RUN chronic apt-get -qq install -y gnucobol4 gnuplot gobjc golang && chronic apt
 RUN chronic apt-get -qq install -y gpt groff groovy guile-3.0 && chronic apt-get clean
 RUN chronic apt-get -qq install -y gzip haxe icont iconx && chronic apt-get clean
 RUN chronic apt-get -qq install -y intercal iverilog jasmin-sable jq && chronic apt-get clean
-RUN chronic apt-get -qq install -y julia ksh libgd-dev libpng-dev && chronic apt-get clean
+RUN chronic apt-get -qq install -y kotlin ksh libgd-dev libpng-dev && chronic apt-get clean
 RUN chronic apt-get -qq install -y libpolyml-dev lisaac livescript llvm && chronic apt-get clean
 RUN chronic apt-get -qq install -y lua5.3 m4 make maxima && chronic apt-get clean
 RUN chronic apt-get -qq install -y minizinc mono-devel mono-mcs mono-vbnc && chronic apt-get clean
-RUN chronic apt-get -qq install -y nasm neko nickle nim && chronic apt-get clean
-RUN chronic apt-get -qq install -y node-typescript nodejs ocaml octave && chronic apt-get clean
-RUN chronic apt-get -qq install -y openjdk-11-jdk pari-gp parser3-cgi perl && chronic apt-get clean
-RUN chronic apt-get -qq install -y php-cli pike8.0 polyml python3 && chronic apt-get clean
-RUN chronic apt-get -qq install -y r-base rakudo ratfor rc && chronic apt-get clean
-RUN chronic apt-get -qq install -y regina-rexx ruby ruby-mustache rustc && chronic apt-get clean
-RUN chronic apt-get -qq install -y scala scilab-cli sed slsh && chronic apt-get clean
-RUN chronic apt-get -qq install -y spin squirrel3 surgescript swi-prolog && chronic apt-get clean
-RUN chronic apt-get -qq install -y tcl tcsh valac vim && chronic apt-get clean
-RUN chronic apt-get -qq install -y xsltproc yabasic yorick zoem && chronic apt-get clean
-RUN chronic apt-get -qq install -y zsh && chronic apt-get clean
+RUN chronic apt-get -qq install -y nasm neko nickle node-typescript && chronic apt-get clean
+RUN chronic apt-get -qq install -y nodejs ocaml octave openjdk-11-jdk && chronic apt-get clean
+RUN chronic apt-get -qq install -y pari-gp parser3-cgi perl php-cli && chronic apt-get clean
+RUN chronic apt-get -qq install -y polyml python3 r-base rakudo && chronic apt-get clean
+RUN chronic apt-get -qq install -y ratfor rc regina-rexx ruby && chronic apt-get clean
+RUN chronic apt-get -qq install -y ruby-mustache rustc scala scilab-cli && chronic apt-get clean
+RUN chronic apt-get -qq install -y sed slsh spin squirrel3 && chronic apt-get clean
+RUN chronic apt-get -qq install -y surgescript swi-prolog tcl tcsh && chronic apt-get clean
+RUN chronic apt-get -qq install -y valac vim wabt xsltproc && chronic apt-get clean
+RUN chronic apt-get -qq install -y yabasic yorick zoem zsh && chronic apt-get clean
 ADD . /usr/local/share/quine-relay
 WORKDIR /usr/local/share/quine-relay
 RUN make -C vendor
