@@ -4,10 +4,16 @@
 
 f = ARGV[0]
 system("wasm2c", f, "-o", f + ".c", exception: true)
-system("gcc", "-o", "dummy-wasi-exec", f + ".c", __FILE__, "-include", f + ".h", "-lwasm-rt-impl", "-I.", exception: true)
+system("gcc", "-DWASM_RT_MODULE_PREFIX=Z_" + File.basename(f, ".wasm").gsub(".", "Z2E"), "-o", "dummy-wasi-exec", f + ".c", __FILE__, "-include", f + ".h", "-lwasm-rt-impl", "-I.", exception: true)
 exec("./dummy-wasi-exec")
 __END__
 */DUMMY
+
+#ifndef WASM_RT_ADD_PREFIX
+#define WASM_RT_PASTE_(x, y) x ## y
+#define WASM_RT_PASTE(x, y) WASM_RT_PASTE_(x, y)
+#define WASM_RT_ADD_PREFIX(x) WASM_RT_PASTE(WASM_RT_MODULE_PREFIX, x)
+#endif
 
 // This is a dummy WASI implementation based on wasm2c.
 // It supports only "wasi_snapshot_preview1.fd_write" for stdout.
@@ -33,10 +39,11 @@ u32 fd_write(u32 fd, u32 iovs, u32 iovsLen, u32 size) {
 	return 0;
 }
 
-u32 (*Z_wasi_snapshot_preview1Z_fd_writeZ_iiiii)(u32, u32, u32, u32) = fd_write;
+u32 (*Z_wasi_snapshot_preview1Z_fd_write)(u32, u32, u32, u32) = fd_write;
 
 int main() {
-	WASM_RT_ADD_PREFIX(init)();
-	WASM_RT_ADD_PREFIX(Z__startZ_vv)();
+	WASM_RT_ADD_PREFIX(_init)();
+	WASM_RT_ADD_PREFIX(Z__start)();
+	WASM_RT_ADD_PREFIX(_free)();
 	return 0;
 }
