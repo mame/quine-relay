@@ -219,8 +219,8 @@ I used the following Ubuntu deb packages to test this program.
 
 \#  |language                    |ubuntu package                    |version
 ----|----------------------------|----------------------------------|-----------------------------
-1   |Ruby                        |ruby                              |1:3.0~exp1
-2   |Rust                        |rustc                             |1.61.0+dfsg1-1~exp1ubuntu1
+1   |Ruby                        |ruby                              |1:3.0\~exp1
+2   |Rust                        |rustc                             |1.61.0+dfsg1-1\~exp1ubuntu1
 3   |Scala                       |scala                             |2.11.12-5
 4   |Scheme                      |guile-3.0                         |3.0.8-2
 5   |Scilab                      |scilab-cli                        |6.1.1+dfsg2-4
@@ -272,7 +272,7 @@ I used the following Ubuntu deb packages to test this program.
 51  |Chef                        |*N/A*                             |-
 52  |Clojure                     |clojure                           |1.10.3-1
 53  |CMake                       |cmake                             |3.24.2-1ubuntu1
-54  |Cobol                       |gnucobol4                         |4.0~early~20200606-6
+54  |Cobol                       |gnucobol4                         |4.0\~early\~20200606-6
 55  |CoffeeScript                |coffeescript                      |2.7.0-3
 56  |Common Lisp                 |clisp                             |1:2.49.20210628.gitde01f0f-2
 57  |D                           |gdc                               |4:12.2.0-1ubuntu1
@@ -295,7 +295,7 @@ I used the following Ubuntu deb packages to test this program.
 74  |GEL (Genius)                |genius                            |1.0.27-1
 75  |GeneratorScriptingLanguage  |generator-scripting-language      |4.1.5-3
 76  |Gnuplot                     |gnuplot                           |5.4.4+dfsg1-1
-77  |Go                          |golang                            |2:1.19~1
+77  |Go                          |golang                            |2:1.19\~1
 78  |GolfScript                  |*N/A*                             |-
 79  |G-Portugol                  |gpt                               |1.1-7
 80  |Grass                       |*N/A*                             |-
@@ -310,10 +310,10 @@ I used the following Ubuntu deb packages to test this program.
 89  |JavaScript                  |nodejs                            |18.7.0+dfsg-5ubuntu1
 90  |Jq                          |jq                                |1.6-2.1ubuntu3
 91  |JSFuck                      |nodejs                            |18.7.0+dfsg-5ubuntu1
-92  |Kotlin                      |kotlin                            |1.3.31+~1.0.1+~0.11.12-2
+92  |Kotlin                      |kotlin                            |1.3.31+\~1.0.1+\~0.11.12-2
 93  |ksh                         |ksh                               |20220829
 94  |Lazy K                      |*N/A*                             |-
-95  |Lisaac                      |lisaac                            |1:0.39~rc1-3.1
+95  |Lisaac                      |lisaac                            |1:0.39\~rc1-3.1
 96  |LiveScript                  |livescript                        |1.6.1+dfsg-3
 97  |LLVM asm                    |llvm                              |1:15.0-55.1ubuntu1
 98  |LOLCODE                     |*N/A*                             |-
@@ -338,7 +338,7 @@ I used the following Ubuntu deb packages to test this program.
 117 |Perl 6                      |rakudo                            |2022.04-2
 118 |PHP                         |php-cli                           |2:8.1+92ubuntu1
 119 |Piet                        |*N/A*                             |-
-120 |PostScript                  |ghostscript                       |9.56.1~dfsg1-0ubuntu3
+120 |PostScript                  |ghostscript                       |9.56.1\~dfsg1-0ubuntu3
 121 |PPT (Punched tape)          |bsdgames                          |2.17-29
 122 |Prolog                      |swi-prolog                        |8.4.2+dfsg-2ubuntu1
 123 |Promela (Spin)              |spin                              |6.5.2+dfsg-1

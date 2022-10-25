@@ -26,6 +26,7 @@ rows += RunSteps.map.with_index do |s, idx|
     apt = s.apt || "*N/A*"
     ver = pkg_versions[apt]
   end
+  ver = ver.gsub("~") { "\\~" } if ver
   [(idx + 1).to_s, s.name, apt, ver || "-"]
 end
 
