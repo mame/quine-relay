@@ -33,7 +33,6 @@ class CodeGen
       cmd_raw = cmd_make
       cmd_raw = cmd_raw.gsub("$(SCHEME)", "guile")
       cmd_raw = cmd_raw.gsub("$(JAVASCRIPT)", "nodejs")
-      cmd_raw = cmd_raw.gsub("$(BF)", "bf -c500000")
       cmd_raw = cmd_raw.gsub("$(CC)", "gcc")
       cmd_raw = cmd_raw.gsub("$(CXX)", "g++")
       cmd_raw = cmd_raw.gsub("$(GBS)", "gbs3")
@@ -235,7 +234,7 @@ class Octave_Ook < CodeGen
   File = ["QR.octave", "QR.ook"]
   Cmd = [
     "mv QR.m QR.m.bak && octave -qf QR.octave > OUTFILE && mv QR.m.bak QR.m",
-    "ruby vendor/ook-to-bf.rb QR.ook QR.ook.bf && $(BF) QR.ook.bf > OUTFILE"
+    "ruby vendor/ook-to-bf.rb QR.ook QR.ook.bf && ruby vendor/bf.rb QR.ook.bf > OUTFILE"
   ]
   Apt = ["octave", nil]
   def code
@@ -1037,9 +1036,9 @@ class BeanShell_Befunge_BLC8_Brainfuck < CodeGen
     "bsh QR.bsh > OUTFILE",
     "cfunge QR.bef > OUTFILE",
     "ruby vendor/blc.rb < QR.Blc > OUTFILE",
-    "$(BF) QR.bf > OUTFILE",
+    "ruby vendor/bf.rb QR.bf > OUTFILE",
   ]
-  Apt = ["bsh", nil, nil, "bf"]
+  Apt = ["bsh", nil, nil, nil]
   def code
     blc = ::File.read(::File.join(__dir__, "blc-boot.dat"))
     <<-'END'.lines.map {|l| l.strip }.join.sub("BLC", [blc].pack("m0"))
