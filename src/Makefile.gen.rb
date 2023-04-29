@@ -30,7 +30,7 @@ ifeq ($(SCHEME),csi)
   SCHEME := csi -s
 endif
 ifeq ($(WASI_RUNTIME),node)
-  WASI_RUNTIME := ruby vendor/dummy-wasi-runtime.c
+  WASI_RUNTIME := node --experimental-wasi-unstable-preview1 vendor/wasi-runtime.js
 endif
 
 .DELETE_ON_ERROR:

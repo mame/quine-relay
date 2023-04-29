@@ -4,23 +4,23 @@ def f(s)
 
   wasm_txt_pre = <<-'END'.lines.map {|s| s.strip }.join + enc[s.size * 16 + 3]
     (module
-      (import"wasi_snapshot_preview1""fd_write"(func(param i32 i32 i32 i32)(result i32)))
-      (memory(export"memory")(data "\08\00\00\00
+      (import "wasi_snapshot_preview1" "fd_write" (func(param i32 i32 i32 i32)(result i32)))
+      (memory(export "memory")(data "\08\00\00\00
   END
 
   raise unless wasm_txt_pre.size % 4 == 0
 
   wasm_txt_post = <<-'END'.lines.map {|s| s.strip }.join
       "))
-      (func(export"_start")i32.const 1 i32.const 0 i32.const 1 i32.const 0 call 0 drop)
+      (func(export "_start")i32.const 1 i32.const 0 i32.const 1 i32.const 0 call 0 drop)
     )
   END
 
   txt = <<-END
     (module
-      (import"wasi_snapshot_preview1""fd_write"(func $fd_write(param i32 i32 i32 i32)(result i32)))
+      (import "wasi_snapshot_preview1" "fd_write"(func $fd_write(param i32 i32 i32 i32)(result i32)))
       (memory 64)
-      (export"memory"(memory 0))
+      (export "memory"(memory 0))
       (data(i32.const 0)"#{
         enc[8*5]+enc[1] # " "
       }#{
@@ -42,7 +42,7 @@ def f(s)
         call $fd_write
         drop
       )
-      (func(export"_start")
+      (func(export "_start")
         (local $idx i32)
         (local $shift i32)
 
@@ -118,13 +118,15 @@ data4 = abcd[j + 12-1...-4]
 #   data1 + LSB128(length+const) + data2 + LSB128(length+const) + data3 + Hexdump(length) + data4
 
 
-A = [26, 34, 85, 127, 144, 153, 196]
+A = [26, 34, 86, 127, 148, 158, 200]
 def e(data)
   enc = "".b
   data.bytes do |n|
     case
     when n < 0x1a
       enc << [n + ?B.ord].pack("C*")
+    when ?9.ord <= n && n < ?9.ord + A.size
+      raise
     when n < 32 || n == ?".ord || (?B.ord <= n && n <= ?Z.ord) || n >= 127
       enc << [?9.ord + A.index(n)].pack("C*")
     else
@@ -150,11 +152,13 @@ File.open("wasm-tmpl.dat", "w") do |f|
   f.puts e(data4)
 end
 
-out = File.read("../QR.xslt")
 d=->s,t=?"{s.gsub(t){t+t}};
 out = "ABCDE"
 
 # test code
+raise if data3.size + data4.size + 18 != 292
+n = 292+out.size
+m = (n.bit_length - 1) / 7
 puts <<END.lines.map {|s| s.strip }.join(":")
 Module QR
   Sub Main()
@@ -166,7 +170,7 @@ Module QR
           s.WriteByte(If(c Mod 3,Asc(#{out.size*16+3}.ToString("x8")(1Xor 7-c*2\\3)),92))
         Next
       Else
-        n=(c>124)*(#{6+((287+out.size).bit_length-1)/7}*c-#{((287+out.size).bit_length-1)/7+287+out.size+125*(6+((287+out.size).bit_length-1)/7)})
+        n=(c>124)*(#{6+m}*c-#{m+n+125*(6+m)})
         Do While n>127
           s.WriteByte(128+(127And n))
           n\\=128
