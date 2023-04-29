@@ -26,7 +26,6 @@ jobs:
           sudo docker cp qr:/usr/local/share/quine-relay/QR.spl spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.sl spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.st spoiler/
-          sudo docker cp qr:/usr/local/share/quine-relay/QR.nut spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.sml spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.sq spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.ss spoiler/
@@ -73,6 +72,7 @@ jobs:
           sudo docker cp qr:/usr/local/share/quine-relay/QR.cob spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.coffee spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.lisp spoiler/
+          sudo docker cp qr:/usr/local/share/quine-relay/QR.cr spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.d spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.dfy spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.dc spoiler/
@@ -91,7 +91,6 @@ jobs:
           sudo docker cp qr:/usr/local/share/quine-relay/QR.g spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.gdb spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.gel spoiler/
-          sudo docker cp qr:/usr/local/share/quine-relay/QR.gsl spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.plt spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.go spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.gs spoiler/
@@ -125,6 +124,7 @@ jobs:
           sudo docker cp qr:/usr/local/share/quine-relay/QR.asm spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.neko spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.5c spoiler/
+          sudo docker cp qr:/usr/local/share/quine-relay/QR.nim spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.m spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.ml spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.octave spoiler/
