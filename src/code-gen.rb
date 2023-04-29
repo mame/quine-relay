@@ -1330,11 +1330,11 @@ class VisualBasic_WebAssemblyBinary_WebAssemblyText_Whitespace < CodeGen
       "@@DATA3@@" => '#{40.chr}'+data3[1..].gsub("\\"){"\\\\"},
       "@@DATA4@@" => data4.gsub("\\"){"\\\\"},
 
-      # precompute some expressions by assuming that 2**14 <= (287+s.size) < 2**21
-    # "@@CONST1@@" => '#{6+((287+s.size).bit_length-1)/7}',
+      # precompute some expressions by assuming that 2**14 <= (292+s.size) < 2**21
+    # "@@CONST1@@" => '#{6+((292+s.size).bit_length-1)/7}',
       "@@CONST1@@" => "8",
-    # "@@CONST2@@" => '287+125*6+126*(((287+s.size).bit_length-1)/7)',
-      "@@CONST2@@" => "1289"
+    # "@@CONST2@@" => '292+125*6+126*(((292+s.size).bit_length-1)/7)',
+      "@@CONST2@@" => "1294"
     })
   end
 end
