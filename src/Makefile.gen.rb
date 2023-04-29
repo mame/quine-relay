@@ -23,15 +23,11 @@ find_any = $(call check,$(1),$(call find_any0,$(2)))
 
 JAVASCRIPT   := $(call find_any,JavaScript,nodejs node js)
 SCHEME       := $(call find_any,Scheme,guile csi gosh)
-BF           := $(call find_any,Brainfuck,bf beef bfc)
 GBS          := $(call find_any,Gambas script,gbs3 gbs2 gba3)
 WASI_RUNTIME := $(call find_any,WASI runtime,wasmtime node)
 
 ifeq ($(SCHEME),csi)
   SCHEME := csi -s
-endif
-ifeq ($(BF),bf)
-  BF := bf -c500000
 endif
 ifeq ($(WASI_RUNTIME),node)
   WASI_RUNTIME := ruby vendor/dummy-wasi-runtime.c
