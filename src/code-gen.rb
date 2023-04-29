@@ -272,6 +272,13 @@ class ObjC < CodeGen
   Code = %q("#import<stdio.h>#{N}int main(){puts#{E[PREV]+R}}")
 end
 
+class Nim < CodeGen
+  File = "QR.nim"
+  Cmd = "nim compile QR.nim && ./QR > OUTFILE"
+  Apt = "nim"
+  Code = %q("echo#{E[PREV]}")
+end
+
 class Nickle < CodeGen
   File = "QR.5c"
   Cmd = "nickle QR.5c > OUTFILE"
@@ -701,14 +708,6 @@ class Gnuplot < CodeGen
   Code = %q('set print"-";print'+E[PREV])
 end
 
-class GeneratorScriptingLanguage < CodeGen
-  Name = "GeneratorScriptingLanguage"
-  File = "QR.gsl"
-  Cmd = "gsl -q QR.gsl > OUTFILE"
-  Apt = "generator-scripting-language"
-  Code = %q(".template 1\n#{d[PREV,B]}\n.endtemplate")
-end
-
 class GEL < CodeGen
   Name = "GEL (Genius)"
   File = "QR.gel"
@@ -883,6 +882,14 @@ end
 #  Apt = "pakcs"
 #  Code = %q("main=putStr"+E[PREV])
 #end
+
+class Crystal < CodeGen
+  Name = "Crystal"
+  File = "QR.cr"
+  Cmd = "crystal QR.cr > OUTFILE"
+  Apt = [["crystal", "libevent-dev"]]
+  Code = %q("puts#{E[PREV]}")
+end
 
 class CommonLisp < CodeGen
   Name = "Common Lisp"
@@ -1436,13 +1443,6 @@ class StandardML_Subleq < CodeGen
       )
     END
   end
-end
-
-class Squirrel < CodeGen
-  File = "QR.nut"
-  Cmd = "squirrel QR.nut > OUTFILE"
-  Apt = "squirrel3"
-  Code = %q("print"+E[PREV])
 end
 
 class Smalltalk < CodeGen
