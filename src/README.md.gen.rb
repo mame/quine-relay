@@ -62,7 +62,7 @@ __END__
 
 ## What this is
 
-This is a <%= RunSteps[0].name %> program that generates
+[QR.rb](https://github.com/mame/quine-relay/blob/master/QR.rb) is a <%= RunSteps[0].name %> program that generates
 a <%= RunSteps[1].name %> program that generates
 a <%= RunSteps[2].name %> program that generates
 ...(through <%= RunSteps.size %> languages in total)...
