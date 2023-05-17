@@ -5,27 +5,27 @@
 ## What this is
 
 This is a Ruby program that generates
-Rust program that generates
-Scala program that generates
+a Rust program that generates
+a Scala program that generates
 ...(through 128 languages in total)...
-REXX program that generates
+a REXX program that generates
 the original Ruby code again.
 
 ![Language Uroboros][langs]
 
 [langs]: langs.png
 
-(If you want to see the old 50-language version, see [50](https://github.com/mame/quine-relay/tree/50) branch.)
+(If you want to see the old 50-language version, see the [50](https://github.com/mame/quine-relay/tree/50) branch.)
 
 ## Usage
 
 ### Ubuntu
 
-If you are using Ubuntu 23.04 (Lunar Lobster), you can perform the following steps.
+If you are using Ubuntu 23.04 (Lunar Lobster), you can follow these steps.
 
-#### 1. Install all interpreters/compilers.
+#### 1. Install all the interpreters/compilers.
 
-First, you have to type the following apt-get command to install all of them.
+First, you need to type the following apt-get command to install them all.
 
     $ sudo apt-get install afnix algol68g aplus-fsf aspectj asymptote \
       ats2-lang bash bc bsdgames bsh clisp clojure cmake coffeescript \
@@ -191,7 +191,7 @@ Alternatively, just type `make`.
 
     $ make
 
-Note: It may require huge memory to compile some files.
+Note: It may take a lot of memory to compile some files.
 
 ### Docker
 
@@ -200,9 +200,9 @@ Simply build the image and run a container as follows:
     $ docker build -t qr .
     $ docker run --privileged --rm -e CI=true qr
 
-Note: you need to run in privileged mode otherwise the `maxima` command will fail.
+Note: You must run in privileged mode, otherwise the `maxima` command will fail.
 
-If you want to check generated files, you can mount the local directory in the Docker container (but keep using the `vendor` directory of the container), as follows:
+If you want to check the generated files, you can mount the local directory in the Docker container (but still use the `vendor` directory of the container), as follows:
 
     $ docker run --privileged --rm -e CI=true -v $(pwd):/usr/local/share/quine-relay -v /usr/local/share/quine-relay/vendor qr
 
@@ -210,10 +210,10 @@ If you want to check generated files, you can mount the local directory in the D
 
 You may find [instructions for other platforms in the wiki](https://github.com/mame/quine-relay/wiki/Installation).
 
-If you are not using these Linux distributions, please find your way yourself.
-If you could do it, please let me know.  Good luck.
+If you do not use these Linux distributions, please find your own way.
+If you manage it, please let me know.  I wish you good luck.
 
-## Tested interpreter/compiler versions
+## Interpreter/compiler versions tested
 
 I used the following Ubuntu deb packages to test this program.
 
@@ -338,7 +338,7 @@ I used the following Ubuntu deb packages to test this program.
 117 |Perl 6                      |rakudo                            |2022.12-1
 118 |PHP                         |php-cli                           |2:8.1+92ubuntu1
 119 |Piet                        |*N/A*                             |-
-120 |PostScript                  |ghostscript                       |10.0.0\~dfsg1-0ubuntu1
+120 |PostScript                  |ghostscript                       |10.0.0\~dfsg1-0ubuntu1.1
 121 |PPT (Punched tape)          |bsdgames                          |2.17-29
 122 |Prolog                      |swi-prolog                        |9.0.4+dfsg-1ubuntu2
 123 |Promela (Spin)              |spin                              |6.5.2+dfsg-1
@@ -349,8 +349,8 @@ I used the following Ubuntu deb packages to test this program.
 128 |REXX                        |regina-rexx                       |3.6-2.4
 
 Note that some languages are not available in Ubuntu (marked as *N/A*).
-This repository includes their implementations in `vendor/`.
-See also `vendor/README` in detail.
+This repository contains their implementations in `vendor/`.
+See also `vendor/README` for detail.
 
 
 ## Frequently asked questions
@@ -361,21 +361,21 @@ A. [Take your pick](https://github.com/mame/quine-relay/issues/11).
 
 ### Q. How?
 
-A. Good news: I published a book, ["The world of obfuscated, esoteric, artistic programming"](http://gihyo.jp/book/2015/978-4-7741-7643-7).
+A. Good news: I have published a book, ["The World of Obfuscated, Esoteric, Artistic Programming"](http://gihyo.jp/book/2015/978-4-7741-7643-7).
 It explains how to write a quine, an ascii-art quine, and an uroboros quine like this quine-relay.
 You can buy my book on [amazon.co.jp](http://www.amazon.co.jp/dp/4774176435).
 
-(It also contains my almost all (about forty) works, including
+(It also contains my almost all of my (about forty) works, including
 [alphabet-only Ruby program](http://www.slideshare.net/mametter/ruby-esoteric-obfuscated-ruby-programming-5088683),
 [radiation-hardened quine](https://github.com/mame/radiation-hardened-quine),
-etc., and explains many techniques to write such programs.)
+etc., and explains many techniques for writing such programs.)
 
 Bad news: It is written in Japanese.
-I hope you could translate it into English <strike>and help me earn royalties</strike>.
+I hope you can translate it into English <strike>and help me earn royalties</strike>.
 
 ### Q. Language XXX is missing!
 
-A. See [the criteria for language inclusion][criteria] in detail.  (In short: please create a deb package and contribute it to Ubuntu.)
+A. See [the language inclusion criteria][criteria] in detail.  (In short, please create a deb package and contribute it to Ubuntu.)
 
 See also [:heart:][sponsors].
 
@@ -389,9 +389,9 @@ A. [![CI](https://github.com/mame/quine-relay/workflows/CI/badge.svg)](https://g
 
 ### Q. How long did it take you?
 
-A. [Do you try to cross the world line?](https://github.com/mame/quine-relay/issues/60)
+A. [Are you trying to cross the world line?](https://github.com/mame/quine-relay/issues/60)
 
-### Q. The code does not fit into my display!
+### Q. The code does not fit in my screen!
 
 A. [Here you go][thumbnail].
 
