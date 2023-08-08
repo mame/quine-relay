@@ -168,7 +168,7 @@ A. See [the language inclusion criteria][criteria] in detail.  (In short, please
 
 See also [:heart:][sponsors].
 
-[criteria]: https://github.com/mame/quine-relay/wiki/Criteria-for-language-inclusion
+[criteria]: https://github.com/mame/quine-relay/wiki/Language-inclusion-criteria
 [sponsors]: https://github.com/sponsors/mame
 
 
