@@ -29,17 +29,17 @@ First, you need to type the following apt-get command to install them all.
 
     $ sudo apt-get install afnix algol68g aplus-fsf aspectj asymptote \
       ats2-lang bash bc bsdgames bsh clisp clojure cmake coffeescript \
-      crystal dafny dc dhall elixir emacs-nox erlang f2c fish flex \
-      fp-compiler fsharp g++ gambas3-gb-pcre gambas3-scripter gap gawk gcc \
-      gdb gdc genius gforth gfortran ghc ghostscript gnat gnu-smalltalk \
-      gnucobol4 gnuplot gobjc golang gpt groovy guile-3.0 gzip haxe icont \
-      iconx intercal iverilog jasmin-sable jq kotlin ksh libevent-dev \
+      crystal dafny dc dhall dotnet7 elixir emacs-nox erlang f2c fish flex \
+      fp-compiler g++ gambas3-gb-pcre gambas3-scripter gap gawk gcc gdb gdc \
+      genius gforth gfortran ghc ghostscript gnat gnu-smalltalk gnucobol4 \
+      gnuplot gobjc golang gpt groovy guile-3.0 gzip haxe icont iconx \
+      intercal iverilog jasmin-sable jq kotlin ksh libevent-dev \
       libpolyml-dev lisaac livescript llvm lua5.3 m4 make maxima minizinc \
-      mono-devel mono-mcs mono-vbnc nasm neko nickle nim node-typescript \
-      nodejs ocaml octave openjdk-11-jdk pari-gp parser3-cgi perl php-cli \
-      polyml python3 r-base rakudo ratfor rc regina-rexx ruby ruby-mustache \
-      rustc scala scilab-cli sed slsh spin surgescript swi-prolog tcl tcsh \
-      valac vim wabt xsltproc yabasic yorick zoem zsh
+      mono-devel nasm neko nickle nim node-typescript nodejs ocaml octave \
+      openjdk-11-jdk pari-gp parser3-cgi perl php-cli polyml python3 r-base \
+      rakudo ratfor rc regina-rexx ruby ruby-mustache rustc scala scilab-cli \
+      sed slsh spin surgescript swi-prolog tcl tcsh valac vim wabt xsltproc \
+      yabasic yorick zoem zsh
 
 Then, build the bundled interpreters.
 
@@ -71,7 +71,8 @@ Then, build the bundled interpreters.
     $ mono vendor/local/bin/Vlt.exe /s QR.mid && mono QR.exe > QR.v
     $ iverilog -o QR QR.v && ./QR -vcd-none > QR.vim
     $ vim -EsS QR.vim > QR.vb
-    $ vbnc QR.vb && mono ./QR.exe > QR.wasm
+    $ echo '<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net7.0</TargetFramework><EnableDefaultCompileItems>false</EnableDefaultCompileItems></PropertyGroup><ItemGroup><Compile Include="QR.vb" /></ItemGroup></Project>' > tmp.vbproj &&
+      DOTNET_NOLOGO=1 dotnet run --project tmp.vbproj > QR.wasm
     $ $(WASI_RUNTIME) QR.wasm > QR.wat
     $ wat2wasm QR.wat -o QR.wat.wasm && $(WASI_RUNTIME) QR.wat.wasm > QR.ws
     $ ruby vendor/whitespace.rb QR.ws > QR.xslt
@@ -98,7 +99,8 @@ Then, build the bundled interpreters.
     $ ruby vendor/bf.rb QR.bf > QR.c
     $ gcc -o QR QR.c && ./QR > QR.cpp
     $ g++ -o QR QR.cpp && ./QR > QR.cs
-    $ mcs QR.cs && mono QR.exe > QR.chef
+    $ echo '<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net7.0</TargetFramework><EnableDefaultCompileItems>false</EnableDefaultCompileItems></PropertyGroup><ItemGroup><Compile Include="QR.cs" /></ItemGroup></Project>' > tmp.csproj &&
+      DOTNET_NOLOGO=1 dotnet run --project tmp.csproj > QR.chef
     $ PERL5LIB=vendor/local/lib/perl5 compilechef QR.chef QR.chef.pl &&
       perl QR.chef.pl > QR.clj
     $ clojure QR.clj > QR.cmake
@@ -114,7 +116,8 @@ Then, build the bundled interpreters.
     $ elixir QR.exs > QR.el
     $ emacs -Q --script QR.el > QR.erl
     $ escript QR.erl > QR.fsx
-    $ fsharpc QR.fsx -o QR.exe && mono QR.exe > QR.false
+    $ echo '<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net7.0</TargetFramework><EnableDefaultCompileItems>false</EnableDefaultCompileItems></PropertyGroup><ItemGroup><Compile Include="QR.fsx" /></ItemGroup></Project>' > tmp.fsproj &&
+      DOTNET_NOLOGO=1 dotnet run --project tmp.fsproj > QR.false
     $ ruby vendor/false.rb QR.false > QR.fl
     $ flex -o QR.fl.c QR.fl && gcc -o QR QR.fl.c && ./QR > QR.fish
     $ fish QR.fish > QR.fs
@@ -239,8 +242,8 @@ I used the following Ubuntu deb packages to test this program.
 18  |Vala                        |valac                             |0.56.7-1
 19  |Velato                      |*N/A*                             |-
 20  |Verilog                     |iverilog                          |11.0-1.1
-21  |Vimscript                   |vim                               |2:9.0.1000-4ubuntu3
-22  |Visual Basic                |mono-vbnc                         |4.0.1-3
+21  |Vimscript                   |vim                               |2:9.0.1000-4ubuntu3.1
+22  |Visual Basic                |dotnet7                           |7.0.111-0ubuntu1\~23.04.1
 23  |WebAssembly (Binary format) |wabt                              |1.0.32-1
 24  |WebAssembly (Text format)   |wabt                              |1.0.32-1
 25  |Whitespace                  |*N/A*                             |-
@@ -267,7 +270,7 @@ I used the following Ubuntu deb packages to test this program.
 46  |Brainfuck                   |*N/A*                             |-
 47  |C                           |gcc                               |4:12.2.0-3ubuntu1
 48  |C++                         |g++                               |4:12.2.0-3ubuntu1
-49  |C#                          |mono-mcs                          |6.8.0.105+dfsg-3.3
+49  |C#                          |dotnet7                           |7.0.111-0ubuntu1\~23.04.1
 50  |Chef                        |*N/A*                             |-
 51  |Clojure                     |clojure                           |1.11.1-2
 52  |CMake                       |cmake                             |3.25.1-1ubuntu1
@@ -282,7 +285,7 @@ I used the following Ubuntu deb packages to test this program.
 61  |Elixir                      |elixir                            |1.14.0.dfsg-2
 62  |Emacs Lisp                  |emacs-nox                         |1:28.2+1-13ubuntu3
 63  |Erlang                      |erlang                            |1:25.2.3+dfsg-1
-64  |F#                          |fsharp                            |4.0.0.4+dfsg2-2
+64  |F#                          |dotnet7                           |7.0.111-0ubuntu1\~23.04.1
 65  |FALSE                       |*N/A*                             |-
 66  |Flex                        |flex                              |2.6.4-8.1
 67  |Fish                        |fish                              |3.6.0-3
@@ -305,7 +308,7 @@ I used the following Ubuntu deb packages to test this program.
 84  |Icon                        |icont, iconx                      |9.4.3-7ubuntu1
 85  |INTERCAL                    |intercal                          |30:0.30-3
 86  |Jasmin                      |jasmin-sable                      |2.5.0-2
-87  |Java                        |openjdk-11-jdk                    |11.0.18+10-0ubuntu5
+87  |Java                        |openjdk-11-jdk                    |11.0.20.1+1-0ubuntu1\~23.04
 88  |JavaScript                  |nodejs                            |18.13.0+dfsg1-1ubuntu2
 89  |Jq                          |jq                                |1.6-2.1ubuntu3
 90  |JSFuck                      |nodejs                            |18.13.0+dfsg1-1ubuntu2
@@ -334,11 +337,11 @@ I used the following Ubuntu deb packages to test this program.
 113 |PARI/GP                     |pari-gp                           |2.15.2-1
 114 |Parser 3                    |parser3-cgi                       |3.4.6-3
 115 |Pascal                      |fp-compiler                       |3.2.2+dfsg-18ubuntu1
-116 |Perl 5                      |perl                              |5.36.0-7
+116 |Perl 5                      |perl                              |5.36.0-7ubuntu0.23.04.1
 117 |Perl 6                      |rakudo                            |2022.12-1
 118 |PHP                         |php-cli                           |2:8.1+92ubuntu1
 119 |Piet                        |*N/A*                             |-
-120 |PostScript                  |ghostscript                       |10.0.0\~dfsg1-0ubuntu1.1
+120 |PostScript                  |ghostscript                       |10.0.0\~dfsg1-0ubuntu1.3
 121 |PPT (Punched tape)          |bsdgames                          |2.17-29
 122 |Prolog                      |swi-prolog                        |9.0.4+dfsg-1ubuntu2
 123 |Promela (Spin)              |spin                              |6.5.2+dfsg-1

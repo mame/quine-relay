@@ -9,8 +9,8 @@ RUN chronic apt-get -qq install -y asymptote ats2-lang bash bc && chronic apt-ge
 RUN chronic apt-get -qq install -y bison bsdgames bsh clisp && chronic apt-get clean
 RUN chronic apt-get -qq install -y clojure cmake coffeescript crystal && chronic apt-get clean
 RUN chronic apt-get -qq install -y curl dafny dc dhall && chronic apt-get clean
-RUN chronic apt-get -qq install -y elixir emacs-nox erlang f2c && chronic apt-get clean
-RUN chronic apt-get -qq install -y fish flex fp-compiler fsharp && chronic apt-get clean
+RUN chronic apt-get -qq install -y dotnet7 elixir emacs-nox erlang && chronic apt-get clean
+RUN chronic apt-get -qq install -y f2c fish flex fp-compiler && chronic apt-get clean
 RUN chronic apt-get -qq install -y g++ gambas3-gb-pcre gambas3-scripter gap && chronic apt-get clean
 RUN chronic apt-get -qq install -y gawk gcc gdb gdc && chronic apt-get clean
 RUN chronic apt-get -qq install -y genius gforth gfortran ghc && chronic apt-get clean
@@ -22,17 +22,17 @@ RUN chronic apt-get -qq install -y iverilog jasmin-sable jq kotlin && chronic ap
 RUN chronic apt-get -qq install -y ksh libevent-dev libgd-dev libpng-dev && chronic apt-get clean
 RUN chronic apt-get -qq install -y libpolyml-dev lisaac livescript llvm && chronic apt-get clean
 RUN chronic apt-get -qq install -y lua5.3 m4 make maxima && chronic apt-get clean
-RUN chronic apt-get -qq install -y minizinc mono-devel mono-mcs mono-vbnc && chronic apt-get clean
-RUN chronic apt-get -qq install -y nasm neko nickle nim && chronic apt-get clean
-RUN chronic apt-get -qq install -y node-typescript nodejs ocaml octave && chronic apt-get clean
-RUN chronic apt-get -qq install -y openjdk-11-jdk pari-gp parser3-cgi perl && chronic apt-get clean
-RUN chronic apt-get -qq install -y php-cli polyml python3 r-base && chronic apt-get clean
-RUN chronic apt-get -qq install -y rakudo ratfor rc regina-rexx && chronic apt-get clean
-RUN chronic apt-get -qq install -y ruby ruby-mustache rustc scala && chronic apt-get clean
-RUN chronic apt-get -qq install -y scilab-cli sed slsh spin && chronic apt-get clean
-RUN chronic apt-get -qq install -y surgescript swi-prolog tcl tcsh && chronic apt-get clean
-RUN chronic apt-get -qq install -y valac vim wabt xsltproc && chronic apt-get clean
-RUN chronic apt-get -qq install -y yabasic yorick zoem zsh && chronic apt-get clean
+RUN chronic apt-get -qq install -y minizinc mono-devel nasm neko && chronic apt-get clean
+RUN chronic apt-get -qq install -y nickle nim node-typescript nodejs && chronic apt-get clean
+RUN chronic apt-get -qq install -y ocaml octave openjdk-11-jdk pari-gp && chronic apt-get clean
+RUN chronic apt-get -qq install -y parser3-cgi perl php-cli polyml && chronic apt-get clean
+RUN chronic apt-get -qq install -y python3 r-base rakudo ratfor && chronic apt-get clean
+RUN chronic apt-get -qq install -y rc regina-rexx ruby ruby-mustache && chronic apt-get clean
+RUN chronic apt-get -qq install -y rustc scala scilab-cli sed && chronic apt-get clean
+RUN chronic apt-get -qq install -y slsh spin surgescript swi-prolog && chronic apt-get clean
+RUN chronic apt-get -qq install -y tcl tcsh valac vim && chronic apt-get clean
+RUN chronic apt-get -qq install -y wabt xsltproc yabasic yorick && chronic apt-get clean
+RUN chronic apt-get -qq install -y zoem zsh && chronic apt-get clean
 ADD . /usr/local/share/quine-relay
 WORKDIR /usr/local/share/quine-relay
 RUN make -C vendor

@@ -215,8 +215,8 @@ QR.wasm: QR.vb
 	@echo "##  22: Visual Basic -> WebAssembly (Binary format)  ##"
 	@echo "#######################################################"
 	@echo
-	vbnc QR.vb
-	mono ./QR.exe > QR.wasm
+	echo '<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net7.0</TargetFramework><EnableDefaultCompileItems>false</EnableDefaultCompileItems></PropertyGroup><ItemGroup><Compile Include="QR.vb" /></ItemGroup></Project>' > tmp.vbproj
+	DOTNET_NOLOGO=1 dotnet run --project tmp.vbproj > QR.wasm
 
 QR.wat: QR.wasm
 	@echo
@@ -438,8 +438,8 @@ QR.chef: QR.cs
 	@echo "##  49: C# -> Chef  ##"
 	@echo "######################"
 	@echo
-	mcs QR.cs
-	mono QR.exe > QR.chef
+	echo '<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net7.0</TargetFramework><EnableDefaultCompileItems>false</EnableDefaultCompileItems></PropertyGroup><ItemGroup><Compile Include="QR.cs" /></ItemGroup></Project>' > tmp.csproj
+	DOTNET_NOLOGO=1 dotnet run --project tmp.csproj > QR.chef
 
 QR.clj: QR.chef
 	@echo
@@ -563,8 +563,8 @@ QR.false: QR.fsx
 	@echo "##  64: F# -> FALSE  ##"
 	@echo "#######################"
 	@echo
-	fsharpc QR.fsx -o QR.exe
-	mono QR.exe > QR.false
+	echo '<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net7.0</TargetFramework><EnableDefaultCompileItems>false</EnableDefaultCompileItems></PropertyGroup><ItemGroup><Compile Include="QR.fsx" /></ItemGroup></Project>' > tmp.fsproj
+	DOTNET_NOLOGO=1 dotnet run --project tmp.fsproj > QR.false
 
 QR.fl: QR.false
 	@echo
