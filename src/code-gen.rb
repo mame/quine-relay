@@ -798,8 +798,20 @@ end
 class FSharp < CodeGen
   Name = "F#"
   File = "QR.fsx"
-  Cmd = "fsharpc QR.fsx -o QR.exe && mono QR.exe > OUTFILE"
-  Apt = "fsharp"
+  fsproj = <<-END
+    <Project Sdk="Microsoft.NET.Sdk">
+      <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net7.0</TargetFramework>
+        <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+      </PropertyGroup>
+      <ItemGroup>
+        <Compile Include="QR.fsx" />
+      </ItemGroup>
+    </Project>
+  END
+  Cmd = %(echo '#{ fsproj.lines.map {|s| s.strip }.join }' > tmp.fsproj && DOTNET_NOLOGO=1 dotnet run --project tmp.fsproj > OUTFILE)
+  Apt = "dotnet7"
   Code = %q('printfn("""'+d[PREV,?%]+' """)')
 end
 
@@ -950,11 +962,23 @@ end
 class CSharp_Chef < CodeGen
   Name = ["C#", "Chef"]
   File = ["QR.cs", "QR.chef"]
+  csproj = <<-END
+    <Project Sdk="Microsoft.NET.Sdk">
+      <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net7.0</TargetFramework>
+        <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+      </PropertyGroup>
+      <ItemGroup>
+        <Compile Include="QR.cs" />
+      </ItemGroup>
+    </Project>
+  END
   Cmd = [
-    "mcs QR.cs && mono QR.exe > OUTFILE",
+    %(echo '#{ csproj.lines.map {|s| s.strip }.join }' > tmp.csproj && DOTNET_NOLOGO=1 dotnet run --project tmp.csproj > OUTFILE),
     "PERL5LIB=vendor/local/lib/perl5 compilechef QR.chef QR.chef.pl && perl QR.chef.pl > OUTFILE"
   ]
-  Apt = ["mono-mcs", nil]
+  Apt = ["dotnet7", nil]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
@@ -1295,20 +1319,30 @@ end
 class VisualBasic_WebAssemblyBinary_WebAssemblyText_Whitespace < CodeGen
   Name = ["Visual Basic", "WebAssembly (Binary format)", "WebAssembly (Text format)", "Whitespace"]
   File = ["QR.vb", "QR.wasm", "QR.wat", "QR.ws"]
+  vbproj = <<-END
+    <Project Sdk="Microsoft.NET.Sdk">
+      <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net7.0</TargetFramework>
+        <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+      </PropertyGroup>
+      <ItemGroup>
+        <Compile Include="QR.vb" />
+      </ItemGroup>
+    </Project>
+  END
   Cmd = [
-    "vbnc QR.vb && mono ./QR.exe > OUTFILE",
+    %(echo '#{ vbproj.lines.map {|s| s.strip }.join }' > tmp.vbproj && DOTNET_NOLOGO=1 dotnet run --project tmp.vbproj > OUTFILE),
     "$(WASI_RUNTIME) QR.wasm > OUTFILE",
     "wat2wasm QR.wat -o QR.wat.wasm && $(WASI_RUNTIME) QR.wat.wasm > OUTFILE",
     "ruby vendor/whitespace.rb QR.ws > OUTFILE"
   ]
-  Apt = ["mono-vbnc", "wabt", "wabt", nil]
+  Apt = ["dotnet7", "wabt", "wabt", nil]
   def code
     r = <<-'END'.lines.map {|l| l.strip }.join(?:)
-      %(Module QR
-        Sub Main()
-          Dim c,n,s As Object=#{C[0]}.OpenStandardOutput(),t()As Short={@@TBL@@}
-          For Each c in"@@DATA1@@}@@DATA2@@~@@DATA3@@$@@DATA4@@"
-            c=Asc(c)
+      %(Module QR\nSub Main()\nDim c,n:Dim s As Object=#{C[0]}.OpenStandardOutput():Dim t()As Short={@@TBL@@}
+          For Each d in"@@DATA1@@}@@DATA2@@~@@DATA3@@$@@DATA4@@"
+            c=Asc(d)
             If c=36
               For c=0To 11
                 #$W(If(c Mod 3,Asc(#{s=PREV;s.size*16+3}.ToString("x8")(1Xor 7-c*2\\3)),92))
@@ -1351,7 +1385,11 @@ class VimScript < CodeGen
   Apt = "vim"
   File = "QR.vim"
   Cmd = "vim -EsS QR.vim > OUTFILE"
-  Code = %q("let s=#{E[PREV]}\nput=s\nprint\nqa!")
+  def code
+    <<-'END'.lines.map {|l| l.strip }.join
+      (PREV).lines.map{|s|"let s=#{E[s]}\nput=s\nprint\n"}.join+"qa!"
+    END
+  end
 end
 
 class Verilog < CodeGen

@@ -9,3 +9,4 @@ gst.im
 /src/blc-boot.dat
 /src/grass-boot.dat
 *.sw*
+tmp.*proj
