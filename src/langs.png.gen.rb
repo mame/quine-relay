@@ -6,6 +6,12 @@ require "rsvg2"
 # * https://www.google.com/fonts/specimen/Raleway
 # * https://www.google.com/fonts/specimen/UnifrakturCook
 
+%w(Raleway UnifrakturCook).each do |font|
+  if `fc-list #{ font }`.strip.empty? && !ENV["SKIP_FONT_CHECK"]
+    raise "Font `#{ font }' is not available; to skip this check, set SKIP_FONT_CHECK=1"
+  end
+end
+
 W = H = 750
 surface = Cairo::ImageSurface.new(W, H)
 ctx = Cairo::Context.new(surface)
