@@ -200,33 +200,33 @@ A.
 
 ## for Ubuntu 13.04
 
-https://github.com/mame/quine-relay/tree/ad3f8222c796969db8cfb1bae015a46c2387b3d6
+[50 languages](https://github.com/mame/quine-relay/tree/ad3f8222c796969db8cfb1bae015a46c2387b3d6)
 
 Added: Ruby, Scala, Scheme, bash, Smalltalk, Unlambda, Tcl, Whitespace, Verilog, Vala, Ada, ALGOL 68, Awk, Brainfuck, Boo, C, C++, C#, Cobol, Clojure, Fortran90, FORTRAN77, Forth, Common Lisp, CoffeeScript, Groovy, Go, INTERCAL, Icon, Haskell, Jasmin, Java, LLVM asm, Logo, Lua, Makefile, MSIL, Objective-C, JavaScript, OCaml, Octave, Parrot asm, Pascal, Perl, PHP, Pike, Prolog, Python, R, REXX
 
 ## for Ubuntu 13.10
 
-https://github.com/mame/quine-relay/tree/ea4d39fb1ebc7ee23ec6f60ca7bfa0d465b5806a
+[50 languages](https://github.com/mame/quine-relay/tree/ea4d39fb1ebc7ee23ec6f60ca7bfa0d465b5806a)
 
 ## for Ubuntu 14.04
 
-https://github.com/mame/quine-relay/tree/d16bf072e3063dc476dc440c8f3e33d7426e98db
+[50 languages](https://github.com/mame/quine-relay/tree/d16bf072e3063dc476dc440c8f3e33d7426e98db)
 
 ## for Ubuntu 14.10
 
-https://github.com/mame/quine-relay/tree/e449baba456d4885102482cbd365335be59241b2
+[64 languages](https://github.com/mame/quine-relay/tree/e449baba456d4885102482cbd365335be59241b2)
 
 Added: Scilab, S-Lang, SPL, LOLCODE, Maxima, NASM, Neko, Nickle, Ook!, PARI/GP, Piet, PPT (Punched tape), PostScript, Ratfor
 
 ## for Ubuntu 15.04
 
-https://github.com/mame/quine-relay/tree/7749715289ca162eb1c1eb1ff1ed1393edc41630
+[100 languages](https://github.com/mame/quine-relay/tree/7749715289ca162eb1c1eb1ff1ed1393edc41630)
 
 Added: Subleq, Standard ML, Thue, Visual Basic, XSLT, Yorick, Zoem, A+, AFNIX, Ante, Asymptote, ATS, BLC8, Befunge, bc, Chef, CDuce, D, dc, eC, Emacs Lisp, Erlang, F#, Falcon, FALSE, Gambas script, GAP, GEL (Genius), Gnuplot, G-Portugol, Gri, Haxe, Julia, Lisaac, Lazy K, Kaya
 
 ## for Ubuntu 15.10
 
-https://github.com/mame/quine-relay/tree/f45035f867c7c8f7b4e12fa63e7c8eef9aabecad
+[100 languages](https://github.com/mame/quine-relay/tree/f45035f867c7c8f7b4e12fa63e7c8eef9aabecad)
 
 Removed: Boo, Falcon, Kaya
 
@@ -234,11 +234,11 @@ Added: Elixir, Jq, Nim
 
 ## for Ubuntu 16.04
 
-https://github.com/mame/quine-relay/tree/233ba8b4e1d7e4c59a46d64481048a8ea7f4400e
+[100 languages](https://github.com/mame/quine-relay/tree/233ba8b4e1d7e4c59a46d64481048a8ea7f4400e)
 
 ## for Ubuntu 17.04
 
-https://github.com/mame/quine-relay/tree/e65a798da23df0367d9eb5e4d46f00d87e6cb342
+[100 languages](https://github.com/mame/quine-relay/tree/e65a798da23df0367d9eb5e4d46f00d87e6cb342)
 
 Removed: SPL, Gri, Logo, Parrot asm
 
@@ -246,7 +246,7 @@ Added: Squirrel, Dafny, Grass, MiniZinc
 
 ## for Ubuntu 17.10
 
-https://github.com/mame/quine-relay/tree/943b83801a1bd019ebf348adc78df2cdfde06513
+[100 languages](https://github.com/mame/quine-relay/tree/943b83801a1bd019ebf348adc78df2cdfde06513)
 
 Removed: CDuce
 
@@ -254,7 +254,7 @@ Added: Rust
 
 ## for Ubuntu 18.04
 
-https://github.com/mame/quine-relay/tree/6e173d76e972e1da7992b84768bf9f4c788949ed
+[128 languages](https://github.com/mame/quine-relay/tree/6e173d76e972e1da7992b84768bf9f4c788949ed)
 
 Removed: Gambas script, Perl
 
@@ -262,7 +262,7 @@ Added: Shakespeare, sed, tcsh, TypeScript, Velato, Vimscript, Yabasic, zsh, Aheu
 
 ## for Ubuntu 19.04
 
-https://github.com/mame/quine-relay/tree/c8898351500682cea02219313e9203da7eca5505
+[128 languages](https://github.com/mame/quine-relay/tree/c8898351500682cea02219313e9203da7eca5505)
 
 Removed: Scilab, G-Portugol, nesC
 
@@ -270,7 +270,7 @@ Added: Curry, Gambas script, GeneratorScriptingLanguage
 
 ## for Ubuntu 19.10
 
-https://github.com/mame/quine-relay/tree/13041dbf3f80a90c9221ef94f8e8bc385800b6fd
+[128 languages](https://github.com/mame/quine-relay/tree/13041dbf3f80a90c9221ef94f8e8bc385800b6fd)
 
 Removed: Gri
 
@@ -278,11 +278,11 @@ Added: Scilab
 
 ## for Ubuntu 20.04
 
-https://github.com/mame/quine-relay/tree/62e2cc2d61d99719328094d185d899bc03a851fb
+[128 languages](https://github.com/mame/quine-relay/tree/62e2cc2d61d99719328094d185d899bc03a851fb)
 
 ## for Ubuntu 20.10
 
-https://github.com/mame/quine-relay/tree/114f44fefd610812d2f5e3032603762752ed51b2
+[128 languages](https://github.com/mame/quine-relay/tree/114f44fefd610812d2f5e3032603762752ed51b2)
 
 Removed: AspectC++, eC
 
@@ -290,7 +290,7 @@ Added: SurgeScript, Dhall
 
 ## for Ubuntu 21.04
 
-https://github.com/mame/quine-relay/tree/d8df33bad3693afd0bd3bf1c2b1cedd5753325dc
+[128 languages](https://github.com/mame/quine-relay/tree/d8df33bad3693afd0bd3bf1c2b1cedd5753325dc)
 
 Removed: Curry
 
@@ -298,11 +298,11 @@ Added: G-Portugol
 
 ## for Ubuntu 21.10
 
-https://github.com/mame/quine-relay/tree/158b6251d36a48122ec0006feaf759d8b1973b0f
+[128 languages](https://github.com/mame/quine-relay/tree/158b6251d36a48122ec0006feaf759d8b1973b0f)
 
 ## for Ubuntu 22.04
 
-https://github.com/mame/quine-relay/tree/7b81d8704549d31814499c5300be2be9568467c8
+[128 languages](https://github.com/mame/quine-relay/tree/7b81d8704549d31814499c5300be2be9568467c8)
 
 Removed: Julia, Nim, Pike
 
@@ -310,11 +310,11 @@ Added: WebAssembly (Text format), WebAssembly (Binary format), Kotlin
 
 ## for Ubuntu 22.10
 
-https://github.com/mame/quine-relay/tree/362962dd2d55d7c36dd9fa3e0d4c0c52c0e6a18f
+[128 languages](https://github.com/mame/quine-relay/tree/362962dd2d55d7c36dd9fa3e0d4c0c52c0e6a18f)
 
 ## for Ubuntu 23.04
 
-https://github.com/mame/quine-relay/tree/5dfdada5aa58f6a97ae85b84f86c7eb091225a8c
+[128 languages](https://github.com/mame/quine-relay/tree/5dfdada5aa58f6a97ae85b84f86c7eb091225a8c)
 
 Removed: Squirrel, GeneratorScriptingLanguage
 
@@ -322,7 +322,7 @@ Added: Crystal, Nim
 
 ## for Ubuntu 23.10
 
-https://github.com/mame/quine-relay/tree/74c4cc7d79fccbb1c8315070b9efea03cb787755
+[128 languages](https://github.com/mame/quine-relay/tree/74c4cc7d79fccbb1c8315070b9efea03cb787755)
 
 Removed: Smalltalk
 
