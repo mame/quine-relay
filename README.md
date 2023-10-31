@@ -410,6 +410,92 @@ A.
     $ rake2.0 clobber
     $ rake2.0
 
+## History
+
+## 2013/04 (for Ubuntu 13.04)
+
+Added: Ruby, Scala, Scheme, bash, Smalltalk, Unlambda, Tcl, Whitespace, Verilog, Vala, Ada, ALGOL 68, Awk, Brainfuck, Boo, C, C++, C#, Cobol, Clojure, Fortran90, FORTRAN77, Forth, Common Lisp, CoffeeScript, Groovy, Go, INTERCAL, Icon, Haskell, Jasmin, Java, LLVM asm, Logo, Lua, Makefile, MSIL, Objective-C, JavaScript, OCaml, Octave, Parrot asm, Pascal, Perl, PHP, Pike, Prolog, Python, R, REXX
+
+## 2013/10 (for Ubuntu 13.10)
+
+## 2014/10 (for Ubuntu 14.10)
+
+## 2013/10 (for Ubuntu 13.10)
+
+## 2014/10 (for Ubuntu 14.10)
+
+Added: Scilab, S-Lang, SPL, LOLCODE, Maxima, NASM, Neko, Nickle, Ook!, PARI/GP, Piet, PPT (Punched tape), PostScript, Ratfor
+
+## 2015/04 (for Ubuntu 15.04)
+
+Added: Subleq, Standard ML, Thue, Visual Basic, XSLT, Yorick, Zoem, A+, AFNIX, Ante, Asymptote, ATS, BLC8, Befunge, bc, Chef, CDuce, D, dc, eC, Emacs Lisp, Erlang, F#, Falcon, FALSE, Gambas script, GAP, GEL (Genius), Gnuplot, G-Portugol, Gri, Haxe, Julia, Lisaac, Lazy K, Kaya
+
+## 2015/10 (for Ubuntu 15.10)
+
+Removed: Boo, Falcon, Kaya
+
+Added: Elixir, Jq, Nim
+
+## 2017/04 (for Ubuntu 17.04)
+
+Removed: SPL, Gri, Logo, Parrot asm
+
+Added: Squirrel, Dafny, Grass, MiniZinc
+
+## 2017/10 (for Ubuntu 17.10)
+
+Removed: CDuce
+
+Added: Rust
+
+## 2018/04 (for Ubuntu 18.04)
+
+Removed: Gambas script, Perl
+
+Added: Shakespeare, sed, tcsh, TypeScript, Velato, Vimscript, Yabasic, zsh, Aheui, AspectC++, AspectJ, BeanShell, CMake, Flex, Fish, GDB, GolfScript, Gzip, Gri, JSFuck, ksh, LiveScript, M4, Mustache, nesC, Parser 3, Perl 5, Perl 6, Promela (Spin), rc
+
+## 2019/04 (for Ubuntu 19.04)
+
+Removed: Scilab, G-Portugol, nesC
+
+Added: Curry, Gambas script, GeneratorScriptingLanguage
+
+## 2019/10 (for Ubuntu 19.10)
+
+Removed: Gri
+
+Added: Scilab
+
+## 2020/10 (for Ubuntu 20.10)
+
+Removed: AspectC++, eC
+
+Added: SurgeScript, Dhall
+
+## 2021/04 (for Ubuntu 21.04)
+
+Removed: Curry
+
+Added: G-Portugol
+
+## 2022/04 (for Ubuntu 22.04)
+
+Removed: Julia, Nim, Pike
+
+Added: WebAssembly (Text format), WebAssembly (Binary format), Kotlin
+
+## 2023/04 (for Ubuntu 23.04)
+
+Removed: Squirrel, GeneratorScriptingLanguage
+
+Added: Crystal, Nim
+
+## 2023/10 (for Ubuntu 23.10)
+
+Removed: Smalltalk
+
+Added: Modula-2
+
 ## License
 
 The MIT License applies to all resources
