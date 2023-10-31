@@ -339,6 +339,26 @@ class MSIL < CodeGen
   end
 end
 
+class Modula2 < CodeGen
+  Name = "Modula-2"
+  File = "QR.mod"
+  Cmd = "gm2 -fiso QR.mod -o QR && ./QR > OUTFILE"
+  Apt = "gm2"
+  def code
+    <<-'END'.lines.map {|l| l.strip }.join
+      "
+        MODULE QR;
+        FROM StrIO IMPORT WriteString;
+        BEGIN #{
+          (PREV).gsub(/()[#{i=94.chr}"]+|[#{i}']+/){
+            ["WriteString(",$&,");"]*($1??":?')
+          }
+        }END QR.
+      "
+    END
+  end
+end
+
 class MiniZinc < CodeGen
   File = "QR.mzn"
   Cmd = "minizinc --solver Gecode --soln-sep '' QR.mzn > OUTFILE"
@@ -1481,13 +1501,6 @@ class StandardML_Subleq < CodeGen
       )
     END
   end
-end
-
-class Smalltalk < CodeGen
-  File = "QR.st"
-  Cmd = "gst QR.st > OUTFILE"
-  Apt = "gnu-smalltalk"
-  Code = %q("Transcript show: '#{d[PREV,?']}';cr")
 end
 
 class Scilab_Sed_Shakespeare_SLang < CodeGen
