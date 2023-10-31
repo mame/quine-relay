@@ -1,4 +1,4 @@
-FROM ubuntu:23.04
+FROM ubuntu:23.10
 ENV DEBIAN_FRONTEND noninteractive
 RUN rm /etc/dpkg/dpkg.cfg.d/excludes
 RUN apt-get update && apt-get upgrade -y
@@ -14,7 +14,7 @@ RUN chronic apt-get -qq install -y f2c fish flex fp-compiler && chronic apt-get 
 RUN chronic apt-get -qq install -y g++ gambas3-gb-pcre gambas3-scripter gap && chronic apt-get clean
 RUN chronic apt-get -qq install -y gawk gcc gdb gdc && chronic apt-get clean
 RUN chronic apt-get -qq install -y genius gforth gfortran ghc && chronic apt-get clean
-RUN chronic apt-get -qq install -y ghostscript gnat gnu-smalltalk gnucobol4 && chronic apt-get clean
+RUN chronic apt-get -qq install -y ghostscript gm2 gnat gnucobol4 && chronic apt-get clean
 RUN chronic apt-get -qq install -y gnuplot gobjc golang gpt && chronic apt-get clean
 RUN chronic apt-get -qq install -y groff groovy guile-3.0 gzip && chronic apt-get clean
 RUN chronic apt-get -qq install -y haxe icont iconx intercal && chronic apt-get clean
