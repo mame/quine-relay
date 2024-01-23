@@ -93,7 +93,7 @@ Then, build the bundled interpreters.
     $ bash QR.bash > QR.bc
     $ BC_LINE_LENGTH=4000000 bc -q QR.bc > QR.bsh
     $ bsh QR.bsh > QR.bef
-    $ cfunge QR.bef > QR.Blc
+    $ ./vendor/local/bin/cfunge QR.bef > QR.Blc
     $ ruby vendor/blc.rb < QR.Blc > QR.bf
     $ ruby vendor/bf.rb QR.bf > QR.c
     $ gcc -o QR QR.c && ./QR > QR.cpp
