@@ -37,13 +37,6 @@ class Execline < CodeGen
   Code = %q(%(echo "#{e[PREV]}"))
 end
 
-class Pike < CodeGen
-  File = "QR.pike"
-  Cmd = "pike QR.pike > OUTFILE"
-  Apt = "pike8.0"
-  Code = %q("int main(){write#{E[PREV]+R}}")
-end
-
 CodeGen::List.slice!(original_list_size..-1).each do |s|
   i = CodeGen::List.find_index(s::After)
   CodeGen::List.insert(i, s)

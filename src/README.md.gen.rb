@@ -328,6 +328,14 @@ Removed: Smalltalk
 
 Added: Modula-2
 
+## for Ubuntu 24.04
+
+[128 languages]()
+
+Removed: PPT (Punched tape)
+
+Added: Pike
+
 ## License
 
 The MIT License applies to all resources

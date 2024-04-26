@@ -115,24 +115,19 @@ class Prolog < CodeGen
   Code = %q("qr:-write('#{Q[e[PREV],?']}').")
 end
 
-class PostScript_PPT < CodeGen
-  Name = ["PostScript", "PPT (Punched tape)"]
-  File = ["QR.ps", "QR.ppt"]
-  Cmd = ["gs -dNODISPLAY -q QR.ps > OUTFILE", "ppt -d < QR.ppt > OUTFILE"]
-  Apt = ["ghostscript", "bsdgames"]
-  def code
-    <<-'END'.lines.map {|l| l.strip }.join
-      "
-        (#{?_*11})dup =
-        /s(|     .   |)def
-        (#{Q[PREV,B]}){
-          9 7{
-            exch dup 1 and 79 mul 32 add exch 2 idiv 3 1 roll s exch 2 index exch put 1 sub dup 6 eq{1 sub}if
-          }repeat s = pop pop
-        }forall = quit
-      "
-    END
-  end
+class PostScript < CodeGen
+  Name = "PostScript"
+  File = "QR.ps"
+  Cmd = "gs -dNODISPLAY -q QR.ps > OUTFILE"
+  Apt = "ghostscript"
+  Code = %q("(#{Q[PREV,B]})print quit")
+end
+
+class Pike < CodeGen
+  File = "QR.pike"
+  Cmd = "pike QR.pike > OUTFILE"
+  Apt = "pike8.0"
+  Code = %q("int main(){write#{E[PREV]+R}}")
 end
 
 class PHP_Piet < CodeGen
@@ -822,7 +817,7 @@ class FSharp < CodeGen
     <Project Sdk="Microsoft.NET.Sdk">
       <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <TargetFramework>net7.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
       </PropertyGroup>
       <ItemGroup>
@@ -831,7 +826,7 @@ class FSharp < CodeGen
     </Project>
   END
   Cmd = %(echo '#{ fsproj.lines.map {|s| s.strip }.join }' > tmp.fsproj && DOTNET_NOLOGO=1 dotnet run --project tmp.fsproj > OUTFILE)
-  Apt = "dotnet7"
+  Apt = "dotnet8"
   Code = %q('printfn("""'+d[PREV,?%]+' """)')
 end
 
@@ -986,7 +981,7 @@ class CSharp_Chef < CodeGen
     <Project Sdk="Microsoft.NET.Sdk">
       <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <TargetFramework>net7.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
       </PropertyGroup>
       <ItemGroup>
@@ -998,7 +993,7 @@ class CSharp_Chef < CodeGen
     %(echo '#{ csproj.lines.map {|s| s.strip }.join }' > tmp.csproj && DOTNET_NOLOGO=1 dotnet run --project tmp.csproj > OUTFILE),
     "PERL5LIB=vendor/local/lib/perl5 compilechef QR.chef QR.chef.pl && perl QR.chef.pl > OUTFILE"
   ]
-  Apt = ["dotnet7", nil]
+  Apt = ["dotnet8", nil]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
@@ -1343,7 +1338,7 @@ class VisualBasic_WebAssemblyBinary_WebAssemblyText_Whitespace < CodeGen
     <Project Sdk="Microsoft.NET.Sdk">
       <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <TargetFramework>net7.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
       </PropertyGroup>
       <ItemGroup>
@@ -1357,7 +1352,7 @@ class VisualBasic_WebAssemblyBinary_WebAssemblyText_Whitespace < CodeGen
     "wat2wasm QR.wat -o QR.wat.wasm && $(WASI_RUNTIME) QR.wat.wasm > OUTFILE",
     "ruby vendor/whitespace.rb QR.ws > OUTFILE"
   ]
-  Apt = ["dotnet7", "wabt", "wabt", nil]
+  Apt = ["dotnet8", "wabt", "wabt", nil]
   def code
     r = <<-'END'.lines.map {|l| l.strip }.join(?:)
       %(Module QR\nSub Main()\nDim c,n:Dim s As Object=#{C[0]}.OpenStandardOutput():Dim t()As Short={@@TBL@@}
@@ -1509,7 +1504,7 @@ class Scilab_Sed_Shakespeare_SLang < CodeGen
   Cmd = [
     "scilab-cli -nb -f QR.sci > OUTFILE",
     "sed -E -f QR.sed QR.sed > OUTFILE",
-    "./vendor/local/bin/spl2c < QR.spl > QR.spl.c && gcc -z muldefs -o QR -I ./vendor/local/include -L ./vendor/local/lib QR.spl.c -lspl -lm && ./QR > OUTFILE",
+    "spl2c < QR.spl > QR.spl.c && gcc -z muldefs -o QR -I ./vendor/local/include -L ./vendor/local/lib QR.spl.c -lspl -lm && ./QR > OUTFILE",
     "slsh QR.sl > OUTFILE",
   ]
   Apt = ["scilab-cli", "sed", nil, "slsh"]

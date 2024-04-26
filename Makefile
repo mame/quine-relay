@@ -88,7 +88,7 @@ QR.sl: QR.spl
 	@echo "##  7: Shakespeare -> S-Lang  ##"
 	@echo "################################"
 	@echo
-	./vendor/local/bin/spl2c < QR.spl > QR.spl.c
+	spl2c < QR.spl > QR.spl.c
 	gcc -z muldefs -o QR -I ./vendor/local/include -L ./vendor/local/lib QR.spl.c -lspl -lm
 	./QR > QR.sl
 
@@ -207,7 +207,7 @@ QR.wasm: QR.vb
 	@echo "##  21: Visual Basic -> WebAssembly (Binary format)  ##"
 	@echo "#######################################################"
 	@echo
-	echo '<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net7.0</TargetFramework><EnableDefaultCompileItems>false</EnableDefaultCompileItems></PropertyGroup><ItemGroup><Compile Include="QR.vb" /></ItemGroup></Project>' > tmp.vbproj
+	echo '<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net8.0</TargetFramework><EnableDefaultCompileItems>false</EnableDefaultCompileItems></PropertyGroup><ItemGroup><Compile Include="QR.vb" /></ItemGroup></Project>' > tmp.vbproj
 	DOTNET_NOLOGO=1 dotnet run --project tmp.vbproj > QR.wasm
 
 QR.wat: QR.wasm
@@ -430,7 +430,7 @@ QR.chef: QR.cs
 	@echo "##  48: C# -> Chef  ##"
 	@echo "######################"
 	@echo
-	echo '<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net7.0</TargetFramework><EnableDefaultCompileItems>false</EnableDefaultCompileItems></PropertyGroup><ItemGroup><Compile Include="QR.cs" /></ItemGroup></Project>' > tmp.csproj
+	echo '<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net8.0</TargetFramework><EnableDefaultCompileItems>false</EnableDefaultCompileItems></PropertyGroup><ItemGroup><Compile Include="QR.cs" /></ItemGroup></Project>' > tmp.csproj
 	DOTNET_NOLOGO=1 dotnet run --project tmp.csproj > QR.chef
 
 QR.clj: QR.chef
@@ -555,7 +555,7 @@ QR.false: QR.fsx
 	@echo "##  63: F# -> FALSE  ##"
 	@echo "#######################"
 	@echo
-	echo '<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net7.0</TargetFramework><EnableDefaultCompileItems>false</EnableDefaultCompileItems></PropertyGroup><ItemGroup><Compile Include="QR.fsx" /></ItemGroup></Project>' > tmp.fsproj
+	echo '<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net8.0</TargetFramework><EnableDefaultCompileItems>false</EnableDefaultCompileItems></PropertyGroup><ItemGroup><Compile Include="QR.fsx" /></ItemGroup></Project>' > tmp.fsproj
 	DOTNET_NOLOGO=1 dotnet run --project tmp.fsproj > QR.false
 
 QR.fl: QR.false
@@ -1037,29 +1037,29 @@ QR.png: QR.php
 	@echo
 	php QR.php > QR.png
 
-QR.ps: QR.png
+QR.pike: QR.png
+	@echo
+	@echo "#########################"
+	@echo "##  119: Piet -> Pike  ##"
+	@echo "#########################"
+	@echo
+	npiet QR.png > QR.pike
+
+QR.ps: QR.pike
 	@echo
 	@echo "###############################"
-	@echo "##  119: Piet -> PostScript  ##"
+	@echo "##  120: Pike -> PostScript  ##"
 	@echo "###############################"
 	@echo
-	npiet QR.png > QR.ps
+	pike QR.pike > QR.ps
 
-QR.ppt: QR.ps
+QR.prolog: QR.ps
 	@echo
-	@echo "#############################################"
-	@echo "##  120: PostScript -> PPT (Punched tape)  ##"
-	@echo "#############################################"
+	@echo "#################################"
+	@echo "##  121: PostScript -> Prolog  ##"
+	@echo "#################################"
 	@echo
-	gs -dNODISPLAY -q QR.ps > QR.ppt
-
-QR.prolog: QR.ppt
-	@echo
-	@echo "#########################################"
-	@echo "##  121: PPT (Punched tape) -> Prolog  ##"
-	@echo "#########################################"
-	@echo
-	ppt -d < QR.ppt > QR.prolog
+	gs -dNODISPLAY -q QR.ps > QR.prolog
 
 QR.pr: QR.prolog
 	@echo

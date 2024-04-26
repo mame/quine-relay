@@ -29,7 +29,7 @@ $(LOCAL)/bin/lazyk:
 
 $(LOCAL)/bin/spl2c:
 	tar xzf $(SPL).tar.gz
-	(cd $(SPL) && ln -s ../local spl && make install)
+	(cd $(SPL) && ln -s ../local spl && make spl2c CCFLAGS="-O0 -g -Wall" && make install)
 
 $(LOCAL)/bin/Vlt.exe:
 	unzip -d $(LOCAL)/bin -q Velato_0_1.zip

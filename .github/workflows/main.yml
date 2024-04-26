@@ -136,8 +136,8 @@ jobs:
           sudo docker cp qr:/usr/local/share/quine-relay/QR.pl6 spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.php spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.png spoiler/
+          sudo docker cp qr:/usr/local/share/quine-relay/QR.pike spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.ps spoiler/
-          sudo docker cp qr:/usr/local/share/quine-relay/QR.ppt spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.prolog spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.pr spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.py spoiler/
