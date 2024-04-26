@@ -70,12 +70,12 @@ task :default => %w(
   ../Dockerfile
 )
 
-task "../SHA1SUMS" => ["SHA1SUMS.gen.rb", *LIBS] do
-  ruby "SHA1SUMS.gen.rb"
+task "../SHA256SUMS" => ["SHA256SUMS.gen.rb", *LIBS] do
+  ruby "SHA256SUMS.gen.rb"
 end
 
 task :run => :default do
   sh "make -C .."
 end
 
-task :gen => [:run, "../SHA1SUMS"]
+task :gen => [:run, "../SHA256SUMS"]
