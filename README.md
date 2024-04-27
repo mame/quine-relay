@@ -544,7 +544,7 @@ Added: Modula-2
 
 ## for Ubuntu 24.04
 
-[128 languages]()
+[128 languages](https://github.com/mame/quine-relay/tree/20d7f437c053b8e0b301ba996d124a4b812e3571)
 
 Removed: PPT (Punched tape)
 
