@@ -30,15 +30,16 @@ jobs:
           sudo docker run --privileged --name qr -e CI=true -t quine-relay
       - name: push spoiler
         run: |
-          mkdir spoiler
+          git clone https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/mame/quine-relay.git spoiler --branch spoiler
+          git -C spoiler rm --quiet -r '*'
 #{ cp_cmds }
           cd spoiler
-          git init --quiet
           git config user.name 'Yusuke Endoh'
           git config user.email 'mame@ruby-lang.org'
           git add .
-          git commit -m spoiler --quiet
-          git push --force --quiet https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/mame/quine-relay.git master:spoiler
+          TZ=Asia/Tokyo \
+          git commit --allow-empty -m "spoiler: $(git show -s --format=%s "$GITHUB_SHA")"
+          git push --quiet origin spoiler
           echo The intermediate sources are available: https://github.com/mame/quine-relay/tree/spoiler
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         env:
