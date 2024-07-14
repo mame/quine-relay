@@ -31,7 +31,7 @@ if false
   exit
 end
 
-# a table of short-hand character for sequences that often apper
+# a table of short-hand character for sequences that often appear
 ABBREV = {
   ?~ => " ",
   ?` => "\\",
