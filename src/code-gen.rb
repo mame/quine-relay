@@ -356,20 +356,9 @@ end
 
 class MiniZinc < CodeGen
   File = "QR.mzn"
-  Cmd = "minizinc --solver Gecode --soln-sep '' QR.mzn > OUTFILE"
+  Cmd = "minizinc --solver COIN-BC --soln-sep '' QR.mzn > OUTFILE"
   Apt = "minizinc"
   Code = %q("solve satisfy;output [#{E[PREV]}];")
-end
-
-class Maxima < CodeGen
-  File = "QR.mac"
-  Cmd = "maxima -q --init-mac=QR.mac > OUTFILE"
-  Apt = "maxima"
-  Backup = [[
-    %(if [ "$(CI)" = "true" ]; then mv /tmp /tmp.bak && ln -s /dev/shm /tmp; fi),
-    %(if [ "$(CI)" = "true" ]; then rm /tmp && mv /tmp.bak /tmp; fi),
-  ]]
-  Code = %q("linel:99999;print#{E[PREV]};quit();")
 end
 
 class Makefile < CodeGen
@@ -445,7 +434,7 @@ class Ksh_LazyK_Lisaac < CodeGen
   Cmd = [
     "ksh QR.ksh > OUTFILE",
     "lazyk QR.lazy > OUTFILE",
-    "lisaac qr.li && ./qr > OUTFILE",
+    "lisaac -gcc -Wno-implicit-function-declaration qr.li && ./qr > OUTFILE",
   ]
   Apt = ["ksh", nil, "lisaac"]
   Backup = [nil, nil, "QR.c"]
@@ -639,7 +628,7 @@ end
 
 class Haskell < CodeGen
   File = "QR.hs"
-  Cmd = "ghc QR.hs && ./QR > OUTFILE"
+  Cmd = "rm -f QR.o && ghc QR.hs && ./QR > OUTFILE"
   Apt = "ghc"
   Code = %q("main=putStr"+E[PREV])
 end
@@ -830,12 +819,12 @@ class FSharp < CodeGen
   Code = %q('printfn("""'+d[PREV,?%]+' """)')
 end
 
-#class Execline < CodeGen
-#  File = "QR.e"
-#  Cmd = "execlineb QR.e > OUTFILE"
-#  Apt = "execline"
-#  Code = %q(%(echo "#{e[PREV]}"))
-#end
+class Execline < CodeGen
+  File = "QR.e"
+  Cmd = "execlineb QR.e > OUTFILE"
+  Apt = "execline"
+  Code = %q(%(echo "#{e[PREV]}"))
+end
 
 class Erlang < CodeGen
   File = "QR.erl"
@@ -884,13 +873,6 @@ class Dc_Dhall < CodeGen
   ]
   Apt = ["dc", "dhall"]
   Code = %q("['']p[#{PREV}]p['']pq")
-end
-
-class Dafny < CodeGen
-  File = "QR.dfy"
-  Cmd = "dafny QR.dfy && mono QR.exe > OUTFILE"
-  Apt = "dafny"
-  Code = %q(%(method Main(){print(@"#{d[PREV]}");}))
 end
 
 class D < CodeGen
@@ -1496,6 +1478,13 @@ class StandardML_Subleq < CodeGen
       )
     END
   end
+end
+
+class Squirrel < CodeGen
+  File = "QR.nut"
+  Cmd = "squirrel QR.nut > OUTFILE"
+  Apt = "squirrel3"
+  Code = %q("print"+E[PREV])
 end
 
 class Scilab_Sed_Shakespeare_SLang < CodeGen
