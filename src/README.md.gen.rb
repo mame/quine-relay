@@ -336,6 +336,14 @@ Removed: PPT (Punched tape)
 
 Added: Pike
 
+## for Ubuntu 24.10
+
+128 languages
+
+Removed: Dafny, Maxima
+
+Added: Execline, Squirrel
+
 ## License
 
 The MIT License applies to all resources
@@ -349,7 +357,7 @@ See `vendor/README` in detail.
 
 The MIT License (MIT)
 
-Copyright (c) 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023 Yusuke Endoh (@mametter), @hirekoke
+Copyright (c) 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 Yusuke Endoh (@mametter), @hirekoke
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

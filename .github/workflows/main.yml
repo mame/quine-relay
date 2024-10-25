@@ -26,6 +26,7 @@ jobs:
           sudo docker cp qr:/usr/local/share/quine-relay/QR.sed spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.spl spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.sl spoiler/
+          sudo docker cp qr:/usr/local/share/quine-relay/QR.nut spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.sml spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.sq spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.ss spoiler/
@@ -74,12 +75,12 @@ jobs:
           sudo docker cp qr:/usr/local/share/quine-relay/QR.lisp spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.cr spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.d spoiler/
-          sudo docker cp qr:/usr/local/share/quine-relay/QR.dfy spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.dc spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.dhall spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.exs spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.el spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.erl spoiler/
+          sudo docker cp qr:/usr/local/share/quine-relay/QR.e spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.fsx spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.false spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.fl spoiler/
@@ -117,7 +118,6 @@ jobs:
           sudo docker cp qr:/usr/local/share/quine-relay/QR.lua spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.m4 spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.mk spoiler/
-          sudo docker cp qr:/usr/local/share/quine-relay/QR.mac spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.mzn spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.mod spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.il spoiler/
@@ -148,13 +148,7 @@ jobs:
           sudo docker cp qr:/usr/local/share/quine-relay/QR.rexx spoiler/
           cd spoiler
           git add .
-          GIT_AUTHOR_NAME="$(git show -s --format=%an "$GITHUB_SHA")" \
-          GIT_AUTHOR_EMAIL="$(git show -s --format=%ae "$GITHUB_SHA")" \
-          GIT_AUTHOR_DATE="$(git show -s --format=%ad "$GITHUB_SHA")" \
-          GIT_COMMITTER_NAME='GitHub Actions' \
-          GIT_COMMITTER_EMAIL='actions@github.com' \
-          TZ=UTC \
-          git commit --allow-empty -m "spoiler: $(git show -s --format=%s "$GITHUB_SHA")"
+          GIT_AUTHOR_NAME="$(git show -s --format=%an "$GITHUB_SHA")"           GIT_AUTHOR_EMAIL="$(git show -s --format=%ae "$GITHUB_SHA")"           GIT_AUTHOR_DATE="$(git show -s --format=%ad "$GITHUB_SHA")"           GIT_COMMITTER_NAME='GitHub Actions'           GIT_COMMITTER_EMAIL='actions@github.com'           TZ=UTC           git commit --allow-empty -m "spoiler: $(git show -s --format=%s "$GITHUB_SHA")"
           git push --quiet origin spoiler
           echo The intermediate sources are available: https://github.com/${GITHUB_REPOSITORY}/tree/spoiler
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
