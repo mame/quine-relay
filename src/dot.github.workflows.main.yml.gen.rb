@@ -35,12 +35,12 @@ jobs:
 #{ cp_cmds }
           cd spoiler
           git add .
-          GIT_AUTHOR_NAME="$(git show -s --format=%an "$GITHUB_SHA")" \
-          GIT_AUTHOR_EMAIL="$(git show -s --format=%ae "$GITHUB_SHA")" \
-          GIT_AUTHOR_DATE="$(git show -s --format=%ad "$GITHUB_SHA")" \
-          GIT_COMMITTER_NAME='GitHub Actions' \
-          GIT_COMMITTER_EMAIL='actions@github.com' \
-          TZ=UTC \
+          GIT_AUTHOR_NAME="$(git show -s --format=%an "$GITHUB_SHA")" \\
+          GIT_AUTHOR_EMAIL="$(git show -s --format=%ae "$GITHUB_SHA")" \\
+          GIT_AUTHOR_DATE="$(git show -s --format=%ad "$GITHUB_SHA")" \\
+          GIT_COMMITTER_NAME='GitHub Actions' \\
+          GIT_COMMITTER_EMAIL='actions@github.com' \\
+          TZ=UTC \\
           git commit --allow-empty -m "spoiler: $(git show -s --format=%s "$GITHUB_SHA")"
           git push --quiet origin spoiler
           echo The intermediate sources are available: https://github.com/${GITHUB_REPOSITORY}/tree/spoiler
