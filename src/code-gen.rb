@@ -1579,7 +1579,8 @@ class Rust < CodeGen
   Code = %q(%(fn main(){print!("{}",#{E[PREV]});}))
 end
 
-class Ruby < CodeGen
+class Ruby_ < CodeGen
+  Name = "Ruby"
   File = "QR.rb"
   Cmd = "ruby QR.rb > OUTFILE"
   Apt = "ruby"
