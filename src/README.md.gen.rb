@@ -193,8 +193,8 @@ A.
     $ sudo apt-get install rake ruby-cairo ruby-rsvg2 ruby-gdk-pixbuf2 \
       optipng advancecomp ruby-chunky-png
     $ cd src
-    $ rake2.0 clobber
-    $ rake2.0
+    $ rake clobber
+    $ rake
 
 ## History
 

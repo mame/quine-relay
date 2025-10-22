@@ -36,3 +36,17 @@ CodeGen::List.slice!(original_list_size..-1).each do |s|
 end
 
 CodeGen::List.delete(GeneratorScriptingLanguage)
+
+class Zig < CodeGen
+  File = "QR.zig"
+  Cmd = "zig run QR.zig > OUTFILE"
+  Apt = "zig"
+  Code = %q(%(pub fn main()!void{_=try @import("std").io.getStdOut().write#{E[PREV]};}))
+end
+
+# aribas
+# elvish
+# hare
+# raku
+# snek
+# storm-lang

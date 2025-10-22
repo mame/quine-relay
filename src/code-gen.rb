@@ -420,23 +420,15 @@ class LLVMAsm < CodeGen
   end
 end
 
-class LiveScript < CodeGen
-  Name = "LiveScript"
-  File = "QR.ls"
-  Cmd = "lsc QR.ls > OUTFILE"
-  Apt = "livescript"
-  Code = %q("console.log"+Q[E[PREV],?#])
-end
-
-class Ksh_LazyK_Lisaac < CodeGen
-  Name = ["ksh", "Lazy K", "Lisaac"]
-  File = ["QR.ksh", "QR.lazy", "qr.li"]
+class Ksh_LazyK_LiveScript < CodeGen
+  Name = ["ksh", "Lazy K", "LiveScript"]
+  File = ["QR.ksh", "QR.lazy", "QR.ls"]
   Cmd = [
     "ksh QR.ksh > OUTFILE",
     "lazyk QR.lazy > OUTFILE",
-    "lisaac -gcc -Wno-implicit-function-declaration qr.li && ./qr > OUTFILE",
+    "lsc QR.ls > OUTFILE",
   ]
-  Apt = ["ksh", nil, "lisaac"]
+  Apt = ["ksh", nil, "livescript"]
   Backup = [nil, nil, "QR.c"]
   def code
     lazyk = ::File.read(::File.join(__dir__, "lazyk-boot.dat"))
@@ -447,30 +439,19 @@ class Ksh_LazyK_Lisaac < CodeGen
     lazyk = lazyk.gsub(/[ZHJK\^`~X]/) {|c| "\\x%02x" % c.ord }
     <<-'END'.lines.map {|l| l.strip }.join.sub("LAZYK"){lazyk}
       %(
-        s=();
-        a(){ s+=($(echo -n $1|od -An -tu1 -v) $2);};
-        a "SectionHeader+name:=QR;SectionPublic-main<-(" 10;
-        t='#{PREV.gsub(?',%('"'"'))}';
-        for((i=0;i<${#t};i+=99));do;
-          x=${t:$i:99};
-          a "\\"${x//[\\\\\\\"]/\\\\\\0}\\".print;" 10;
-        done;
-        a ");";
         p(){ echo -n $1;};
-        f(){ for x in ${s[*]};do;
-            p $3;
-            for((j=$2;j--;));do;
-              h $1 $x $j;
+        f(){ for x in $(p "$1"|od -An -tu1 -v);do;
+            p $4;
+            for((j=$3;j--;));do;
+              h $2 $x $j;
             done;
           done;
         };
         p k\\`;
         h(){ p \\`${1:$(($2>>$3&1)):2};};
-        f kki 7 '``s``s``s``s``s``s``s``si';
-        s=();
-        a 'LAZYK';
+        f 'console.log#{Q[E[PREV],?#].gsub(?',%('"'"'))}' kki 7 '``s``s``s``s``s``s``s``si';
         h(){ p ${1:$(((($2%83-10)>>((2-$3)*2))%4)):1};};
-        f ski\\` 3
+        f 'LAZYK' ski\\` 3
       )
     END
   end
@@ -593,7 +574,7 @@ class Icon_INTERCAL < CodeGen
   File = ["QR.icn", "QR.i"]
   Cmd = [
     "icont -s QR.icn && ./QR > OUTFILE",
-    "ick -bfOc QR.i && gcc -static QR.c -I /usr/include/ick-* -o QR -lick && ./QR > OUTFILE"
+    "ick -bfOc QR.i && gcc -std=c99 -static QR.c -I /usr/include/ick-* -o QR -lick && ./QR > OUTFILE"
   ]
   Backup = [nil, "QR.c"]
   Apt = [["icont", "iconx"], "intercal"]
@@ -1447,6 +1428,13 @@ class Tcl < CodeGen
   Cmd = "tclsh QR.tcl > OUTFILE"
   Apt = "tcl"
   Code = %q(%(puts "#{Q[e[PREV],/[\[\]$]/]}"))
+end
+
+class Swift < CodeGen
+  File = "QR.swift"
+  Cmd = "swiftc QR.swift && ./QR > OUTFILE"
+  Apt = "swiftlang"
+  Code = %q("print#{E[PREV]}")
 end
 
 class SurgeScript < CodeGen

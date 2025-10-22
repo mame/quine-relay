@@ -56,6 +56,10 @@ OUT << "\t@sha256sum --quiet -c SHA256SUMS"
     end
   end
   cmd.split("&&").each {|c| OUT << "\t" + c.strip.gsub(/^!/, "ulimit -s unlimited && ") }
+  if s1.name == "BeanShell"
+    # workaround; bsh disables terminal echo
+    OUT << "\t@stty echo"
+  end
   if s1.backup
     if s1.backup.is_a?(String)
       OUT << "\t@mv #{ s1.backup }.bak #{ s1.backup }"
