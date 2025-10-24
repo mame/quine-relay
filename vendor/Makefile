@@ -14,7 +14,7 @@ $(LOCAL)/bin/lci:
 
 $(LOCAL)/bin/npiet:
 	tar xzf $(NPIET).tar.gz
-	(cd $(NPIET) && ./configure --prefix=$(LOCAL) && make && make install)
+	(cd $(NPIET) && ./configure CC="gcc -std=c99 -Wno-implicit-function-declaration -Wno-int-conversion" --prefix=$(LOCAL) && make && make install)
 
 $(LOCAL)/bin/cfunge:
 	tar xjf $(CFUNGE).tar.bz2
