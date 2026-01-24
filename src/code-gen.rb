@@ -267,6 +267,13 @@ class ObjC < CodeGen
   Code = %q("#import<stdio.h>#{N}int main(){puts#{E[PREV]+R}}")
 end
 
+class Nix < CodeGen
+  File = "QR.nix"
+  Cmd = "nix-instantiate --eval --raw QR.nix > OUTFILE"
+  Apt = "nix-bin"
+  Code = %q(E[PREV].gsub('$',B+'$'))
+end
+
 class Nim < CodeGen
   File = "QR.nim"
   Cmd = "nim compile QR.nim && ./QR > OUTFILE"
@@ -713,14 +720,6 @@ class GAP < CodeGen
   Cmd = "gap -q QR.g > OUTFILE"
   Apt = "gap"
   Code = %q("s:=OutputTextUser();WriteAll(s,#{E[PREV]});CloseStream(s);QUIT;")
-end
-
-class Gambas < CodeGen
-  Name = "Gambas script"
-  File = "QR.gbs"
-  Cmd = "$(GBS) QR.gbs > OUTFILE"
-  Apt = [["gambas3-scripter", "gambas3-gb-pcre"]]
-  Code = %q(%(print"#{e[PREV]}"))
 end
 
 class Forth_FORTRAN77_Fortran90 < CodeGen

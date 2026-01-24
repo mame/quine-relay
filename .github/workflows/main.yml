@@ -89,7 +89,6 @@ jobs:
           sudo docker cp qr:/usr/local/share/quine-relay/QR.fs spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.f spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.f90 spoiler/
-          sudo docker cp qr:/usr/local/share/quine-relay/QR.gbs spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.g spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.gdb spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.gel spoiler/
@@ -126,6 +125,7 @@ jobs:
           sudo docker cp qr:/usr/local/share/quine-relay/QR.neko spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.5c spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.nim spoiler/
+          sudo docker cp qr:/usr/local/share/quine-relay/QR.nix spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.m spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.ml spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.octave spoiler/

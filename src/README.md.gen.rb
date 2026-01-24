@@ -356,6 +356,14 @@ Removed: Lisaac
 
 Added: Swift
 
+## For Ubuntu 26.04 (upcoming)
+
+(not released yet)
+
+Removed: Gambas Script
+
+Added: Nix
+
 ## License
 
 The MIT License applies to all resources
