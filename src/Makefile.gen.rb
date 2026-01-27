@@ -23,7 +23,6 @@ find_any = $(call check,$(1),$(call find_any0,$(2)))
 
 JAVASCRIPT   := $(call find_any,JavaScript,nodejs node js)
 SCHEME       := $(call find_any,Scheme,guile csi gosh)
-GBS          := $(call find_any,Gambas script,gbs3 gbs2 gba3)
 WASI_RUNTIME := $(call find_any,WASI runtime,wasmtime node)
 
 ifeq ($(SCHEME),csi)
