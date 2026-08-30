@@ -5,7 +5,24 @@ gen_prologue_2 = GenPrologue.split(?;)[2..-1].join(?;)
 
 s =
   gen_prologue_2 + ?; +
-  GenSteps[0..-2].inject('"eval$s=%q(#$s)"') {|code, s| s.code.sub("PREV"){ code }.chomp }
+  GenSteps[0..-2].inject('"eval$s=%q(#$s)"') do |code, gen_step|
+    gen_step.code.sub("PREV") { "check[#{ gen_step.name.dump },#{ code },:check_end]" }.chomp
+  end
+
+def run_check(src)
+  steps = GenSteps.each
+  check = ->(name, prev, _check_end) do
+    step = steps.next
+    raise if step.name != name
+    step.check.call(prev)
+    prev
+  end
+  Object.new.instance_eval(src)
+end
+
+run_check((gen_prologue_1 + ?; + s).gsub(/[^\S ]/, ""))
+
+s = s.gsub(/check\["[^"]*",|,:check_end\]/, "")
 
 if false
   # search characters rarely used
