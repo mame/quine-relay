@@ -20,8 +20,7 @@ def run_check(src)
   Object.new.instance_eval(src)
 end
 
-run_check((gen_prologue_1 + ?; + s).gsub(/[^\S ]/, ""))
-
+hooked = s
 s = s.gsub(/check\["[^"]*",|,:check_end\]/, "")
 
 if false
@@ -135,5 +134,8 @@ File.write("../QR.rb", code + "\n")
 
 # parse check
 RubyVM::AbstractSyntaxTree.parse(code)
-RubyVM::AbstractSyntaxTree.parse(code[/\Aeval\$s=%q\((.*)\)\z/m, 1])
+RubyVM::AbstractSyntaxTree.parse($s = code[/\Aeval\$s=%q\((.*)\)\z/m, 1])
 raise unless eval(code[/%w\(.*\)\*""/m]) == PAYLOAD
+
+# $s is what the innermost step prints, so check only once QR.rb is written
+run_check((gen_prologue_1 + ?; + hooked).gsub(/[^\S ]/, ""))
