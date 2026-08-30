@@ -103,6 +103,7 @@ system("wat2wasm ABCD.wat", exception: true)
 system("wat2wasm ABCDE.wat", exception: true)
 abcd = File.binread("ABCD.wasm")
 abcde = File.binread("ABCDE.wasm")
+File.delete("ABCD.wat", "ABCDE.wat", "ABCD.wasm", "ABCDE.wasm")
 i = (0..).find {|i| abcd[i] != abcde[i] }
 j = (abcd.size - 4).downto(0).find {|i| abcd[i] != abcde[i] }
 
@@ -118,7 +119,12 @@ data4 = abcd[j + 12-1...-4]
 #   data1 + LSB128(length+const) + data2 + LSB128(length+const) + data3 + Hexdump(length) + data4
 
 
-A = [26, 34, 86, 127, 148, 158, 200]
+# bytes that cannot be spelled literally in a VB string; they are encoded as "9".."?"
+def escaped?(n)
+  n >= 0x1a && (n < 32 || n == ?".ord || (?B.ord <= n && n <= ?Z.ord) || n >= 127)
+end
+A = [data1, data2, data3, data4].join.bytes.select {|n| escaped?(n) }.uniq.sort
+raise if A.size > 7
 def e(data)
   enc = "".b
   data.bytes do |n|
@@ -127,7 +133,7 @@ def e(data)
       enc << [n + ?B.ord].pack("C*")
     when ?9.ord <= n && n < ?9.ord + A.size
       raise
-    when n < 32 || n == ?".ord || (?B.ord <= n && n <= ?Z.ord) || n >= 127
+    when escaped?(n)
       enc << [?9.ord + A.index(n)].pack("C*")
     else
       enc << n
