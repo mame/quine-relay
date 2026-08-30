@@ -129,3 +129,7 @@ code[-1] = ")"
 code[-1 - COPYRIGHT.size, COPYRIGHT.size] = COPYRIGHT
 
 File.write("../QR.rb", code + "\n")
+
+# parse check
+RubyVM::AbstractSyntaxTree.parse(code)
+RubyVM::AbstractSyntaxTree.parse(code[/\Aeval\$s=%q\((.*)\)\z/m, 1])
