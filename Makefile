@@ -224,7 +224,7 @@ QR.wasm: QR.vb
 	@echo "##  23: Visual Basic -> WebAssembly (Binary format)  ##"
 	@echo "#######################################################"
 	@echo
-	echo '<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net8.0</TargetFramework><EnableDefaultCompileItems>false</EnableDefaultCompileItems></PropertyGroup><ItemGroup><Compile Include="QR.vb" /></ItemGroup></Project>' > tmp.vbproj
+	echo '<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework><EnableDefaultCompileItems>false</EnableDefaultCompileItems></PropertyGroup><ItemGroup><Compile Include="QR.vb" /></ItemGroup></Project>' > tmp.vbproj
 	DOTNET_NOLOGO=1 dotnet run --project tmp.vbproj > QR.wasm
 
 QR.wat: QR.wasm
@@ -284,26 +284,18 @@ QR.zsh: QR.azm
 	@echo
 	zoem -i QR.azm > QR.zsh
 
-QR.+: QR.zsh
+qr.adb: QR.zsh
 	@echo
-	@echo "#####################"
-	@echo "##  31: zsh -> A+  ##"
-	@echo "#####################"
+	@echo "######################"
+	@echo "##  31: zsh -> Ada  ##"
+	@echo "######################"
 	@echo
-	zsh QR.zsh > QR.+
-
-qr.adb: QR.+
-	@echo
-	@echo "#####################"
-	@echo "##  32: A+ -> Ada  ##"
-	@echo "#####################"
-	@echo
-	a+ QR.+ > qr.adb
+	zsh QR.zsh > qr.adb
 
 QR.als: qr.adb
 	@echo
 	@echo "########################"
-	@echo "##  33: Ada -> AFNIX  ##"
+	@echo "##  32: Ada -> AFNIX  ##"
 	@echo "########################"
 	@echo
 	gnatmake qr.adb
@@ -312,7 +304,7 @@ QR.als: qr.adb
 QR.aheui: QR.als
 	@echo
 	@echo "##########################"
-	@echo "##  34: AFNIX -> Aheui  ##"
+	@echo "##  33: AFNIX -> Aheui  ##"
 	@echo "##########################"
 	@echo
 	LANG=C LD_LIBRARY_PATH=/usr/lib/afnix axi QR.als > QR.aheui
@@ -320,7 +312,7 @@ QR.aheui: QR.als
 QR.a68: QR.aheui
 	@echo
 	@echo "#############################"
-	@echo "##  35: Aheui -> ALGOL 68  ##"
+	@echo "##  34: Aheui -> ALGOL 68  ##"
 	@echo "#############################"
 	@echo
 	ruby vendor/aheui.rb QR.aheui > QR.a68
@@ -328,7 +320,7 @@ QR.a68: QR.aheui
 QR.ante: QR.a68
 	@echo
 	@echo "############################"
-	@echo "##  36: ALGOL 68 -> Ante  ##"
+	@echo "##  35: ALGOL 68 -> Ante  ##"
 	@echo "############################"
 	@echo
 	a68g QR.a68 > QR.ante
@@ -336,7 +328,7 @@ QR.ante: QR.a68
 QR.aj: QR.ante
 	@echo
 	@echo "###########################"
-	@echo "##  37: Ante -> AspectJ  ##"
+	@echo "##  36: Ante -> AspectJ  ##"
 	@echo "###########################"
 	@echo
 	ruby vendor/ante.rb QR.ante > QR.aj
@@ -344,7 +336,7 @@ QR.aj: QR.ante
 QR.asy: QR.aj
 	@echo
 	@echo "################################"
-	@echo "##  38: AspectJ -> Asymptote  ##"
+	@echo "##  37: AspectJ -> Asymptote  ##"
 	@echo "################################"
 	@echo
 	ajc QR.aj
@@ -353,7 +345,7 @@ QR.asy: QR.aj
 QR.dats: QR.asy
 	@echo
 	@echo "############################"
-	@echo "##  39: Asymptote -> ATS  ##"
+	@echo "##  38: Asymptote -> ATS  ##"
 	@echo "############################"
 	@echo
 	asy QR.asy > QR.dats
@@ -361,7 +353,7 @@ QR.dats: QR.asy
 QR.awk: QR.dats
 	@echo
 	@echo "######################"
-	@echo "##  40: ATS -> Awk  ##"
+	@echo "##  39: ATS -> Awk  ##"
 	@echo "######################"
 	@echo
 	patscc -o QR QR.dats
@@ -370,7 +362,7 @@ QR.awk: QR.dats
 QR.bash: QR.awk
 	@echo
 	@echo "#######################"
-	@echo "##  41: Awk -> bash  ##"
+	@echo "##  40: Awk -> bash  ##"
 	@echo "#######################"
 	@echo
 	awk -f QR.awk > QR.bash
@@ -378,7 +370,7 @@ QR.bash: QR.awk
 QR.bc: QR.bash
 	@echo
 	@echo "######################"
-	@echo "##  42: bash -> bc  ##"
+	@echo "##  41: bash -> bc  ##"
 	@echo "######################"
 	@echo
 	bash QR.bash > QR.bc
@@ -386,7 +378,7 @@ QR.bc: QR.bash
 QR.bsh: QR.bc
 	@echo
 	@echo "###########################"
-	@echo "##  43: bc -> BeanShell  ##"
+	@echo "##  42: bc -> BeanShell  ##"
 	@echo "###########################"
 	@echo
 	BC_LINE_LENGTH=4000000 bc -q QR.bc > QR.bsh
@@ -394,7 +386,7 @@ QR.bsh: QR.bc
 QR.bef: QR.bsh
 	@echo
 	@echo "################################"
-	@echo "##  44: BeanShell -> Befunge  ##"
+	@echo "##  43: BeanShell -> Befunge  ##"
 	@echo "################################"
 	@echo
 	bsh QR.bsh > QR.bef
@@ -403,7 +395,7 @@ QR.bef: QR.bsh
 QR.Blc: QR.bef
 	@echo
 	@echo "###########################"
-	@echo "##  45: Befunge -> BLC8  ##"
+	@echo "##  44: Befunge -> BLC8  ##"
 	@echo "###########################"
 	@echo
 	cfunge QR.bef > QR.Blc
@@ -411,7 +403,7 @@ QR.Blc: QR.bef
 QR.bf: QR.Blc
 	@echo
 	@echo "#############################"
-	@echo "##  46: BLC8 -> Brainfuck  ##"
+	@echo "##  45: BLC8 -> Brainfuck  ##"
 	@echo "#############################"
 	@echo
 	ruby vendor/blc.rb < QR.Blc > QR.bf
@@ -419,7 +411,7 @@ QR.bf: QR.Blc
 QR.c: QR.bf
 	@echo
 	@echo "##########################"
-	@echo "##  47: Brainfuck -> C  ##"
+	@echo "##  46: Brainfuck -> C  ##"
 	@echo "##########################"
 	@echo
 	ruby vendor/bf.rb QR.bf > QR.c
@@ -427,7 +419,7 @@ QR.c: QR.bf
 QR.cpp: QR.c
 	@echo
 	@echo "####################"
-	@echo "##  48: C -> C++  ##"
+	@echo "##  47: C -> C++  ##"
 	@echo "####################"
 	@echo
 	$(CC) -o QR QR.c
@@ -436,7 +428,7 @@ QR.cpp: QR.c
 QR.cs: QR.cpp
 	@echo
 	@echo "#####################"
-	@echo "##  49: C++ -> C#  ##"
+	@echo "##  48: C++ -> C#  ##"
 	@echo "#####################"
 	@echo
 	$(CXX) -o QR QR.cpp
@@ -445,16 +437,16 @@ QR.cs: QR.cpp
 QR.chef: QR.cs
 	@echo
 	@echo "######################"
-	@echo "##  50: C# -> Chef  ##"
+	@echo "##  49: C# -> Chef  ##"
 	@echo "######################"
 	@echo
-	echo '<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net8.0</TargetFramework><EnableDefaultCompileItems>false</EnableDefaultCompileItems></PropertyGroup><ItemGroup><Compile Include="QR.cs" /></ItemGroup></Project>' > tmp.csproj
+	echo '<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework><EnableDefaultCompileItems>false</EnableDefaultCompileItems></PropertyGroup><ItemGroup><Compile Include="QR.cs" /></ItemGroup></Project>' > tmp.csproj
 	DOTNET_NOLOGO=1 dotnet run --project tmp.csproj > QR.chef
 
 QR.clj: QR.chef
 	@echo
 	@echo "###########################"
-	@echo "##  51: Chef -> Clojure  ##"
+	@echo "##  50: Chef -> Clojure  ##"
 	@echo "###########################"
 	@echo
 	PERL5LIB=vendor/local/lib/perl5 compilechef QR.chef QR.chef.pl
@@ -463,7 +455,7 @@ QR.clj: QR.chef
 QR.cmake: QR.clj
 	@echo
 	@echo "############################"
-	@echo "##  52: Clojure -> CMake  ##"
+	@echo "##  51: Clojure -> CMake  ##"
 	@echo "############################"
 	@echo
 	clojure QR.clj > QR.cmake
@@ -471,7 +463,7 @@ QR.cmake: QR.clj
 QR.cob: QR.cmake
 	@echo
 	@echo "##########################"
-	@echo "##  53: CMake -> Cobol  ##"
+	@echo "##  52: CMake -> Cobol  ##"
 	@echo "##########################"
 	@echo
 	cmake -P QR.cmake > QR.cob
@@ -479,7 +471,7 @@ QR.cob: QR.cmake
 QR.coffee: QR.cob
 	@echo
 	@echo "#################################"
-	@echo "##  54: Cobol -> CoffeeScript  ##"
+	@echo "##  53: Cobol -> CoffeeScript  ##"
 	@echo "#################################"
 	@echo
 	cobc -O2 -x QR.cob
@@ -488,7 +480,7 @@ QR.coffee: QR.cob
 QR.lisp: QR.coffee
 	@echo
 	@echo "#######################################"
-	@echo "##  55: CoffeeScript -> Common Lisp  ##"
+	@echo "##  54: CoffeeScript -> Common Lisp  ##"
 	@echo "#######################################"
 	@echo
 	coffee --nodejs --stack_size=100000 QR.coffee > QR.lisp
@@ -496,7 +488,7 @@ QR.lisp: QR.coffee
 QR.cr: QR.lisp
 	@echo
 	@echo "##################################"
-	@echo "##  56: Common Lisp -> Crystal  ##"
+	@echo "##  55: Common Lisp -> Crystal  ##"
 	@echo "##################################"
 	@echo
 	clisp QR.lisp > QR.cr
@@ -504,7 +496,7 @@ QR.cr: QR.lisp
 QR.d: QR.cr
 	@echo
 	@echo "########################"
-	@echo "##  57: Crystal -> D  ##"
+	@echo "##  56: Crystal -> D  ##"
 	@echo "########################"
 	@echo
 	crystal QR.cr > QR.d
@@ -512,7 +504,7 @@ QR.d: QR.cr
 QR.dc: QR.d
 	@echo
 	@echo "###################"
-	@echo "##  58: D -> dc  ##"
+	@echo "##  57: D -> dc  ##"
 	@echo "###################"
 	@echo
 	gdc -o QR QR.d
@@ -521,7 +513,7 @@ QR.dc: QR.d
 QR.dhall: QR.dc
 	@echo
 	@echo "#######################"
-	@echo "##  59: dc -> Dhall  ##"
+	@echo "##  58: dc -> Dhall  ##"
 	@echo "#######################"
 	@echo
 	dc QR.dc > QR.dhall || true
@@ -529,7 +521,7 @@ QR.dhall: QR.dc
 QR.exs: QR.dhall
 	@echo
 	@echo "###########################"
-	@echo "##  60: Dhall -> Elixir  ##"
+	@echo "##  59: Dhall -> Elixir  ##"
 	@echo "###########################"
 	@echo
 	dhall text --file QR.dhall > QR.exs
@@ -537,7 +529,7 @@ QR.exs: QR.dhall
 QR.el: QR.exs
 	@echo
 	@echo "################################"
-	@echo "##  61: Elixir -> Emacs Lisp  ##"
+	@echo "##  60: Elixir -> Emacs Lisp  ##"
 	@echo "################################"
 	@echo
 	elixir QR.exs > QR.el
@@ -545,7 +537,7 @@ QR.el: QR.exs
 QR.erl: QR.el
 	@echo
 	@echo "################################"
-	@echo "##  62: Emacs Lisp -> Erlang  ##"
+	@echo "##  61: Emacs Lisp -> Erlang  ##"
 	@echo "################################"
 	@echo
 	emacs -Q --script QR.el > QR.erl
@@ -553,7 +545,7 @@ QR.erl: QR.el
 QR.e: QR.erl
 	@echo
 	@echo "##############################"
-	@echo "##  63: Erlang -> Execline  ##"
+	@echo "##  62: Erlang -> Execline  ##"
 	@echo "##############################"
 	@echo
 	escript QR.erl > QR.e
@@ -561,7 +553,7 @@ QR.e: QR.erl
 QR.fsx: QR.e
 	@echo
 	@echo "##########################"
-	@echo "##  64: Execline -> F#  ##"
+	@echo "##  63: Execline -> F#  ##"
 	@echo "##########################"
 	@echo
 	execlineb QR.e > QR.fsx
@@ -569,19 +561,27 @@ QR.fsx: QR.e
 QR.false: QR.fsx
 	@echo
 	@echo "#######################"
-	@echo "##  65: F# -> FALSE  ##"
+	@echo "##  64: F# -> FALSE  ##"
 	@echo "#######################"
 	@echo
-	echo '<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net8.0</TargetFramework><EnableDefaultCompileItems>false</EnableDefaultCompileItems></PropertyGroup><ItemGroup><Compile Include="QR.fsx" /></ItemGroup></Project>' > tmp.fsproj
+	echo '<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework><EnableDefaultCompileItems>false</EnableDefaultCompileItems></PropertyGroup><ItemGroup><Compile Include="QR.fsx" /></ItemGroup></Project>' > tmp.fsproj
 	DOTNET_NOLOGO=1 dotnet run --project tmp.fsproj > QR.false
 
-QR.fl: QR.false
+QR.fnl: QR.false
 	@echo
-	@echo "#########################"
-	@echo "##  66: FALSE -> Flex  ##"
-	@echo "#########################"
+	@echo "###########################"
+	@echo "##  65: FALSE -> Fennel  ##"
+	@echo "###########################"
 	@echo
-	ruby vendor/false.rb QR.false > QR.fl
+	ruby vendor/false.rb QR.false > QR.fnl
+
+QR.fl: QR.fnl
+	@echo
+	@echo "##########################"
+	@echo "##  66: Fennel -> Flex  ##"
+	@echo "##########################"
+	@echo
+	fennel QR.fnl > QR.fl
 
 QR.fish: QR.fl
 	@echo
