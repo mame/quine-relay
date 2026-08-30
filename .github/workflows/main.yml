@@ -49,7 +49,6 @@ jobs:
           sudo docker cp qr:/usr/local/share/quine-relay/QR.yorick spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.azm spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.zsh spoiler/
-          sudo docker cp qr:/usr/local/share/quine-relay/QR.+ spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/qr.adb spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.als spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.aheui spoiler/
@@ -84,6 +83,7 @@ jobs:
           sudo docker cp qr:/usr/local/share/quine-relay/QR.e spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.fsx spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.false spoiler/
+          sudo docker cp qr:/usr/local/share/quine-relay/QR.fnl spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.fl spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.fish spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.fs spoiler/

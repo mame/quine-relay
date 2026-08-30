@@ -1,14 +1,14 @@
-FROM ubuntu:25.10
+FROM ubuntu:26.04
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get -qq install -y apt-utils > /dev/null
 RUN apt-get -qq install -y moreutils
-RUN chronic apt-get -qq install -y afnix algol68g aplus-fsf aspectj && chronic apt-get clean
-RUN chronic apt-get -qq install -y asymptote ats2-lang bash bc && chronic apt-get clean
-RUN chronic apt-get -qq install -y bison bsh clisp clojure && chronic apt-get clean
-RUN chronic apt-get -qq install -y cmake coffeescript crystal curl && chronic apt-get clean
-RUN chronic apt-get -qq install -y dc dhall dotnet8 elixir && chronic apt-get clean
-RUN chronic apt-get -qq install -y emacs-nox erlang execline f2c && chronic apt-get clean
+RUN chronic apt-get -qq install -y afnix algol68g aspectj asymptote && chronic apt-get clean
+RUN chronic apt-get -qq install -y ats2-lang bash bc bison && chronic apt-get clean
+RUN chronic apt-get -qq install -y bsh clisp clojure cmake && chronic apt-get clean
+RUN chronic apt-get -qq install -y coffeescript crystal curl dc && chronic apt-get clean
+RUN chronic apt-get -qq install -y dhall dotnet-sdk-10.0 elixir emacs-nox && chronic apt-get clean
+RUN chronic apt-get -qq install -y erlang execline f2c fennel && chronic apt-get clean
 RUN chronic apt-get -qq install -y fish flex fp-compiler g++ && chronic apt-get clean
 RUN chronic apt-get -qq install -y gambas3-gb-pcre gambas3-scripter gap gawk && chronic apt-get clean
 RUN chronic apt-get -qq install -y gcc gdb gdc genius && chronic apt-get clean
@@ -18,20 +18,20 @@ RUN chronic apt-get -qq install -y gobjc golang gpt groff && chronic apt-get cle
 RUN chronic apt-get -qq install -y groovy guile-3.0 gzip haxe && chronic apt-get clean
 RUN chronic apt-get -qq install -y icont iconx intercal iverilog && chronic apt-get clean
 RUN chronic apt-get -qq install -y jasmin-sable jq kotlin ksh && chronic apt-get clean
-RUN chronic apt-get -qq install -y libevent-dev libgd-dev libpng-dev libpolyml-dev && chronic apt-get clean
-RUN chronic apt-get -qq install -y livescript llvm lua5.3 m4 && chronic apt-get clean
-RUN chronic apt-get -qq install -y make minizinc mono-devel nasm && chronic apt-get clean
-RUN chronic apt-get -qq install -y neko nickle nim node-typescript && chronic apt-get clean
-RUN chronic apt-get -qq install -y nodejs ocaml octave openjdk-11-jdk && chronic apt-get clean
-RUN chronic apt-get -qq install -y pari-gp parser3-cgi perl php-cli && chronic apt-get clean
-RUN chronic apt-get -qq install -y pike8.0 polyml python3 r-base && chronic apt-get clean
-RUN chronic apt-get -qq install -y rakudo ratfor rc regina-rexx && chronic apt-get clean
-RUN chronic apt-get -qq install -y ruby ruby-mustache rustc scala && chronic apt-get clean
-RUN chronic apt-get -qq install -y scilab-cli sed slsh spin && chronic apt-get clean
-RUN chronic apt-get -qq install -y squirrel3 surgescript swi-prolog swiftlang && chronic apt-get clean
-RUN chronic apt-get -qq install -y tcl tcsh valac vim && chronic apt-get clean
-RUN chronic apt-get -qq install -y wabt xsltproc yabasic yorick && chronic apt-get clean
-RUN chronic apt-get -qq install -y zoem zsh && chronic apt-get clean
+RUN chronic apt-get -qq install -y libevent-dev libfl-dev libgd-dev libpng-dev && chronic apt-get clean
+RUN chronic apt-get -qq install -y libpolyml-dev livescript llvm lua5.3 && chronic apt-get clean
+RUN chronic apt-get -qq install -y m4 make minizinc mono-devel && chronic apt-get clean
+RUN chronic apt-get -qq install -y nasm neko nickle nim && chronic apt-get clean
+RUN chronic apt-get -qq install -y node-typescript nodejs ocaml octave && chronic apt-get clean
+RUN chronic apt-get -qq install -y openjdk-25-jdk pari-gp parser3-cgi perl && chronic apt-get clean
+RUN chronic apt-get -qq install -y php-cli pike8.0 polyml python3 && chronic apt-get clean
+RUN chronic apt-get -qq install -y r-base rakudo ratfor rc && chronic apt-get clean
+RUN chronic apt-get -qq install -y regina-rexx ruby ruby-mustache rustc && chronic apt-get clean
+RUN chronic apt-get -qq install -y scala scilab-cli sed slsh && chronic apt-get clean
+RUN chronic apt-get -qq install -y spin squirrel3 surgescript swi-prolog && chronic apt-get clean
+RUN chronic apt-get -qq install -y swiftlang tcl tcsh valac && chronic apt-get clean
+RUN chronic apt-get -qq install -y vim wabt xsltproc yabasic && chronic apt-get clean
+RUN chronic apt-get -qq install -y yorick zoem zsh && chronic apt-get clean
 ADD . /usr/local/share/quine-relay
 WORKDIR /usr/local/share/quine-relay
 RUN make -C vendor
