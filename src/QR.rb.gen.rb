@@ -48,17 +48,20 @@ if false
 end
 
 # a table of short-hand character for sequences that often appear
+# key => [sequence, expression that restores it]
+# the sequences are matched in this order, so a later one may refer to an earlier key
+# a key must not appear outside a double-quoted string literal
 ABBREV = {
-  ?~ => " ",
-  ?` => "\\",
-  ?^ => "``",
-  ?Z => "print",
-  ?X => "ain()",
-  ?J => "tring",
-  ?H => "write",
-  ?K => "gsub",
-  ?! => "in",
-  ?Y => "^^",
+  ?~ => [" ",     "g"],
+  ?` => ["\\",    "B"],
+  ?^ => ["``",    "B*2"],
+  ?Z => ["print", ":print"],
+  ?X => ["ain()", %q("ain()")],
+  ?J => ["tring", ":tring"],
+  ?H => ["write", ":write"],
+  ?K => ["gsub",  ":gsub"],
+  ?! => ["in",    ":in"],
+  ?Y => ["^^",    "B*4"],
 }
 
 s = s.gsub(/[#{ ABBREV.keys.join }]/){"\\x%02x" % $&.ord}
@@ -76,21 +79,13 @@ a.size.upto(90) do |n|
   end
 end
 
-ABBREV.each do |k, v|
+ABBREV.each do |k, (v, _)|
   s = s.gsub(v, k)
 end
 
 a = [0] * ($B.max + 1)
-ABBREV.each do |k, v|
-  v = case v
-      when "\\" then "B"
-      when "``" then "B*2"
-      when "^^" then "B*4"
-      when " " then "g"
-      when "ain()" then %("ain()")
-      else ":#{ v }"
-      end
-  a[k.ord % $N % $M] = v
+ABBREV.each do |k, (_, r)|
+  a[k.ord % $N % $M] = r
 end
 a = a.join(",")
 
