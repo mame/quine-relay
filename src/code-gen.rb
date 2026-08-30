@@ -690,6 +690,7 @@ class Jasmin < CodeGen
   end
 
   def check(prev)
+    raise if prev.bytesize > 65535 # it becomes one JVM CONSTANT_Utf8 via ldc
     # the dc stage carries the whole program inside a [...] string, which counts nesting
     raise unless prev.match?(BRACKETS)
   end
@@ -722,6 +723,11 @@ class Icon_INTERCAL < CodeGen
         end
       )
     END
+  end
+
+  def check(prev)
+    # the length is emitted as the INTERCAL constant DO,1<-#N, and constants are 16bit
+    raise if prev.bytesize + 1 > 65535
   end
 end
 
@@ -1243,6 +1249,7 @@ class C < CodeGen
   end
 
   def check(prev)
+    raise if prev.bytesize >= 99999 # the decoder buffer is char s[99999]
     raise unless prev[-6..] == prev[-12..-7] # the LZ77 encoder drops the trailing literals
   end
 end
