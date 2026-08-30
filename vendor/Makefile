@@ -10,15 +10,17 @@ all: $(LOCAL)/bin/lci $(LOCAL)/bin/npiet $(LOCAL)/bin/cfunge $(LOCAL)/bin/compil
 
 $(LOCAL)/bin/lci:
 	unzip -q $(LCI).zip
-	(cd $(LCI) && cmake -DCMAKE_INSTALL_PREFIX=$(LOCAL) . && make && make install)
+	(cd $(LCI) && cmake -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DCMAKE_INSTALL_PREFIX=$(LOCAL) . && make && make install)
 
 $(LOCAL)/bin/npiet:
 	tar xzf $(NPIET).tar.gz
 	(cd $(NPIET) && ./configure CC="gcc -std=c99 -Wno-implicit-function-declaration -Wno-int-conversion" --prefix=$(LOCAL) && make && make install)
 
+# CMake 4 turns CMP0054 on, so cfunge's quoted variable names are no longer dereferenced
 $(LOCAL)/bin/cfunge:
 	tar xjf $(CFUNGE).tar.bz2
-	(cd $(CFUNGE) && cmake -DCMAKE_INSTALL_PREFIX=$(LOCAL) . && make && make install)
+	sed -i 's/"\(CFUNGE_CHECK[A-Z]*_$${_name}\)"/\1/g' $(CFUNGE)/cmake/modules/CfungeRequireInclude.cmake $(CFUNGE)/cmake/modules/CfungeRequireMultipleIncludes.cmake
+	(cd $(CFUNGE) && cmake -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DCMAKE_INSTALL_PREFIX=$(LOCAL) . && make && make install)
 
 $(LOCAL)/bin/compilechef:
 	tar xzf $(ACME_CHEF).tar.gz
