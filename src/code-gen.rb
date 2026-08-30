@@ -794,7 +794,7 @@ class FSharp < CodeGen
     <Project Sdk="Microsoft.NET.Sdk">
       <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net10.0</TargetFramework>
         <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
       </PropertyGroup>
       <ItemGroup>
@@ -803,7 +803,7 @@ class FSharp < CodeGen
     </Project>
   END
   Cmd = %(echo '#{ fsproj.lines.map {|s| s.strip }.join }' > tmp.fsproj && DOTNET_NOLOGO=1 dotnet run --project tmp.fsproj > OUTFILE)
-  Apt = "dotnet8"
+  Apt = "dotnet-sdk-10.0"
   Code = %q('printfn("""'+d[PREV,?%]+' """)')
 end
 
@@ -951,7 +951,7 @@ class CSharp_Chef < CodeGen
     <Project Sdk="Microsoft.NET.Sdk">
       <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net10.0</TargetFramework>
         <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
       </PropertyGroup>
       <ItemGroup>
@@ -963,7 +963,7 @@ class CSharp_Chef < CodeGen
     %(echo '#{ csproj.lines.map {|s| s.strip }.join }' > tmp.csproj && DOTNET_NOLOGO=1 dotnet run --project tmp.csproj > OUTFILE),
     "PERL5LIB=vendor/local/lib/perl5 compilechef QR.chef QR.chef.pl && perl QR.chef.pl > OUTFILE"
   ]
-  Apt = ["dotnet8", nil]
+  Apt = ["dotnet-sdk-10.0", nil]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
@@ -1300,7 +1300,7 @@ class VisualBasic_WebAssemblyBinary_WebAssemblyText_Whitespace < CodeGen
     <Project Sdk="Microsoft.NET.Sdk">
       <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net10.0</TargetFramework>
         <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
       </PropertyGroup>
       <ItemGroup>
@@ -1314,7 +1314,7 @@ class VisualBasic_WebAssemblyBinary_WebAssemblyText_Whitespace < CodeGen
     "wat2wasm QR.wat -o QR.wat.wasm && $(WASI_RUNTIME) QR.wat.wasm > OUTFILE",
     "ruby vendor/whitespace.rb QR.ws > OUTFILE"
   ]
-  Apt = ["dotnet8", "wabt", "wabt", nil]
+  Apt = ["dotnet-sdk-10.0", "wabt", "wabt", nil]
   def code
     r = <<-'END'.lines.map {|l| l.strip }.join(?:)
       %(Module QR\nSub Main()\nDim c,n:Dim s As Object=#{C[0]}.OpenStandardOutput():Dim t()As Short={@@TBL@@}
