@@ -1,6 +1,6 @@
 # A source for generating Quine Relay
 
-GenStep = Struct.new(:name, :code, :run_steps)
+GenStep = Struct.new(:name, :code, :run_steps, :check)
 RunStep = Struct.new(:name, :src, :cmd_make, :cmd_raw, :backup, :apt)
 
 # A class that generates Ruby code that generates a code (in a language X) that prints PREV.
@@ -15,11 +15,21 @@ class CodeGen
   end
 
   def self.gen_step
-    GenStep[name, new.code, run_steps]
+    gen = new
+    GenStep[name, gen.code, run_steps, gen.method(:check).to_proc]
   end
 
   def code
     self.class::Code
+  end
+
+  # check if PREV satisfies the assumption of the CodeGen
+  def check(prev)
+  end
+
+  # The same escaping as e[] of GenPrologue, for check
+  def escape(s)
+    s.gsub(/[\\"]/) { "\\" + $& }.gsub("\n", "\\n")
   end
 
   def self.run_steps
