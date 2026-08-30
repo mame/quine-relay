@@ -118,6 +118,9 @@ while TEMPLATE.count("#") - width < code.size
   width = TEMPLATE[/.*/].size
   warn "overflow!: #{ s - width }->#{ TEMPLATE.count("#") - width }"
 end
+# the art cuts the code at every run of "#", and a cut inside the trailing `)*""` makes it a splat
+code[-5, 0] = ?; while TEMPLATE.scan(/#+/).inject([0]) {|a, r| a << a[-1] + r.size }.any? {|i| code.size - 5 < i && i < code.size }
+PAYLOAD = code[/%w\((.*)\)\*""\)\z/m, 1]
 PADDING = "".ljust(width, "#_buffer_for_future_bug_fixes_")
 COPYRIGHT =
   "  Quine Relay -- Copyright (c) 2013, 2014 Yusuke Endoh (@mametter), @hirekoke  ".
@@ -133,3 +136,4 @@ File.write("../QR.rb", code + "\n")
 # parse check
 RubyVM::AbstractSyntaxTree.parse(code)
 RubyVM::AbstractSyntaxTree.parse(code[/\Aeval\$s=%q\((.*)\)\z/m, 1])
+raise unless eval(code[/%w\(.*\)\*""/m]) == PAYLOAD
