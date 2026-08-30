@@ -54,14 +54,14 @@ end
 ABBREV = {
   ?~ => [" ",     "g"],
   ?` => ["\\",    "B"],
-  ?^ => ["``",    "B*2"],
-  ?Z => ["print", ":print"],
-  ?X => ["ain()", %q("ain()")],
-  ?J => ["tring", ":tring"],
-  ?H => ["write", ":write"],
-  ?K => ["gsub",  ":gsub"],
-  ?! => ["in",    ":in"],
-  ?Y => ["^^",    "B*4"],
+  ?K => ["print", ":print"],
+  ?J => ["``",    "B*2"],
+  ?^ => ['#{',    %q('#{')],
+  ?H => ["in",    ":in"],
+  ?Y => [".gsub", %q('.gsub')],
+  ?Z => ["write", ":write"],
+  ?X => ["for",   ":for"],
+  ?! => ["]}",    %q(']}')],
 }
 
 s = s.gsub(/[#{ ABBREV.keys.join }]/){"\\x%02x" % $&.ord}
