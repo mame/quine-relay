@@ -3,6 +3,10 @@
 GenStep = Struct.new(:name, :code, :run_steps, :check)
 RunStep = Struct.new(:name, :src, :cmd_make, :cmd_raw, :backup, :apt)
 
+# properly nested delimiters
+PARENS   = /\A(?<b>[^()]*+(?:\(\g<b>\)[^()]*+)*+)\z/
+BRACKETS = /\A(?<b>[^\[\]]*+(?:\[\g<b>\][^\[\]]*+)*+)\z/
+
 # A class that generates Ruby code that generates a code (in a language X) that prints PREV.
 class CodeGen
   # File = source file name of X
@@ -108,6 +112,11 @@ class Python_R_Ratfor_Rc_REXX < CodeGen
       )
     END
   end
+
+  def check(prev)
+    # python3 reads the source as UTF-8 and hands ord(c) to Fortran's char(), which takes 0..255
+    raise unless prev.bytes.all? {|c| c < 128 }
+  end
 end
 
 class Promela < CodeGen
@@ -116,6 +125,11 @@ class Promela < CodeGen
   Cmd = "spin -T QR.pr > OUTFILE"
   Apt = "spin"
   Code = %q("init{#{f(PREV,6){"printf#{d[$S,?%]};"}}}")
+
+  def check(prev)
+    # spin appends "1 process created" to stdout on the same line, and the "#" comments it out
+    raise unless prev.end_with?(?#)
+  end
 end
 
 class Prolog < CodeGen
@@ -131,6 +145,11 @@ class PostScript < CodeGen
   Cmd = "gs -dNODISPLAY -q QR.ps > OUTFILE"
   Apt = "ghostscript"
   Code = %q("(#{Q[PREV,B]})print quit")
+
+  def check(prev)
+    # a PostScript (...) literal counts nested parens, and only the backslash is escaped here
+    raise unless prev.match?(PARENS)
+  end
 end
 
 class Pike < CodeGen
@@ -138,6 +157,11 @@ class Pike < CodeGen
   Cmd = "pike QR.pike > OUTFILE"
   Apt = "pike8.0"
   Code = %q("int main(){write#{E[PREV]+R}}")
+
+  def check(prev)
+    # the Piet image reads a byte as a column height, and Perl 5's Re-Pair takes 0-31 and 128-255
+    raise unless prev.bytes.all? {|c| c == 10 || (0x20..0x7e).cover?(c) }
+  end
 end
 
 class PHP_Piet < CodeGen
@@ -166,6 +190,11 @@ class PHP_Piet < CodeGen
       )
     END
   end
+
+  def check(prev)
+    # npiet reads a byte as a column height in a 128-row image, and the PHP source carries it raw
+    raise unless prev.bytes.all? {|c| c == 10 || (0x20..0x7e).cover?(c) }
+  end
 end
 
 class Perl6 < CodeGen
@@ -174,6 +203,11 @@ class Perl6 < CodeGen
   Cmd = "perl6 QR.pl6 > OUTFILE"
   Apt = "rakudo"
   Code = %q("$_='#{Q[PREV.gsub(B,"\x7f"),?']}';s:g/\\\\x7f/\\\\\\\\/;print $_")
+
+  def check(prev)
+    # it goes raw into a '...' literal, and Perl 5's Re-Pair takes bytes 0-31 and 128-255
+    raise unless prev.bytes.all? {|c| (0x20..0x7e).cover?(c) }
+  end
 end
 
 class Perl5 < CodeGen
@@ -209,6 +243,11 @@ class Perl5 < CodeGen
       )
     END
   end
+
+  def check(prev)
+    # rp[] allocates its Re-Pair codewords from bytes 0-31 and 128-255
+    raise unless prev.bytes.all? {|c| (0x20..0x7f).cover?(c) }
+  end
 end
 
 class Pascal < CodeGen
@@ -216,6 +255,11 @@ class Pascal < CodeGen
   Cmd = "fpc QR.pas && ./QR > OUTFILE"
   Apt = "fp-compiler"
   Code = %q("#$D(output);begin write(#{f(PREV,1){"'#$s',"}}'')end.")
+
+  def check(prev)
+    # it goes into a '...' literal unescaped, and the literal cannot span lines
+    raise if prev =~ /['\n]/
+  end
 end
 
 class Parser3 < CodeGen
@@ -224,6 +268,14 @@ class Parser3 < CodeGen
   Cmd = "parser3 QR.p > OUTFILE"
   Apt = "parser3-cgi"
   Code = %q("$console:line[#{PREV.gsub(/[:;()]/){?^+$&}}]")
+
+  def check(prev)
+    # "$" starts a variable reference and "^" is the escape character, but only ";" is escaped here
+    raise if prev =~ /[$^]/
+    raise if prev.include?("\r") # parser3 turns it into a newline
+    # it is placed inside $console:line[...], and brackets cannot be escaped
+    raise unless prev.match?(BRACKETS)
+  end
 end
 
 class PARIGP < CodeGen
@@ -260,6 +312,12 @@ class Octave_Ook < CodeGen
     END
     # NOTE: %% is a hack for Nickle printf escaping.
   end
+
+  def check(prev)
+    # the Ook encoder puts byte b in bank 11-ceil(b/13), only banks 1..9 exist, and the
+    # first byte of a bank indexes a 141-entry table by b+13
+    raise unless prev.bytes.all? {|c| (14..128).cover?(c) }
+  end
 end
 
 class OCaml < CodeGen
@@ -289,6 +347,11 @@ class Nickle < CodeGen
   Cmd = "nickle QR.5c > OUTFILE"
   Apt = "nickle"
   Code = %q("printf#{E[PREV]}\\n")
+
+  def check(prev)
+    # it becomes printf's format string, where "%%" is the only escape (see the NOTE in Octave_Ook)
+    raise if prev.gsub("%%", "").include?(?%)
+  end
 end
 
 class Neko < CodeGen
@@ -322,6 +385,12 @@ class Mustache_NASM < CodeGen
       x: |
       ^^^}}{{{qr}}}"
     END
+  end
+
+  def check(prev)
+    raise if prev.include?(?`) # it closes NASM's `...` string, and e[] does not escape it
+    # it closes the {{! ... }} comment that hides the YAML from the mustache pass
+    raise if prev.include?("}}")
   end
 end
 
@@ -362,6 +431,11 @@ class Modula2 < CodeGen
       "
     END
   end
+
+  def check(prev)
+    # it is cut into "..." and '...' literals without escaping, and neither can span lines
+    raise if prev.include?("\n")
+  end
 end
 
 class MiniZinc < CodeGen
@@ -376,6 +450,10 @@ class Makefile < CodeGen
   Cmd = "make -f QR.mk > OUTFILE"
   Apt = "make"
   Code = %q("all:\n\t@echo '#{d[PREV,?$].gsub(?'){"'\\\\''"}}'")
+
+  def check(prev)
+    raise if prev.include?("\n") # the whole payload is one echo recipe line
+  end
 end
 
 class M4 < CodeGen
@@ -383,6 +461,11 @@ class M4 < CodeGen
   Cmd = "m4 QR.m4 > OUTFILE"
   Apt = "m4"
   Code = %q("changequote(<@,@>)\ndefine(p,<@#{PREV}@>)\np")
+
+  def check(prev)
+    # they are the quote delimiters set by changequote, and m4 quotes nest
+    raise if prev.include?("<@") || prev.include?("@>")
+  end
 end
 
 class Lua < CodeGen
@@ -390,6 +473,10 @@ class Lua < CodeGen
   Cmd = "lua5.3 QR.lua > OUTFILE"
   Apt = "lua5.3"
   Code = %q("x=string.gsub(#{V[E[PREV],?&,?&]},'&(%d+)&',function(s)return string.rep('\\\\\\\\',tonumber(s))end);print(x)")
+
+  def check(prev)
+    raise if prev.include?(?&) # it delimits the backslash run-length encoding "&n&"
+  end
 end
 
 class LOLCODE < CodeGen
@@ -406,6 +493,10 @@ class LOLCODE < CodeGen
         KTHXBYE BYE
       )
     END
+  end
+
+  def check(prev)
+    raise if prev.include?("\n") # lci's VISIBLE "..." cannot span lines
   end
 end
 
@@ -427,6 +518,10 @@ class LLVMAsm < CodeGen
         }
       )
     END
+  end
+
+  def check(prev)
+    raise if prev.include?("\0") # @s is a NUL-terminated C string printed by puts
   end
 end
 
@@ -464,6 +559,11 @@ class Ksh_LazyK_LiveScript < CodeGen
         f 'LAZYK' ski\\` 3
       )
     END
+  end
+
+  def check(prev)
+    # p(){ print -rn $1;} expands $1 unquoted, so IFS collapses each run of whitespace into one space
+    raise if prev =~ /\t|  /
   end
 end
 
@@ -516,6 +616,12 @@ class JavaScript_Jq_JSFuck < CodeGen
       )
     END
   end
+
+  def check(prev)
+    # JSFuck encodes each byte as %XX with charCodeAt().toString(16), which is not zero-padded,
+    # and unescape() cannot yield a non-ASCII byte
+    raise if prev.bytes.any? {|b| b < 0x10 || b > 0x7f }
+  end
 end
 
 class Java_ < CodeGen
@@ -557,6 +663,10 @@ class Java_ < CodeGen
       )
     END
   end
+
+  def check(prev)
+    raise if prev.bytes.any? {|b| b < 1 || b > 126 } # the LZ78 dictionary is seeded with c[1..126]
+  end
 end
 
 class Jasmin < CodeGen
@@ -577,6 +687,11 @@ class Jasmin < CodeGen
         .end method
       )
     END
+  end
+
+  def check(prev)
+    # the dc stage carries the whole program inside a [...] string, which counts nesting
+    raise unless prev.match?(BRACKETS)
   end
 end
 
@@ -622,6 +737,11 @@ class Haskell < CodeGen
   Cmd = "rm -f QR.o && ghc QR.hs && ./QR > OUTFILE"
   Apt = "ghc"
   Code = %q("main=putStr"+E[PREV])
+
+  def check(prev)
+    # only \, " and newline are escaped, and GHC rejects a raw control character in a literal
+    raise if prev =~ /[^\n\x20-\x7e]/
+  end
 end
 
 class Groovy_Gzip < CodeGen
@@ -636,6 +756,12 @@ class Groovy_Gzip < CodeGen
         z.close()
       )
     END
+  end
+
+  def check(prev)
+    raise if prev.include?(?') # it would close Groovy's '...' literal
+    raise if prev =~ /[&_]/ # they are the placeholders that '"' and "\\" are moved to
+    raise if prev.include?("\n") # Groovy's '...' literal cannot span lines
   end
 end
 
@@ -677,6 +803,11 @@ class GolfScript_GPortugol_Grass < CodeGen
       "@@MOD@@" => mod,
     })
   end
+
+  def check(prev)
+    # vendor/golfscript.rb passes a "..." literal to Ruby's eval, so these would interpolate
+    raise if prev =~ /#[{$@]/
+  end
 end
 
 class Go < CodeGen
@@ -694,6 +825,11 @@ class Go < CodeGen
       )
     END
   end
+
+  def check(prev)
+    # the Go compiler rejects a source file that is not valid UTF-8
+    raise unless prev.dup.force_encoding("UTF-8").valid_encoding?
+  end
 end
 
 class Gnuplot < CodeGen
@@ -709,6 +845,13 @@ class GEL < CodeGen
   Cmd = "genius QR.gel > OUTFILE"
   Apt = "genius"
   Code = %q(f(PREV,61){"printn#$S\n"})
+
+  def check(prev)
+    # genius is flex-based and its scanner overflows above 16383 bytes per token
+    prev.scan(/.{1,#{61*255}}/m) do |s|
+      raise if s.size + s.scan(/[\\"\n]/).size + 2 > 16383
+    end
+  end
 end
 
 class GDB < CodeGen
@@ -780,6 +923,10 @@ class Flex < CodeGen
   Cmd = "flex -o QR.fl.c QR.fl && gcc -o QR QR.fl.c && ./QR > OUTFILE"
   Apt = "flex"
   Code = %q("%option noyywrap\n%%\n%%\nint main(){puts#{E[PREV]};}")
+
+  def check(prev)
+    raise if prev.include?("\0") # it becomes a C string literal printed by puts
+  end
 end
 
 class Fennel < CodeGen
@@ -815,6 +962,10 @@ class FSharp < CodeGen
   Cmd = %(echo '#{ fsproj.lines.map {|s| s.strip }.join }' > tmp.fsproj && DOTNET_NOLOGO=1 dotnet run --project tmp.fsproj > OUTFILE)
   Apt = "dotnet-sdk-10.0"
   Code = %q('printfn("""'+d[PREV,?%]+' """)')
+
+  def check(prev)
+    raise if prev.include?('"""') # it closes the triple-quoted string
+  end
 end
 
 class Execline < CodeGen
@@ -822,6 +973,11 @@ class Execline < CodeGen
   Cmd = "execlineb QR.e > OUTFILE"
   Apt = "execline"
   Code = %q(%(echo "#{e[PREV]}"))
+
+  def check(prev)
+    # MAX_ARG_STRLEN, the Linux limit on one argument; echo takes PREV as one argument
+    raise if prev.bytesize >= 131072
+  end
 end
 
 class Erlang < CodeGen
@@ -844,6 +1000,10 @@ class Elixir < CodeGen
   Cmd = "elixir QR.exs > OUTFILE"
   Apt = "elixir"
   Code = %q("IO.puts"+E[PREV])
+
+  def check(prev)
+    raise if prev.include?('#{') # Elixir interpolates it in a "" string
+  end
 end
 
 #class Dhall < CodeGen
@@ -871,6 +1031,13 @@ class Dc_Dhall < CodeGen
   ]
   Apt = ["dc", "dhall"]
   Code = %q("['']p[#{PREV}]p['']pq")
+
+  def check(prev)
+    raise unless prev.match?(BRACKETS) # dc reads the whole program as a [...] string
+    raise if prev.include?("''") # it ends the Dhall multi-line string
+    raise if prev.include?("${") # Dhall interpolates it
+    raise if prev.start_with?(" ", "\t") # Dhall strips the common indentation
+  end
 end
 
 class D < CodeGen
@@ -878,6 +1045,10 @@ class D < CodeGen
   Cmd = "gdc -o QR QR.d && ./QR > OUTFILE"
   Apt = "gdc"
   Code = %q("import std.stdio;void main(){write(`#{PREV}`);}")
+
+  def check(prev)
+    raise if prev.include?("$") # it delimits the q"$...$" string
+  end
 end
 
 # pakcs package is broken in Ubuntu 20.10; I guess it will be fixed in Ubuntu 21.04
@@ -896,6 +1067,10 @@ class Crystal < CodeGen
   Cmd = "crystal QR.cr > OUTFILE"
   Apt = [["crystal", "libevent-dev"]]
   Code = %q("puts#{E[PREV]}")
+
+  def check(prev)
+    raise if prev.include?('#{') # Crystal interpolates it in a "" string
+  end
 end
 
 class CommonLisp < CodeGen
@@ -904,6 +1079,10 @@ class CommonLisp < CodeGen
   Cmd = "clisp QR.lisp > OUTFILE"
   Apt = "clisp"
   Code = %q(%((write-line"#{e[PREV]}")))
+
+  def check(prev)
+    raise if prev.include?("\n") # Common Lisp has no \n escape
+  end
 end
 
 class CoffeeScript < CodeGen
@@ -952,6 +1131,10 @@ class Clojure_CMake_Cobol < CodeGen
         )
     END
   end
+
+  def check(prev)
+    raise if prev.include?("\n") # re-seq #".{1,31}" would drop it
+  end
 end
 
 class CSharp_Chef < CodeGen
@@ -988,6 +1171,11 @@ class CSharp_Chef < CodeGen
         }
       )
     END
+  end
+
+  def check(prev)
+    # the Chef recipe declares no other ingredient
+    raise unless prev.bytes.all? {|b| (10..126).cover?(b) }
   end
 end
 
@@ -1053,6 +1241,10 @@ class C < CodeGen
     )
     END
   end
+
+  def check(prev)
+    raise unless prev[-6..] == prev[-12..-7] # the LZ77 encoder drops the trailing literals
+  end
 end
 
 class BeanShell_Befunge_BLC8_Brainfuck < CodeGen
@@ -1088,6 +1280,10 @@ class BeanShell_Befunge_BLC8_Brainfuck < CodeGen
       )
     END
   end
+
+  def check(prev)
+    raise unless prev.ascii_only? # each character is emitted as 8 bits
+  end
 end
 
 class Bash_Bc < CodeGen
@@ -1102,6 +1298,10 @@ class Bash_Bc < CodeGen
     <<-'END'.lines.map {|l| l.strip }.join
       %(echo '#{PREV.gsub(?',%('"'"'))}'|sed -e's/\\\\/\\\\\\\\/g' -e's/"/\\\\q/g' -e's/.*/print "&"\\nquit/')
     END
+  end
+
+  def check(prev)
+    raise if prev.include?("\n") # sed appends "quit" to each line
   end
 end
 
@@ -1118,6 +1318,11 @@ class ATS < CodeGen
   Cmd = "patscc -o QR QR.dats && ./QR > OUTFILE"
   Apt = "ats2-lang"
   Code = %q("implement main0()=print"+E[PREV])
+
+  def check(prev)
+    # patscc compiles the C it emits in a strict ISO mode, where a trigraph is translated
+    raise if prev =~ %r{\?\?[=/'()!<>-]}
+  end
 end
 
 class Asymptote < CodeGen
@@ -1146,6 +1351,10 @@ class AspectJ < CodeGen
       )
     END
   end
+
+  def check(prev)
+    raise if prev.include?(?^) # it marks the backslash run-length encoding
+  end
 end
 
 class ALGOL68_Ante < CodeGen
@@ -1165,6 +1374,10 @@ class ALGOL68_Ante < CodeGen
         OD
       ]*"REPR"
     end
+  end
+
+  def check(prev)
+    raise if prev.include?("\n") # a string denotation is one line
   end
 end
 
@@ -1212,6 +1425,10 @@ class AFNIX_Aheui < CodeGen
       )
     END
   end
+
+  def check(prev)
+    raise unless prev.ascii_only? # the AFNIX Buffer is read as characters
+  end
 end
 
 class Ada < CodeGen
@@ -1241,6 +1458,12 @@ class Ada < CodeGen
     #  )
     #END
   end
+
+  def check(prev)
+    # 55 = the program without the string, 11 = the extra chars of "&ASCII.LF&"
+    # gnat allows up to 32766 characters per line
+    raise if prev.size + prev.count(?") + prev.count("\n") * 11 + 55 > 32766
+  end
 end
 
 class Zsh < CodeGen
@@ -1263,6 +1486,11 @@ class Yorick < CodeGen
   Cmd = "yorick -batch QR.yorick > OUTFILE"
   Apt = "yorick"
   Code = %q(%(write,format="#{y="";f(PREV,35){y<<",\\n"+$S;"%s"}}")+y)
+
+  def check(prev)
+    # yorick allows up to 16360 characters per line, and a chunk becomes ("...")+
+    prev.scan(/.{1,#{ 35 * 255 }}/m) { raise if escape($&).size + 5 > 16360 }
+  end
 end
 
 class Yabasic < CodeGen
@@ -1280,6 +1508,11 @@ class Yabasic < CodeGen
         f("#{V[e[PREV],'",','):f("']}",0)
       )
     END
+  end
+
+  def check(prev)
+    # yabasic allows up to 16383 characters per "..." literal
+    escape(prev).split(/(?:\\\\)+/) { |s| raise if s.size + 2 > 16383 }
   end
 end
 
@@ -1300,6 +1533,11 @@ class XSLT < CodeGen
         </xsl:#{I}>
       "
     END
+  end
+
+  def check(prev)
+    raise if prev.include?("]]>") # it closes the CDATA section
+    raise if prev =~ /[\x00-\x08\x0b\x0c\x0e-\x1f]/ # XML 1.0 forbids it and CDATA cannot escape it
   end
 end
 
@@ -1365,6 +1603,13 @@ class VisualBasic_WebAssemblyBinary_WebAssemblyText_Whitespace < CodeGen
       "@@CONST2@@" => "1294"
     })
   end
+
+  def check(prev)
+    # the length is emitted as a 2 or 3 byte LEB128, so it must not fall outside that range
+    data3, data4 = ::File.read(::File.join(__dir__, "wasm-tmpl.dat")).lines.values_at(3, 4)
+    k = data3.chomp.size + data4.chomp.size + 18
+    raise unless (2**14...2**21).cover?(k + prev.size)
+  end
 end
 
 class VimScript < CodeGen
@@ -1422,6 +1667,10 @@ class TypeScript_Unlambda < CodeGen
       "let s=#{E[PREV]},i=0,t='k';while(s[i])t='\\x60.'+s[i++]+t;console.log(t)"
     END
   end
+
+  def check(prev)
+    raise if prev.include?("\n") # `.<newline> is not a valid token
+  end
 end
 
 class Tcsh_Thue < CodeGen
@@ -1430,6 +1679,10 @@ class Tcsh_Thue < CodeGen
   Cmd = ["tcsh QR.tcsh > OUTFILE", "ruby vendor/thue.rb QR.t > OUTFILE"]
   Apt = ["tcsh", nil]
   Code = %q(%(echo 'a::=~#{Q[Q[PREV,B],?!].gsub(?',%('"'"'))}'"\\\\n::=\\\\na"))
+
+  def check(prev)
+    raise if prev.include?("\n") # a Thue rule is one line
+  end
 end
 
 class Tcl < CodeGen
@@ -1474,6 +1727,10 @@ class StandardML_Subleq < CodeGen
         );
       )
     END
+  end
+
+  def check(prev)
+    raise if prev.bytes.max.to_i > 126
   end
 end
 
@@ -1545,6 +1802,10 @@ class Scilab_Sed_Shakespeare_SLang < CodeGen
       )
     END
   end
+
+  def check(prev)
+    raise if prev.bytes.max.to_i > 126
+  end
 end
 
 class Scheme < CodeGen
@@ -1566,6 +1827,11 @@ class Scala < CodeGen
         }
       "
     END
+  end
+
+  def check(prev)
+    # the JVM allows up to 65535 bytes per CONSTANT_Utf8
+    prev.scan(/.{1,#{ 196 * 255 }}/m) { raise if $&.bytesize > 65535 }
   end
 end
 
