@@ -68,16 +68,16 @@ s = s.gsub(/[#{ ABBREV.keys.join }]/){"\\x%02x" % $&.ord}
 
 # search perfect and simplest hash
 a = ABBREV.keys.join.bytes
-max = 1000
-a.size.upto(90) do |n|
-  a.size.upto(90) do |m|
+best = nil
+a.size.upto(255) do |n|
+  a.size.upto(255) do |m|
     b = a.map {|c| c%n%m }
-    if b.uniq.size >= a.size&&b.max<max
-      $N, $M, $B = n, m, b
-      max = b.max
-    end
+    next unless b.uniq.size == a.size
+    cand = [b.max, n.to_s.size + m.to_s.size, n, m]
+    best = [cand, b] if !best || (cand <=> best[0]) < 0
   end
 end
+$N, $M, $B = best[0][2], best[0][3], best[1]
 
 ABBREV.each do |k, (v, _)|
   s = s.gsub(v, k)
