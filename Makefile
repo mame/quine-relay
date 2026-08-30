@@ -390,7 +390,7 @@ QR.bef: QR.bsh
 	@echo "################################"
 	@echo
 	bsh QR.bsh > QR.bef
-	@stty echo
+	-@stty echo
 
 QR.Blc: QR.bef
 	@echo
