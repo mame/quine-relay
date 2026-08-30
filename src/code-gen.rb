@@ -512,7 +512,7 @@ class Java_ < CodeGen
   Name = "Java"
   File = "QR.java"
   Cmd = "javac QR.java && java QR > OUTFILE"
-  Apt = "openjdk-11-jdk"
+  Apt = "openjdk-25-jdk"
   def code
     # LZ78-like compression
     <<-'END'.lines.map {|l| l.strip }.join
