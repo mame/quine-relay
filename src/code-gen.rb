@@ -772,6 +772,13 @@ class Flex < CodeGen
   Code = %q("%option noyywrap\n%%\n%%\nint main(){puts#{E[PREV]};}")
 end
 
+class Fennel < CodeGen
+  File = "QR.fnl"
+  Cmd = "fennel QR.fnl > OUTFILE"
+  Apt = "fennel"
+  Code = %q("(io.write \"#{e[PREV]}\")")
+end
+
 class FALSELang < CodeGen
   Name = "FALSE"
   File = "QR.false"
@@ -1224,14 +1231,6 @@ class Ada < CodeGen
     #  )
     #END
   end
-end
-
-class Aplus < CodeGen
-  Name = "A+"
-  File = "QR.+"
-  Cmd = "a+ QR.+ > OUTFILE"
-  Apt = "aplus-fsf"
-  Code = %q(E[PREV]+"\nsys.exit 0")
 end
 
 class Zsh < CodeGen
