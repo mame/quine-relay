@@ -570,6 +570,14 @@ Removed: Lisaac
 
 Added: Swift
 
+## for Ubuntu 26.04
+
+[128 languages](https://github.com/mame/quine-relay/tree/4f5a5700a746dc6fff136b9c4a1a13df00e946e1)
+
+Removed: A+
+
+Added: Fennel
+
 ## License
 
 The MIT License applies to all resources
