@@ -1648,7 +1648,7 @@ class Swift < CodeGen
   File = "QR.swift"
   Cmd = "swiftc QR.swift && ./QR > OUTFILE"
   Apt = "swiftlang"
-  Code = %q("print#{E[PREV]}")
+  Code = %q("print"+E[PREV])
 end
 
 class SurgeScript < CodeGen
