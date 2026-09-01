@@ -628,10 +628,9 @@ class Java_ < CodeGen
     # LZ78-like compression
     <<-'END'.lines.map {|l| l.strip }.join
       %(
-        class QR{
-          #$L void main(String[]v){
-            String c[]=new String[99999],y="",z=y,s="#{
-              z=t=(0..r=q=126).map{|n|[n,[]]};
+        void main(){
+            String c[]=new String[99999],z="",s="#{
+              z=t=(0..r=q=127).map{|n|[n,[]]};
               a="";
               b=->n{a<<(n%78+55)%84+42};
               (PREV).bytes{|n|
@@ -643,18 +642,16 @@ class Java_ < CodeGen
               b[r/78];b[r]
             }";
             int i=0,n=0,q=0;
-            for(;++n<126;)c[n]=""+(char)n;
+            for(;++n<127;)c[n]=""+(char)n;
             for(;i<#{a.size};){
               q=q*78+(s.charAt(i)-13)%84;
               if(i++%2>0){
-                y=q<n?c[q]:y;
-                c[n++]=z+y.charAt(0);
-                System.out.print(z=c[q]);
+                c[n]=z+(q<n++?c[q]:z).charAt(0);
+                IO.print(z=c[q]);
                 q=0;
               }
             }
           }
-        }
       )
     END
   end
