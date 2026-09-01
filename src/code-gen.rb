@@ -841,7 +841,7 @@ class GEL < CodeGen
   File = "QR.gel"
   Cmd = "genius QR.gel > OUTFILE"
   Apt = "genius"
-  Code = %q(f(PREV,61){"printn#$S\n"})
+  Code = %q(f(PREV,61){"printn#$S;"})
 
   def check(prev)
     # genius is flex-based and its scanner overflows above 16383 bytes per token
