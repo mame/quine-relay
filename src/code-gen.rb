@@ -701,16 +701,16 @@ class Icon_INTERCAL < CodeGen
         procedure main();
           i:=c:=0;
           s:=#{E[PREV+N]};
-          write("DO,1<-#"||*s);
-          s?while t:=ord(move(1))do{
+          write("DO,1<-#",*s);
+          every t:=ord(!s)do{
             i+:=1;
             u:=-i;
             every 0to 7do{u:=u*2+t%2;t/:=2};
             write("PLEASE")\\(i%4/3);
-            write("DO,1SUB#"||i||"<-#"||((c-u)%256));
+            write("DO,1SUB#",i,"<-#",(c-u)%256);
             c:=u;
           };
-          write("PLEASEREADOUT,1\\nPLEASEGIVEUP");
+          write("PLEASEREADOUT,1PLEASEGIVEUP");
         end
       )
     END
