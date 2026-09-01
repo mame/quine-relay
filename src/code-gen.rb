@@ -1107,23 +1107,15 @@ class Clojure_CMake_Cobol < CodeGen
     <<-'END'.lines.map {|l| l.strip }.join
       %(
         (doseq[s
-          (lazy-cat
-            ["IDENTIFICATION DIVISION."
-             "PROGRAM-ID. QR."
-             "PROCEDURE DIVISION."
-             'DISPLAY]
-             (map #(str
-                  "    \\""
-                  (.replace %1"\\"""\\"\\"")
-                  "\\"")
-               (re-seq #".{1,45}"
+          (concat
+            ["program-id. q. procedure division. display"]
+             (map #(str \\"
+                  (.replace %"\\"""\\"\\"")
+                  \\")
+               (re-seq #".{1,31}"
                   "#{e[PREV]}"))
-             ["    \\" \\"."
-              "STOP RUN."])]
-          (println(str
-            "message(STATUS \\"     "
-            (.replace(.replace(str s)"\\\\""\\\\\\\\")"\\"""\\\\\\"")
-            "\\")")))
+             ["."])]
+          (println"message(STATUS \\"    \\""(pr-str s)")"))
         )
     END
   end
