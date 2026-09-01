@@ -878,25 +878,15 @@ class Forth_FORTRAN77_Fortran90 < CodeGen
   Backup = [nil, "QR.c", nil]
   Apt = ["gforth", "f2c", "gfortran"]
   def code
-    # assuming that PREV has no '
     <<-'END'.lines.map {|l| l.strip }.join(" ")
       %(
-        : A ."#{g*9}" ;
-        : B A ." WRITE(*,*)'" A ;
-        : C B TYPE ." '" CR ;
+        : B ."#{g*9}print*,'" ;
+        : C B type ." '" CR ;
         : D
-          S" #$D" C
-          S\\" print \\"(&" C
-          S\\" #{e[PREV]}" DUP A ." DO 10 I=1," . CR
-          S" &A,&" C
-          ." 10      CONTINUE" CR
-          S\\" &A)\\",&" C
-          0 DO B ." &char(" COUNT . ." ),&'" CR LOOP
-          S\\" &\\"\\"" C
-          S" end #$D" C
-          A ." STOP" CR
-          A ." END" CR
-          BYE ;
+          S" print ''(*(A))'',&" C
+          S\\" #{e[PREV]}" 0 DO B ." char(" COUNT . ." ),&'" CR LOOP
+          S" '''';end" C
+          ."#{g*9}end" CR BYE ;
         D
       )
     END
