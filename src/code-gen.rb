@@ -996,7 +996,7 @@ class Elixir < CodeGen
   File = "QR.exs"
   Cmd = "elixir QR.exs > OUTFILE"
   Apt = "elixir"
-  Code = %q("IO.puts"+E[PREV])
+  Code = %q("IO.write#{E[PREV]}")
 
   def check(prev)
     raise if prev.include?('#{') # Elixir interpolates it in a "" string
