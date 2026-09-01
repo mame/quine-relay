@@ -292,26 +292,11 @@ class Octave_Ook < CodeGen
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       "
-        s=#{E[PREV]}+0;
-        o=' Ook'+0;
-        t=num2cell(b=11-ceil(s/13));
-        for n=1:9
-            m={};
-            for i=1:141
-              f=@(x,y,n)repmat(char([o x o y]),1,abs(n));
-              m(i)=[f(z=46,63,n) f(q=z-(i<13)*13,q,i-13) f(33,z,1) f(63,z,n)];
-            end;
-            t(x=b==n)=m(diff([0 s(x)])+13);
-        end;
-        puts([t{:}]);
+        puts([arrayfun(@(k)
+            [repmat(['Ook' char(46-13*(k<0)) ' '],1,2*abs(k)) 'Ook! Ook. '],
+            diff([0 #{E[PREV]}]+0),'un',0){:}]);
       "
     END
-  end
-
-  def check(prev)
-    # the Ook encoder puts byte b in bank 11-ceil(b/13), only banks 1..9 exist, and the
-    # first byte of a bank indexes a 141-entry table by b+13
-    raise unless prev.bytes.all? {|c| (14..128).cover?(c) }
   end
 end
 
