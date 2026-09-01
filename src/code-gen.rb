@@ -481,11 +481,11 @@ class LOLCODE < CodeGen
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
-        HAI 1.2\n
+        HAI 1,
         VISIBLE "#{
           PREV.gsub(/[:"]/,":\\0")
-        }"\n
-        KTHXBYE BYE
+        }",
+        KTHXBYE
       )
     END
   end
