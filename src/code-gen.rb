@@ -444,7 +444,7 @@ class Makefile < CodeGen
   File = "QR.mk"
   Cmd = "make -f QR.mk > OUTFILE"
   Apt = "make"
-  Code = %q("all:\n\t@echo '#{d[PREV,?$].gsub(?'){"'\\\\''"}}'")
+  Code = %q("a:;@echo '#{d[PREV,?$].gsub(?'){"'\\\\''"}}'")
 
   def check(prev)
     raise if prev.include?("\n") # the whole payload is one echo recipe line
