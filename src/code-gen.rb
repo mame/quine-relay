@@ -1192,33 +1192,27 @@ class C < CodeGen
       s.bytes{|c|
         n>0?
           n-=1:
-          (t[c]=(t[c]||[]).reject{|j|j<i-3560};
-           x=[];
-           t[c].map{|j|
-             k=(0..90).find{|k|not s[i+1+k]==s[j+k]}||91;
-             k>4&&x<<[k,j]
-           };
-           x=x.max)?
+          (x=(t[c]=(t[c]||[]).reject{|j|j<i-3560}).map{|j|
+             [(0..90).find{|k|not s[i+1+k]==s[j+k]}||91,j]
+           }.max;
+           x&&x[0]>4)?
           (
             n,j=x;
-            x=b.size;(u=[x,3999].min;D[u%87][u/87];L<<b[0,u];b[0,u]="";x-=u)while x>0;
+            b.gsub(/.{1,3999}/m){|u|D[(z=u.size)%87][z/87];L<<u};b="";
             x=4001+i-j;D[x%87][x/87][n-5]
           ):b<<c;
         t[c]+=[i+=1]
       };
       "
         #include<stdio.h>\n
-        char*p=#{E[L]},s[999999],*q=s;
+        char*p=#{E[L]},s[99999],*q=s;
         int main(){
-          int n,m;
-          for(;*p;){
+          for(int n,m;*p;){
             n=(*p-5)%92+(p[1]-5)%92*87;
             p+=2;
-            if(n>3999)
-              for(m=(*p++-5)%92+6;m--;q++)*q=q[4000-n];
-            else for(;n--;)*q++=*p++;
+            for(m=n>3999?(*p++-5)%92+6:n;m--;q++)*q=n>3999?q[4000-n]:*p++;
           }
-          puts(s)#{R}
+          puts(s);
         }
       "
     )
