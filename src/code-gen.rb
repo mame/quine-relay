@@ -467,7 +467,7 @@ class Lua < CodeGen
   File = "QR.lua"
   Cmd = "lua5.3 QR.lua > OUTFILE"
   Apt = "lua5.3"
-  Code = %q("x=string.gsub(#{V[E[PREV],?&,?&]},'&(%d+)&',function(s)return string.rep('\\\\\\\\',tonumber(s))end);print(x)")
+  Code = %q("print((#{V[E[PREV],?&,?&]}:gsub('&(%d+)&',load[[return('\\\\\\\\'):rep(...)]])))")
 
   def check(prev)
     raise if prev.include?(?&) # it delimits the backslash run-length encoding "&n&"
