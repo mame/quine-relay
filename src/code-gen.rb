@@ -1644,7 +1644,7 @@ class Tcsh_Thue < CodeGen
   File = ["QR.tcsh", "QR.t"]
   Cmd = ["tcsh QR.tcsh > OUTFILE", "ruby vendor/thue.rb QR.t > OUTFILE"]
   Apt = ["tcsh", nil]
-  Code = %q(%(echo 'a::=~#{Q[Q[PREV,B],?!].gsub(?',%('"'"'))}'"\\\\n::=\\\\na"))
+  Code = %q(%(cat<<\\\\E\na::=~#{PREV}\n::=\na\n\\\\E))
 
   def check(prev)
     raise if prev.include?("\n") # a Thue rule is one line
