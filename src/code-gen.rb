@@ -1530,27 +1530,27 @@ class VisualBasic_WebAssemblyBinary_WebAssemblyText_Whitespace < CodeGen
   Apt = ["dotnet-sdk-10.0", "wabt", "wabt", nil]
   def code
     r = <<-'END'.lines.map {|l| l.strip }.join(?:)
-      %(Module QR\nSub Main()\nDim c,n:Dim s As Object=#{C[0]}.OpenStandardOutput():Dim t()As Short={@@TBL@@}
+      %(Module QR\nSub main()\nDim c,n:Dim s=#{C[0]}.openstandardoutput(),t={@@TBL@@}
           For Each d in"@@DATA1@@}@@DATA2@@~@@DATA3@@$@@DATA4@@"
             c=Asc(d)
             If c=36
               For c=0To 11
-                #$W(If(c Mod 3,Asc(#{s=PREV;s.size*16+3}.ToString("x8")(1Xor 7-c*2\\3)),92))
+                #$W(If(c mod 3,Asc(#{s=PREV;s.size*16+3}.ToString("x8")(7-c*2\\3 xor 1)),92))
               Next
             Else
               n=(c>124)*(@@CONST1@@*c-#{s.size+@@CONST2@@})
               Do While n>127
-                #$W(128+(127And n))
+                #$W(n mod 128+128)
                 n\\=128
               Loop
-              #$W(If(c<125,If((c-1)\\7-8,c+66*(c>65And c<91),t(c-57)),n))
+              #$W(If(c<125,If((c-1)\\7-8,c-66*(c>65)*(c<91),t(c-57)),n))
             End If
           Next
           For Each c in"#{d[s].gsub N,'"& VbLf &"'}"
             #$W(Asc(c))
           Next
         End Sub
-      End Module)
+      end module)
     END
     tbl, data1, data2, data3, data4 = ::File.read(::File.join(__dir__, "wasm-tmpl.dat")).lines.map {|s| s.chomp }
     raise unless data3[0] == '('
@@ -1561,11 +1561,12 @@ class VisualBasic_WebAssemblyBinary_WebAssemblyText_Whitespace < CodeGen
       "@@DATA3@@" => '#{40.chr}'+data3[1..].gsub("\\"){"\\\\"},
       "@@DATA4@@" => data4.gsub("\\"){"\\\\"},
 
-      # precompute some expressions by assuming that 2**14 <= (292+s.size) < 2**21
-    # "@@CONST1@@" => '#{6+((292+s.size).bit_length-1)/7}',
+      # K = the constant part of the wasm data section size
+      # precompute some expressions by assuming that 2**14 <= (K+s.size) < 2**21
+    # "@@CONST1@@" => '#{6+((K+s.size).bit_length-1)/7}',
       "@@CONST1@@" => "8",
-    # "@@CONST2@@" => '292+125*6+126*(((292+s.size).bit_length-1)/7)',
-      "@@CONST2@@" => "1294"
+    # "@@CONST2@@" => '#{m=((K+s.size).bit_length-1)/7;m+K+125*(6+m)}',
+      "@@CONST2@@" => (2 + (data3.size + data4.size + 18) + 125 * 8).to_s
     })
   end
 
