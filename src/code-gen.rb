@@ -938,7 +938,7 @@ class FALSELang < CodeGen
   File = "QR.false"
   Cmd = "ruby vendor/false.rb QR.false > OUTFILE"
   Apt = [nil]
-  Code = %q(?"+PREV.gsub(?"){'"34,"'}.gsub(N){'"10,"'}+?")
+  Code = %q(?"+PREV.gsub(?",'"34,"')+?")
 end
 
 class FSharp < CodeGen

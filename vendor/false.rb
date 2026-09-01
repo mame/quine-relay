@@ -34,7 +34,7 @@ while code[pos]
   when ?, then print stack.pop.chr
   when ?^ then stack << $stdin.getc
   when ?B then $stdin.flush; $stdout.flush
-  when ?" then s = parse[/"(.*?)"/]; print s
+  when ?" then s = parse[/"(.*?)"/m]; print s
   when ?{ then s = parse[/\}/]
   when ?' then stack << code[pos += 1].ord
   when ?` then raise
