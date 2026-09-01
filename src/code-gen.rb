@@ -1454,7 +1454,7 @@ class Yorick < CodeGen
   File = "QR.yorick"
   Cmd = "yorick -batch QR.yorick > OUTFILE"
   Apt = "yorick"
-  Code = %q(%(write,format="#{y="";f(PREV,35){y<<",\\n"+$S;"%s"}}")+y)
+  Code = %q(%(write,format="%s",#{f(PREV,35){$S+"+\n"}}""))
 
   def check(prev)
     # yorick allows up to 16360 characters per line, and a chunk becomes ("...")+
