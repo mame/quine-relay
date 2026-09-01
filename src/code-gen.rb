@@ -989,7 +989,7 @@ class EmacsLisp < CodeGen
   File = "QR.el"
   Cmd = "emacs -Q --script QR.el > OUTFILE"
   Apt = "emacs-nox"
-  Code = %q(%((princ "#{e[PREV]}")))
+  Code = %q(%((princ"#{e[PREV]}")))
 end
 
 class Elixir < CodeGen
