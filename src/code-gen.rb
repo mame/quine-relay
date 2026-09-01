@@ -366,20 +366,19 @@ class Mustache_NASM < CodeGen
   Apt = ["ruby-mustache", "nasm"]
   def code
     <<-'END'.lines.map {|l| l.strip.gsub("^^^", " ") }.join("\\n")
-      "m{{!: x
-      qr: |-
-      ^^^:db\x60#{e[s=PREV]}\x60
+      "_start{{!:
+      q: |
+      ^^^:mov edx,z-d
       ^^^global _start
-      ^^^_start:mov edx,#{s.size}
-      ^^^mov ecx,m
-      ^^^mov ebx,1
-      ^^^mov eax,4
+      ^^^mov ecx,d
+      ^^^inc ebx
+      ^^^mov al,4
       ^^^int 128
-      ^^^mov ebx,0
       ^^^mov eax,1
+      ^^^dec ebx
       ^^^int 128
-      x: |
-      ^^^}}{{{qr}}}"
+      ^^^d:db\x60#{e[PREV]}\x60
+      ^^^z:;}}{{{q}}}"
     END
   end
 
