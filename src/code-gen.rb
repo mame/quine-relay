@@ -958,7 +958,7 @@ class FSharp < CodeGen
   END
   Cmd = %(echo '#{ fsproj.lines.map {|s| s.strip }.join }' > tmp.fsproj && DOTNET_NOLOGO=1 dotnet run --project tmp.fsproj > OUTFILE)
   Apt = "dotnet-sdk-10.0"
-  Code = %q('printfn("""'+d[PREV,?%]+' """)')
+  Code = %q(%(#$C """#{PREV} """))
 
   def check(prev)
     raise if prev.include?('"""') # it closes the triple-quoted string
