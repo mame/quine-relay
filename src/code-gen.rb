@@ -1722,43 +1722,33 @@ class Scilab_Sed_Shakespeare_SLang < CodeGen
     # * The S-Lang program includes 8-bit characters and decompress the compression.
     <<-'END'.lines.map {|l| l.strip }.join
       %(
-        printf("
-          1d;
-          s/.//;
-          s/1/ the sum of a son and0/g;
-          s/0/ twice/g;
-          s/2/You are as bad as/g;
-          s/3/ a son!Speak your mind!/g\\n
-          #The Relay of Quine.\\n
-          #Ajax, a man.\\n
-          #Ford, a man.\\n
-          #Act i: Quine.\\n
-          #Scene i: Relay.\\n
-          #[Enter Ajax and Ford]\\n
-          #Ajax:\\n
-          #");
-        function[]=f(s);
-          for i=1:2:length(s),
-            printf("2%s3",part(dec2bin(hex2dec(part(s,i:i+1))),$:-1:2)),
-          end;
-        endfunction\n
         #{
           s,v=rp[PREV,127..255];
+          c=->x{x.gsub(/.{1,99}/m){"+\n"+E[$&]}};
           f(
+            "1d;
+            s/.//;
+            s/1/ the sum of a son and0/g;
+            s/0/ twice/g\n
+            #The Relay of Quine.\n
+            #Ajax, a man.\n
+            #Ford, a man.\n
+            #Act i: Quine.\n
+            #Scene i: Relay.\n
+            #[Enter Ajax and Ford]\n
+            #Ajax:\n
+            #"+
             %(
-              variable s=`#{s.gsub(/.{1,234}/){$&.gsub("`",%(`+"`"+`))+"`+\n`"}}`,i;
-              for(i=0;i<129;i++)
-                s=strreplace(
-                  s,
-                  pack("C",255-i),
-                  substrbytes(`#{v[0,99]}`+\n`#{v[99..-1]}`,i*2+1,2));
+              variable s=""#{c[s]},v=""#{c[v]},i;
+              _for i(0,128,1)
+                s=strreplace(s,pack("C",255-i),v[[i*2:i*2+1]]);
               printf("%s",s)
-            ),7
+            ).bytes.map{|b|"You are as bad as"+("%b"%b)[1..].reverse+" a son.Speak thy mind."}*""+
+            "\n#[Exeunt]",7
           ){
-            "f('%s')\n"%$s.unpack("H*")
+            "printf#$S\n"
           }
         }
-        printf("\\n#[Exeunt]");
         quit
       )
     END
