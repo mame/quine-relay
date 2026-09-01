@@ -114,10 +114,12 @@ $result = []
 
   prologue, epilogue = a.join.split.join.split("!")
   def dump(s)
-    aa = [*"0".."Z"]
+    # the run-length alphabet starts at "+" so that the encoded data avoids
+    # X/Y/Z, which cost 4 bytes each in the QR.rb payload
+    aa = [*"+".."U"]
     a = ""
     s.scan(/(v|W*)(w{1,#{aa.size-1}})/) do |s1, s2|
-      a << (s1 == "v" ? "/" : aa[s1.size]) << aa[s2.size]
+      a << (s1 == "v" ? "*" : aa[s1.size]) << aa[s2.size]
     end
     "#{ a.dump }"
   end
