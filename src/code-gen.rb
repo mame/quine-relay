@@ -775,10 +775,10 @@ class GolfScript_GPortugol_Grass < CodeGen
           119:i;
           {
             206i-:i;
-            .48<{71+}{[i]\\48-*}if
+            .43<{76+}{[i]\\43-*}if
           }%
         }:t;
-        "algoritmo QR;in"[195][173]++'cio imprima("'
+        "algoritmo A;in\\u00edcio imprima(\\""
         @@PROLOGUE@@
         "#{e[PREV]}"
         {
@@ -791,7 +791,7 @@ class GolfScript_GPortugol_Grass < CodeGen
     mod, prologue, epilogue = ::File.read(::File.join(__dir__, "grass-boot.dat")).lines
     prologue += "t"
     epilogue += "t"
-    prologue = prologue.gsub(/(\/12131)+/) { "\"t\"/12131\"t #{ $&.size / 6 }*\"" }
+    prologue = prologue.gsub(/(\*,-,\.,)+/) { "\"t\"*,-,.,\"#{ $&.size / 6 }*t\"" }
     mod = mod.to_i
     r.gsub(/@@\w+@@/, {
       "@@PROLOGUE@@" => prologue.chomp,
