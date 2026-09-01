@@ -1075,7 +1075,7 @@ class CommonLisp < CodeGen
   File = "QR.lisp"
   Cmd = "clisp QR.lisp > OUTFILE"
   Apt = "clisp"
-  Code = %q(%((write-line"#{e[PREV]}")))
+  Code = %q(%((princ"#{e[PREV]}")))
 
   def check(prev)
     raise if prev.include?("\n") # Common Lisp has no \n escape
