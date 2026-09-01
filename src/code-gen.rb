@@ -1682,11 +1682,10 @@ class StandardML_Subleq < CodeGen
       %(
         fun p n=print(Int.toString n^" ");
         fun main()=(
-          p 0;p 0;p 130;
+          print"0 0 130 ";
           List.tabulate(127,p);
-          String.map(fn c=>(p(3+ord c);print"-1 0 ";c))#{E[PREV]};
-          print"0 0 -1"
-        );
+          String.map(fn c=>(p(3+ord c);print"-1 0 ";c))#{E[PREV]}
+        )
       )
     END
   end
