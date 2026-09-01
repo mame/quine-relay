@@ -106,8 +106,8 @@ class Python_R_Ratfor_Rc_REXX < CodeGen
     <<-'END'.lines.map {|l| l.strip }.join
       %(
         print('cat("')\n
-        for c in"".join(["echo 'say ''%s'''\\n"%l for l in#{E[d[d[PREV,?'],?']]}.split("\\n")]):
-          print('r=fput(char(%d))'%ord(c))\n
+        for l in#{E[d[d[PREV,?'],?']]}.split("\\n"):
+          [print('r=fput(char(%d))'%ord(c))for c in"echo 'say ''%s'''\\n"%l]\n
         print('end\\n")')#
       )
     END
