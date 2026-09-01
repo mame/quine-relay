@@ -202,7 +202,7 @@ class Perl6 < CodeGen
   File = "QR.pl6"
   Cmd = "perl6 QR.pl6 > OUTFILE"
   Apt = "rakudo"
-  Code = %q("$_='#{Q[PREV.gsub(B,"\x7f"),?']}';s:g/\\\\x7f/\\\\\\\\/;print $_")
+  Code = %q("print '#{Q[d[PREV,B],?']}'")
 
   def check(prev)
     # it goes raw into a '...' literal, and Perl 5's Re-Pair takes bytes 0-31 and 128-255
