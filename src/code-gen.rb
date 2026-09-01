@@ -566,7 +566,7 @@ class Kotlin < CodeGen
   File = "QR.kt"
   Cmd = "kotlinc QR.kt -include-runtime -d QR.jar && kotlin QR.jar > OUTFILE"
   Apt = "kotlin"
-  Code = %q("fun main(a:Array<String>){print#{Q[E[PREV]]} }")
+  Code = %q("fun main()=print#{Q[E[PREV]]}")
 end
 
 class JavaScript_Jq_JSFuck < CodeGen
