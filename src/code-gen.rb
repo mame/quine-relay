@@ -250,7 +250,7 @@ class Pascal < CodeGen
   File = "QR.pas"
   Cmd = "fpc QR.pas && ./QR > OUTFILE"
   Apt = "fp-compiler"
-  Code = %q("#$D(output);begin write(#{f(PREV,1){"'#$s',"}}'')end.")
+  Code = %q("begin write('#{PREV}')end.")
 
   def check(prev)
     # it goes into a '...' literal unescaped, and the literal cannot span lines
