@@ -1470,10 +1470,9 @@ class Yabasic < CodeGen
     <<-'END'.lines.map {|l| l.strip }.join
       %(
         sub f(s$,n)
-          print(s$);:
-          for i=1to n print("\\\\");:
-          next:
-        end sub:
+          ?s$;:
+          for i=1to n?"\\\\";
+          next end sub:
         f("#{V[e[PREV],'",','):f("']}",0)
       )
     END
