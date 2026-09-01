@@ -1585,7 +1585,7 @@ class VimScript < CodeGen
   Cmd = "vim -EsS QR.vim > OUTFILE"
   def code
     <<-'END'.lines.map {|l| l.strip }.join
-      (PREV).lines.map{|s|"let s=#{E[s]}\nput=s\nprint\n"}.join+"qa!"
+      "let s=#{E[PREV]}\nput=s\n2,$p\nq!"
     END
   end
 end
