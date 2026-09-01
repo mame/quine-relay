@@ -293,20 +293,20 @@ class Octave_Ook < CodeGen
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       "
-        s=double#{E[PREV]};
+        s=#{E[PREV]}+0;
+        o=' Ook'+0;
         t=num2cell(b=11-ceil(s/13));
         for n=1:9
             m={};
             for i=1:141
-              f=@(x,y,n)repmat(['Ook' char(x) ' Ook' char(y) ' '],[1 abs(n)]);
+              f=@(x,y,n)repmat(char([o x o y]),1,abs(n));
               m(i)=[f(z=46,63,n) f(q=z-(i<13)*13,q,i-13) f(33,z,1) f(63,z,n)];
             end;
             t(x=b==n)=m(diff([0 s(x)])+13);
         end;
-        printf('%%s',t{:})
+        puts([t{:}]);
       "
     END
-    # NOTE: %% is a hack for Nickle printf escaping.
   end
 
   def check(prev)
@@ -345,8 +345,8 @@ class Nickle < CodeGen
   Code = %q("printf#{E[PREV]}\\n")
 
   def check(prev)
-    # it becomes printf's format string, where "%%" is the only escape (see the NOTE in Octave_Ook)
-    raise if prev.gsub("%%", "").include?(?%)
+    # it becomes printf's format string
+    raise if prev.include?(?%)
   end
 end
 
