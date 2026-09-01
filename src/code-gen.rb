@@ -1294,7 +1294,7 @@ class ATS < CodeGen
   File = "QR.dats"
   Cmd = "patscc -o QR QR.dats && ./QR > OUTFILE"
   Apt = "ats2-lang"
-  Code = %q("implement main0()=print"+E[PREV])
+  Code = %q("implement main0()=print#{E[PREV]}")
 
   def check(prev)
     # patscc compiles the C it emits in a strict ISO mode, where a trigraph is translated
