@@ -1655,7 +1655,7 @@ class Tcl < CodeGen
   File = "QR.tcl"
   Cmd = "tclsh QR.tcl > OUTFILE"
   Apt = "tcl"
-  Code = %q(%(puts "#{Q[e[PREV],/[\[\]$]/]}"))
+  Code = %q(%(puts "#{Q[PREV,/["$\[\\\\]/]}"))
 end
 
 class Swift < CodeGen
