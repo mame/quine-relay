@@ -397,7 +397,7 @@ class MSIL < CodeGen
     <<-'END'.lines.map {|l| l.strip }.join
       %(
         .assembly t{}
-        .method #$L void Main()
+        .method #$L void m()
         {
           .entrypoint ldstr"#{e[PREV]}"
           call void [mscorlib]#{C*"::"}(string)
