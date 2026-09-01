@@ -354,7 +354,7 @@ class Neko < CodeGen
   File = "QR.neko"
   Cmd = "nekoc QR.neko && neko QR.n > OUTFILE"
   Apt = "neko"
-  Code = %q("$print#{E[PREV]};")
+  Code = %q("$print#{E[PREV]}")
 end
 
 class Mustache_NASM < CodeGen
