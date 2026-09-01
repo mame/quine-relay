@@ -580,17 +580,17 @@ class JavaScript_Jq_JSFuck < CodeGen
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
-        P={0:'[+[]]',m:'((+[])'+(C="['constructor']")+"+[])['11']"};
-        for(R in B=
+        P={0:'[+[]]'};
+        for(R of
           (
-            '![]@!![]@[][[]]@'+
-            (A="[]['fill']")+
-            "@([]+[])['fontcolor']([])@(+('11e20')+[])['split']([])@"+
-            A+C+"('return escape')()("+A+')'
+            '![]@!![]@'+
+            (A="[]['at']")+
+            "@([]+[])['link']()@(+('11e20')+[])['split']([])@(+[])"+
+            (C="['constructor']")
           ).split('@')
         )
-          for(E in D=eval(G='('+B[R]+'+[])'))
-            P[T=D[E]]=P[T]||G+"['"+E+"']";
+          for(E in D=eval(G='('+R+'+[])'))
+            P[D[E]]||=G+"['"+E+"']";
         for(G='[',B=0;++B<36;)
           P[D=B.toString(36)]=
             B<10?
@@ -598,15 +598,10 @@ class JavaScript_Jq_JSFuck < CodeGen
             :
               P[D]||"(+('"+B+"'))['to'+([]+[])"+C+"['name']]('36')";
         A+=C+"('console.log(unescape(\\"";
-        for(E in G=#{E[PREV]})
-          A+="'+![]+'"+G.charCodeAt(E).toString(16);
-        for(A+="\\".replace(/'+![]+'/g,\\"%\\")))')()",R=0;R<9;R++)
-          A=A.replace(/'.*?'/g,function(B){
-            T=[];
-            for(E=1;B[E+1];)
-              T.push(P[B[E++]]);
-            return T.join('+')
-          });
+        for(E of #{E[PREV]})
+          A+="'+![]+'"+E.charCodeAt().toString(16);
+        for(A+="\\".replace(/false/g,escape(\\" \\")[0])))')()",R=9;R--;)
+          A=A.replace(/'(.*?)'/g,(B,D)=>[...D].map(E=>P[E]).join('+'));
         console.log('"'+A+'"')
       )
     END
