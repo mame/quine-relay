@@ -726,7 +726,7 @@ class Haxe < CodeGen
   File = "QR.hx"
   Cmd = "haxe -main QR -neko QR.n && neko QR.n > OUTFILE"
   Apt = "haxe"
-  Code = %q("class QR{#$L function main(){neko.Lib.print#{E[PREV]};}}")
+  Code = %q("class QR{#$L function main()Sys.print#{E[PREV]};}")
 end
 
 class Haskell < CodeGen
