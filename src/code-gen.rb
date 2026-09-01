@@ -136,7 +136,7 @@ class Prolog < CodeGen
   File = "QR.prolog"
   Cmd = "swipl -q -t qr -f QR.prolog > OUTFILE"
   Apt = "swi-prolog"
-  Code = %q("qr:-write('#{Q[e[PREV],?']}').")
+  Code = %q("qr:-write#{E[PREV]}.")
 end
 
 class PostScript < CodeGen
