@@ -919,7 +919,7 @@ class Flex < CodeGen
   File = "QR.fl"
   Cmd = "flex -o QR.fl.c QR.fl && gcc -o QR QR.fl.c && ./QR > OUTFILE"
   Apt = "flex"
-  Code = %q("%option noyywrap\n%%\n%%\nint main(){puts#{E[PREV]};}")
+  Code = %q("%option noyywrap\n int main(){puts#{E[PREV]};}\n%%")
 
   def check(prev)
     raise if prev.include?("\0") # it becomes a C string literal printed by puts
