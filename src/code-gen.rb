@@ -1332,7 +1332,7 @@ class ALGOL68_Ante < CodeGen
       %W[
         STRINGz:= 226+ 153,a:=z+ 166,b:=a+"2"+z+ 160,c:=b+"8"+z+ 165,t:="#{d[PREV]}";
         FORiTO\ UPBtDO\ INTn:=ABSt[i];
-          print( (50+n%64)+c+ (50+n%8MOD8)+c+ (50+nMOD8)+b+"J"+a)
+          print( (50+n%64)+c+ (50+n%8%*8)+c+ (50+nMOD8)+b+ 74+a)
         OD
       ]*"REPR"
     end
