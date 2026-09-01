@@ -1273,7 +1273,7 @@ class Bash_Bc < CodeGen
   Apt = ["bash", "bc"]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
-      %(echo '#{PREV.gsub(?',%('"'"'))}'|sed -e's/\\\\/\\\\\\\\/g' -e's/"/\\\\q/g' -e's/.*/print "&"\\nquit/')
+      %(sed 's/\\\\/\\\\\\\\/g;s/"/\\\\q/g;s/.*/print "&"\\nquit/'<<\\E\n#{PREV}\nE)
     END
   end
 
