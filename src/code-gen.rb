@@ -850,7 +850,7 @@ class GDB < CodeGen
   File = "QR.gdb"
   Cmd = "gdb -q -x QR.gdb > OUTFILE"
   Apt = "gdb"
-  Code = %q(%(printf"#{e[d[PREV,?%]]}"\nquit))
+  Code = %q('echo '+e[PREV]+"\nquit")
 end
 
 class GAP < CodeGen
