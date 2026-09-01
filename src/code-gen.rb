@@ -1594,7 +1594,7 @@ class Verilog < CodeGen
   File = "QR.v"
   Cmd = "iverilog -o QR QR.v && ./QR -vcd-none > OUTFILE"
   Apt = "iverilog"
-  Code = %q(%(module QR;initial begin #{f(PREV,3){%($write("%s",#$S);)+N}}end endmodule))
+  Code = %q(%(module QR;initial begin #{f(PREV,3){%($write("%s",#$S);)}}end endmodule))
 end
 
 class Vala_Velato < CodeGen
