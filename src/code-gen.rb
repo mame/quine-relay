@@ -1630,7 +1630,7 @@ class TypeScript_Unlambda < CodeGen
   Apt = ["node-typescript", nil]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
-      "let s=#{E[PREV]},i=0,t='k';while(s[i])t='\\x60.'+s[i++]+t;console.log(t)"
+      "let t='k',c;for(c of#{E[PREV]})t='\\x60.'+c+t;console.log(t)"
     END
   end
 
