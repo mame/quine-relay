@@ -1489,16 +1489,13 @@ class XSLT < CodeGen
   Cmd = "xsltproc QR.xslt > OUTFILE"
   Apt = "xsltproc"
   def code
-    <<-'END'.lines.map {|l| l.strip }.join.gsub("$$$", "\n")
+    <<-'END'.lines.map {|l| l.strip }.join
       "
-        <?xml#{O=" version='1.0'"}?>$$$
-        <?xml-#{I="stylesheet"} type='text/xsl'href='QR.xslt'?>$$$
-        <xsl:#{I+O} xmlns:xsl='http://www.w3.org/1999/XSL/Transform'>
-          <xsl:output method='text'/>
-          <#{U="xsl:template"} match='/'>
-            <![CDATA[#{PREV}]]>
-          </#{U}>
-        </xsl:#{I}>
+        <?xml-#{I="stylesheet"} type='text/xsl'href=''?>
+        <#{I} version='1.0' xmlns='http://www.w3.org/1999/XSL/Transform'>
+          <output method='text'/>
+          <x xmlns='z:'><![CDATA[#{PREV}]]></x>
+        </#{I}>
       "
     END
   end
