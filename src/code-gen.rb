@@ -912,7 +912,7 @@ class Fish < CodeGen
   File = "QR.fish"
   Cmd = "fish QR.fish > OUTFILE"
   Apt = "fish"
-  Code = %q("echo '#{Q[Q[PREV,B],?!].gsub(?',%('"'"'))}'")
+  Code = %q("echo '#{Q[PREV,/['\\\\]/]}'")
 end
 
 class Flex < CodeGen
