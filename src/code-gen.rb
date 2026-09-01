@@ -1063,7 +1063,7 @@ class Crystal < CodeGen
   File = "QR.cr"
   Cmd = "crystal QR.cr > OUTFILE"
   Apt = [["crystal", "libevent-dev"]]
-  Code = %q("puts#{E[PREV]}")
+  Code = %q("print#{E[PREV]}")
 
   def check(prev)
     raise if prev.include?('#{') # Crystal interpolates it in a "" string
