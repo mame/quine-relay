@@ -1669,11 +1669,7 @@ class SurgeScript < CodeGen
   File = "QR.ss"
   Cmd = "surgescript QR.ss > OUTFILE"
   Apt = "surgescript"
-  def code
-    <<-'END'
-      %(object"Application"{state"main"{foreach(s in[#{f(PREV,4){$S+?,}}])Console.write(s);Application.exit();}})
-    END
-  end
+  Code = %q(%(object"Application"{state"main"{#{f(PREV,4){%(Console.write#$S;)}}exit();}}))
 end
 
 class StandardML_Subleq < CodeGen
