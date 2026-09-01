@@ -749,7 +749,7 @@ class Groovy_Gzip < CodeGen
     <<-'END'.lines.map {|l| l.strip }.join
       %(
         z=new java.util.zip.GZIPOutputStream(System.out);
-        z.write('#{PREV.tr(?"+B,"!~")}'.tr('~!','\\\\\u0022')as byte[]);
+        z<<'#{PREV.tr(?"+B,"&_")}'.tr('_&','\\\\"');
         z.close()
       )
     END
