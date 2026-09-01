@@ -817,7 +817,7 @@ class Go < CodeGen
         package main;
         import"fmt";
         func main(){
-          fmt.Print#{E[PREV]};
+          fmt.Print#{E[PREV]}
         }
       )
     END
