@@ -341,7 +341,7 @@ class Nickle < CodeGen
   File = "QR.5c"
   Cmd = "nickle QR.5c > OUTFILE"
   Apt = "nickle"
-  Code = %q("printf#{E[PREV]}\\n")
+  Code = %q("printf#{E[PREV]};")
 
   def check(prev)
     # it becomes printf's format string
