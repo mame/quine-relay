@@ -1041,7 +1041,7 @@ class D < CodeGen
   File = "QR.d"
   Cmd = "gdc -o QR QR.d && ./QR > OUTFILE"
   Apt = "gdc"
-  Code = %q("import std.stdio;void main(){write(`#{PREV}`);}")
+  Code = %q(%(import std;void main(){write(q"$#{PREV}$");}))
 
   def check(prev)
     raise if prev.include?("$") # it delimits the q"$...$" string
