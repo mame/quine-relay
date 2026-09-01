@@ -1364,14 +1364,10 @@ class AFNIX_Aheui < CodeGen
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
-        trans B(Buffer)\n
-        trans O(n){\n
-          B:add(Byte(+ 128 n))
-        }\n
-        trans f(v n){\n
-          O(+(/ n 64)107)\n
-          O(n:mod 64)\n
-          O v
+        trans o(interp:get-output-stream)\n
+        o:set-encoding-mode"utf-8"\n
+        trans f(v n){
+          print(Character(+ 45056(+(* 64 n)v)))
         }\n
         trans D(n){
           if(< n 4){
@@ -1389,15 +1385,12 @@ class AFNIX_Aheui < CodeGen
           }
         }\n
         trans S(Buffer"#{e[PREV]}")\n
-        while(!=(S:length)0){\n
+        while(>(S:length)0){
           trans c(S:read)\n
           D(c:to-integer)\n
           f 35 39
         }\n
-        f 24 149\n
-        interp:library"afnix-sio"\n
-        trans o(afnix:sio:OutputTerm)\n
-        o:write B
+        f 24 149
       )
     END
   end
