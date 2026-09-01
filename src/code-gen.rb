@@ -1027,7 +1027,7 @@ class Dc_Dhall < CodeGen
     "dhall text --file QR.dhall > OUTFILE",
   ]
   Apt = ["dc", "dhall"]
-  Code = %q("['']p[#{PREV}]p['']pq")
+  Code = %q("[''\n#{PREV}'']p")
 
   def check(prev)
     raise unless prev.match?(BRACKETS) # dc reads the whole program as a [...] string
