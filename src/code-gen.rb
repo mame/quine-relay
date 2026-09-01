@@ -455,7 +455,7 @@ class M4 < CodeGen
   File = "QR.m4"
   Cmd = "m4 QR.m4 > OUTFILE"
   Apt = "m4"
-  Code = %q("changequote(<@,@>)\ndefine(p,<@#{PREV}@>)\np")
+  Code = %q("changequote(<@,@>)<@#{PREV}@>")
 
   def check(prev)
     # they are the quote delimiters set by changequote, and m4 quotes nest
