@@ -71,7 +71,6 @@ GenPrologue = <<-'END'.lines.map {|l| l.strip }.join
   C=%w(System.Console Write);
   $C=C*?.;
   $D="program QR";
-  $G=" contents of"+$F=" the mixing bowl";
   $L="public static";
   $W="s.WriteByte";
   rp=->s,r{
@@ -1148,15 +1147,11 @@ class CSharp_Chef < CodeGen
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
-        class Program{
-          #$L void Main(){
-            #$C("Quine Relay Coffee.\\n\\nIngredients.\\n");
-            for(int i=9;i++<126;)#$C($"{i} g caffeine {i}\\n");
-            #$C("\\nMethod.\\n");
-            foreach(char c in#{E[PREV.reverse]})#$C($"Put caffeine {(int)c} into#$F.\\n");
-            #$C("Liquify#$G.\\nPour#$G into the baking dish.\\n\\nServes 1.\\n");
-          }
-        }
+        #$C("Quine Relay Coffee.\\n\\nIngredients.\\n");
+        for(int i=9;i++<126;)#$C($"{i} l {i}\\n");
+        #$C("\\nMethod.\\n");
+        foreach(int c in#{E[PREV.reverse]})#$C($"Put {c}.");
+        #$C("Pour contents of the mixing bowl into the baking dish.\\n\\nServes 1.");
       )
     END
   end
