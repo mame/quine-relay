@@ -1426,7 +1426,7 @@ class Zsh < CodeGen
   File = "QR.zsh"
   Cmd = "zsh QR.zsh > OUTFILE"
   Apt = "zsh"
-  Code = %q("echo -E $'#{Q[Q[PREV,B],?']}'")
+  Code = %q("cat<<\\\\Q\n#{PREV}\nQ")
 end
 
 class Zoem < CodeGen
