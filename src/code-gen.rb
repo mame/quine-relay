@@ -222,23 +222,19 @@ class Perl5 < CodeGen
         %(
           $_="#{
             s,v=rp[PREV,128..287];
-            s="
+            ["
               $_='#{Q[s,c=/['\\\\]/]}';
               $n=32;
-              $s='#{Q[v,c]}';
-              $s=~s{..}{
-                $a=$&;
+              for$a(unpack'(a2)*','#{Q[v,c]}'){
                 $b=chr(--$n&255);
-                ~s/$b/$a/g;
-              }eg;
+                s/$b/$a/g
+              }
               print
-            ";
-            (s+N*(-s.size%6)).unpack("B*")[0].
-              gsub(/.{6}/){n=$&.to_i 2;((n+14)/26*6+n+47).chr}
+            "].pack("u").tr(" -a",",-:A-Za-y")
           }";
-          s|.|$n=ord$&;substr unpack(B8,chr$n-int($n/32)*6-41),2|eg;
-          eval pack'B*',$_
-        ).scan(/[ ,-:A-z]+|(.)/){p="s++#{$1?"chr #{$1.ord}+e":$&+?+};"+p};
+          tr/,-:A-Za-y/ -a/;
+          eval unpack u
+        ).scan(/[ ,-:A-z]+|(.)/m){p="s++#{$1?"chr #{$1.ord}+e":$&+?+};"+p};
         p
       )
     END
