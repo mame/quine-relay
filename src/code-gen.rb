@@ -1240,19 +1240,18 @@ class BeanShell_Befunge_BLC8_Brainfuck < CodeGen
     <<-'END'.lines.map {|l| l.strip }.join.sub("BLC", [blc].pack("m0"))
       %(
         f(s){System.out.print(s);}
-        s="389**6+44*6+00p45*,";
+        s="ef*c+45*,";
         for(c:#{E[PREV]}){
-          s+="00g,";
+          s+="d9+,";
           for(m=1;m<256;m*=2)
-            s+="00g,4,:"+(c/m%2>0?"4+":"")+",";
+            s+="d9+,4,:"+c/m%2*4+"+,";
           f(s);
           s="4,:,";
         }
         f(s+s);
         for(c:Base64.getDecoder().decode("BLC")){
-          c=c<0?256+c:c;
-          for(i=0;i++<3;c/=8)f(c%8);
-          f("8*+8*+,");
+          c&=255;
+          f(""+c%8+c/8%8+c/64+"8*+8*+,");
         }
         f("@");
       )
