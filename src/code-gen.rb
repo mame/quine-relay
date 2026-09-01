@@ -262,7 +262,7 @@ class Parser3 < CodeGen
   File = "QR.p"
   Cmd = "parser3 QR.p > OUTFILE"
   Apt = "parser3-cgi"
-  Code = %q("$console:line[#{PREV.gsub(/[:;()]/){?^+$&}}]")
+  Code = %q("$console:line[#{PREV.gsub(?;,"^;")}]")
 
   def check(prev)
     # "$" starts a variable reference and "^" is the escape character, but only ";" is escaped here
