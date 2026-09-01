@@ -416,13 +416,13 @@ class Modula2 < CodeGen
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       "
-        MODULE QR;
-        FROM StrIO IMPORT WriteString;
+        MODULE Q;
+        IMPORT StrIO;
         BEGIN #{
-          (PREV).gsub(/()[#{i=94.chr}"]+|[#{i}']+/){
-            ["WriteString(",$&,");"]*($1??":?')
+          PREV.gsub(/()[#{i=?^}"]+|[#{i}']+/){
+            ["StrIO.WriteString(",$&,");"]*($1??":?')
           }
-        }END QR.
+        }END Q.
       "
     END
   end
