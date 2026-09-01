@@ -1170,10 +1170,10 @@ class Cplusplus < CodeGen
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       "
-        #include<iostream>\n
-        int main(){
-          std::cout<<#{E[PREV]};
-        }/****//****/
+        #include<cstdio>\n
+        int main(){{
+          puts#{E[PREV]};;;;;
+        };;;;;}
       "
     END
   end
