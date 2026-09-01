@@ -1790,7 +1790,7 @@ class Rust < CodeGen
   File = "QR.rs"
   Cmd = "rustc QR.rs && ./QR > OUTFILE"
   Apt = "rustc"
-  Code = %q(%(fn main(){print!("{}",#{E[PREV]});}))
+  Code = %q(%(fn main(){print!("{}",#{E[PREV]})}))
 end
 
 class Ruby_ < CodeGen
