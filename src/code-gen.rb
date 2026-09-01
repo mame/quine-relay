@@ -171,20 +171,20 @@ class PHP_Piet < CodeGen
     <<-'END'.lines.map {|l| l.strip }.join
       %(
         <?php $z=3+$w=strlen($s=#{Q[E[PREV]]})*3;
-          echo"\\x89PNG\\r\\n\\x1a\\n";
+          echo"\\x89PNG\\r\\n\\32\\n";
           $m="";
           $t="\\xc0\\0\\xff";
-          for($i=-1;++$i<128*$z;
+          for($i=-1;++$i<$z<<7;
               $m.=$c--?
-                ($w-$c||$i>$z)&&$i/$z<($c<$w?ord($s[(int)($c/3)]):$c--%3+2)?
+                ($w-$c||$i>$z)&&$i/$z<($c<$w?ord($s[$c/3|0]):$c--%3+2)?
                   $t[2].$t[$c%3%2].$t[$c%3]:"\\0\\0\\0":"\\0"
           )
             $c=$i%$z;
-          foreach(array(
+          foreach([
             "IHDR".pack("NNCV",$w+2,128,8,2),
             "IDAT".gzcompress($m),
             "IEND"
-          )as$d)
+          ]as$d)
             echo pack("NA*N",strlen($d)-4,$d,crc32($d));
       )
     END
