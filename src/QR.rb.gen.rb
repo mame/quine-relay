@@ -52,16 +52,18 @@ end
 # the sequences are matched in this order, so a later one may refer to an earlier key
 # a key must not appear outside a double-quoted string literal
 ABBREV = {
-  ?~ => [" ",     "g"],
-  ?` => ["\\",    "B"],
-  ?K => ["print", ":print"],
-  ?J => ["``",    "B*2"],
-  ?^ => ['#{',    %q('#{')],
-  ?H => ["in",    ":in"],
-  ?Y => [".gsub", %q('.gsub')],
-  ?Z => ["write", ":write"],
-  ?X => ["for",   ":for"],
-  ?! => ["]}",    %q(']}')],
+  ?~ => [" ",       "g"],
+  ?` => ["\\",      "B"],
+  ?K => ["print",   ":print"],
+  ?J => ['#{',      %q('#{')],
+  ?Y => ["``",      "B*2"],
+  ?H => ["in",      ":in"],
+  ?^ => ["~maH()",  %q(g+'main()')],
+  ?X => ["]}",      %q(']}')],
+  ?Z => [".gsub",   %q('.gsub')],
+  ?G => ["write",   ":write"],
+  ?U => ["JE[",     %q('#{E[')],
+  ?! => ["for",     ":for"],
 }
 
 s = s.gsub(/[#{ ABBREV.keys.join }]/){"\\x%02x" % $&.ord}
