@@ -162,8 +162,8 @@ d=->s,t=?"{s.gsub(t){t+t}};
 out = "ABCDE"
 
 # test code
-raise if data3.size + data4.size + 18 != 292
-n = 292+out.size
+k = data3.size + data4.size + 18
+n = k+out.size
 m = (n.bit_length - 1) / 7
 puts <<END.lines.map {|s| s.strip }.join(":")
 Module QR
