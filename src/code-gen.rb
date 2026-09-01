@@ -320,7 +320,7 @@ class OCaml < CodeGen
   File = "QR.ml"
   Cmd = "ocaml QR.ml > OUTFILE"
   Apt = "ocaml"
-  Code = %q("print_string"+E[PREV])
+  Code = %q("print_string#{E[PREV]}")
 end
 
 class ObjC < CodeGen
