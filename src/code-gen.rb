@@ -862,7 +862,7 @@ class GAP < CodeGen
   File = "QR.g"
   Cmd = "gap -q QR.g > OUTFILE"
   Apt = "gap"
-  Code = %q("s:=OutputTextUser();WriteAll(s,#{E[PREV]});CloseStream(s);QUIT;")
+  Code = %q("WriteAll(OutputTextUser(),#{E[PREV]});QUIT;")
 end
 
 class Gambas < CodeGen
