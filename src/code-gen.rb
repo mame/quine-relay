@@ -437,7 +437,7 @@ class MiniZinc < CodeGen
   File = "QR.mzn"
   Cmd = "minizinc --solver COIN-BC --soln-sep '' QR.mzn > OUTFILE"
   Apt = "minizinc"
-  Code = %q("solve satisfy;output [#{E[PREV]}];")
+  Code = %q("output#{E[PREV]}")
 end
 
 class Makefile < CodeGen
