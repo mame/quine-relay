@@ -1393,10 +1393,10 @@ class Ada < CodeGen
   def code
     <<-'END'.lines.map {|l| l.strip }.join.gsub("$$$", " ")
       %(
-        with Ada.Text_Io;
+        with Text_Io;
         procedure qr is$$$
         begin$$$
-          Ada.Text_Io.Put("#{d[PREV].gsub(N,'"&Character'+?'+'Val(10)&"')}");
+          Text_Io.Put("#{d[PREV].gsub(N,'"&ASCII.LF&"')}");
         end;
       )
     END
