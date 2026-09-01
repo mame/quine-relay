@@ -156,7 +156,7 @@ class Pike < CodeGen
   File = "QR.pike"
   Cmd = "pike QR.pike > OUTFILE"
   Apt = "pike8.0"
-  Code = %q("int main(){write#{E[PREV]+R}}")
+  Code = %q("int main(){write#{E[PREV]};}")
 
   def check(prev)
     # the Piet image reads a byte as a column height, and Perl 5's Re-Pair takes 0-31 and 128-255
