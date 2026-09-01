@@ -531,15 +531,16 @@ class Ksh_LazyK_LiveScript < CodeGen
   Backup = [nil, nil, "QR.c"]
   def code
     lazyk = ::File.read(::File.join(__dir__, "lazyk-boot.dat"))
-    lazyk = lazyk.tr("ski`","0123").scan(/.{1,3}/).map do |n|
-      n = n.reverse.to_i(4)
-      [*93..124,*42..73][n]
+    lazyk = lazyk.tr("ski`","0123")
+    lazyk += "0" * (-lazyk.size % 3)
+    lazyk = lazyk.scan(/.{3}/).map do |n|
+      [*93..124,*42..73][n.to_i(4)]
     end.pack("C*")
     lazyk = lazyk.gsub(/[ZHJK\^`~X]/) {|c| "\\x%02x" % c.ord }
     <<-'END'.lines.map {|l| l.strip }.join.sub("LAZYK"){lazyk}
       %(
-        p(){ echo -n $1;};
-        f(){ for x in $(p "$1"|od -An -tu1 -v);do;
+        p(){ print -rn $1;};
+        f(){ for x in $(p "$1"|od -vAn -tu1);do;
             p $4;
             for((j=$3;j--;));do;
               h $2 $x $j;
@@ -547,9 +548,9 @@ class Ksh_LazyK_LiveScript < CodeGen
           done;
         };
         p k\\`;
-        h(){ p \\`${1:$(($2>>$3&1)):2};};
-        f 'console.log#{Q[E[PREV],?#].gsub(?',%('"'"'))}' kki 7 '``s``s``s``s``s``s``s``si';
-        h(){ p ${1:$(((($2%83-10)>>((2-$3)*2))%4)):1};};
+        h(){ p \\`${1:$2>>$3&1:2};};
+        f 'console.log#{Q[E[PREV],?#].gsub(?',%('"'"'))}' kki 7 '#{"``s"*8}i';
+        h(){ p ${1:$2%83-10>>$3*2&3:1};};
         f 'LAZYK' ski\\` 3
       )
     END
