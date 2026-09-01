@@ -504,11 +504,11 @@ class LLVMAsm < CodeGen
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
-        @s=global[#{i=(s=PREV).size+1}x i8]
-          c"#{s.gsub(/[\\"\n\t]/){"\\%02X"%$&.ord}}\\00"
-        declare i32@puts(i8*)
+        @s=global[#{(s=PREV).size+1}x i8]
+          c"#{s.gsub(/[\\"\n\t]/){"\\%02x"%$&.ord}}\\00"
+        declare i32@puts(ptr)
         define i32@main(){
-          %1=call i32@puts(i8*getelementptr([#{i}x i8],[#{i}x i8]*@s,i32 0,i32 0))
+          call i32@puts(ptr@s)
           ret i32 0
         }
       )
