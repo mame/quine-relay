@@ -1089,8 +1089,7 @@ class CoffeeScript < CodeGen
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       "
-        (f=(n)->Array(n+1).join '\\\\');
-        console.log('%s',#{V[E[PREV].gsub(?`,"\\\\x60"),'#{f(',')}']})
+        console.log#{V[E[PREV],'"+"\\\\".repeat(',')+"']}
       "
     END
   end
