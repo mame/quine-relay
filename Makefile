@@ -1110,13 +1110,21 @@ QR.rexx: QR.rc
 	@echo
 	rc QR.rc > QR.rexx
 
-QR2.rb: QR.rexx
+QR.mal: QR.rexx
 	@echo
-	@echo "#########################"
-	@echo "##  128: REXX -> Ruby  ##"
-	@echo "#########################"
+	@echo "#############################"
+	@echo "##  128: REXX -> Malbolge  ##"
+	@echo "#############################"
 	@echo
-	rexx ./QR.rexx > QR2.rb
+	rexx ./QR.rexx > QR.mal
+
+QR2.rb: QR.mal
+	@echo
+	@echo "#############################"
+	@echo "##  129: Malbolge -> Ruby  ##"
+	@echo "#############################"
+	@echo
+	vendor/local/bin/malbolge QR.mal < /dev/null > QR2.rb
 
 clean:
 	@mv QR.rb quine-relay.rb

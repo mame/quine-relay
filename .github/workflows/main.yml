@@ -147,6 +147,7 @@ jobs:
           sudo docker cp qr:/usr/local/share/quine-relay/QR.ratfor spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.rc spoiler/
           sudo docker cp qr:/usr/local/share/quine-relay/QR.rexx spoiler/
+          sudo docker cp qr:/usr/local/share/quine-relay/QR.mal spoiler/
           cd spoiler
           git add .
           GIT_AUTHOR_NAME="$(git show -s --format=%an "$GITHUB_SHA")" \

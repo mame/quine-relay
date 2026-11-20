@@ -70,3 +70,12 @@ Shakespeare: spl-1.2.1.tar.gz
 Velato: Velato_0_1.zip
   * http://velato.net/
   * License: freeware
+
+Malbolge: malbolge.c and malbolge-encode.cpp
+  * Classic Malbolge semantics and tables from Ben Olmstead's public-domain specification:
+    https://www.lscheffer.com/malbolge_spec.html
+  * Interpreter, deterministic encoder, and REXX packing: MIT
+  * mg reads the payload and emits a self-contained REXX producer.
+    Use mg --raw to emit the same Malbolge source directly.
+  * The generated Malbolge program is run with an empty input stream.
+    Its input instruction uses the Classic EOF value as a constant.

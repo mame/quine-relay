@@ -90,23 +90,30 @@ GenPrologue = <<-'END'.lines.map {|l| l.strip }.join
 END
 # rp: Re-Pair (Naive byte pair encoding)
 
-class Python_R_Ratfor_Rc_REXX < CodeGen
-  Name = ["Python", "R", "Ratfor", "rc", "REXX"]
-  File = ["QR.py", "QR.R", "QR.ratfor", "QR.rc", "QR.rexx"]
+class REXX_Malbolge < CodeGen
+  Name = ["REXX", "Malbolge"]
+  File = ["QR.rexx", "QR.mal"]
+  Cmd = ["rexx ./QR.rexx > OUTFILE", "vendor/local/bin/malbolge QR.mal < /dev/null > OUTFILE"]
+  Apt = ["regina-rexx", nil]
+  Code = %q((m=IO.popen("vendor/local/bin/mg","r+"){|p|p<<PREV+N;p.close_write;p.read};$?.success?||raise;m))
+end
+
+class Python_R_Ratfor_Rc < CodeGen
+  Name = ["Python", "R", "Ratfor", "rc"]
+  File = ["QR.py", "QR.R", "QR.ratfor", "QR.rc"]
   Cmd = [
     "python3 QR.py > OUTFILE",
     "R --slave -f QR.R > OUTFILE",
     "ratfor -o QR.ratfor.f QR.ratfor && gfortran -o QR QR.ratfor.f && ./QR > OUTFILE",
-    "rc QR.rc > OUTFILE",
-    "rexx ./QR.rexx > OUTFILE"
+    "rc QR.rc > OUTFILE"
   ]
-  Apt = ["python3", "r-base", "ratfor", "rc", "regina-rexx"]
+  Apt = ["python3", "r-base", "ratfor", "rc"]
   def code
     <<-'END'.lines.map {|l| l.strip }.join
       %(
         print('cat("')\n
-        for l in#{E[d[d[PREV,?'],?']]}.split("\\n"):
-          [print('r=fput(char(%d))'%ord(c))for c in"echo 'say ''%s'''\\n"%l]\n
+        for l in#{E[d[PREV,?']]}.split("\\n"):
+          [print('r=fput(char(%d))'%ord(c))for c in"echo '%s'\\n"%l]\n
         print('end\\n")')#
       )
     END
@@ -1381,28 +1388,18 @@ class Ada < CodeGen
         with Text_Io;
         procedure qr is$$$
         begin$$$
-          Text_Io.Put("#{d[PREV].gsub(N,'"&ASCII.LF&"')}");
+          #{f(PREV,8){%(Text_Io.Put("#{d[$s].gsub(N,'"&ASCII.LF&"')}");\n)}}
         end;
       )
     END
-    #<<-'END'.lines.map {|l| l.strip }.join.gsub("$$$", " ")
-    #  %(
-    #    with Ada.Text_Io;
-    #    procedure qr is$$$
-    #    begin$$$
-    #      #{f(PREV,120){
-    #        %(Ada.Text_Io.Put("#{d[$s].gsub(N,'"&Character'+?'+'Val(10)&"')}");\n)
-    #      }}
-    #      Ada.Text_Io.Put_Line("");
-    #    end;
-    #  )
-    #END
   end
 
   def check(prev)
-    # 55 = the program without the string, 11 = the extra chars of "&ASCII.LF&"
-    # gnat allows up to 32766 characters per line
-    raise if prev.size + prev.count(?") + prev.count("\n") * 11 + 55 > 32766
+    # GNAT allows up to 32766 characters per line. Check escaped chunks,
+    # including a conservative allowance for the procedure header.
+    prev.scan(/.{1,#{8 * 255}}/m).each do |chunk|
+      raise if chunk.bytesize + chunk.count(?") + chunk.count("\n") * 11 + 70 > 32766
+    end
   end
 end
 
