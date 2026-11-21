@@ -6,7 +6,7 @@ SPL	  := spl-1.2.1
 LOCAL     := $(CURDIR)/local
 
 .NOTPARALLEL:
-all: $(LOCAL)/bin/lci $(LOCAL)/bin/npiet $(LOCAL)/bin/cfunge $(LOCAL)/bin/compilechef $(LOCAL)/bin/lazyk $(LOCAL)/bin/spl2c $(LOCAL)/bin/Vlt.exe
+all: $(LOCAL)/bin/lci $(LOCAL)/bin/npiet $(LOCAL)/bin/cfunge $(LOCAL)/bin/compilechef $(LOCAL)/bin/lazyk $(LOCAL)/bin/spl2c $(LOCAL)/bin/Vlt.exe $(LOCAL)/bin/malbolge $(LOCAL)/bin/mg
 
 $(LOCAL)/bin/lci:
 	unzip -q $(LCI).zip
@@ -35,6 +35,14 @@ $(LOCAL)/bin/spl2c:
 
 $(LOCAL)/bin/Vlt.exe:
 	unzip -d $(LOCAL)/bin -q Velato_0_1.zip
+
+$(LOCAL)/bin/malbolge: malbolge.c
+	mkdir -p $(@D)
+	$(CC) $(CFLAGS) -O2 -std=c99 $< -o $@
+
+$(LOCAL)/bin/mg: malbolge-encode.cpp
+	mkdir -p $(@D)
+	$(CXX) $(CXXFLAGS) -O3 -std=c++17 $< -o $@
 
 clean:
 	rm -rf $(LOCAL)/ $(LCI)/ $(NPIET)/ $(CFUNGE)/ $(ACME_CHEF)/ $(SPL)/

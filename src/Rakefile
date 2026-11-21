@@ -28,7 +28,13 @@ file "wasm-tmpl.dat" => "wasm-tmpl.dat.gen.rb" do
   ruby "wasm-tmpl.dat.gen.rb"
 end
 
-file "../QR.rb" => ["QR.rb.gen.rb", *LIBS, "uroboros.txt"] do
+malbolge_encoder = File.expand_path("../vendor/local/bin/mg", __dir__)
+
+file malbolge_encoder => "../vendor/malbolge-encode.cpp" do
+  sh "make", "-C", "../vendor", malbolge_encoder
+end
+
+file "../QR.rb" => ["QR.rb.gen.rb", *LIBS, "uroboros.txt", malbolge_encoder] do
   ruby "QR.rb.gen.rb"
 end
 

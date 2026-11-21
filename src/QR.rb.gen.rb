@@ -107,7 +107,10 @@ code.chop!
 
 TEMPLATE = File.read("uroboros.txt")
 width = TEMPLATE[/.*/].size
-while TEMPLATE.count("#") - width < code.size
+copyright = "  Quine Relay -- Copyright (c) 2013, 2014 Yusuke Endoh (@mametter), @hirekoke  "
+# Reuse the leading border of the copyright row while keeping its text centered.
+footer = ->w { copyright.center(w, "#")[0..-2].sub(/\A#+/, "#") }
+while TEMPLATE.count("#") - footer[width].size - 1 < code.size
   s = TEMPLATE.count("#")
   line = TEMPLATE[/^#*$/]
   TEMPLATE.replace((line + "\n" + TEMPLATE + line).gsub!(/^|$/, "######") + "\n")
@@ -116,11 +119,10 @@ while TEMPLATE.count("#") - width < code.size
 end
 # the art cuts the code at every run of "#", and a cut inside the trailing `)*""` makes it a splat
 code[-5, 0] = ?; while TEMPLATE.scan(/#+/).inject([0]) {|a, r| a << a[-1] + r.size }.any? {|i| code.size - 5 < i && i < code.size }
+raise "code overlaps the footer" if code.size > TEMPLATE.count("#") - footer[width].size - 1
 PAYLOAD = code[/%w\((.*)\)\*""\)\z/m, 1]
 PADDING = "".ljust(width, "#_buffer_for_future_bug_fixes_")
-COPYRIGHT =
-  "  Quine Relay -- Copyright (c) 2013, 2014 Yusuke Endoh (@mametter), @hirekoke  ".
-  center(width, "#")[0..-2]
+COPYRIGHT = footer[width]
 
 code = TEMPLATE.gsub(/#+/) { w = $&.size; code.slice!(0, w).ljust(w, PADDING) }.chomp
 code[-1] = ")"
@@ -135,4 +137,5 @@ RubyVM::AbstractSyntaxTree.parse($s = code[/\Aeval\$s=%q\((.*)\)\z/m, 1])
 raise unless eval(code[/%w\(.*\)\*""/m]) == PAYLOAD
 
 # $s is what the innermost step prints, so check only once QR.rb is written
-run_check((gen_prologue_1 + ?; + hooked).gsub(/[^\S ]/, ""))
+# Check with the same repository-relative tools as the generated relay.
+Dir.chdir("..") { run_check((gen_prologue_1 + ?; + hooked).gsub(/[^\S ]/, "")) }

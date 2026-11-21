@@ -7,8 +7,8 @@
 [QR.rb](https://github.com/mame/quine-relay/blob/master/QR.rb) is a Ruby program that generates
 a Rust program that generates
 a Scala program that generates
-...(through 128 languages in total)...
-a REXX program that generates
+...(through 129 languages in total)...
+a Malbolge program that generates
 the original Ruby code again.
 
 ![Language Uroboros][langs]
@@ -21,7 +21,7 @@ the original Ruby code again.
 
 ### Ubuntu
 
-If you are using Ubuntu 26.04 (Resolute Raccoon), you can follow these steps.
+If you are using Ubuntu 26.04.1 LTS (Resolute Raccoon), you can follow these steps.
 
 #### 1. Install all the interpreters/compilers.
 
@@ -184,7 +184,8 @@ Then, build the bundled interpreters.
     $ ratfor -o QR.ratfor.f QR.ratfor && gfortran -o QR QR.ratfor.f &&
       ./QR > QR.rc
     $ rc QR.rc > QR.rexx
-    $ rexx ./QR.rexx > QR2.rb
+    $ rexx ./QR.rexx > QR.mal
+    $ vendor/local/bin/malbolge QR.mal < /dev/null > QR2.rb
 
 You will see that `QR.rb` is the same as `QR2.rb`.
 
@@ -350,10 +351,15 @@ I used the following Ubuntu deb packages to test this program.
 126 |Ratfor                      |ratfor                            |1.07-1build1
 127 |rc                          |rc                                |1.7.4+97.gceb59bb-7
 128 |REXX                        |regina-rexx                       |3.9.5+dfsg1-0.3
+129 |Malbolge                    |*N/A*                             |-
 
 Note that some languages are not available in Ubuntu (marked as *N/A*).
 This repository contains their implementations in `vendor/`.
 See also `vendor/README` for detail.
+
+The Classic Malbolge stage uses the bundled interpreter with empty standard
+input. Building the bundled interpreters also builds the deterministic
+encoder that the initial Ruby program uses to generate the REXX producer.
 
 
 ## Frequently asked questions

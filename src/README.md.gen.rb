@@ -141,6 +141,10 @@ Note that some languages are not available in Ubuntu (marked as *N/A*).
 This repository contains their implementations in `vendor/`.
 See also `vendor/README` for detail.
 
+The Classic Malbolge stage uses the bundled interpreter with empty standard
+input. Building the bundled interpreters also builds the deterministic
+encoder that the initial Ruby program uses to generate the REXX producer.
+
 
 ## Frequently asked questions
 
